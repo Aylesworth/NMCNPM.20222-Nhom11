@@ -1,8 +1,8 @@
 package mch;
 
 import javax.swing.UIManager;
-import mch.controller.MainFrame;
-import mch.controller.SignUpForm;
+import mch.view.MainFrame;
+import mch.view.SignUpForm;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

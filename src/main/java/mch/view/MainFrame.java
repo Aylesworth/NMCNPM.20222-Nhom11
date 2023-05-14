@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mch.controller;
+package mch.view;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainFrame extends JFrame {
 
-    private Container contentPane;
+    private final Container contentPane;
 
     public MainFrame() {
         contentPane = getContentPane();
@@ -30,8 +30,9 @@ public class MainFrame extends JFrame {
         pack();
     }
 
-    public <T> void addNavigationBar() {
+    public void addNavigationBar() {
         contentPane.add((java.awt.Component) App.getApplicationContext().getBean(NavigationBar.class), 0);
+        repaint();
         pack();
     }
 
@@ -40,6 +41,7 @@ public class MainFrame extends JFrame {
             addNavigationBar();
         }
         contentPane.add((java.awt.Component) App.getApplicationContext().getBean(panelClass), 1);
+        repaint();
         pack();
     }
 

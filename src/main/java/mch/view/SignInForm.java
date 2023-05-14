@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package mch.controller;
+package mch.view;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import mch.App;
+import mch.controller.UserController;
 import mch.exception.InvalidValueException;
 import mch.exception.ServiceException;
-import mch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class SignInForm extends javax.swing.JPanel {
     }
     
     @Autowired
-    private UserService userService;
+    private UserController userController;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,7 +143,7 @@ public class SignInForm extends javax.swing.JPanel {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         try {
             validateFields();
-            userService.signIn(txtEmail.getText(), String.valueOf(txtPassword.getPassword()));
+            userController.signIn(txtEmail.getText(), String.valueOf(txtPassword.getPassword()));
             // TODO: Check user or admin, switch to corresponding home page
             JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
         } catch (InvalidValueException ex) {

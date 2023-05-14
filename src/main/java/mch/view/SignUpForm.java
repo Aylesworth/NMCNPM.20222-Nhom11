@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package mch.controller;
+package mch.view;
 
 import java.awt.Color;
 import java.time.LocalDate;
@@ -11,10 +11,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import mch.App;
+import mch.controller.UserController;
 import mch.dto.UserSignUpDTO;
 import mch.exception.InvalidValueException;
 import mch.exception.ServiceException;
-import mch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class SignUpForm extends javax.swing.JPanel {
     }
 
     @Autowired
-    private UserService userService;
+    private UserController userController;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,7 +151,7 @@ public class SignUpForm extends javax.swing.JPanel {
                     .phone(txtPhone.getText())
                     .address(txtAddress.getText()).build();
 
-            userService.signUp(dto);
+            userController.signUp(dto);
 
             JOptionPane.showMessageDialog(null, "Đăng ký thành công!");
             clear();
@@ -248,13 +248,20 @@ public class SignUpForm extends javax.swing.JPanel {
 
     private void clear() {
         txtEmail.setText("");
+        txtEmail.setBackground(Color.white);
         txtPassword.setText("");
+        txtPassword.setBackground(Color.white);
         txtConfirmPassword.setText("");
+        txtConfirmPassword.setBackground(Color.white);
         txtFullName.setText("");
+        txtFullName.setBackground(Color.white);
         txtDob.setText("");
+        txtDob.setBackground(Color.white);
         boxSex.setSelectedIndex(0);
         txtPhone.setText("");
+        txtPhone.setBackground(Color.white);
         txtAddress.setText("");
+        txtAddress.setBackground(Color.white);
         lblMessage.setText("");
     }
 
