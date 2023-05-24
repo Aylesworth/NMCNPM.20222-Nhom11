@@ -6,7 +6,7 @@ package mch.view;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import mch.App;
+import mch.Application;
 import mch.controller.UserController;
 import mch.exception.InvalidValueException;
 import mch.exception.ServiceException;
@@ -156,7 +156,7 @@ public class SignInForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-        App.getApplicationContext().getBean(MainFrame.class).setSinglePanel(SignUpForm.class);
+        Application.getApplicationContext().getBean(MainFrame.class).setSinglePanel(SignUpForm.class);
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     @Autowired

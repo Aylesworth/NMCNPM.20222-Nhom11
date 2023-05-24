@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
-import mch.App;
+import mch.Application;
 import mch.controller.UserController;
 import mch.dto.UserSignUpDto;
 import mch.exception.InvalidValueException;
@@ -163,7 +163,7 @@ public class SignUpForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        App.getApplicationContext().getBean(MainFrame.class).setSinglePanel(SignInForm.class);
+        Application.getApplicationContext().getBean(MainFrame.class).setSinglePanel(SignInForm.class);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
