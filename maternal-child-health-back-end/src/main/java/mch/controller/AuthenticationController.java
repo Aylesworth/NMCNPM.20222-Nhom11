@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mch.dto.AuthenticationRequest;
 import mch.dto.AuthenticationResponse;
@@ -22,14 +23,14 @@ public class AuthenticationController {
 	
 	@PostMapping("/auth/login")
 	public ResponseEntity<AuthenticationResponse> authenticate(
-			@RequestBody AuthenticationRequest request) {
+			@Valid @RequestBody AuthenticationRequest request) {
 		
 		return ResponseEntity.ok(authenticationService.authenticate(request));
 	}
 	
 	@PostMapping("/auth/register")
 	public ResponseEntity<SimpleResponse> register(
-			@RequestBody RegistrationRequest request) throws Exception {
+			@Valid @RequestBody RegistrationRequest request) throws Exception {
 		
 		authenticationService.register(request);
 		

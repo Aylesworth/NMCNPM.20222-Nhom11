@@ -1,8 +1,8 @@
 package mch.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,16 +15,16 @@ import lombok.RequiredArgsConstructor;
 import mch.dto.AuthenticationRequest;
 import mch.dto.AuthenticationResponse;
 import mch.dto.RegistrationRequest;
-import mch.model.Token;
+import mch.model.Role;
 import mch.model.User;
-import mch.repository.TokenRepository;
+import mch.repository.RoleRepository;
 import mch.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 	private final UserRepository userRepository;
-	private final TokenRepository tokenRepository;
+	private final RoleRepository roleRepository;
 	private final AuthenticationManager authenticationManager;
 	private final JwtService jwtService;
 	private final UserService userService;
@@ -35,8 +35,9 @@ public class AuthenticationService {
 				authenticationRequest.getPassword()));
 		User user = userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow();
 
-		System.out.println(user.getRoles());
-		Collection<SimpleGrantedAuthority> authorities = user.getRoles().stream()
+		List<Role> roles = roleRepository.getRolesOfUser(user.getId());
+		System.out.println(roles.size());
+		Collection<SimpleGrantedAuthority> authorities = roles.stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName()))
 				.collect(Collectors.toList());
 		
@@ -62,11 +63,7 @@ public class AuthenticationService {
 				.roles(new HashSet<>())
 				.build();
 		user = userRepository.save(user);
-		userService.addRoleToUser(user.getUsername(), "ROLE_USER");
-//		return authenticate(AuthenticationRequest.builder()
-//				.email(registrationRequest.getEmail())
-//				.password(registrationRequest.getPassword())
-//				.build());
+		userService.addRoleToUser(user.getEmail(), "ROLE_USER");
 	}
 
 }

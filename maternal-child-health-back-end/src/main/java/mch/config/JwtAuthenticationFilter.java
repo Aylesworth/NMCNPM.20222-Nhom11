@@ -1,7 +1,6 @@
 package mch.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,8 +28,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import mch.model.Token;
-import mch.repository.TokenRepository;
 
 @Component
 @RequiredArgsConstructor
@@ -38,19 +35,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Value("${secret-key}")
 	private String secretKey;
-
-//	private final TokenRepository tokenRepository;
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
 		String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-		
-//		if (request.getServletPath().matches(".*/auth/.*")) {
-//			filterChain.doFilter(request, response);
-//			return;
-//		}
 		
 		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 			try {
@@ -60,10 +50,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				DecodedJWT decodedJWT = verifier.verify(token);
 
 				String email = decodedJWT.getSubject();
-				
-//				Token tokenObject = tokenRepository.findByValue(token).orElseThrow(() -> new Exception("No active token found"));
-//				if (!tokenObject.getActive())
-//					throw new Exception("Inactive token");
 				
 				String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 				Collection<SimpleGrantedAuthority> authorities = Arrays.stream(roles)

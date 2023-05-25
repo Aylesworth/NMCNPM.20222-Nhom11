@@ -1,10 +1,11 @@
 package mch.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Date;
+
+import org.hibernate.annotations.DialectOverride.Formula;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,29 +13,36 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
-@Table(name = "token")
+@Table(name = "child")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Token {
+public class Child {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private Long id;
 	
-	private String value;
+	private String fullName;
 	
-	private Boolean active;
+	private String nickname;
+	
+	private Date dob;
+	
+	private String sex;
+	
+	private String ethnicity;
+	
+	private String nationality;
+	
+	private String birthplace;
+	
+	private String insuranceId;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	@JsonIgnore
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
-	private User user;
+	@JoinColumn(name = "parent_id")
+	private User parent;
 }

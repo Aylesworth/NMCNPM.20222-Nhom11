@@ -21,6 +21,7 @@ public class JwtService {
 	private String secretKey;
 
 	public String generateToken(User user, Collection<SimpleGrantedAuthority> authorities) {
+		System.out.println(authorities.size());
 		Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
 		return JWT.create().withSubject(user.getEmail()).withIssuedAt(new Date(System.currentTimeMillis()))
 				.withExpiresAt(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))

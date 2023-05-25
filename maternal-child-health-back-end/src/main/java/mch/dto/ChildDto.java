@@ -14,29 +14,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
+public class ChildDto {
+	
 	private Long id;
-	private String email;
 	
 	@NotEmpty
 	private String fullName;
-	
-	@Pattern(regexp = "[0-9]+")
-	private String citizenId;
-	
+
+	private String nickname;
+
 	@NotNull
 	private Date dob;
-	
+
 	@NotEmpty
 	private String sex;
-	
-	@NotEmpty
-	@Pattern(regexp = "[0-9]{10,12}")
-	private String phoneNumber;
-	
-	@NotEmpty
-	private String address;
-	
+
+	private String ethnicity;
+
+	private String nationality;
+
+	private String birthplace;
+
 	@Pattern(regexp = "[A-Z0-9]{12,18}")
 	private String insuranceId;
+
+	@NotNull
+	private Long parentId;
 }

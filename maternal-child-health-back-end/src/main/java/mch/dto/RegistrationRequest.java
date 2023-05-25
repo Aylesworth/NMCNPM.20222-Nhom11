@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RegistrationRequest {
 	@NotEmpty
+	@Pattern(regexp = "[A-Za-z0-9.]+[@][A-Za-z0-9]+([.][A-Za-z0-9]+)+")
 	private String email;
 	
 	@NotEmpty
