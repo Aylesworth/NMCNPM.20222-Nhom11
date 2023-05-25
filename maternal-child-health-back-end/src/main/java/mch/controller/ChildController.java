@@ -35,7 +35,7 @@ public class ChildController {
 		return ResponseEntity.ok(childService.getChildById(id));
 	}
 
-	@GetMapping("/children/findByParent")
+	@GetMapping("/children/find-by-parent")
 	public ResponseEntity<List<ChildDto>> getChildrenOfUser(@RequestParam(name = "id", required = true) Long userId) {
 		return ResponseEntity.ok(childService.getChildrenOfUser(userId));
 	}
@@ -46,9 +46,10 @@ public class ChildController {
 		return ResponseEntity.ok(new SimpleResponse("Child added successfully"));
 	}
 
-	@PutMapping("/children")
-	public ResponseEntity<SimpleResponse> updateChild(@Valid @RequestBody ChildDto childDto) {
-		childService.updateChild(childDto);
+	@PutMapping("/children/{id}")
+	public ResponseEntity<SimpleResponse> updateChild(@PathVariable Long id,
+			@Valid @RequestBody ChildDto childDto) {
+		childService.updateChild(id, childDto);
 		return ResponseEntity.ok(new SimpleResponse("Child updated successfully"));
 	}
 }

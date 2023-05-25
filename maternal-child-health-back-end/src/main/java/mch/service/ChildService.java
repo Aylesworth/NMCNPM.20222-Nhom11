@@ -13,5 +13,5 @@ public interface ChildService {
 	
 	public void addChild(ChildDto childDto);
 	
-	public void updateChild(ChildDto childDto);
+	public void updateChild(Long id, ChildDto childDto);
 }

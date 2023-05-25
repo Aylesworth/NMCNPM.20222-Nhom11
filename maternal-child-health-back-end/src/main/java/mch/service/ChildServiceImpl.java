@@ -37,14 +37,14 @@ public class ChildServiceImpl implements ChildService {
 
 	@Override
 	public void addChild(ChildDto childDto) {
-		if (childDto.getId() != null)
-			throw new RuntimeException("Must not specify ID");
+		childDto.setId(null);
 		childRepository.save(childDtoMapper.toEntity(childDto));
 	}
 
 	@Override
-	public void updateChild(ChildDto childDto) {
-		childRepository.findById(childDto.getId()).orElseThrow();
+	public void updateChild(Long id, ChildDto childDto) {
+		childRepository.findById(id).orElseThrow();
+		childDto.setId(id);
 		childRepository.save(childDtoMapper.toEntity(childDto));
 	}
 
