@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import mch.dto.ChildDto;
 import mch.dto.mapper.ChildDtoMapper;
-import mch.model.Child;
 import mch.repository.ChildRepository;
 
 @Service

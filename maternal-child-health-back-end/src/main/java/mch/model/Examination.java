@@ -2,45 +2,46 @@ package mch.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "child")
+@Table(name = "examination")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Child {
+public class Examination {
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	private String fullName;
-	
-	private String nickname;
-	
-	private Date dob;
-	
-	private String sex;
-	
-	private String ethnicity;
-	
-	private String nationality;
-	
-	private String birthplace;
-	
-	private String insuranceId;
-	
 	@ManyToOne
-	@JoinColumn(name = "parent_id")
-	private User parent;
+	@JoinColumn(name = "child_id")
+	@JsonIgnore
+	private Child child;
+	
+	@NotNull
+	private Date date;
+	
+	private String facility;
+	
+	private String reason;
+	
+	private String result;
+	
+	private String advice;
+	
+	private String note;
 }
