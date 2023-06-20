@@ -1,25 +1,26 @@
 package com.aylesw.mch.backend.service;
 
 
-import com.aylesw.mch.backend.model.DangKyUser;
-import com.aylesw.mch.backend.model.ThayDoiUser;
-import com.aylesw.mch.backend.model.User;
+import com.aylesw.mch.backend.dto.RegisterDto;
+import com.aylesw.mch.backend.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-	public void approveDangKyUser(Long dangKyUserId);
+    void addRole(String email, String roleName);
 
-	public void approveThayDoiUser(Long thayDoiUserId);
+    void approveUserRegistration(Long userRegistrationId);
 
-	public List<User> search(String keyword);
+    void approveUserChange(Long userChangeId);
 
-	public User getInfo(Long id);
+    List<UserDto> search(String keyword);
 
-	public void createUser(DangKyUser dangKyUser);
+    UserDto getUser(Long id);
 
-	public void updateUser(ThayDoiUser thayDoiUser);
+    void createUser(RegisterDto registerDto);
 
-	public void deleteUser(Long id);
+    void updateUser(Long id, RegisterDto registerDto);
+
+    void deleteUser(Long id);
 }
