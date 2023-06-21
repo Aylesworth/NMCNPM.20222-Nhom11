@@ -1,14 +1,16 @@
 package com.aylesw.mch.backend.service;
 
-import com.aylesw.mch.backend.dto.NotificationDto;
-import com.aylesw.mch.backend.model.Notification;
+import com.aylesw.mch.backend.dto.NotificationDetails;
+import com.aylesw.mch.backend.model.SystemNotification;
 
 import java.util.List;
 
 public interface NotificationService {
-    void createNotification(Long userId, NotificationDto notificationDto);
+    void createSystemNotification(NotificationDetails notificationDetails);
 
-    List<NotificationDto> loadNotifications(Long userId);
+    void createEmailNotification(NotificationDetails notificationDetails);
+
+    List<SystemNotification> getSystemNotifications(Long userId);
 
     void scheduleEmailsOnStart();
 }

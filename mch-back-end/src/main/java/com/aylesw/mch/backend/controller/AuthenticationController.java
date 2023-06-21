@@ -1,10 +1,9 @@
 package com.aylesw.mch.backend.controller;
 
-import com.aylesw.mch.backend.dto.AuthenticationRequest;
-import com.aylesw.mch.backend.dto.AuthenticationResponse;
-import com.aylesw.mch.backend.dto.RegisterDto;
+import com.aylesw.mch.backend.dto.*;
 import com.aylesw.mch.backend.service.AuthenticationService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,5 +32,29 @@ public class AuthenticationController {
         authenticationService.register(registerDto);
 
         return ResponseEntity.ok("User account waiting for approval");
+    }
+
+    @PostMapping("/auth/request-password-reset")
+    public ResponseEntity<String> requestPasswordReset(@NotEmpty @RequestBody String email) {
+        authenticationService.requestPasswordReset(email);
+        return ResponseEntity.ok("Password reset code sent to " + email);
+    }
+
+    @PostMapping("/auth/reset-password")
+    public ResponseEntity<String> resetPassword(@Valid @RequestBody ResetPasswordDto resetPasswordDto) {
+        authenticationService.resetPassword(resetPasswordDto);
+        return ResponseEntity.ok("User password reset successfully");
+    }
+
+    @PostMapping("/auth/request-email-verification")
+    public ResponseEntity<String> requestEmailVerification(@NotEmpty @RequestBody String email) {
+        authenticationService.requestEmailVerification(email);
+        return ResponseEntity.ok("Email verification code sent to " + email);
+    }
+
+    @PostMapping("/auth/verify-email")
+    public ResponseEntity<String> verifyEmail(@Valid @RequestBody VerifyEmailDto verifyEmailDto) {
+        authenticationService.verifyEmail(verifyEmailDto);
+        return ResponseEntity.ok("User email verified successfully");
     }
 }

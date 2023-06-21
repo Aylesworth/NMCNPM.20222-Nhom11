@@ -1,11 +1,17 @@
 package com.aylesw.mch.backend.service;
 
-import com.aylesw.mch.backend.dto.AuthenticationRequest;
-import com.aylesw.mch.backend.dto.AuthenticationResponse;
-import com.aylesw.mch.backend.dto.RegisterDto;
+import com.aylesw.mch.backend.dto.*;
 
 public interface AuthenticationService {
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest);
+    AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest);
 
-    public void register(RegisterDto registerDto);
+    void register(RegisterDto registerDto);
+
+    void requestPasswordReset(String email);
+
+    void resetPassword(ResetPasswordDto resetPasswordDto);
+
+    void requestEmailVerification(String email);
+
+    void verifyEmail(VerifyEmailDto verifyEmailDto);
 }

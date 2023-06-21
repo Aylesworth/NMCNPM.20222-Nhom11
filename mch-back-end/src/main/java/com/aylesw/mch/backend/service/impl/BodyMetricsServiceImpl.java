@@ -1,11 +1,12 @@
 package com.aylesw.mch.backend.service.impl;
 
 import com.aylesw.mch.backend.dto.BodyMetricsDto;
-import com.aylesw.mch.backend.dto.NotificationDto;
+import com.aylesw.mch.backend.dto.NotificationDetails;
 import com.aylesw.mch.backend.exception.ApiException;
 import com.aylesw.mch.backend.exception.ResourceNotFoundException;
 import com.aylesw.mch.backend.model.BodyMetrics;
 import com.aylesw.mch.backend.model.Child;
+import com.aylesw.mch.backend.model.User;
 import com.aylesw.mch.backend.repository.BodyMetricsRepository;
 import com.aylesw.mch.backend.repository.ChildRepository;
 import com.aylesw.mch.backend.service.BodyMetricsService;
@@ -62,12 +63,14 @@ public class BodyMetricsServiceImpl implements BodyMetricsService {
         Child child = childRepository.findById(childId)
                 .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
 
-        Long userId = child.getParent().getId();
+        User user = child.getParent();
 
-        NotificationDto notificationDto = NotificationDto.builder()
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .title("Yêu cầu cập nhật định kỳ")
                 .message("Cha/mẹ hãy cập nhật chiều cao, cân nặng định kỳ cho bé " + child.getFullName() + " nhé!")
+                .user(user)
                 .build();
 
-        notificationService.createNotification(userId, notificationDto);
+        notificationService.createSystemNotification(notificationDetails);
     }
 }
