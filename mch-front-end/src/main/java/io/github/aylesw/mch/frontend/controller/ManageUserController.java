@@ -126,7 +126,7 @@ public class ManageUserController implements Initializable {
 
     @FXML
     void addUser(ActionEvent event) {
-        ScreenManager.getAddUserWindow(this).show();
+
     }
 
     @FXML
@@ -154,8 +154,6 @@ public class ManageUserController implements Initializable {
 
     @FXML
     void editUser(ActionEvent event) {
-        Long userId = ((Double) tblUser.getSelectionModel().getSelectedItem().get("id")).longValue();
-        ScreenManager.getEditUserWindow(userId, this).show();
     }
 
     @FXML

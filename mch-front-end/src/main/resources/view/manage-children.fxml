@@ -1,123 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
       <Tab text="Quản lý trẻ em">
          <content>
-            <FlowPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane>
                <children>
-                  <VBox alignment="CENTER" prefHeight="770.0" prefWidth="900.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="89.0" prefWidth="860.0" spacing="10.0">
-                           <children>
-                              <JFXTextField labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Tìm kiếm" />
-                              <JFXButton style="-fx-background-color: aqua;" text="Ảnh kính lúp" />
-                           </children>
-                        </HBox>
-                        <TableView fx:id="tblUser" prefHeight="647.0" prefWidth="830.0">
-                           <columns>
-                              <TableColumn prefWidth="47.333343505859375" text="ID" />
-                              <TableColumn prefWidth="75.0" text="Họ tên" />
-                              <TableColumn prefWidth="75.0" text="Giới tính" />
-                              <TableColumn prefWidth="75.0" text="Ngày sinh" />
-                              <TableColumn prefWidth="75.0" text="Tuổi (tháng)" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="130.0" spacing="20.0">
-                     <children>
-                        <JFXButton onAction="#addUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Thêm" />
-                        <JFXButton fx:id="btnViewUser" onAction="#viewUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Xem hồ sơ" />
-                        <JFXButton fx:id="btnEditUser" onAction="#editUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Sửa hồ sơ" />
-                        <JFXButton fx:id="btnDeleteUser" onAction="#deleteUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Xóa" />
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tblUser" layoutX="42.0" layoutY="99.0" prefHeight="615.0" prefWidth="313.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="153.33334350585938" text="Họ tên" />
+                        <TableColumn prefWidth="159.33331298828125" text="Tuổi (tháng)" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXTextField labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField labelFloat="true" layoutX="415.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <Label layoutX="415.0" layoutY="184.0" prefHeight="17.0" prefWidth="111.0" text="ID:" />
+                  <JFXTextField labelFloat="true" layoutX="705.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField labelFloat="true" layoutX="415.0" layoutY="359.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField labelFloat="true" layoutX="705.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField labelFloat="true" layoutX="705.0" layoutY="359.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXComboBox labelFloat="true" layoutX="415.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXButton layoutX="680.0" layoutY="481.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Xóa hồ sơ" />
+                  <JFXButton layoutX="606.0" layoutY="428.0" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: aqua;" text="Cập nhật" />
+                  <JFXButton layoutX="529.0" layoutY="481.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Xem hồ sơ chính" />
                </children>
-            </FlowPane>
+            </AnchorPane>
          </content>
       </Tab>
       <Tab text="Phê duyệt hồ sơ">
          <content>
-            <FlowPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane>
                <children>
-                  <VBox alignment="CENTER" prefHeight="770.0" prefWidth="900.0">
-                     <children>
-                        <TableView fx:id="tblUser1" prefHeight="647.0" prefWidth="830.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Họ tên" />
-                              <TableColumn prefWidth="75.0" text="Giới tính" />
-                              <TableColumn prefWidth="75.0" text="Ngày sinh" />
-                              <TableColumn prefWidth="75.0" text="Tên cha/mẹ" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="130.0" spacing="20.0">
-                     <children>
-                        <JFXButton onAction="#addUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Xem chi tiết" />
-                        <JFXButton fx:id="btnViewUser21" onAction="#viewUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
-                        <JFXButton fx:id="btnEditUser21" onAction="#editUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Từ chối" />
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tblUser1" layoutX="42.0" layoutY="99.0" prefHeight="615.0" prefWidth="401.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="111.33331298828125" text="Thời gian" />
+                        <TableColumn prefWidth="144.6666259765625" text="Họ tên" />
+                        <TableColumn prefWidth="136.66668701171875" text="Tuổi (tháng)" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXTextField labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField labelFloat="true" layoutX="483.0" layoutY="243.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <Label layoutX="483.0" layoutY="183.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin hồ sơ:" />
+                  <JFXTextField labelFloat="true" layoutX="738.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField labelFloat="true" layoutX="483.0" layoutY="358.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField labelFloat="true" layoutX="738.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField labelFloat="true" layoutX="738.0" layoutY="359.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXComboBox labelFloat="true" layoutX="483.0" layoutY="299.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXButton layoutX="725.0" layoutY="445.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Từ chối" />
+                  <JFXButton layoutX="580.0" layoutY="445.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
                </children>
-            </FlowPane>
+            </AnchorPane>
          </content>
       </Tab>
       <Tab text="Phê duyệt thay đổi">
          <content>
-            <FlowPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane>
                <children>
-                  <VBox alignment="CENTER" prefHeight="770.0" prefWidth="900.0">
-                     <children>
-                        <TableView fx:id="tblUser2" prefHeight="647.0" prefWidth="830.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Họ tên" />
-                              <TableColumn prefWidth="75.0" text="Giới tính" />
-                              <TableColumn prefWidth="75.0" text="Ngày sinh" />
-                              <TableColumn prefWidth="75.0" text="Tên cha/mẹ" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="770.0" prefWidth="130.0" spacing="20.0">
-                     <children>
-                        <JFXButton onAction="#addUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Xem chi tiết" />
-                        <JFXButton fx:id="btnViewUser2" onAction="#viewUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
-                        <JFXButton fx:id="btnEditUser2" onAction="#editUser" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: aqua;" text="Từ chối" />
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tblUser11" layoutX="42.0" layoutY="99.0" prefHeight="615.0" prefWidth="401.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="111.33331298828125" text="Thời gian" />
+                        <TableColumn prefWidth="146.66668701171875" text="Họ tên" />
+                        <TableColumn prefWidth="134.6666259765625" text="Tuổi (tháng)" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXTextField labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField labelFloat="true" layoutX="494.0" layoutY="384.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <Label layoutX="494.0" layoutY="324.0" prefHeight="17.0" prefWidth="187.0" text="Thông tin mới cập nhật:" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="385.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField labelFloat="true" layoutX="494.0" layoutY="499.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="441.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="500.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXComboBox labelFloat="true" layoutX="494.0" layoutY="440.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXButton layoutX="736.0" layoutY="588.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Từ chối" />
+                  <JFXButton layoutX="591.0" layoutY="588.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
+                  <JFXTextField labelFloat="true" layoutX="494.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <Label layoutX="494.0" layoutY="59.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin gốc:" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="120.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField labelFloat="true" layoutX="494.0" layoutY="234.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="176.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField labelFloat="true" layoutX="749.0" layoutY="235.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXComboBox labelFloat="true" layoutX="494.0" layoutY="175.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
                </children>
-            </FlowPane>
+            </AnchorPane>
          </content>
       </Tab>
    </tabs>

@@ -1,13 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="801.0" prefWidth="1030.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Tiếp nhận đăng ký">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane prefHeight="967.0" prefWidth="1030.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
+                                 <children>
+                                    <TableView prefHeight="695.0" prefWidth="716.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Tên trẻ" />
+                                        <TableColumn prefWidth="75.0" text="Vaccine" />
+                                          <TableColumn prefWidth="75.0" text="Mũi số" />
+                                          <TableColumn prefWidth="75.0" text="Ngày tiêm" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
+                                 <children>
+                                    <JFXTextField editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Tên trẻ" />
+                                    <JFXTextField editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ngày sinh" />
+                                    <JFXTextField editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Tuổi (tháng)" />
+                                    <JFXTextField editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Vaccine" />
+                                    <JFXTextField editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Mũi số" />
+                                    <JFXTextField labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ngày tiêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xác nhận" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Hủy mũi tiêm" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Lịch tiêm dự kiến">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane prefHeight="967.0" prefWidth="1030.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
+                                 <children>
+                                    <TableView prefHeight="695.0" prefWidth="716.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Tên trẻ" />
+                                          <TableColumn prefWidth="75.0" text="Vaccine" />
+                                          <TableColumn prefWidth="75.0" text="Mũi số" />
+                                          <TableColumn prefWidth="75.0" text="Ngày tiêm" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
+                                 <children>
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xuất lịch tiêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Thêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Đổi ngày giờ" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xóa" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </FlowPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Thống kê mũi tiêm">
+               <content>
+                  <JFXScrollPane />
+               </content>
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <BarChart layoutX="58.0" layoutY="154.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <AreaChart layoutX="515.0" layoutY="131.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

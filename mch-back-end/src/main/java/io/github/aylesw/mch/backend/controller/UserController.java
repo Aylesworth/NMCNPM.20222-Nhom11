@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -51,6 +51,11 @@ public class UserController {
     @GetMapping("/search")
     public ResponseEntity<List<UserDto>> search(@RequestParam(value = "q", required = true) String keyword) {
         return ResponseEntity.ok(userService.search(keyword));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")

@@ -3,6 +3,8 @@ package io.github.aylesw.mch.frontend.common;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 
 public class Utils {
@@ -23,6 +25,18 @@ public class Utils {
         alert.setContentText(content);
         alert.showAndWait();
         return alert.getResult();
+    }
+
+    public static LocalDate stringToLocalDateISO(String string) {
+        return LocalDate.parse(string);
+    }
+
+    public static LocalDate stringToLocalDateCustom(String string) {
+        return LocalDate.parse(string, Beans.DATE_TIME_FORMATTER);
+    }
+
+    public static String localDateToString(LocalDate localDate) {
+        return localDate.format(Beans.DATE_TIME_FORMATTER);
     }
 
 }

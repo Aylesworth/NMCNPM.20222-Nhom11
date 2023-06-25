@@ -24,10 +24,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
 
-        stage.setScene(ScreenManager.loadScene("child-details.fxml", null));
-        stage.show();
-//        ScreenManager.getMainFrame().show();
-//        ScreenManager.getMainFrameController().getBorderPane().setLeft(ScreenManager.loadRoot("nav-bar-admin.fxml", null));
-//        ScreenManager.getMainFrameController().getBorderPane().setCenter(ScreenManager.loadRoot("manage-users.fxml", new ManageUserController()));
+//        ScreenManager.getLoginWindow().show();
+
+        ScreenManager.getMainFrame().show();
+        ScreenManager.getMainFrameController().getBorderPane().setLeft(ScreenManager.getAdminNavigationBar());
+        ScreenManager.getMainFrameController().getBorderPane().setCenter(ScreenManager.getManageUsersPanel());
     }
 }

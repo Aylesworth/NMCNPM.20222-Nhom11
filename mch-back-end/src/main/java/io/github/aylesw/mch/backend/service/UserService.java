@@ -25,6 +25,8 @@ public interface UserService {
 
     List<UserDto> search(String keyword);
 
+    List<UserDto> getAllUsers();
+
     UserDto getUser(Long id);
 
     void createUser(RegisterDto registerDto);

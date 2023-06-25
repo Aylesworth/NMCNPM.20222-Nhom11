@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="250.0" spacing="5.0" style="-fx-background-color: lightcyan;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="250.0" spacing="5.0" style="-fx-background-color: lightcyan;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="84.0" prefWidth="196.0" text="QUẢN LÝ SỨC KHỎE MẸ VÀ BÉ" textAlignment="CENTER" wrapText="true">
          <font>
@@ -45,11 +45,6 @@
          </font>
       </JFXButton>
       <JFXButton prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: aqua;" text="Sự kiện">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
-      <JFXButton prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: aqua;" text="Thống kê">
          <font>
             <Font size="18.0" />
          </font>

@@ -11,12 +11,16 @@ public class ScreenManager {
 
     private static Stage mainFrame;
 
+    static {
+        mainFrame = new Stage();
+        mainFrame.setTitle("Quản lý Sức khỏe Mẹ và Bé");
+        mainFrame.setScene(loadScene("main-frame.fxml", mainFrameController));
+    }
+
     public static Stage getMainFrame() {
-        if (mainFrame == null) {
-            mainFrame = new Stage();
-            mainFrame.setTitle("Quản lý Sức khỏe Mẹ và Bé");
-            mainFrame.setScene(loadScene("main-frame.fxml", mainFrameController));
-        }
+//        if (mainFrame == null) {
+//
+//        }
         return mainFrame;
     }
 
@@ -38,18 +42,12 @@ public class ScreenManager {
         return stage;
     }
 
-    public static Stage getAddUserWindow(ManageUserController parent) {
-        Stage stage = new Stage();
-        stage.setTitle("Thêm người dùng");
-        stage.setScene(loadScene("add-user.fxml", new AddUserController(stage, parent)));
-        return stage;
+    public static Parent getAdminNavigationBar() {
+        return loadRoot("nav-bar-admin.fxml", null);
     }
 
-    public static Stage getEditUserWindow(Long userId, ManageUserController parent) {
-        Stage stage = new Stage();
-        stage.setTitle("Sửa người dùng");
-        stage.setScene(loadScene("edit-user.fxml", new EditUserController(userId, stage, parent)));
-        return stage;
+    public static Parent getManageUsersPanel() {
+        return loadRoot("manage-users.fxml", new ManageUsersController());
     }
 
     public static Scene loadScene(String resourceName, Object controller) {
