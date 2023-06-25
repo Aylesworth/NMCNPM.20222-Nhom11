@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.controller;
 
-import com.aylesw.mch.backend.dto.*;
+import io.github.aylesw.mch.backend.dto.*;
 import io.github.aylesw.mch.backend.service.AuthenticationService;
 import io.github.aylesw.mch.backend.dto.*;
 import jakarta.validation.Valid;

@@ -143,21 +143,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        user.getRoles().clear();
+        userRepository.save(user);
         userRepository.deleteById(id);
     }
 
     @Override
     public void changePassword(Long id, ChangePasswordDto changePasswordDto) {
-       User user = userRepository.findById(id)
-               .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
-       try {
-           authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), changePasswordDto.getOldPassword()));
-       } catch (AuthenticationException e) {
-           throw new ApiException(HttpStatus.BAD_REQUEST, "Old password does not match");
-       }
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), changePasswordDto.getOldPassword()));
+        } catch (AuthenticationException e) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Old password does not match");
+        }
 
-       user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
-       userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+        userRepository.save(user);
     }
 }

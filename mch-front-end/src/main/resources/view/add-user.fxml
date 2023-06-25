@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="159.0" text="THÊM NGƯỜI DÙNG" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="426.0" prefWidth="449.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="txtEmail" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Email *">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" maxWidth="250.0" prefWidth="250.0" promptText="Mật khẩu *" />
+            <JFXPasswordField fx:id="txtConfirmPassword" labelFloat="true" maxWidth="250.0" prefWidth="250.0" promptText="Xác nhận mật khẩu *" />
+            <JFXTextField fx:id="txtFullName" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Họ tên *">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXComboBox fx:id="boxSex" labelFloat="true" prefHeight="25.0" prefWidth="250.0" promptText="Giới tính *" visibleRowCount="2" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" prefHeight="524.0" prefWidth="499.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Ngày sinh (dd/mm/yyyy) *" />
+            <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số điện thoại *">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="txtAddress" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Địa chỉ *" />
+            <JFXTextField fx:id="txtCitizenId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Mã CCCD" />
+            <JFXTextField fx:id="txtInsuranceId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số BHYT" />
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton onAction="#addUser" style="-fx-background-color: aqua;" text="Thêm" />
+            <JFXButton onAction="#cancel" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: aqua;" text="Hủy" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

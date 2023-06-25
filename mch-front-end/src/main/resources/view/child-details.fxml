@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Thông tin cá nhân">
+         <content>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label text="Bé Nguyễn Văn B">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="49.0" prefWidth="1030.0" spacing="20.0">
+                     <children>
+                        <JFXButton style="-fx-background-color: orange; -fx-background-radius: 20;" text="Sửa hồ sơ" />
+                        <JFXButton style="-fx-background-color: orange; -fx-background-radius: 20;" text="Xóa hồ sơ" />
+                     </children>
+                  </HBox>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="467.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Email:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="nguyenvana@gmail.com" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Họ tên:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Nguyễn Văn A" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Giới tính:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Nam" />
+                                          <JFXComboBox visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Ngày sinh:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="01/01/1990" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="514.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Số điện thoại:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="0987654321" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Địa chỉ:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="1 Giải Phóng" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Mã CCCD:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="012345678910" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="515.0" spacing="20.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="110.0" text="Số BHYT:" />
+                                    <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="AB0123456789101" />
+                                          <JFXTextField visible="false" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <JFXButton text="Lưu" visible="false" />
+                        <JFXButton text="Hủy" visible="false" />
+                     </children>
+                  </FlowPane>
+               </children>
+            </VBox>
+         </content></Tab>
+    <Tab text="Chiều cao, cân nặng">
+         <content>
+            <FlowPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <JFXScrollPane>
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="770.0" prefWidth="1030.0" spacing="20.0" style="-fx-background-color: white;">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="762.0" spacing="20.0">
+                                 <children>
+                                    <JFXButton prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Thêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Yêu cầu cập nhật" />
+                                 </children>
+                              </HBox>
+                              <AnchorPane prefHeight="139.0" prefWidth="749.0" style="-fx-background-color: ivory; -fx-background-radius: 50;">
+                                 <children>
+                                    <Label layoutX="168.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="Ngày đo:" />
+                                    <Label layoutX="168.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+                                    <Label layoutX="168.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Chiều cao:" />
+                                    <Label layoutX="426.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Cân nặng:" />
+                                    <Label layoutX="426.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="BMI:" />
+                                    <Label layoutX="426.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Đánh giá:" />
+                                    <Label layoutX="243.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="10 cm" />
+                                    <Label layoutX="243.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+                                    <Label layoutX="243.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="1 kg" />
+                                    <Label layoutX="499.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="1 cm" />
+                                    <Label layoutX="499.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="6.9" />
+                                    <Label layoutX="499.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="Suy dinh dưỡng" />
+                                    <JFXButton layoutX="807.0" layoutY="57.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </JFXScrollPane>
+               </children>
+            </FlowPane>
+         </content></Tab>
+      <Tab text="Tiêm chủng">
+         <content>
+            <JFXScrollPane>
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="889.0" prefWidth="802.0" style="-fx-background-color: white;">
+                     <children>
+                        <AnchorPane prefHeight="139.0" prefWidth="749.0" style="-fx-background-color: ivory; -fx-background-radius: 50;">
+                           <children>
+                              <Label layoutX="75.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="Chiều cao:" />
+                              <Label layoutX="75.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Cân nặng:" />
+                              <Label layoutX="75.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Ngày đo:" />
+                              <Label layoutX="368.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+                              <Label layoutX="368.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="BMI:" />
+                              <Label layoutX="368.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Đánh giá:" />
+                              <Label layoutX="150.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+                              <Label layoutX="150.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="10 cm" />
+                              <Label layoutX="150.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="1 kg" />
+                              <Label layoutX="441.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="không có" />
+                              <Label layoutX="441.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="6.9" />
+                              <Label layoutX="441.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="Suy dinh dưỡng" />
+                              <JFXButton layoutX="652.0" layoutY="57.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </JFXScrollPane>
+         </content>
+         <content>
+            <FlowPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <JFXScrollPane>
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="770.0" prefWidth="1030.0" spacing="20.0" style="-fx-background-color: white;">
+                           <children>
+                              <JFXButton prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Thêm mũi tiêm" />
+                              <AnchorPane prefHeight="143.0" prefWidth="990.0" style="-fx-background-color: ivory; -fx-background-radius: 50;">
+                                 <children>
+                                    <Label layoutX="163.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Tên vaccine:" />
+                                    <Label layoutX="163.0" layoutY="96.0" prefHeight="17.0" prefWidth="89.0" text="Mũi số:" />
+                                    <Label layoutX="163.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Ngày:" />
+                                    <Label layoutX="447.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+                                    <Label layoutX="265.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+                                    <Label layoutX="265.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Viêm gan B" />
+                                    <Label layoutX="265.0" layoutY="96.0" prefHeight="17.0" prefWidth="161.0" text="2" />
+                                    <Label layoutX="545.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="không có" />
+                                    <JFXButton layoutX="826.0" layoutY="35.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+                                    <JFXButton layoutX="469.0" layoutY="95.0" style="-fx-background-color: orange;" text="Xem triệu chứng" textFill="WHITE" />
+                                    <Label layoutX="447.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Trạng thái:" />
+                                    <Label layoutX="545.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Đã tiêm" />
+                                    <JFXButton layoutX="826.0" layoutY="78.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Sửa" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </JFXScrollPane>
+               </children>
+            </FlowPane>
+         </content>
+      </Tab>
+      <Tab text="Khám chữa bệnh">
+         <content>
+            <JFXScrollPane>
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="770.0" prefWidth="1030.0" spacing="20.0" style="-fx-background-color: white;">
+                     <children>
+                        <JFXButton prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Thêm" />
+                        <AnchorPane prefHeight="194.0" prefWidth="990.0" style="-fx-background-color: ivory; -fx-background-radius: 50;">
+                           <children>
+                              <Label layoutX="163.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Lý do:" />
+                              <Label layoutX="163.0" layoutY="96.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+                              <Label layoutX="163.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Ngày:" />
+                              <Label layoutX="447.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Nơi khám:" />
+                              <Label layoutX="265.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+                              <Label layoutX="265.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Bụng to" />
+                              <Label layoutX="265.0" layoutY="96.0" prefHeight="17.0" prefWidth="161.0" text="(không có)" />
+                              <Label layoutX="545.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="Bệnh viện Miyazaki" />
+                              <JFXButton layoutX="826.0" layoutY="35.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+                              <Label layoutX="447.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Chẩn đoán:" />
+                              <Label layoutX="545.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Mang thai (song thai)" />
+                              <JFXButton layoutX="826.0" layoutY="78.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Sửa" />
+                              <JFXListView layoutX="545.0" layoutY="96.0" prefHeight="82.0" prefWidth="161.0" />
+                              <Label layoutX="447.0" layoutY="96.0" prefHeight="17.0" prefWidth="89.0" text="Đơn thuốc:" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </JFXScrollPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service;
 
-import com.aylesw.mch.backend.dto.*;
+import io.github.aylesw.mch.backend.dto.*;
 import io.github.aylesw.mch.backend.dto.*;
 
 public interface AuthenticationService {

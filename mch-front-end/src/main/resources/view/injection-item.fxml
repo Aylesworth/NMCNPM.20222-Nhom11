@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="143.0" prefWidth="990.0" style="-fx-background-color: ivory; -fx-background-radius: 50;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="163.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Tên vaccine:" />
+      <Label layoutX="163.0" layoutY="96.0" prefHeight="17.0" prefWidth="89.0" text="Mũi số:" />
+      <Label layoutX="163.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Ngày:" />
+      <Label layoutX="447.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+      <Label layoutX="265.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+      <Label layoutX="265.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Viêm gan B" />
+      <Label layoutX="265.0" layoutY="96.0" prefHeight="17.0" prefWidth="161.0" text="2" />
+      <Label layoutX="545.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" text="không có" />
+      <JFXButton layoutX="826.0" layoutY="35.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+      <JFXButton layoutX="469.0" layoutY="95.0" style="-fx-background-color: orange;" text="Xem triệu chứng" textFill="WHITE" />
+      <Label layoutX="447.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Trạng thái:" />
+      <Label layoutX="545.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" text="Đã tiêm" />
+      <JFXButton layoutX="826.0" layoutY="78.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Sửa" />
+   </children>
+</AnchorPane>

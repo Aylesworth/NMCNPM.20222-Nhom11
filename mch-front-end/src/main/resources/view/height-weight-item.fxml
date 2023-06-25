@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="139.0" prefWidth="749.0" style="-fx-background-color: ivory; -fx-background-radius: 50;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="168.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="Ngày đo:" />
+      <Label layoutX="168.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Ghi chú:" />
+      <Label layoutX="168.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Chiều cao:" />
+      <Label layoutX="426.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" text="Cân nặng:" />
+      <Label layoutX="426.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" text="BMI:" />
+      <Label layoutX="426.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" text="Đánh giá:" />
+      <Label layoutX="243.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="10 cm" />
+      <Label layoutX="243.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="21/06/2023" />
+      <Label layoutX="243.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="1 kg" />
+      <Label layoutX="499.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" text="1 cm" />
+      <Label layoutX="499.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" text="6.9" />
+      <Label layoutX="499.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" text="Suy dinh dưỡng" />
+      <JFXButton layoutX="778.0" layoutY="57.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" text="Xóa" />
+   </children>
+</AnchorPane>

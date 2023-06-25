@@ -1,6 +1,5 @@
 package io.github.aylesw.mch.backend.config;
 
-import com.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
