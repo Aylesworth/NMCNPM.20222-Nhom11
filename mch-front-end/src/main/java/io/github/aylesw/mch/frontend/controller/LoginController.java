@@ -64,7 +64,7 @@ public class LoginController {
 
     @FXML
     void goToSignUp() {
-        ScreenManager.getSignUpWindow().show();
+        ScreenManager.signUpStage().show();
     }
 }
 

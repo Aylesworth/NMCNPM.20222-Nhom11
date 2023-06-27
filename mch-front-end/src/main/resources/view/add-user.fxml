@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="20.0" prefWidth="159.0" text="THÊM NGƯỜI DÙNG" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="187.0" text="THÊM NGƯỜI DÙNG" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </children>
@@ -43,6 +43,9 @@
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
       </VBox>
    </left>
    <right>
@@ -58,13 +61,16 @@
             <JFXTextField fx:id="txtCitizenId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Mã CCCD" />
             <JFXTextField fx:id="txtInsuranceId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số BHYT" />
          </children>
+         <padding>
+            <Insets right="50.0" />
+         </padding>
       </VBox>
    </right>
    <bottom>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton onAction="#addUser" style="-fx-background-color: aqua;" text="Thêm" />
-            <JFXButton onAction="#cancel" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: aqua;" text="Hủy" />
+            <JFXButton onAction="#addUser" text="Thêm" />
+            <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="56.0" text="Hủy" />
          </children>
       </HBox>
    </bottom>

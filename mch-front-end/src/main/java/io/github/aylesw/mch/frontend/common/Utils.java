@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 
 public class Utils {
@@ -31,12 +30,17 @@ public class Utils {
         return LocalDate.parse(string);
     }
 
+    public static String convertDateFormat(String isoFormat) {
+        LocalDate localDate = LocalDate.parse(isoFormat);
+        return localDate.format(Beans.DATE_FORMATTER);
+    }
+
     public static LocalDate stringToLocalDateCustom(String string) {
-        return LocalDate.parse(string, Beans.DATE_TIME_FORMATTER);
+        return LocalDate.parse(string, Beans.DATE_FORMATTER);
     }
 
     public static String localDateToString(LocalDate localDate) {
-        return localDate.format(Beans.DATE_TIME_FORMATTER);
+        return localDate.format(Beans.DATE_FORMATTER);
     }
 
 }

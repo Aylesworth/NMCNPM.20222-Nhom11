@@ -19,13 +19,6 @@ public class AddUserController implements Initializable {
 
     private Stage container;
 
-    private ManageUserController parent;
-
-    public AddUserController(Stage container, ManageUserController parent) {
-        this.container = container;
-        this.parent = parent;
-    }
-
     @FXML
     private JFXTextField txtEmail;
 
@@ -63,7 +56,7 @@ public class AddUserController implements Initializable {
 
     @FXML
     void addUser(ActionEvent event) {
-        String url = AppConstants.BASE_URL + "/user";
+        String url = AppConstants.BASE_URL + "/users";
         String token = Utils.getToken();
         String method = "POST";
         String requestBody = new RequestBodyMap()
@@ -71,7 +64,7 @@ public class AddUserController implements Initializable {
                 .put("password", txtPassword.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", boxSex.getValue())
-                .put("dob", LocalDate.parse(txtDob.getText(), Beans.DATE_TIME_FORMATTER))
+                .put("dob", LocalDate.parse(txtDob.getText(), Beans.DATE_FORMATTER))
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())
@@ -88,7 +81,6 @@ public class AddUserController implements Initializable {
 
             Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm người dùng thành công!");
             container.close();
-            parent.loadData();
         } catch (Exception e) {
             e.printStackTrace();
             Utils.showAlert(Alert.AlertType.ERROR, "Lỗi", null, "Đã có lỗi xảy ra!");

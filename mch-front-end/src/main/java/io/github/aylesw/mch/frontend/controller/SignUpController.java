@@ -1,10 +1,8 @@
 package io.github.aylesw.mch.frontend.controller;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import io.github.aylesw.mch.frontend.Main;
 import io.github.aylesw.mch.frontend.common.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -62,7 +60,7 @@ public class SignUpController implements Initializable {
                 .put("password", txtPassword.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", boxSex.getValue())
-                .put("dob", LocalDate.parse(txtDob.getText(), Beans.DATE_TIME_FORMATTER))
+                .put("dob", LocalDate.parse(txtDob.getText(), Beans.DATE_FORMATTER))
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())

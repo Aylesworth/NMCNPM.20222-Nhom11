@@ -1,0 +1,130 @@
+/* Buttons */
+.button {
+    -fx-background-color: #FF5722;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #FF9800;
+}
+
+.button:pressed {
+    -fx-background-color: #FF9800;
+}
+
+.menu-button {
+    -fx-background-color: #0277bd;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.menu-button:hover {
+    -fx-background-color: #03A9F4;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #03A9F4;
+}
+
+/* Text Fields */
+.text-field {
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-background-color: #e1f5fe;
+    -fx-text-fill: #212121;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+/* Check Boxes */
+.check-box {
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Radio Buttons */
+.radio-button {
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #212121;
+}
+
+.combo-box .list-cell:selected {
+    /*-fx-background-color: #e1f5fe;*/
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f5f5f5;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #212121;
+}
+
+.table-view .row-cell {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .row-cell:even {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-view .row-cell:selected {
+    -fx-background-color: #0277bd;
+    -fx-text-fill: #ffffff;
+}
+
+/* TabPane */
+.tab-pane {
+    -fx-background-color: #ffffff;
+}
+
+/* Tab */
+.tab {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+}
+
+.tab:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.tab:selected {
+    -fx-background-color: #9493e6;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}

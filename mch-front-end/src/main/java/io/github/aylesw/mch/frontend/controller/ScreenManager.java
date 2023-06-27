@@ -7,20 +7,18 @@ import javafx.stage.Stage;
 
 public class ScreenManager {
 
-    private static MainFrameController mainFrameController = new MainFrameController();
+    private static MainFrameController mainFrameController;
 
     private static Stage mainFrame;
 
     static {
+        mainFrameController = new MainFrameController();
         mainFrame = new Stage();
         mainFrame.setTitle("Quản lý Sức khỏe Mẹ và Bé");
         mainFrame.setScene(loadScene("main-frame.fxml", mainFrameController));
     }
 
     public static Stage getMainFrame() {
-//        if (mainFrame == null) {
-//
-//        }
         return mainFrame;
     }
 
@@ -28,30 +26,37 @@ public class ScreenManager {
         return mainFrameController;
     }
 
-    public static Stage getLoginWindow() {
-        Stage stage = new Stage();
-        stage.setTitle("Đăng nhập");
-        stage.setScene(loadScene("login.fxml", new LoginController()));
-        return stage;
+    public static Stage loginStage() {
+        return loadStage("Đăng nhập", "login.fxml", new LoginController());
     }
 
-    public static Stage getSignUpWindow() {
-        Stage stage = new Stage();
-        stage.setTitle("Đăng ký");
-        stage.setScene(loadScene("sign-up.fxml", new SignUpController()));
-        return stage;
+    public static Stage signUpStage() {
+        return loadStage("Đăng ký", "sign-up.fxml", new SignUpController());
     }
 
-    public static Parent getAdminNavigationBar() {
+    public static Parent adminNavBar() {
         return loadRoot("nav-bar-admin.fxml", null);
     }
 
-    public static Parent getManageUsersPanel() {
+    public static Parent manageUsersPanel() {
         return loadRoot("manage-users.fxml", new ManageUsersController());
     }
 
+    public static Stage addUserStage() {
+        return loadStage("Thêm người dùng", "add-user.fxml", new AddUserController());
+    }
+
+
+    public static Stage loadStage(String title, String resourceName, Object controller) {
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(loadScene(resourceName, controller));
+        return stage;
+    }
+
     public static Scene loadScene(String resourceName, Object controller) {
-        return new Scene(loadRoot(resourceName, controller));
+        Scene scene = new Scene(loadRoot(resourceName, controller));
+        return scene;
     }
 
     public static Parent loadRoot(String resourceName, Object controller) {

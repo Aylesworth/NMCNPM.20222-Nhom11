@@ -14,7 +14,7 @@ public class LocalDateAdapter extends TypeAdapter<LocalDate> {
     private final DateTimeFormatter formatter;
 
     public LocalDateAdapter() {
-        this(Beans.DATE_TIME_FORMATTER);
+        this(Beans.DATE_FORMATTER);
     }
 
     public LocalDateAdapter(DateTimeFormatter formatter) {

@@ -1,11 +1,7 @@
 package io.github.aylesw.mch.frontend;
 
-import io.github.aylesw.mch.frontend.controller.MainFrameController;
-import io.github.aylesw.mch.frontend.controller.ManageUserController;
 import io.github.aylesw.mch.frontend.controller.ScreenManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -27,7 +23,7 @@ public class Main extends Application {
 //        ScreenManager.getLoginWindow().show();
 
         ScreenManager.getMainFrame().show();
-        ScreenManager.getMainFrameController().getBorderPane().setLeft(ScreenManager.getAdminNavigationBar());
-        ScreenManager.getMainFrameController().getBorderPane().setCenter(ScreenManager.getManageUsersPanel());
+        ScreenManager.getMainFrameController().getBorderPane().setLeft(ScreenManager.adminNavBar());
+        ScreenManager.getMainFrameController().getBorderPane().setCenter(ScreenManager.manageUsersPanel());
     }
 }
