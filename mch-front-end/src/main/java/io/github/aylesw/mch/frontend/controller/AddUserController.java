@@ -17,7 +17,11 @@ import java.util.ResourceBundle;
 
 public class AddUserController implements Initializable {
 
-    private Stage container;
+    private ManageUsersController parent;
+
+    public AddUserController(ManageUsersController parent) {
+        this.parent = parent;
+    }
 
     @FXML
     private JFXTextField txtEmail;
@@ -80,7 +84,8 @@ public class AddUserController implements Initializable {
                     .build().request();
 
             Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm người dùng thành công!");
-            container.close();
+            ((Stage)txtEmail.getScene().getWindow()).close();
+            parent.loadUsersData();
         } catch (Exception e) {
             e.printStackTrace();
             Utils.showAlert(Alert.AlertType.ERROR, "Lỗi", null, "Đã có lỗi xảy ra!");
@@ -89,7 +94,7 @@ public class AddUserController implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
-        container.close();
+        ((Stage)txtEmail.getScene().getWindow()).close();
     }
 
 }

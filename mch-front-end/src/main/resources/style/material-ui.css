@@ -31,6 +31,19 @@
     -fx-background-color: #03A9F4;
 }
 
+.child-ref-button {
+    -fx-background-color: AQUA;
+    -fx-text-fill: #212121;
+}
+
+.child-ref-button:hover {
+    -fx-background-color: #00CED1;
+}
+
+.child-ref-button:pressed {
+    -fx-background-color: #00CED1;
+}
+
 /* Text Fields */
 .text-field {
     -fx-text-fill: #212121;
@@ -127,4 +140,49 @@
     -fx-background-color: #9493e6;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
+}
+
+/* Titled pane */
+.titled-pane {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.titled-pane .title {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .content {
+    -fx-padding: 10px;
+}
+
+.titled-pane > .content > .content {
+    -fx-padding: 5px 0;
+}
+
+/* Scroll pane */
+.scroll-pane {
+    -fx-background-color: #FAFAFA;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: #E0E0E0;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar:vertical:hover,
+.scroll-pane .scroll-bar:horizontal:hover {
+    -fx-background-color: #BDBDBD;
+}
+
+.scroll-pane .scroll-bar:vertical:pressed,
+.scroll-pane .scroll-bar:horizontal:pressed {
+    -fx-background-color: #757575;
 }

@@ -42,6 +42,14 @@ public class UserController {
         return ResponseEntity.ok("User registration approved");
     }
 
+    @PostMapping("/reject-registration")
+    public ResponseEntity<String> rejectUserRegistration(
+            @RequestParam(value = "id", required = true) Long userRegistrationId,
+            @RequestParam(value = "reason", required = true) String reason) {
+        userService.rejectUserRegistration(userRegistrationId, reason);
+        return ResponseEntity.ok("User registration declined");
+    }
+
     @PostMapping("/approve-change")
     public ResponseEntity<String> approveUserChange(@RequestParam(value = "id", required = true) Long userChangeId) {
         userService.approveUserChange(userChangeId);

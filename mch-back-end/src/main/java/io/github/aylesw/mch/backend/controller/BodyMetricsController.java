@@ -15,26 +15,26 @@ import java.util.List;
 public class BodyMetricsController {
     private final BodyMetricsService bodyMetricsService;
 
-    @GetMapping("/child/{child-id}/body-metrics")
+    @GetMapping("/children/{child-id}/body-metrics")
     public ResponseEntity<List<BodyMetricsDto>> getBodyMetrics(@PathVariable("child-id") Long childId) {
         return ResponseEntity.ok(bodyMetricsService.getBodyMetrics(childId));
     }
 
-    @PostMapping("/child/{child-id}/body-metrics")
+    @PostMapping("/children/{child-id}/body-metrics")
     public ResponseEntity<String> addBodyMetrics(@PathVariable("child-id") Long childId,
                                                  @Valid @RequestBody BodyMetricsDto bodyMetricsDto) {
         bodyMetricsService.addBodyMetrics(childId, bodyMetricsDto);
         return ResponseEntity.ok("New body metrics added successfully");
     }
 
-    @DeleteMapping("/child/{child-id}/body-metrics/{id}")
+    @DeleteMapping("/children/{child-id}/body-metrics/{id}")
     public ResponseEntity<String> delete(@PathVariable("child-id") Long childId,
                                          @PathVariable("id") Long bodyMetricsId) {
         bodyMetricsService.deleteBodyMetrics(childId, bodyMetricsId);
         return ResponseEntity.ok("Body metrics deleted successfully");
     }
 
-    @PostMapping("/child/{child-id}/body-metrics/request-update")
+    @PostMapping("/children/{child-id}/body-metrics/request-update")
     public ResponseEntity<String> requestUpdate(@PathVariable("child-id") Long childId) {
         bodyMetricsService.requestUpdate(childId);
         return ResponseEntity.ok("Requested body metrics update");

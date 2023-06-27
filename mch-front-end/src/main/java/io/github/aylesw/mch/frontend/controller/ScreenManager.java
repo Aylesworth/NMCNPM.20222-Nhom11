@@ -7,45 +7,66 @@ import javafx.stage.Stage;
 
 public class ScreenManager {
 
-    private static MainFrameController mainFrameController;
+    private static MainWindowController mainWindowController;
 
-    private static Stage mainFrame;
+    private static Stage mainStage;
 
     static {
-        mainFrameController = new MainFrameController();
-        mainFrame = new Stage();
-        mainFrame.setTitle("Quản lý Sức khỏe Mẹ và Bé");
-        mainFrame.setScene(loadScene("main-frame.fxml", mainFrameController));
+        mainWindowController = new MainWindowController();
+        mainStage = loadStage("Quản lý Sức khỏe Mẹ và Bé", "main-window.fxml", mainWindowController);
     }
 
-    public static Stage getMainFrame() {
-        return mainFrame;
+    public static Stage getMainStage() {
+        return mainStage;
     }
 
-    public static MainFrameController getMainFrameController() {
-        return mainFrameController;
+    public static void setNavBar(boolean adminView) {
+        if (adminView) {
+            mainWindowController.getBorderPane().setLeft(getAdminNavBar());
+        } else {
+
+        }
     }
 
-    public static Stage loginStage() {
+    public static void setMainPanel(Parent root) {
+        mainWindowController.getBorderPane().setCenter(root);
+    }
+
+    public static Stage getLoginStage() {
         return loadStage("Đăng nhập", "login.fxml", new LoginController());
     }
 
-    public static Stage signUpStage() {
+    public static Stage getSignUpStage() {
         return loadStage("Đăng ký", "sign-up.fxml", new SignUpController());
     }
 
-    public static Parent adminNavBar() {
-        return loadRoot("nav-bar-admin.fxml", null);
+    public static Parent getAdminNavBar() {
+        return loadNode("nav-bar-admin.fxml", null);
     }
 
-    public static Parent manageUsersPanel() {
-        return loadRoot("manage-users.fxml", new ManageUsersController());
+    public static Parent getManageUsersPanel() {
+        return loadNode("manage-users.fxml", new ManageUsersController());
     }
 
-    public static Stage addUserStage() {
-        return loadStage("Thêm người dùng", "add-user.fxml", new AddUserController());
+    public static Stage getAddUserStage(ManageUsersController parent) {
+        return loadStage("Thêm người dùng", "add-user.fxml", new AddUserController(parent));
     }
 
+    public static Parent getUserDetailsPanel(long id, Parent previous, ManageUsersController previousController) {
+        return loadNode("user-details.fxml", new UserDetailsController(id, previous, previousController));
+    }
+
+    public static Stage getAddChildStage(Object parent) {
+        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parent));
+    }
+
+    public static Stage getAddChildStage(long parentId, UserDetailsController parent) {
+        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parent));
+    }
+
+    public static Parent getChildRefItem(long id, String name) {
+        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name));
+    }
 
     public static Stage loadStage(String title, String resourceName, Object controller) {
         Stage stage = new Stage();
@@ -55,11 +76,11 @@ public class ScreenManager {
     }
 
     public static Scene loadScene(String resourceName, Object controller) {
-        Scene scene = new Scene(loadRoot(resourceName, controller));
+        Scene scene = new Scene(loadNode(resourceName, controller));
         return scene;
     }
 
-    public static Parent loadRoot(String resourceName, Object controller) {
+    public static Parent loadNode(String resourceName, Object controller) {
         try {
             FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource("/view/" + resourceName).toURI().toURL());
             loader.setController(controller);

@@ -16,19 +16,19 @@ public class InjectionController {
 
     private final InjectionService injectionService;
 
-    @GetMapping("/child/{child-id}/injection")
+    @GetMapping("/children/{child-id}/injections")
     public ResponseEntity<List<InjectionDto>> getInjections(@PathVariable("child-id") Long childId) {
         return ResponseEntity.ok(injectionService.getInjections(childId));
     }
 
-    @PostMapping("/child/{child-id}/injection")
+    @PostMapping("/children/{child-id}/injections")
     public ResponseEntity<String> addInjection(@PathVariable("child-id") Long childId,
                                                @Valid @RequestBody InjectionDto injectionDto) {
         injectionService.addInjection(childId, injectionDto);
         return ResponseEntity.ok("New injection information added successfully");
     }
 
-    @PutMapping("/child/{child-id}/injection/{id}")
+    @PutMapping("/children/{child-id}/injections/{id}")
     public ResponseEntity<String> updateInjection(@PathVariable("child-id") Long childId,
                                                   @PathVariable("id") Long injectionId,
                                                   @Valid @RequestBody InjectionDto injectionDto) {
@@ -36,7 +36,7 @@ public class InjectionController {
         return ResponseEntity.ok("Injection information updated successfully");
     }
 
-    @DeleteMapping("/child/{child-id}/injection/{id}")
+    @DeleteMapping("/children/{child-id}/injections/{id}")
     public ResponseEntity<String> deleteInjection(@PathVariable("child-id") Long childId,
                                                   @PathVariable("id") Long injectionId) {
         injectionService.deleteInjection(childId, injectionId);

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
       <Tab text="Quản lý người dùng">
          <content>
@@ -29,7 +29,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <ProgressIndicator fx:id="spinner" />
+                        <ProgressIndicator fx:id="spinner1" />
                      </children>
                   </StackPane>
                   <JFXTextField fx:id="txtSearchUser" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchUser" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
@@ -54,28 +54,33 @@
          <content>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tblUserRegistrations" layoutX="42.0" layoutY="99.0" prefHeight="615.0" prefWidth="433.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="Thời gian" />
-                        <TableColumn prefWidth="123.33328247070312" text="Email" />
-                        <TableColumn prefWidth="188.00006103515625" text="Họ tên" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <StackPane layoutX="42.0" layoutY="99.0">
+                     <children>
+                        <TableView fx:id="tblUserRegistrations" prefHeight="615.0" prefWidth="433.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Thời gian" />
+                              <TableColumn prefWidth="123.33328247070312" text="Email" />
+                              <TableColumn prefWidth="188.00006103515625" text="Họ tên" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <ProgressIndicator fx:id="spinner2" />
+                     </children>
+                  </StackPane>
                   <JFXTextField fx:id="txtSearchUserRegistration" labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
-                  <JFXTextField fx:id="txtFullName2" labelFloat="true" layoutX="515.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
-                  <JFXTextField fx:id="txtEmail2" labelFloat="true" layoutX="515.0" layoutY="278.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
-                  <JFXTextField fx:id="txtPhoneNumber2" labelFloat="true" layoutX="761.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
+                  <JFXTextField fx:id="txtFullName2" editable="false" labelFloat="true" layoutX="515.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtEmail2" editable="false" labelFloat="true" layoutX="515.0" layoutY="278.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
+                  <JFXTextField fx:id="txtPhoneNumber2" editable="false" labelFloat="true" layoutX="761.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
                   <Label layoutX="515.0" layoutY="167.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin đăng ký:" />
-                  <JFXTextField fx:id="txtAddress2" labelFloat="true" layoutX="761.0" layoutY="278.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
-                  <JFXTextField fx:id="txtDob2" labelFloat="true" layoutX="515.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtCitizenId2" labelFloat="true" layoutX="761.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
-                  <JFXTextField fx:id="txtInsuranceId2" labelFloat="true" layoutX="761.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXComboBox fx:id="cbxSex2" labelFloat="true" layoutX="515.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính" />
-                  <JFXButton fx:id="btnDeclineRegistration" layoutX="761.0" layoutY="483.0" onAction="#declineRegistration" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: aqua;" text="Từ chối" />
-                  <JFXButton fx:id="btnApproveRegistration" layoutX="616.0" layoutY="483.0" onAction="#approveRegistration" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
+                  <JFXTextField fx:id="txtAddress2" editable="false" labelFloat="true" layoutX="761.0" layoutY="278.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
+                  <JFXTextField fx:id="txtDob2" editable="false" labelFloat="true" layoutX="515.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtCitizenId2" editable="false" labelFloat="true" layoutX="761.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
+                  <JFXTextField fx:id="txtInsuranceId2" editable="false" labelFloat="true" layoutX="761.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXButton fx:id="btnRejectRegistration" layoutX="761.0" layoutY="483.0" onAction="#rejectRegistration" prefHeight="25.0" prefWidth="91.0" text="Từ chối" />
+                  <JFXButton fx:id="btnApproveRegistration" layoutX="616.0" layoutY="483.0" onAction="#approveRegistration" prefHeight="25.0" prefWidth="91.0" text="Phê duyệt" />
+                  <JFXTextField fx:id="txtSex2" editable="false" labelFloat="true" layoutX="515.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
                </children>
             </AnchorPane>
          </content>
@@ -84,16 +89,21 @@
          <content>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tblUserChanges" layoutX="42.0" layoutY="99.0" prefHeight="615.0" prefWidth="433.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="Thời gian" />
-                        <TableColumn prefWidth="123.33328247070312" text="Email" />
-                        <TableColumn prefWidth="188.00006103515625" text="Họ tên" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <StackPane layoutX="42.0" layoutY="99.0">
+                     <children>
+                        <TableView fx:id="tblUserChanges" prefHeight="615.0" prefWidth="433.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Thời gian" />
+                              <TableColumn prefWidth="123.33328247070312" text="Email" />
+                              <TableColumn prefWidth="188.00006103515625" text="Họ tên" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <ProgressIndicator fx:id="spinner3" />
+                     </children>
+                  </StackPane>
                   <JFXTextField fx:id="txtSearchChanges" labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
                   <JFXTextField fx:id="txtOrgFullName" labelFloat="true" layoutX="515.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <JFXTextField fx:id="txtOrgEmail" labelFloat="true" layoutX="515.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />

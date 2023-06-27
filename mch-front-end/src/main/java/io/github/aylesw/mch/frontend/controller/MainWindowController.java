@@ -3,7 +3,7 @@ package io.github.aylesw.mch.frontend.controller;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
-public class MainFrameController {
+public class MainWindowController {
 
     @FXML
     private BorderPane borderPane;

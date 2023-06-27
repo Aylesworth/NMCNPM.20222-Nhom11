@@ -2,7 +2,6 @@ package io.github.aylesw.mch.frontend.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import io.github.aylesw.mch.frontend.common.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,6 +23,9 @@ public class ManageUsersController implements Initializable {
     private ObservableList<Map<String, Object>> users;
     private ObservableList<Map<String, Object>> userRegistrations;
     private ObservableList<Map<String, Object>> userChanges;
+
+    @FXML
+    private TabPane root;
 
     @FXML
     private TableView<Map<String, Object>> tblUsers;
@@ -95,10 +97,10 @@ public class ManageUsersController implements Initializable {
     private JFXTextField txtInsuranceId2;
 
     @FXML
-    private JFXComboBox<String> cbxSex2;
+    private JFXTextField txtSex2;
 
     @FXML
-    private JFXButton btnDeclineRegistration;
+    private JFXButton btnRejectRegistration;
 
     @FXML
     private JFXButton btnApproveRegistration;
@@ -158,7 +160,13 @@ public class ManageUsersController implements Initializable {
     private JFXComboBox<String> cbxNewSex;
 
     @FXML
-    private ProgressIndicator spinner;
+    private ProgressIndicator spinner1;
+
+    @FXML
+    private ProgressIndicator spinner2;
+
+    private long selectedUserId;
+    private long selectedUserRegistrationId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -171,6 +179,7 @@ public class ManageUsersController implements Initializable {
         txtFullName.setText("");
         txtEmail.setText("");
         cbxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        cbxSex.getSelectionModel().clearSelection();
         txtDob.setText("");
         txtPhoneNumber.setText("");
         txtAddress.setText("");
@@ -189,25 +198,34 @@ public class ManageUsersController implements Initializable {
 
         users = FXCollections.observableArrayList();
 
-        Service<ObservableList<Map<String,Object>>> service = new Service<ObservableList<Map<String, Object>>>() {
+        spinner1.setVisible(true);
+
+        Service<ObservableList<Map<String, Object>>> service = new Service<>() {
             @Override
             protected Task<ObservableList<Map<String, Object>>> createTask() {
-                return new Task<ObservableList<Map<String, Object>>>() {
+                return new Task<>() {
                     @Override
                     protected ObservableList<Map<String, Object>> call() throws Exception {
-                        var result = new ApiRequest.Builder<List<Map<String,Object>>>()
-                                .url(url).token(token).method(method)
-                                .build().request();
-                        result.removeIf(e -> e.get("email").toString().equals("admin"));
-                        return FXCollections.observableArrayList(result);
+                        try {
+                            var result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                                    .url(url).token(token).method(method)
+                                    .build().request();
+                            result.removeIf(e -> e.get("email").toString().equals("admin"));
+                            return FXCollections.observableArrayList(result);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
                     }
                 };
             }
         };
 
         service.setOnSucceeded(event -> {
-            users.setAll(service.getValue());
-            spinner.setVisible(false);
+            if (service.getValue() != null) {
+                users.setAll(service.getValue());
+                spinner1.setVisible(false);
+            }
         });
         service.start();
 
@@ -233,13 +251,15 @@ public class ManageUsersController implements Initializable {
                 btnViewProfile.setVisible(true);
                 btnDeleteUser.setVisible(true);
 
+                selectedUserId = ((Double) tblUsers.getSelectionModel().getSelectedItem().get("id")).longValue();
+
                 lblId.setText("ID: " + ((Double) newValue.get("id")).longValue());
                 txtFullName.setText(newValue.get("fullName").toString());
                 txtEmail.setText(newValue.get("email").toString());
                 cbxSex.getSelectionModel().selectFirst();
                 while (!cbxSex.getSelectionModel().getSelectedItem().equals(newValue.get("sex").toString()))
                     cbxSex.getSelectionModel().selectNext();
-                txtDob.setText(Utils.convertDateFormat(newValue.get("dob").toString()));
+                txtDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
                 txtPhoneNumber.setText(newValue.get("phoneNumber").toString());
                 txtAddress.setText(newValue.get("address").toString());
                 txtCitizenId.setText(Optional.ofNullable(newValue.get("citizenId")).orElse("").toString());
@@ -251,7 +271,7 @@ public class ManageUsersController implements Initializable {
     private void clearUserRegistrationInfo() {
         txtFullName2.setText("");
         txtEmail2.setText("");
-        cbxSex2.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        txtSex2.setText("");
         txtDob2.setText("");
         txtPhoneNumber2.setText("");
         txtAddress2.setText("");
@@ -259,32 +279,44 @@ public class ManageUsersController implements Initializable {
         txtInsuranceId2.setText("");
 
         btnApproveRegistration.setVisible(false);
-        btnDeclineRegistration.setVisible(false);
+        btnRejectRegistration.setVisible(false);
     }
 
     void loadUserRegistrationsData() {
+        spinner2.setVisible(true);
+
         String url = AppConstants.BASE_URL + "/users/pending-registrations";
         String token = Utils.getToken();
         String method = "GET";
 
-        List<Map<String, Object>> result;
-        try {
-            result = new ApiRequest.Builder<List<Map<String, Object>>>()
-                    .url(url).token(token).method(method)
-                    .build().request();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        userRegistrations = FXCollections.observableArrayList(result);
+        userRegistrations = FXCollections.observableArrayList();
 
         tblUserRegistrations.setItems(userRegistrations);
+
+        tblUserRegistrations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                clearUserRegistrationInfo();
+            } else {
+                btnApproveRegistration.setVisible(true);
+                btnRejectRegistration.setVisible(true);
+
+                selectedUserRegistrationId = ((Double) tblUserRegistrations.getSelectionModel().getSelectedItem().get("id")).longValue();
+
+                txtFullName2.setText(newValue.get("fullName").toString());
+                txtEmail2.setText(newValue.get("email").toString());
+                txtSex2.setText(newValue.get("sex").toString());
+                txtDob2.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
+                txtPhoneNumber2.setText(newValue.get("phoneNumber").toString());
+                txtAddress2.setText(newValue.get("address").toString());
+                txtCitizenId2.setText(Optional.ofNullable(newValue.get("citizenId")).orElse("").toString());
+                txtInsuranceId2.setText(Optional.ofNullable(newValue.get("insuranceId")).orElse("").toString());
+            }
+        });
 
         tblUserRegistrations.getColumns().clear();
 
         TableColumn<Map<String, Object>, String> timeCol = new TableColumn<>("Thời gian");
-        timeCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().get("requested").toString()));
+        timeCol.setCellValueFactory(e -> new SimpleStringProperty(Beans.TIME_FORMAT_CONVERTER.toCustom(e.getValue().get("requested").toString())));
 
         TableColumn<Map<String, Object>, String> fullNameCol = new TableColumn<>("Họ tên");
         fullNameCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().get("fullName").toString()));
@@ -301,20 +333,46 @@ public class ManageUsersController implements Initializable {
                 clearUserRegistrationInfo();
             } else {
                 btnApproveRegistration.setVisible(true);
-                btnDeclineRegistration.setVisible(true);
+                btnRejectRegistration.setVisible(true);
 
                 txtFullName2.setText(newValue.get("fullName").toString());
                 txtEmail2.setText(newValue.get("email").toString());
-                cbxSex2.getSelectionModel().selectFirst();
-                while (!cbxSex2.getSelectionModel().getSelectedItem().equals(newValue.get("sex").toString()))
-                    cbxSex2.getSelectionModel().selectNext();
-                txtDob2.setText(Utils.localDateToString(Utils.stringToLocalDateISO(newValue.get("dob").toString())));
+                txtSex2.setText(newValue.get("sex").toString());
+                txtDob2.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
                 txtPhoneNumber2.setText(newValue.get("phoneNumber").toString());
                 txtAddress2.setText(newValue.get("address").toString());
                 txtCitizenId2.setText(Optional.ofNullable(newValue.get("citizenId")).orElse("").toString());
                 txtInsuranceId2.setText(Optional.ofNullable(newValue.get("insuranceId")).orElse("").toString());
             }
         });
+
+        Service<ObservableList<Map<String, Object>>> service = new Service<>() {
+            @Override
+            protected Task<ObservableList<Map<String, Object>>> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected ObservableList<Map<String, Object>> call() throws Exception {
+                        try {
+                            var result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                                    .url(url).token(token).method(method)
+                                    .build().request();
+                            return FXCollections.observableArrayList(result);
+                        } catch (Exception e) {
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(event -> {
+            if (service.getValue() != null) {
+                spinner2.setVisible(false);
+                userRegistrations.setAll(service.getValue());
+            }
+        });
+
+        service.start();
     }
 
     @FXML
@@ -326,17 +384,91 @@ public class ManageUsersController implements Initializable {
 
     @FXML
     void addUser(ActionEvent event) {
-        ScreenManager.addUserStage().show();
+        ScreenManager.getAddUserStage(this).show();
     }
 
     @FXML
     void approveRegistration(ActionEvent event) {
+        String url = AppConstants.BASE_URL + "/users/approve-registration?id=" + selectedUserRegistrationId;
+        String token = Utils.getToken();
+        String method = "POST";
+        String requestBody = "";
 
+        Service<String> service = new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        try {
+                            return new ApiRequest.Builder<String>()
+                                    .url(url).token(token).method(method).requestBody(requestBody)
+                                    .build().request();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(e -> {
+            if (service.getValue() != null) {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt người dùng thành công!");
+                loadUserRegistrationsData();
+            }
+        });
+
+        service.start();
     }
 
     @FXML
-    void declineRegistration(ActionEvent event) {
+    void rejectRegistration(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Lý do");
+        dialog.setHeaderText("Vui lòng nhập lý do từ chối:");
+        dialog.setContentText(null);
+        Optional<String> reason = dialog.showAndWait();
 
+        if (!reason.isPresent()) {
+            //
+            return;
+        }
+
+        String url = AppConstants.BASE_URL + "/users/reject-registration?id=" + selectedUserRegistrationId + "&reason=" + reason.get();
+        System.out.println(url);
+        String token = Utils.getToken();
+        String method = "POST";
+        String requestBody = "";
+
+        Service<String> service = new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        try {
+                            return new ApiRequest.Builder<String>()
+                                    .url(url).token(token).method(method).requestBody(requestBody)
+                                    .build().request();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(e -> {
+            if (service.getValue() != null) {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Từ chối đăng ký người dùng thành công!");
+                loadUserRegistrationsData();
+            }
+        });
+
+        service.start();
     }
 
     @FXML
@@ -345,8 +477,7 @@ public class ManageUsersController implements Initializable {
         if (!buttonType.equals(ButtonType.OK))
             return;
 
-        long id = ((Double) tblUsers.getSelectionModel().getSelectedItem().get("id")).longValue();
-        String url = AppConstants.BASE_URL + "/users/" + id;
+        String url = AppConstants.BASE_URL + "/users/" + selectedUserId;
         String token = Utils.getToken();
         String method = "DELETE";
 
@@ -362,15 +493,14 @@ public class ManageUsersController implements Initializable {
 
     @FXML
     void updateUser(ActionEvent event) {
-        long id = ((Double) tblUsers.getSelectionModel().getSelectedItem().get("id")).longValue();
-        String url = AppConstants.BASE_URL + "/users/" + id;
+        String url = AppConstants.BASE_URL + "/users/" + selectedUserId;
         String token = Utils.getToken();
         String method = "PUT";
         String requestBody = new RequestBodyMap()
                 .put("email", txtEmail.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", cbxSex.getValue())
-                .put("dob", Utils.stringToLocalDateCustom(txtDob.getText()))
+                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())
@@ -379,7 +509,7 @@ public class ManageUsersController implements Initializable {
         System.out.println(requestBody);
         try {
             new ApiRequest.Builder<String>().url(url).token(token).method(method).requestBody(requestBody).build().request();
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Cập nhật người dùng thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Cập nhật hồ sơ người dùng thành công!");
             loadUsersData();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -388,7 +518,7 @@ public class ManageUsersController implements Initializable {
 
     @FXML
     void viewProfile(ActionEvent event) {
-
+        ScreenManager.setMainPanel(ScreenManager.getUserDetailsPanel(selectedUserId, root, this));
     }
 
 }

@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefWidth="63.0" text="ĐĂNG KÝ">
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="117.0" text="ĐĂNG KÝ">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
@@ -62,7 +62,7 @@
    <bottom>
       <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="900.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton onAction="#signUp" style="-fx-background-color: orange;" text="Đăng ký" textFill="WHITE" />
+            <JFXButton onAction="#signUp" text="Đăng ký" textFill="WHITE" />
          </children>
       </VBox>
    </bottom>

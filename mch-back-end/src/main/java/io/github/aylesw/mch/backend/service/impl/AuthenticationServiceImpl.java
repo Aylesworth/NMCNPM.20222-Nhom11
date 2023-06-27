@@ -79,7 +79,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String authCode = generateAuthCode(email, "Password reset");
         NotificationDetails notificationDetails = NotificationDetails.builder()
                 .user(User.builder().email(email).build())
-                .title("Mã xác nhận")
+                .title("Mã xác minh")
                 .message("<html><p>Mã đặt lại mật khẩu của bạn là: <b>" + authCode + "</b></p></html>")
                 .build();
 
@@ -120,8 +120,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String authCode = generateAuthCode(email, "Email verification");
         NotificationDetails notificationDetails = NotificationDetails.builder()
                 .user(User.builder().email(email).build())
-                .title("Mã xác nhận")
-                .message("<html><p>Mã xác nhận email của bạn là: <b>" + authCode + "</b></p></html>")
+                .title("Mã xác minh")
+                .message("<html><p>Mã xác minh email của bạn là: <b>" + authCode + "</b></p></html>")
                 .build();
 
         notificationService.createEmailNotification(notificationDetails);

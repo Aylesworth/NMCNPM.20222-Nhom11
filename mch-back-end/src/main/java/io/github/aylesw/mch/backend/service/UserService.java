@@ -21,6 +21,8 @@ public interface UserService {
 
     void approveUserRegistration(Long userRegistrationId);
 
+    void rejectUserRegistration(Long userRegistrationId, String reason);
+
     void approveUserChange(Long userChangeId);
 
     List<UserDto> search(String keyword);

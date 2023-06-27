@@ -2,6 +2,7 @@ package io.github.aylesw.mch.backend.service.impl;
 
 import io.github.aylesw.mch.backend.common.Utils;
 import io.github.aylesw.mch.backend.dto.ChangePasswordDto;
+import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.dto.RegisterDto;
 import io.github.aylesw.mch.backend.dto.UserDto;
 import io.github.aylesw.mch.backend.exception.ApiException;
@@ -14,6 +15,7 @@ import io.github.aylesw.mch.backend.repository.RoleRepository;
 import io.github.aylesw.mch.backend.repository.UserChangeRepository;
 import io.github.aylesw.mch.backend.repository.UserRegistrationRepository;
 import io.github.aylesw.mch.backend.repository.UserRepository;
+import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserRegistrationRepository userRegistrationRepository;
     private final UserChangeRepository userChangeRepository;
+    private final NotificationService notificationService;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper mapper;
     private final AuthenticationManager authenticationManager;
@@ -84,6 +87,50 @@ public class UserServiceImpl implements UserService {
 
         userRegistration.setApproved(Utils.currentTimestamp());
         userRegistrationRepository.save(userRegistration);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .user(User.builder().email(userRegistration.getEmail()).build())
+                .title("Tài khoản được phê duyệt")
+                .message("""
+                        <html>
+                            <p>Xin chào <i>%s</i>,</p>
+                            <p>Tài khoản của bạn trên hệ thống <b><i>Quản lý Sức khỏe Mẹ và Bé</i></b> đã được phê duyệt. 
+                            Hiện tại bạn có thể đăng nhập vào hệ thống thông qua email đã đăng ký.</p>
+                            <p>Nếu có bất kỳ thắc mắc nào liên quan đến hệ thống, bạn có thể gửi thư trực tiếp cho chúng tôi thông qua địa chỉ email này.</p>
+                            <p>Mong bạn có những trải nghiệm tốt nhất.<br>Đội ngũ phát triển</p>
+                        </html>
+                        """.formatted(userRegistration.getFullName()))
+                .build();
+
+        notificationService.createEmailNotification(notificationDetails);
+    }
+
+    @Override
+    public void rejectUserRegistration(Long userRegistrationId, String reason) {
+        UserRegistration userRegistration = userRegistrationRepository.findById(userRegistrationId)
+                .orElseThrow(() -> new ResourceNotFoundException("User registration", "id", userRegistrationId));
+
+        if (userRegistration.getApproved() != null)
+            throw new ApiException(HttpStatus.BAD_REQUEST, "User registration already approved");
+
+        userRegistrationRepository.delete(userRegistration);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .user(User.builder().email(userRegistration.getEmail()).build())
+                .title("Tài khoản bị từ chối phê duyệt")
+                .message("""
+                        <html>
+                            <p>Xin chào <i>%s</i>,</p>
+                            <p>Chúng tôi rất tiếc khi phải thông báo rằng tài khoản của bạn trên hệ thống 
+                            <b><i>Quản lý Sức khỏe Mẹ và Bé</i></b> đã bị từ chối phê duyệt với lý do: <i>%s</i></p>
+                            <p>Mặc dù vậy, bạn hoàn toàn có thể chỉnh sửa thông tin cho hợp lệ và đăng ký lại tài khoản một lần nữa.</p>
+                            <p>Nếu có bất kỳ thắc mắc nào liên quan đến hệ thống, bạn có thể gửi thư trực tiếp cho chúng tôi thông qua địa chỉ email này.</p>
+                            <p>Chúc bạn một ngày vui vẻ.<br>Đội ngũ phát triển</p>
+                        </html>
+                        """.formatted(userRegistration.getFullName(), reason))
+                .build();
+
+        notificationService.createEmailNotification(notificationDetails);
     }
 
     @Override

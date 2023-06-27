@@ -60,7 +60,7 @@ public class SignUpController implements Initializable {
                 .put("password", txtPassword.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", boxSex.getValue())
-                .put("dob", LocalDate.parse(txtDob.getText(), Beans.DATE_FORMATTER))
+                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())

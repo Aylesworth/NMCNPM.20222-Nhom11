@@ -20,10 +20,11 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
 
-//        ScreenManager.getLoginWindow().show();
+//        ScreenManager.getLoginStage().show();
+//        ScreenManager.getSignUpStage().show();
 
-        ScreenManager.getMainFrame().show();
-        ScreenManager.getMainFrameController().getBorderPane().setLeft(ScreenManager.adminNavBar());
-        ScreenManager.getMainFrameController().getBorderPane().setCenter(ScreenManager.manageUsersPanel());
+        ScreenManager.getMainStage().show();
+        ScreenManager.setNavBar(true);
+        ScreenManager.setMainPanel(ScreenManager.getManageUsersPanel());
     }
 }

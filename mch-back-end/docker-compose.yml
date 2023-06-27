@@ -7,8 +7,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: nducanh210503
       MYSQL_DATABASE: maternal_child_health
+    volumes:
+      - mysql_data:/var/lib/mysql
     networks:
-      springboot-mysql-net:
+      - springboot-mysql-net
 
   mch-back-end:
     container_name: mch-back-end
@@ -18,8 +20,12 @@ services:
     ports:
       - "8080:8080"
     networks:
-      springboot-mysql-net:
+      - springboot-mysql-net
     restart: on-failure
 
 networks:
   springboot-mysql-net:
+    driver: bridge
+
+volumes:
+  mysql_data:

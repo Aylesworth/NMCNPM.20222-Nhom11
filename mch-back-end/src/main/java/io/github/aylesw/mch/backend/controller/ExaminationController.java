@@ -15,19 +15,19 @@ import java.util.List;
 public class ExaminationController {
     private final ExaminationService examinationService;
 
-    @GetMapping("/child/{child-id}/examination")
+    @GetMapping("/child/{child-id}/examinations")
     public ResponseEntity<List<ExaminationDto>> getExaminations(@PathVariable("child-id") Long childId) {
         return ResponseEntity.ok(examinationService.getExaminations(childId));
     }
 
-    @PostMapping("/child/{child-id}/examination")
+    @PostMapping("/child/{child-id}/examinations")
     public ResponseEntity<String> addExamination(@PathVariable("child-id") Long childId,
                                                  @Valid @RequestBody ExaminationDto examinationDto) {
         examinationService.addExamination(childId, examinationDto);
         return ResponseEntity.ok("Examination information added successfully");
     }
 
-    @PutMapping("/child/{child-id}/examination/{id}")
+    @PutMapping("/child/{child-id}/examinations/{id}")
     public ResponseEntity<String> update(@PathVariable("child-id") Long childId,
                                          @PathVariable("id") Long examinationId,
                                          @Valid @RequestBody ExaminationDto examinationDto) {
@@ -35,7 +35,7 @@ public class ExaminationController {
         return ResponseEntity.ok("Examination information updated successfully");
     }
 
-    @DeleteMapping("/child/{child-id}/examination/{id}")
+    @DeleteMapping("/child/{child-id}/examinations/{id}")
     public ResponseEntity<String> delete(@PathVariable("child-id") Long childId,
                                          @PathVariable("id") Long examinationId) {
         examinationService.delete(childId, examinationId);

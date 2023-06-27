@@ -26,21 +26,22 @@ public class Utils {
         return alert.getResult();
     }
 
-    public static LocalDate stringToLocalDateISO(String string) {
-        return LocalDate.parse(string);
-    }
+    public static ButtonType showAlert(Alert.AlertType alertType, String content) {
+        Alert alert = new Alert(alertType);
 
-    public static String convertDateFormat(String isoFormat) {
-        LocalDate localDate = LocalDate.parse(isoFormat);
-        return localDate.format(Beans.DATE_FORMATTER);
-    }
+        var title = switch (alertType) {
+            case INFORMATION -> "Thông báo";
+            case CONFIRMATION -> "Xác nhận";
+            case ERROR -> "Lỗi";
+            case WARNING -> "Cảnh báo";
+            case NONE -> "";
+        };
 
-    public static LocalDate stringToLocalDateCustom(String string) {
-        return LocalDate.parse(string, Beans.DATE_FORMATTER);
-    }
-
-    public static String localDateToString(LocalDate localDate) {
-        return localDate.format(Beans.DATE_FORMATTER);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+        return alert.getResult();
     }
 
 }
