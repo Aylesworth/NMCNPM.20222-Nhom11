@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.frontend.controller;
 
-import io.github.aylesw.mch.frontend.Main;
+import io.github.aylesw.mch.frontend.App;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.AppConstants;
 import io.github.aylesw.mch.frontend.common.Utils;
@@ -37,7 +37,7 @@ public class NotificationsController implements Initializable {
                     protected List<Parent> call() throws Exception {
                         try {
                             var result = new ApiRequest.Builder<List<Map<String, Object>>>()
-                                    .url(AppConstants.BASE_URL + "/users/" + Main.getUserId() + "/notifications")
+                                    .url(AppConstants.BASE_URL + "/users/" + App.getUserId() + "/notifications")
                                     .token(Utils.getToken())
                                     .method("GET")
                                     .build().request();

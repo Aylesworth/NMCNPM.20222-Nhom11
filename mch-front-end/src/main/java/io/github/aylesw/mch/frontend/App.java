@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
-public class Main extends Application {
+public class App extends Application {
 
     private static long userId;
 

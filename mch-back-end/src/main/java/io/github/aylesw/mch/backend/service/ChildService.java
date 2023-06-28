@@ -20,9 +20,15 @@ public interface ChildService {
 
     void approveChildRegistration(Long childRegistrationId);
 
+    void rejectChildRegistration(Long childRegistrationId, String reason);
+
     void approveChildChange(Long childChangeId);
 
+    void rejectChildChange(Long childChangeId, String reason);
+
     List<ChildDto> search(String keyword);
+
+    List<ChildDto> getAllChildren();
 
     ChildDto getChild(Long childId);
 

@@ -493,22 +493,22 @@ public class ManageUsersController implements Initializable {
     @FXML
     void searchUser(KeyEvent event) {
         tblUsers.setItems(users.filtered(e ->
-                e.get("email").toString().contains(txtSearchUser.getText()) ||
-                        e.get("fullName").toString().contains(txtSearchUser.getText())));
+                e.get("email").toString().toLowerCase().contains(txtSearchUser.getText().toLowerCase()) ||
+                        e.get("fullName").toString().toLowerCase().contains(txtSearchUser.getText().toLowerCase())));
     }
 
     @FXML
     void searchUserRegistration(KeyEvent event) {
         tblUserRegistrations.setItems(userRegistrations.filtered(e ->
-                e.get("email").toString().contains(txtSearchUserRegistration.getText()) ||
-                        e.get("fullName").toString().contains(txtSearchUserRegistration.getText())));
+                e.get("email").toString().toLowerCase().contains(txtSearchUserRegistration.getText().toLowerCase()) ||
+                        e.get("fullName").toString().toLowerCase().contains(txtSearchUserRegistration.getText().toLowerCase())));
     }
 
     @FXML
     void searchUserChange(KeyEvent event) {
         tblUserChanges.setItems(userChanges.filtered(e ->
-                e.get("email").toString().contains(txtSearchUserChange.getText()) ||
-                        e.get("fullName").toString().contains(txtSearchUserChange.getText())));
+                e.get("email").toString().toLowerCase().contains(txtSearchUserChange.getText()) ||
+                        e.get("fullName").toString().toLowerCase().contains(txtSearchUserChange.getText())));
     }
 
     @FXML

@@ -184,6 +184,12 @@ public class AddChildController implements Initializable {
 
                 if (parent instanceof UserDetailsController userDetailsController) {
                     userDetailsController.loadChildrenList();
+                    return;
+                }
+
+                if (parent instanceof ManageChildrenController manageChildrenController) {
+                    manageChildrenController.loadChildrenData();
+                    return;
                 }
             }
         });

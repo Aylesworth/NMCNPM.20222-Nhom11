@@ -66,7 +66,7 @@ public class ScreenManager {
         return loadNode("user-details.fxml", new UserDetailsController(id, previous, previousController));
     }
 
-    public static Stage getAddChildStage(Object parent) {
+    public static Stage getAddChildStage(ManageChildrenController parent) {
         return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parent));
     }
 
@@ -87,7 +87,7 @@ public class ScreenManager {
     }
 
     public static Parent getManageChildrenPanel() {
-        return loadNode("manage-children.fxml", null);
+        return loadNode("manage-children.fxml", new ManageChildrenController());
     }
 
     public static Parent getManageInjectionsPanel() {

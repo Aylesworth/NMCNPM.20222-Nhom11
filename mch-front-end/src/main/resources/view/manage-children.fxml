@@ -20,7 +20,7 @@
                <children>
                   <StackPane layoutX="42.0" layoutY="99.0">
                      <children>
-                        <TableView fx:id="tblChildren" prefHeight="615.0" prefWidth="313.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="tblChildren" prefHeight="560.0" prefWidth="313.0" tableMenuButtonVisible="true">
                            <columns>
                               <TableColumn prefWidth="153.33334350585938" text="Họ tên" />
                               <TableColumn prefWidth="159.33331298828125" text="Tuổi (tháng)" />
@@ -32,7 +32,7 @@
                         <ProgressIndicator fx:id="spinner1" />
                      </children>
                   </StackPane>
-                  <JFXTextField labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchChild" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField fx:id="txtSearchChild" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchChild" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
                   <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="415.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <Label fx:id="lblId" layoutX="415.0" layoutY="184.0" prefHeight="17.0" prefWidth="111.0" text="ID:" />
                   <JFXTextField fx:id="txtEthnicity" labelFloat="true" layoutX="705.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
@@ -43,6 +43,7 @@
                   <JFXButton fx:id="btnDelete" layoutX="680.0" layoutY="481.0" onAction="#deleteChild" prefHeight="30.0" prefWidth="130.0" text="Xóa hồ sơ" />
                   <JFXButton fx:id="btnUpdate" layoutX="606.0" layoutY="428.0" onAction="#updateChild" prefHeight="25.0" prefWidth="102.0" text="Cập nhật" />
                   <JFXButton fx:id="btnViewProfile" layoutX="509.0" layoutY="481.0" onAction="#viewProfile" prefHeight="30.0" prefWidth="130.0" text="Xem hồ sơ chính" />
+                  <JFXButton layoutX="225.0" layoutY="687.0" onAction="#addChild" prefHeight="30.0" prefWidth="130.0" text="Thêm trẻ em" />
                </children>
             </AnchorPane>
          </content>
@@ -66,16 +67,17 @@
                         <ProgressIndicator fx:id="spinner2" />
                      </children>
                   </StackPane>
-                  <JFXTextField labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchChildRegistration" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
-                  <JFXTextField fx:id="txtFullName2" labelFloat="true" layoutX="483.0" layoutY="243.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtSearchRegistration" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchChildRegistration" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField fx:id="txtFullName2" editable="false" labelFloat="true" layoutX="483.0" layoutY="243.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <Label layoutX="483.0" layoutY="183.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin hồ sơ:" />
-                  <JFXTextField fx:id="txtEthnicity2" labelFloat="true" layoutX="738.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
-                  <JFXTextField fx:id="txtDob2" labelFloat="true" layoutX="483.0" layoutY="358.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtBirthplace2" labelFloat="true" layoutX="738.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
-                  <JFXTextField fx:id="txtInsuranceId2" labelFloat="true" layoutX="738.0" layoutY="359.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXTextField fx:id="txtEthnicity2" editable="false" labelFloat="true" layoutX="738.0" layoutY="244.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField fx:id="txtDob2" editable="false" labelFloat="true" layoutX="483.0" layoutY="358.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtBirthplace2" editable="false" labelFloat="true" layoutX="738.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField fx:id="txtInsuranceId2" editable="false" labelFloat="true" layoutX="738.0" layoutY="359.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
                   <JFXButton fx:id="btnRejectRegistration" layoutX="725.0" layoutY="445.0" onAction="#rejectRegistration" prefHeight="25.0" prefWidth="110.0" text="Từ chối" />
                   <JFXButton fx:id="btnApproveRegistration" layoutX="580.0" layoutY="445.0" onAction="#approveRegistration" prefHeight="25.0" prefWidth="110.0" text="Phê duyệt" />
-                  <JFXTextField fx:id="txtSex2" labelFloat="true" layoutX="483.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXTextField fx:id="txtSex2" editable="false" labelFloat="true" layoutX="483.0" layoutY="300.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXTextField fx:id="txtParent" editable="false" labelFloat="true" layoutX="738.0" layoutY="177.0" prefHeight="25.0" prefWidth="193.0" promptText="Cha/mẹ" />
                </children>
             </AnchorPane>
          </content>
@@ -99,23 +101,24 @@
                         <ProgressIndicator fx:id="spinner3" />
                      </children>
                   </StackPane>
-                  <JFXTextField fx:id="searchChildChange" labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
-                  <JFXTextField fx:id="txtNewFullName" labelFloat="true" layoutX="494.0" layoutY="384.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtSearchChange" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchChildChange" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField fx:id="txtNewFullName" editable="false" labelFloat="true" layoutX="494.0" layoutY="384.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <Label layoutX="494.0" layoutY="324.0" prefHeight="17.0" prefWidth="187.0" text="Thông tin mới cập nhật:" />
-                  <JFXTextField fx:id="txtNewEthnicity" labelFloat="true" layoutX="749.0" layoutY="385.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
-                  <JFXTextField fx:id="txtNewDob" labelFloat="true" layoutX="494.0" layoutY="499.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtNewBirthplace" labelFloat="true" layoutX="749.0" layoutY="441.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
-                  <JFXTextField fx:id="txtNewInsuranceId" labelFloat="true" layoutX="749.0" layoutY="500.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXTextField fx:id="txtNewEthnicity" editable="false" labelFloat="true" layoutX="749.0" layoutY="385.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField fx:id="txtNewDob" editable="false" labelFloat="true" layoutX="494.0" layoutY="499.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtNewBirthplace" editable="false" labelFloat="true" layoutX="749.0" layoutY="441.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField fx:id="txtNewInsuranceId" editable="false" labelFloat="true" layoutX="749.0" layoutY="500.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
                   <JFXButton fx:id="btnRejectChange" layoutX="736.0" layoutY="588.0" onAction="#rejectChange" prefHeight="25.0" prefWidth="110.0" text="Từ chối" />
                   <JFXButton fx:id="btnApproveChange" layoutX="591.0" layoutY="588.0" onAction="#approveChange" prefHeight="25.0" prefWidth="110.0" text="Phê duyệt" />
-                  <JFXTextField fx:id="txtOrgFullName" labelFloat="true" layoutX="494.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtOrgFullName" editable="false" labelFloat="true" layoutX="494.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <Label layoutX="494.0" layoutY="59.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin ban đầu:" />
-                  <JFXTextField fx:id="txtOrgEthnicity" labelFloat="true" layoutX="749.0" layoutY="120.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
-                  <JFXTextField fx:id="txtOrgDob" labelFloat="true" layoutX="494.0" layoutY="234.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtOrgBirthplace" labelFloat="true" layoutX="749.0" layoutY="176.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
-                  <JFXTextField fx:id="txtOrgInsuranceId" labelFloat="true" layoutX="749.0" layoutY="235.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXTextField fx:id="txtOrgSex" labelFloat="true" layoutX="494.0" layoutY="176.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
-                  <JFXTextField fx:id="txtNewSex" labelFloat="true" layoutX="494.0" layoutY="441.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXTextField fx:id="txtOrgEthnicity" editable="false" labelFloat="true" layoutX="749.0" layoutY="120.0" prefHeight="25.0" prefWidth="193.0" promptText="Dân tộc" />
+                  <JFXTextField fx:id="txtOrgDob" editable="false" labelFloat="true" layoutX="494.0" layoutY="234.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtOrgBirthplace" editable="false" labelFloat="true" layoutX="749.0" layoutY="176.0" prefHeight="25.0" prefWidth="193.0" promptText="Nơi sinh" />
+                  <JFXTextField fx:id="txtOrgInsuranceId" editable="false" labelFloat="true" layoutX="749.0" layoutY="235.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXTextField fx:id="txtOrgSex" editable="false" labelFloat="true" layoutX="494.0" layoutY="176.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXTextField fx:id="txtNewSex" editable="false" labelFloat="true" layoutX="494.0" layoutY="441.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXButton fx:id="btnViewProfile2" layoutX="655.0" layoutY="647.0" onAction="#viewProfile2" prefHeight="30.0" prefWidth="130.0" text="Xem hồ sơ chính" />
                </children>
             </AnchorPane>
          </content>

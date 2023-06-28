@@ -3,7 +3,7 @@ package io.github.aylesw.mch.frontend.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import io.github.aylesw.mch.frontend.Main;
+import io.github.aylesw.mch.frontend.App;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.RequestBodyMap;
 import io.github.aylesw.mch.frontend.common.Utils;
@@ -49,7 +49,7 @@ public class LoginController {
 
             String token = response.get("token").toString();
             Utils.saveToken(token);
-            Main.updateUserIdentity();
+            App.updateUserIdentity();
         } catch (Exception e) {
             e.printStackTrace();
         }

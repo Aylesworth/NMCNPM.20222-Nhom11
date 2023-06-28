@@ -1,5 +1,6 @@
 package io.github.aylesw.mch.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "child_registration")
@@ -44,4 +47,11 @@ public class ChildRegistration {
 
     @Column(columnDefinition = "timestamp")
     private Timestamp approved;
+
+    public long getAgeInMonths() {
+        YearMonth start = YearMonth.from(dob.toLocalDate());
+        YearMonth end = YearMonth.now();
+
+        return start.until(end, ChronoUnit.MONTHS);
+    }
 }

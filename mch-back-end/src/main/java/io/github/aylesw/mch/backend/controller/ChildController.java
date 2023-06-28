@@ -17,7 +17,7 @@ import java.util.List;
 public class ChildController {
     private final ChildService childService;
 
-    @GetMapping("")
+    @GetMapping("/find-by-parent")
     public ResponseEntity<List<ChildDto>> getByParentId(@RequestParam("parent-id") Long parentId) {
         return ResponseEntity.ok(childService.getByParentId(parentId));
     }
@@ -52,15 +52,36 @@ public class ChildController {
         return ResponseEntity.ok("Child profile registration approved");
     }
 
+    @PostMapping("/reject-registration")
+    public ResponseEntity<String> rejectChildRegistration(
+            @RequestParam(value = "id", required = true) Long childRegistrationId,
+            @RequestParam(value = "reason", required = true) String reason) {
+        childService.rejectChildRegistration(childRegistrationId, reason);
+        return ResponseEntity.ok("Child profile registration rejected");
+    }
+
     @PostMapping("/approve-change")
     public ResponseEntity<String> approveChildChange(@RequestParam(value = "id", required = true) Long childChangeId) {
         childService.approveChildChange(childChangeId);
         return ResponseEntity.ok("Child profile change approved");
     }
 
+    @PostMapping("/reject-change")
+    public ResponseEntity<String> rejectChildChange(
+            @RequestParam(value = "id", required = true) Long childChangeId,
+            @RequestParam(value = "reason", required = true) String reason) {
+        childService.rejectChildChange(childChangeId, reason);
+        return ResponseEntity.ok("Child profile change rejected");
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<ChildDto>> search(@RequestParam(value = "q", required = true) String keyword) {
         return ResponseEntity.ok(childService.search(keyword));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<ChildDto>> getAllChildren() {
+        return ResponseEntity.ok(childService.getAllChildren());
     }
 
     @GetMapping("/{id}")

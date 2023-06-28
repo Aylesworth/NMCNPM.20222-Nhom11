@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @NoArgsConstructor
@@ -31,4 +33,11 @@ public class ChildDto {
     private String birthplace;
 
     private String insuranceId;
+
+    public long getAgeInMonths() {
+        YearMonth start = YearMonth.from(dob.toLocalDate());
+        YearMonth end = YearMonth.now();
+
+        return start.until(end, ChronoUnit.MONTHS);
+    }
 }

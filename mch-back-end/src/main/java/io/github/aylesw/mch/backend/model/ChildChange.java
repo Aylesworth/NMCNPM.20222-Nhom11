@@ -38,7 +38,6 @@ public class ChildChange {
 
     @ManyToOne
     @JoinColumn(name = "child_id")
-    @JsonIgnore
     private Child child;
 
     @Column(columnDefinition = "timestamp")

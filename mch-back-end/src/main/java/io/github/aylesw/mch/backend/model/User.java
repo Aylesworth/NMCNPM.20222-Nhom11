@@ -54,6 +54,7 @@ public class User implements UserDetails {
 
     private String insuranceId;
 
+    @JsonIgnore
     private Boolean verified;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -64,6 +65,7 @@ public class User implements UserDetails {
         return ChronoUnit.YEARS.between(dob.toLocalDate(), LocalDate.now());
     }
 
+    @JsonIgnore
     public Set<Role> getRoles() {
         if (roles == null)
             roles = new HashSet<>();
