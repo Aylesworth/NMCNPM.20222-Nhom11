@@ -15,7 +15,7 @@
     -fx-background-color: #FF9800;
 }
 
-.menu-button {
+.nav-button {
     -fx-background-color: #0277bd;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Roboto", sans-serif;
@@ -23,12 +23,20 @@
     -fx-font-weight: bold;
 }
 
-.menu-button:hover {
+.nav-button:hover {
     -fx-background-color: #03A9F4;
 }
 
-.menu-button:pressed {
+.nav-button:pressed {
     -fx-background-color: #03A9F4;
+}
+
+.menu-button {
+    -fx-background-color: AQUA;
+    -fx-text-fill: #212121;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 
 .child-ref-button {

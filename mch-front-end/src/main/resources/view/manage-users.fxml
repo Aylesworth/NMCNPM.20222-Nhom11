@@ -20,7 +20,7 @@
                <children>
                   <StackPane layoutX="42.0" layoutY="99.0">
                      <children>
-                        <TableView fx:id="tblUsers" prefHeight="557.0" prefWidth="313.0">
+                        <TableView fx:id="tblUsers" prefHeight="557.0" prefWidth="313.0" tableMenuButtonVisible="true">
                            <columns>
                               <TableColumn prefWidth="131.33334350585938" text="Email" />
                               <TableColumn prefWidth="180.6666259765625" text="Họ tên" />
@@ -56,7 +56,7 @@
                <children>
                   <StackPane layoutX="42.0" layoutY="99.0">
                      <children>
-                        <TableView fx:id="tblUserRegistrations" prefHeight="615.0" prefWidth="433.0">
+                        <TableView fx:id="tblUserRegistrations" prefHeight="615.0" prefWidth="433.0" tableMenuButtonVisible="true">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Thời gian" />
                               <TableColumn prefWidth="123.33328247070312" text="Email" />
@@ -69,7 +69,7 @@
                         <ProgressIndicator fx:id="spinner2" />
                      </children>
                   </StackPane>
-                  <JFXTextField fx:id="txtSearchUserRegistration" labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField fx:id="txtSearchUserRegistration" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchUserRegistration" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
                   <JFXTextField fx:id="txtFullName2" editable="false" labelFloat="true" layoutX="515.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <JFXTextField fx:id="txtEmail2" editable="false" labelFloat="true" layoutX="515.0" layoutY="278.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
                   <JFXTextField fx:id="txtPhoneNumber2" editable="false" labelFloat="true" layoutX="761.0" layoutY="221.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
@@ -91,7 +91,7 @@
                <children>
                   <StackPane layoutX="42.0" layoutY="99.0">
                      <children>
-                        <TableView fx:id="tblUserChanges" prefHeight="615.0" prefWidth="433.0">
+                        <TableView fx:id="tblUserChanges" prefHeight="615.0" prefWidth="433.0" tableMenuButtonVisible="true">
                            <columns>
                               <TableColumn prefWidth="75.0" text="Thời gian" />
                               <TableColumn prefWidth="123.33328247070312" text="Email" />
@@ -104,7 +104,7 @@
                         <ProgressIndicator fx:id="spinner3" />
                      </children>
                   </StackPane>
-                  <JFXTextField fx:id="txtSearchChanges" labelFloat="true" layoutX="86.0" layoutY="46.0" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                  <JFXTextField fx:id="txtSearchUserChange" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchUserChange" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
                   <JFXTextField fx:id="txtOrgFullName" labelFloat="true" layoutX="515.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <JFXTextField fx:id="txtOrgEmail" labelFloat="true" layoutX="515.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
                   <JFXTextField fx:id="txtOrgPhoneNumber" labelFloat="true" layoutX="761.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
@@ -113,9 +113,8 @@
                   <JFXTextField fx:id="txtOrgDob" labelFloat="true" layoutX="515.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
                   <JFXTextField fx:id="txtOrgCitizenId" labelFloat="true" layoutX="761.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
                   <JFXTextField fx:id="txtOrgInsuranceId" labelFloat="true" layoutX="761.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXComboBox fx:id="cbxOrgSex" labelFloat="true" layoutX="515.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính" />
-                  <JFXButton layoutX="761.0" layoutY="668.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: aqua;" text="Từ chối" />
-                  <JFXButton layoutX="616.0" layoutY="668.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: aqua;" text="Phê duyệt" />
+                  <JFXButton fx:id="btnRejectChange" layoutX="761.0" layoutY="668.0" onAction="#rejectChange" prefHeight="25.0" prefWidth="91.0" text="Từ chối" />
+                  <JFXButton fx:id="btnApproveChange" layoutX="616.0" layoutY="668.0" onAction="#approveChange" prefHeight="25.0" prefWidth="91.0" text="Phê duyệt" />
                   <JFXTextField fx:id="txtNewFullName" labelFloat="true" layoutX="515.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
                   <JFXTextField fx:id="txtNewEmail" labelFloat="true" layoutX="515.0" layoutY="480.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
                   <JFXTextField fx:id="txtNewPhoneNumber" labelFloat="true" layoutX="761.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
@@ -124,7 +123,8 @@
                   <JFXTextField fx:id="txtNewDob" labelFloat="true" layoutX="515.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
                   <JFXTextField fx:id="txtNewCitizenId" labelFloat="true" layoutX="761.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
                   <JFXTextField fx:id="txtNewInsuranceId" labelFloat="true" layoutX="761.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXComboBox fx:id="cbxNewSex" labelFloat="true" layoutX="515.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính" />
+                  <JFXTextField fx:id="txtOrgSex" editable="false" labelFloat="true" layoutX="515.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <JFXTextField fx:id="txtNewSex" editable="false" labelFloat="true" layoutX="515.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
                </children>
             </AnchorPane>
          </content>

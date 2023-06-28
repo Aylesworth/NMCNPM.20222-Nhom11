@@ -15,11 +15,6 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @GetMapping("/")
-    public ResponseEntity<String> welcome() {
-        return ResponseEntity.ok("Welcome to Maternal Child Health Management RESTful API");
-    }
-
     @PostMapping("/auth/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @Valid @RequestBody AuthenticationRequest request) {

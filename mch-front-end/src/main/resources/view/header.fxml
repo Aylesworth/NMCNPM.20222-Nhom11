@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="60.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuButton layoutX="1084.0" layoutY="21.0" mnemonicParsing="false" stylesheets="@../style/material-ui.css" text="Tên người dùng">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Xem hồ sơ" />
+            <MenuItem mnemonicParsing="false" text="Đổi mật khẩu" />
+          <MenuItem mnemonicParsing="false" text="Đăng xuất" />
+        </items>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </MenuButton>
+      <FlowPane alignment="CENTER" layoutX="-2.0" layoutY="-1.0" prefHeight="73.0" prefWidth="250.0">
+         <children>
+            <Label alignment="CENTER" prefWidth="196.0" text="QUẢN LÝ SỨC KHỎE MẸ VÀ BÉ" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Felix Titling" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

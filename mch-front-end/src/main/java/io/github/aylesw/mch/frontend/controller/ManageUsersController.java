@@ -76,6 +76,9 @@ public class ManageUsersController implements Initializable {
     private JFXTextField txtSearchUserRegistration;
 
     @FXML
+    private JFXTextField txtSearchUserChange;
+
+    @FXML
     private JFXTextField txtFullName2;
 
     @FXML
@@ -133,7 +136,7 @@ public class ManageUsersController implements Initializable {
     private JFXTextField txtOrgInsuranceId;
 
     @FXML
-    private JFXComboBox<String> cbxOrgSex;
+    private JFXTextField txtOrgSex;
 
     @FXML
     private JFXTextField txtNewFullName;
@@ -157,7 +160,7 @@ public class ManageUsersController implements Initializable {
     private JFXTextField txtNewInsuranceId;
 
     @FXML
-    private JFXComboBox<String> cbxNewSex;
+    private JFXTextField txtNewSex;
 
     @FXML
     private ProgressIndicator spinner1;
@@ -165,13 +168,24 @@ public class ManageUsersController implements Initializable {
     @FXML
     private ProgressIndicator spinner2;
 
+    @FXML
+    private ProgressIndicator spinner3;
+
+    @FXML
+    private JFXButton btnApproveChange;
+
+    @FXML
+    private JFXButton btnRejectChange;
+
     private long selectedUserId;
     private long selectedUserRegistrationId;
+    private long selectedUserChangeId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadUsersData();
         loadUserRegistrationsData();
+        loadUserChangesData();
     }
 
     private void clearUserInfo() {
@@ -284,6 +298,7 @@ public class ManageUsersController implements Initializable {
 
     void loadUserRegistrationsData() {
         spinner2.setVisible(true);
+        clearUserRegistrationInfo();
 
         String url = AppConstants.BASE_URL + "/users/pending-registrations";
         String token = Utils.getToken();
@@ -326,26 +341,6 @@ public class ManageUsersController implements Initializable {
 
         tblUserRegistrations.getColumns().addAll(timeCol, fullNameCol, emailCol);
 
-        clearUserRegistrationInfo();
-
-        tblUserRegistrations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                clearUserRegistrationInfo();
-            } else {
-                btnApproveRegistration.setVisible(true);
-                btnRejectRegistration.setVisible(true);
-
-                txtFullName2.setText(newValue.get("fullName").toString());
-                txtEmail2.setText(newValue.get("email").toString());
-                txtSex2.setText(newValue.get("sex").toString());
-                txtDob2.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
-                txtPhoneNumber2.setText(newValue.get("phoneNumber").toString());
-                txtAddress2.setText(newValue.get("address").toString());
-                txtCitizenId2.setText(Optional.ofNullable(newValue.get("citizenId")).orElse("").toString());
-                txtInsuranceId2.setText(Optional.ofNullable(newValue.get("insuranceId")).orElse("").toString());
-            }
-        });
-
         Service<ObservableList<Map<String, Object>>> service = new Service<>() {
             @Override
             protected Task<ObservableList<Map<String, Object>>> createTask() {
@@ -375,11 +370,145 @@ public class ManageUsersController implements Initializable {
         service.start();
     }
 
+    private void clearUserChangeInfo() {
+        txtOrgFullName.setText("");
+        txtOrgEmail.setText("");
+        txtOrgSex.setText("");
+        txtOrgDob.setText("");
+        txtOrgPhoneNumber.setText("");
+        txtOrgAddress.setText("");
+        txtOrgCitizenId.setText("");
+        txtOrgInsuranceId.setText("");
+
+        txtNewFullName.setText("");
+        txtNewEmail.setText("");
+        txtNewSex.setText("");
+        txtNewDob.setText("");
+        txtNewPhoneNumber.setText("");
+        txtNewAddress.setText("");
+        txtNewCitizenId.setText("");
+        txtNewInsuranceId.setText("");
+
+        btnApproveChange.setVisible(false);
+        btnRejectChange.setVisible(false);
+    }
+
+    void loadUserChangesData() {
+        spinner3.setVisible(true);
+        clearUserChangeInfo();
+
+        userChanges = FXCollections.observableArrayList();
+
+        tblUserChanges.setItems(userChanges);
+
+        tblUserChanges.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                clearUserChangeInfo();
+            } else {
+                btnApproveChange.setVisible(true);
+                btnRejectChange.setVisible(true);
+
+                selectedUserChangeId = ((Double) tblUserChanges.getSelectionModel().getSelectedItem().get("id")).longValue();
+
+                var original = (Map<String, Object>) newValue.get("original");
+                txtOrgFullName.setText(original.get("fullName").toString());
+                txtOrgEmail.setText(original.get("email").toString());
+                txtOrgSex.setText(original.get("sex").toString());
+                txtOrgDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(original.get("dob").toString()));
+                txtOrgPhoneNumber.setText(original.get("phoneNumber").toString());
+                txtOrgAddress.setText(original.get("address").toString());
+                txtOrgCitizenId.setText(Optional.ofNullable(original.get("citizenId")).orElse("").toString());
+                txtOrgInsuranceId.setText(Optional.ofNullable(original.get("insuranceId")).orElse("").toString());
+
+                txtNewFullName.setText(newValue.get("fullName").toString());
+                txtNewEmail.setText(newValue.get("email").toString());
+                txtNewSex.setText(newValue.get("sex").toString());
+                txtNewDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
+                txtNewPhoneNumber.setText(newValue.get("phoneNumber").toString());
+                txtNewAddress.setText(newValue.get("address").toString());
+                txtNewCitizenId.setText(Optional.ofNullable(newValue.get("citizenId")).orElse("").toString());
+                txtNewInsuranceId.setText(Optional.ofNullable(newValue.get("insuranceId")).orElse("").toString());
+            }
+        });
+
+        tblUserChanges.getColumns().clear();
+
+        TableColumn<Map<String, Object>, String> timeCol = new TableColumn<>("Thời gian");
+        timeCol.setCellValueFactory(e -> new SimpleStringProperty(Beans.TIME_FORMAT_CONVERTER.toCustom(e.getValue().get("requested").toString())));
+
+        TableColumn<Map<String, Object>, String> fullNameCol = new TableColumn<>("Họ tên");
+        fullNameCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().get("fullName").toString()));
+
+        TableColumn<Map<String, Object>, String> emailCol = new TableColumn<>("Email");
+        emailCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().get("email").toString()));
+
+        tblUserChanges.getColumns().addAll(timeCol, fullNameCol, emailCol);
+
+        Service<ObservableList<Map<String, Object>>> service = new Service<>() {
+            @Override
+            protected Task<ObservableList<Map<String, Object>>> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected ObservableList<Map<String, Object>> call() throws Exception {
+                        try {
+                            var result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                                    .url(AppConstants.BASE_URL + "/users/pending-changes")
+                                    .token(Utils.getToken())
+                                    .method("GET")
+                                    .build().request();
+
+                            result.forEach(map -> {
+                                Map<String, Object> original = null;
+                                try {
+                                    original = new ApiRequest.Builder<List<Map<String, Object>>>()
+                                            .url(AppConstants.BASE_URL + "/users/search?q=" + map.get("email").toString())
+                                            .token(Utils.getToken())
+                                            .method("GET")
+                                            .build().request().get(0);
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                                map.put("original", original);
+                            });
+
+                            return FXCollections.observableArrayList(result);
+                        } catch (Exception e) {
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(event -> {
+            if (service.getValue() != null) {
+                spinner3.setVisible(false);
+                userChanges.setAll(service.getValue());
+            }
+        });
+
+        service.start();
+    }
+
     @FXML
     void searchUser(KeyEvent event) {
         tblUsers.setItems(users.filtered(e ->
                 e.get("email").toString().contains(txtSearchUser.getText()) ||
                         e.get("fullName").toString().contains(txtSearchUser.getText())));
+    }
+
+    @FXML
+    void searchUserRegistration(KeyEvent event) {
+        tblUserRegistrations.setItems(userRegistrations.filtered(e ->
+                e.get("email").toString().contains(txtSearchUserRegistration.getText()) ||
+                        e.get("fullName").toString().contains(txtSearchUserRegistration.getText())));
+    }
+
+    @FXML
+    void searchUserChange(KeyEvent event) {
+        tblUserChanges.setItems(userChanges.filtered(e ->
+                e.get("email").toString().contains(txtSearchUserChange.getText()) ||
+                        e.get("fullName").toString().contains(txtSearchUserChange.getText())));
     }
 
     @FXML
@@ -417,6 +546,7 @@ public class ManageUsersController implements Initializable {
             if (service.getValue() != null) {
                 Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt người dùng thành công!");
                 loadUserRegistrationsData();
+                loadUsersData();
             }
         });
 
@@ -431,7 +561,7 @@ public class ManageUsersController implements Initializable {
         dialog.setContentText(null);
         Optional<String> reason = dialog.showAndWait();
 
-        if (!reason.isPresent()) {
+        if (reason.isEmpty()) {
             //
             return;
         }
@@ -465,6 +595,84 @@ public class ManageUsersController implements Initializable {
             if (service.getValue() != null) {
                 Utils.showAlert(Alert.AlertType.INFORMATION, "Từ chối đăng ký người dùng thành công!");
                 loadUserRegistrationsData();
+            }
+        });
+
+        service.start();
+    }
+
+    @FXML
+    void approveChange(ActionEvent event) {
+        Service<String> service = new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        try {
+                            return new ApiRequest.Builder<String>()
+                                    .url(AppConstants.BASE_URL + "/users/approve-change?id=" + selectedUserChangeId)
+                                    .token(Utils.getToken())
+                                    .method("POST")
+                                    .build().request();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(e -> {
+            if (service.getValue() != null) {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt thay đổi thông tin người dùng thành công!");
+                loadUserChangesData();
+                loadUsersData();
+            }
+        });
+
+        service.start();
+    }
+
+    @FXML
+    void rejectChange(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Lý do");
+        dialog.setHeaderText("Vui lòng nhập lý do từ chối:");
+        dialog.setContentText(null);
+        Optional<String> reason = dialog.showAndWait();
+
+        if (reason.isEmpty()) {
+            //
+            return;
+        }
+
+        Service<String> service = new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        try {
+                            return new ApiRequest.Builder<String>()
+                                    .url(AppConstants.BASE_URL + "/users/reject-change?id=" + selectedUserChangeId + "&reason=" + reason.get())
+                                    .token(Utils.getToken())
+                                    .method("POST")
+                                    .build().request();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
+
+        service.setOnSucceeded(e -> {
+            if (service.getValue() != null) {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Từ chối thay đổi thông tin người dùng thành công!");
+                loadUserChangesData();
             }
         });
 

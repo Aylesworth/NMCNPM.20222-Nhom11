@@ -19,6 +19,43 @@
    <children>
       <TabPane prefHeight="801.0" prefWidth="1030.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
+          <Tab text="Lịch tiêm dự kiến">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane prefHeight="967.0" prefWidth="1030.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
+                                 <children>
+                                    <TableView prefHeight="695.0" prefWidth="716.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Tên trẻ" />
+                                          <TableColumn prefWidth="75.0" text="Vaccine" />
+                                          <TableColumn prefWidth="75.0" text="Mũi số" />
+                                          <TableColumn prefWidth="75.0" text="Ngày tiêm" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
+                                 <children>
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xuất lịch tiêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Thêm" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Đổi ngày giờ" />
+                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xóa" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </FlowPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
           <Tab text="Tiếp nhận đăng ký">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -59,43 +96,6 @@
                         </FlowPane>
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Lịch tiêm dự kiến">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <FlowPane prefHeight="967.0" prefWidth="1030.0">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
-                                 <children>
-                                    <TableView prefHeight="695.0" prefWidth="716.0">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="Tên trẻ" />
-                                          <TableColumn prefWidth="75.0" text="Vaccine" />
-                                          <TableColumn prefWidth="75.0" text="Mũi số" />
-                                          <TableColumn prefWidth="75.0" text="Ngày tiêm" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                       <VBox.margin>
-                                          <Insets left="20.0" />
-                                       </VBox.margin>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
-                                 <children>
-                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xuất lịch tiêm" />
-                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Thêm" />
-                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Đổi ngày giờ" />
-                                    <JFXButton prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: aqua;" text="Xóa" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </FlowPane>
-                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Thống kê mũi tiêm">

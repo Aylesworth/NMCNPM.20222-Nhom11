@@ -1,10 +1,9 @@
 package io.github.aylesw.mch.backend.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import io.github.aylesw.mch.backend.common.Utils;
-import io.github.aylesw.mch.backend.dto.ChangePasswordDto;
-import io.github.aylesw.mch.backend.dto.NotificationDetails;
-import io.github.aylesw.mch.backend.dto.RegisterDto;
-import io.github.aylesw.mch.backend.dto.UserDto;
+import io.github.aylesw.mch.backend.dto.*;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Role;
@@ -17,8 +16,6 @@ import io.github.aylesw.mch.backend.repository.UserRegistrationRepository;
 import io.github.aylesw.mch.backend.repository.UserRepository;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -43,8 +40,20 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper mapper;
     private final AuthenticationManager authenticationManager;
 
-    @PersistenceContext
-    private final EntityManager entityManager;
+
+    @Override
+    public UserIdentity getUserIdentity(String token) {
+        DecodedJWT decodedJWT = JWT.decode(token);
+        String email = decodedJWT.getSubject();
+        User user = userRepository.findByEmail(email).orElseThrow();
+        return UserIdentity.builder()
+                .id(user.getId())
+                .name(user.getFullName())
+                .roles(user.getRoles().stream()
+                        .map(role -> role.getName())
+                        .toList())
+                .build();
+    }
 
     @Override
     public void addRole(String email, String roleName) {
@@ -145,11 +154,43 @@ public class UserServiceImpl implements UserService {
 
         userChange.setApproved(Utils.currentTimestamp());
         userChangeRepository.save(userChange);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .user(userChange.getUser())
+                .title("Thay đổi được phê duyệt")
+                .message("Yêu cầu thay đổi thông tin cá nhân của bạn đã được phê duyệt.")
+                .time(Utils.currentTimestamp())
+                .build();
+
+        notificationService.createSystemNotification(notificationDetails);
+    }
+
+    @Override
+    public void rejectUserChange(Long userChangeId, String reason) {
+        UserChange userChange = userChangeRepository.findById(userChangeId)
+                .orElseThrow(() -> new ResourceNotFoundException("User change", "id", userChangeId));
+
+        if (userChange.getApproved() != null)
+            throw new ApiException(HttpStatus.BAD_REQUEST, "User profile change already approved");
+
+        userChangeRepository.delete(userChange);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .user(userChange.getUser())
+                .title("Thay đổi bị từ chối phê duyệt")
+                .message("Yêu cầu thay đổi thông tin cá nhân của bạn đã bị từ chối với lý do: %s".formatted(reason))
+                .time(Utils.currentTimestamp())
+                .build();
+
+        notificationService.createSystemNotification(notificationDetails);
     }
 
     @Override
     public List<UserDto> search(String keyword) {
         return userRepository.findByKeyword(keyword).stream()
+                .filter(user -> !user.getRoles().stream()
+                        .map(role -> role.getName())
+                        .toList().contains("ADMIN"))
                 .map(user -> mapper.map(user, UserDto.class))
                 .toList();
     }
@@ -157,6 +198,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
+                .filter(user -> !user.getRoles().stream()
+                        .map(role -> role.getName())
+                        .toList().contains("ADMIN"))
                 .map(user -> mapper.map(user, UserDto.class))
                 .toList();
     }

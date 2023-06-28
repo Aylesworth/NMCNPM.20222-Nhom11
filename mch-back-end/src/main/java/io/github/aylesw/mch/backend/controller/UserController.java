@@ -1,8 +1,10 @@
 package io.github.aylesw.mch.backend.controller;
 
+import io.github.aylesw.mch.backend.common.Utils;
 import io.github.aylesw.mch.backend.dto.ChangePasswordDto;
 import io.github.aylesw.mch.backend.dto.RegisterDto;
 import io.github.aylesw.mch.backend.dto.UserDto;
+import io.github.aylesw.mch.backend.dto.UserIdentity;
 import io.github.aylesw.mch.backend.model.UserChange;
 import io.github.aylesw.mch.backend.model.UserRegistration;
 import io.github.aylesw.mch.backend.service.UserService;
@@ -11,13 +13,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/my-identity")
+    public ResponseEntity<UserIdentity> retrieveUserId(
+            @RequestHeader("Authorization") String authorizationHeader) {
+        return ResponseEntity.ok(userService.getUserIdentity(authorizationHeader.substring(7)));
+    }
 
     @PostMapping("/{id}/request-change")
     public ResponseEntity<String> requestUserChange(@PathVariable("id") Long id,
@@ -47,13 +57,21 @@ public class UserController {
             @RequestParam(value = "id", required = true) Long userRegistrationId,
             @RequestParam(value = "reason", required = true) String reason) {
         userService.rejectUserRegistration(userRegistrationId, reason);
-        return ResponseEntity.ok("User registration declined");
+        return ResponseEntity.ok("User registration rejected");
     }
 
     @PostMapping("/approve-change")
     public ResponseEntity<String> approveUserChange(@RequestParam(value = "id", required = true) Long userChangeId) {
         userService.approveUserChange(userChangeId);
         return ResponseEntity.ok("User profile change approved");
+    }
+
+    @PostMapping("/reject-change")
+    public ResponseEntity<String> rejectUserChange(
+            @RequestParam(value = "id", required = true) Long userChangeId,
+            @RequestParam(value = "reason", required = true) String reason) {
+        userService.rejectUserChange(userChangeId, reason);
+        return ResponseEntity.ok("User profile change rejected");
     }
 
     @GetMapping("/search")

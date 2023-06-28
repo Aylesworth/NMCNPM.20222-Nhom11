@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Map;
+
 public class ScreenManager {
 
     private static MainWindowController mainWindowController;
@@ -18,6 +20,10 @@ public class ScreenManager {
 
     public static Stage getMainStage() {
         return mainStage;
+    }
+
+    public static void setHeaderBar() {
+        mainWindowController.getBorderPane().setTop(getHeaderBar());
     }
 
     public static void setNavBar(boolean adminView) {
@@ -40,8 +46,12 @@ public class ScreenManager {
         return loadStage("Đăng ký", "sign-up.fxml", new SignUpController());
     }
 
+    public static Parent getHeaderBar() {
+        return loadNode("header.fxml", null);
+    }
+
     public static Parent getAdminNavBar() {
-        return loadNode("nav-bar-admin.fxml", null);
+        return loadNode("nav-bar-admin.fxml", new AdminNavBarController());
     }
 
     public static Parent getManageUsersPanel() {
@@ -66,6 +76,26 @@ public class ScreenManager {
 
     public static Parent getChildRefItem(long id, String name) {
         return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name));
+    }
+
+    public static Parent getNotificationItem(Map<String, Object> properties) {
+        return loadNode("notification-item.fxml", new NotificationItemController(properties));
+    }
+
+    public static Parent getNotificationsPanel() {
+        return loadNode("notifications.fxml", new NotificationsController());
+    }
+
+    public static Parent getManageChildrenPanel() {
+        return loadNode("manage-children.fxml", null);
+    }
+
+    public static Parent getManageInjectionsPanel() {
+        return loadNode("manage-injections.fxml", null);
+    }
+
+    public static Parent getManageEventsPanel() {
+        return loadNode("manage-events.fxml", null);
     }
 
     public static Stage loadStage(String title, String resourceName, Object controller) {

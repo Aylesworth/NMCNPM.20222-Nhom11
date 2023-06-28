@@ -60,7 +60,13 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<SystemNotification> getSystemNotifications(Long userId) {
-        return systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp());
+        var notifications = systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp());
+        systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp())
+                .forEach(notification -> {
+                    notification.setSeen(true);
+                    systemNotificationRepository.save(notification);
+                });
+        return notifications;
     }
 
     @Override

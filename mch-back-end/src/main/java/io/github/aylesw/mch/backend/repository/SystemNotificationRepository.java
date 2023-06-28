@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface SystemNotificationRepository extends JpaRepository<SystemNotification, Long> {
     @Query("SELECT n FROM SystemNotification n JOIN FETCH n.user u " +
-            "WHERE u.id = ?1 AND n.time <= ?2" +
+            "WHERE u.id = ?1 AND n.time <= ?2 " +
             "ORDER BY n.time DESC")
     List<SystemNotification> findByUserIdBeforeTime(Long userId, Timestamp time);
 

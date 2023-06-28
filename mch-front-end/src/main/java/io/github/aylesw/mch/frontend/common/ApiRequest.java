@@ -82,7 +82,7 @@ public class ApiRequest<T> {
                 .addHeader("Authorization", token != null ? "Bearer " + token : "")
                 .method(method,
                         method.matches("GET|DELETE") ? null :
-                                RequestBody.create(requestBody, MediaType.parse("application/json")))
+                                RequestBody.create(requestBody == null ? "" : requestBody, MediaType.parse("application/json")))
                 .build();
 
         OkHttpClient client = new OkHttpClient();
