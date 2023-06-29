@@ -16,15 +16,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ManageChildrenController implements Initializable {
+
+    @FXML
+    private TabPane root;
 
     @FXML
     private TableView<Map<String, Object>> tblChildren;
@@ -358,6 +358,7 @@ public class ManageChildrenController implements Initializable {
 
         btnApproveChange.setVisible(false);
         btnRejectChange.setVisible(false);
+        btnViewProfile2.setVisible(false);
     }
 
     void loadChangesData() {
@@ -403,6 +404,7 @@ public class ManageChildrenController implements Initializable {
 
                 btnApproveChange.setVisible(true);
                 btnRejectChange.setVisible(true);
+                btnViewProfile2.setVisible(true);
             }
         });
 
@@ -557,7 +559,9 @@ public class ManageChildrenController implements Initializable {
 
     @FXML
     void searchChildChange(KeyEvent event) {
-
+        tblChildChanges.setItems(changes.filtered(e ->
+                e.get("fullName").toString().toLowerCase()
+                        .contains(txtSearchRegistration.getText().toLowerCase())));
     }
 
     @FXML
@@ -593,12 +597,13 @@ public class ManageChildrenController implements Initializable {
 
     @FXML
     void viewProfile(ActionEvent event) {
-
+        ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(selectedChildId, root, this));
     }
 
     @FXML
     void viewProfile2(ActionEvent event) {
-
+        long id = ((Double)((Map<String,Object>)(tblChildChanges.getSelectionModel().getSelectedItem()).get("child")).get("id")).longValue();
+        ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(id, root, this));
     }
 
 }

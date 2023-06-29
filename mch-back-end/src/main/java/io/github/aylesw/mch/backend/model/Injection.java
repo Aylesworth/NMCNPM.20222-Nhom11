@@ -31,8 +31,8 @@ public class Injection {
 
     private String note;
 
-    @OneToMany(mappedBy = "injection")
+    @OneToMany(mappedBy = "injection", cascade = CascadeType.REMOVE)
     private List<Reaction> reactions;
 
-    private Boolean confirmed;
+    private String status;
 }

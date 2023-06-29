@@ -3,4 +3,4 @@
 <?import com.jfoenix.controls.JFXButton?>
 
 
-<JFXButton fx:id="btnChildRef" onAction="#viewChildProfile" styleClass="child-ref-button" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<JFXButton fx:id="btnChildRef" onAction="#viewChildProfile" styleClass="ref-button" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" />

@@ -29,4 +29,6 @@ public class BodyMetricsDto {
     private Date date;
 
     private String note;
+
+    private Long childId;
 }

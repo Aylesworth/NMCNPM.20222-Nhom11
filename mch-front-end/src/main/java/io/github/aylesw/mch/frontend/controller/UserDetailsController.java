@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UserDetailsController implements Initializable {
@@ -30,9 +31,9 @@ public class UserDetailsController implements Initializable {
 
     private Parent previous;
 
-    private ManageUsersController previousController;
+    private Object previousController;
 
-    public UserDetailsController(long id, Parent previous, ManageUsersController previousController) {
+    public UserDetailsController(long id, Parent previous, Object previousController) {
         this.id = id;
         this.previous = previous;
         this.previousController = previousController;
@@ -157,8 +158,8 @@ public class UserDetailsController implements Initializable {
             txtDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(map.get("dob").toString()));
             txtPhoneNumber.setText(map.get("phoneNumber").toString());
             txtAddress.setText(map.get("address").toString());
-            txtCitizenId.setText(map.get("citizenId").toString());
-            txtInsuranceId.setText(map.get("insuranceId").toString());
+            txtCitizenId.setText(Optional.ofNullable(map.get("citizenId")).orElse("").toString());
+            txtInsuranceId.setText(Optional.ofNullable(map.get("insuranceId")).orElse("").toString());
             lblName.setText(txtFullName.getText());
 
             cbxSex.getSelectionModel().selectFirst();
@@ -171,7 +172,7 @@ public class UserDetailsController implements Initializable {
     }
 
     void loadChildrenList() {
-        String url = AppConstants.BASE_URL + "/children?parent-id=" + id;
+        String url = AppConstants.BASE_URL + "/children/find-by-parent?parent-id=" + id;
         String token = Utils.getToken();
         String method = "GET";
 
@@ -200,7 +201,10 @@ public class UserDetailsController implements Initializable {
 
                 Node addChildButton = childrenPane.getChildren().get(childrenPane.getChildren().size() - 1);
                 List<Parent> childRefItems = service.getValue().stream().map(
-                        m -> ScreenManager.getChildRefItem(((Double) m.get("id")).longValue(), m.get("fullName").toString())
+                        m -> ScreenManager.getChildRefItem(
+                                ((Double) m.get("id")).longValue(),
+                                m.get("fullName").toString(),
+                                lblName.getParent().getParent())
                 ).toList();
 
                 childrenPane.getChildren().setAll(childRefItems);
@@ -213,6 +217,15 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     void back(ActionEvent event) {
+        switch (previousController) {
+            case ManageUsersController manageUsersController -> {
+                manageUsersController.loadUsersData();
+            }
+            case ChildDetailsController childDetailsController -> {
+                childDetailsController.loadData();
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + previousController);
+        }
         ScreenManager.setMainPanel(previous);
     }
 
@@ -236,7 +249,7 @@ public class UserDetailsController implements Initializable {
             new ApiRequest.Builder<String>().url(url).token(token).method(method).build().request();
             Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Xóa người dùng thành công!");
 
-            previousController.loadUsersData();
+//            previousController.loadUsersData();
             back(event);
         } catch (Exception e) {
             throw new RuntimeException(e);

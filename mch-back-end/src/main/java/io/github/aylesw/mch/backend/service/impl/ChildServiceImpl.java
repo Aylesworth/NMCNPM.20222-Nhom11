@@ -175,20 +175,20 @@ public class ChildServiceImpl implements ChildService {
     @Override
     public List<ChildDto> search(String keyword) {
         return childRepository.findByKeyword(keyword).stream()
-                .map(child -> mapper.map(child, ChildDto.class))
+                .map(this::mapToDto)
                 .toList();
     }
 
     @Override
     public List<ChildDto> getAllChildren() {
         return childRepository.findAll().stream()
-                .map(child -> mapper.map(child, ChildDto.class))
+                .map(this::mapToDto)
                 .toList();
     }
 
     @Override
     public ChildDto getChild(Long childId) {
-        return mapper.map(childRepository.findById(childId).orElseThrow(), ChildDto.class);
+        return mapToDto(childRepository.findById(childId).orElseThrow());
     }
 
     @Override
@@ -213,6 +213,13 @@ public class ChildServiceImpl implements ChildService {
         child.setId(id);
         child.setParent(parent);
         childRepository.save(child);
+    }
+
+    private ChildDto mapToDto(Child child) {
+        ChildDto childDto = mapper.map(child, ChildDto.class);
+        childDto.setParentId(child.getParent().getId());
+        childDto.setParentName(child.getParent().getFullName());
+        return childDto;
     }
 
     @Override

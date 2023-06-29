@@ -29,7 +29,11 @@ public class BodyMetricsServiceImpl implements BodyMetricsService {
     @Override
     public List<BodyMetricsDto> getBodyMetrics(Long childId) {
         return bodyMetricsRepository.findByChildId(childId).stream()
-                .map(bodyMetrics -> mapper.map(bodyMetrics, BodyMetricsDto.class))
+                .map(bodyMetrics -> {
+                    BodyMetricsDto dto = mapper.map(bodyMetrics, BodyMetricsDto.class);
+                    dto.setChildId(bodyMetrics.getChild().getId());
+                    return dto;
+                })
                 .toList();
     }
 

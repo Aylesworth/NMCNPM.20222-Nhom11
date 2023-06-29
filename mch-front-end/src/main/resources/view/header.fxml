@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="60.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="70.0" prefHeight="60.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuButton layoutX="1084.0" layoutY="21.0" mnemonicParsing="false" stylesheets="@../style/material-ui.css" text="Tên người dùng">
+      <MenuButton layoutX="1084.0" layoutY="20.0" mnemonicParsing="false" stylesheets="@../style/material-ui.css" text="Tên người dùng">
         <items>
           <MenuItem mnemonicParsing="false" text="Xem hồ sơ" />
             <MenuItem mnemonicParsing="false" text="Đổi mật khẩu" />

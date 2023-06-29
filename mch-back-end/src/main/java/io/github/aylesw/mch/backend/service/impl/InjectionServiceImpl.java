@@ -1,16 +1,20 @@
 package io.github.aylesw.mch.backend.service.impl;
 
+import io.github.aylesw.mch.backend.common.Utils;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
+import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Child;
 import io.github.aylesw.mch.backend.model.Injection;
 import io.github.aylesw.mch.backend.model.Reaction;
+import io.github.aylesw.mch.backend.model.Vaccine;
 import io.github.aylesw.mch.backend.repository.ChildRepository;
 import io.github.aylesw.mch.backend.repository.InjectionRepository;
 import io.github.aylesw.mch.backend.repository.ReactionRepository;
 import io.github.aylesw.mch.backend.repository.VaccineRepository;
 import io.github.aylesw.mch.backend.service.InjectionService;
+import io.github.aylesw.mch.backend.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InjectionServiceImpl implements InjectionService {
 
+    private final NotificationService notificationService;
     private final InjectionRepository injectionRepository;
     private final ChildRepository childRepository;
     private final VaccineRepository vaccineRepository;
@@ -39,7 +44,6 @@ public class InjectionServiceImpl implements InjectionService {
 
         Injection injection = mapToEntity(injectionDto);
         injection.setChild(child);
-        injection.setConfirmed(true);
         injectionRepository.save(injection);
         saveInjection(injection);
     }
@@ -58,7 +62,6 @@ public class InjectionServiceImpl implements InjectionService {
         injection = mapToEntity(injectionDto);
         injection.setId(injectionId);
         injection.setChild(child);
-        injection.setConfirmed(true);
         saveInjection(injection);
     }
 
@@ -86,24 +89,29 @@ public class InjectionServiceImpl implements InjectionService {
         injectionDto.setVaccineDoseNo(injection.getVaccine().getDoseNo());
         injectionDto.setDate(injection.getDate());
         injectionDto.setNote(injection.getNote());
+        injectionDto.setStatus(injection.getStatus());
         injectionDto.setReactions(injection.getReactions().stream().map(Reaction::getDetails).toList());
         return injectionDto;
     }
 
     private Injection mapToEntity(InjectionDto injectionDto) {
         Injection injection = new Injection();
-        injection.setVaccine(vaccineRepository.findById(injectionDto.getVaccineId())
-                .orElseThrow(() -> new ResourceNotFoundException("Vaccine", "id", injectionDto.getVaccineId())));
+        injection.setVaccine(vaccineRepository.findByNameAndDoseNo(
+                        injectionDto.getVaccineName(),
+                        injectionDto.getVaccineDoseNo()
+                ).orElseThrow()
+        );
         injection.setDate(injectionDto.getDate());
         injection.setNote(injectionDto.getNote());
+        injection.setStatus(injectionDto.getStatus());
 
-        injection.setReactions(
-                injectionDto.getReactions().stream()
-                        .map(details -> Reaction.builder().details(details).build())
-                        .toList()
-        );
+        if (injectionDto.getReactions() != null)
+            injection.setReactions(
+                    injectionDto.getReactions().stream()
+                            .map(details -> Reaction.builder().details(details).build())
+                            .toList()
+            );
 
-        injection.setConfirmed(false);
         return injection;
     }
 
@@ -114,9 +122,44 @@ public class InjectionServiceImpl implements InjectionService {
         injection.setReactions(null);
 
         final Injection savedInjection = injectionRepository.save(injection);
-        reactions.forEach(reaction -> reaction.setInjection(savedInjection));
-        savedInjection.setReactions(reactionRepository.saveAll(reactions));
+        if (reactions != null) {
+            reactions.forEach(reaction -> reaction.setInjection(savedInjection));
+            savedInjection.setReactions(reactionRepository.saveAll(reactions));
+        }
 
         return savedInjection;
+    }
+
+    @Override
+    public List<Vaccine> getAllVaccines() {
+        return vaccineRepository.findAll();
+    }
+
+    @Override
+    public void handleReaction(Long childId, Long injectionId, String reaction, String advice) {
+        Child child = childRepository.findById(childId)
+                .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
+
+        Injection injection = injectionRepository.findById(injectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Injection", "id", injectionId));
+
+        if (!injection.getChild().getId().equals(childId))
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Injection does not belong to child");
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .user(child.getParent())
+                .title("Hướng dẫn xử lý triệu chứng")
+                .message("Lời khuyên cho triệu chứng \"%s\" sau mũi tiêm %s số %d của bé %s: %s"
+                        .formatted(
+                                reaction,
+                                injection.getVaccine().getName(),
+                                injection.getVaccine().getDoseNo(),
+                                child.getFullName(),
+                                advice
+                        ))
+                .time(Utils.currentTimestamp())
+                .build();
+
+        notificationService.createSystemNotification(notificationDetails);
     }
 }

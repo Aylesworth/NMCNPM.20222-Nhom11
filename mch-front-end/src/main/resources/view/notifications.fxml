@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ProgressIndicator fx:id="spinner" />
@@ -19,7 +18,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="740.0" prefWidth="1030.0">
+            <ScrollPane prefHeight="669.0" prefWidth="1030.0">
                <content>
                   <VBox fx:id="notificationList" alignment="TOP_CENTER" spacing="10.0" />
                </content>

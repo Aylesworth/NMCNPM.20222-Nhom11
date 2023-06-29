@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface InjectionRepository extends JpaRepository<Injection, Long> {
-    @Query("SELECT i FROM Injection i JOIN FETCH i.child c WHERE c.id = ?1 AND i.confirmed = true")
+    @Query("SELECT i FROM Injection i JOIN FETCH i.child c WHERE c.id = ?1")
     List<Injection> findByChildId(Long childId);
 }

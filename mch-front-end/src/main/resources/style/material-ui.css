@@ -39,16 +39,16 @@
     -fx-font-weight: bold;
 }
 
-.child-ref-button {
+.ref-button {
     -fx-background-color: AQUA;
     -fx-text-fill: #212121;
 }
 
-.child-ref-button:hover {
+.ref-button:hover {
     -fx-background-color: #00CED1;
 }
 
-.child-ref-button:pressed {
+.ref-button:pressed {
     -fx-background-color: #00CED1;
 }
 

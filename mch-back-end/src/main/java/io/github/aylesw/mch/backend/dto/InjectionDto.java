@@ -1,5 +1,6 @@
 package io.github.aylesw.mch.backend.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,17 +21,21 @@ public class InjectionDto {
 
     private String childName;
 
-    @NotNull
     private Long vaccineId;
 
+    @NotEmpty
     private String vaccineName;
 
+    @NotNull
     private Integer vaccineDoseNo;
 
     @NotNull
     private Date date;
 
     private String note;
+
+    @NotEmpty
+    private String status;
 
     private List<String> reactions;
 }

@@ -62,7 +62,7 @@ public class ScreenManager {
         return loadStage("Thêm người dùng", "add-user.fxml", new AddUserController(parent));
     }
 
-    public static Parent getUserDetailsPanel(long id, Parent previous, ManageUsersController previousController) {
+    public static Parent getUserDetailsPanel(long id, Parent previous, Object previousController) {
         return loadNode("user-details.fxml", new UserDetailsController(id, previous, previousController));
     }
 
@@ -74,8 +74,8 @@ public class ScreenManager {
         return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parent));
     }
 
-    public static Parent getChildRefItem(long id, String name) {
-        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name));
+    public static Parent getChildRefItem(long id, String name, Parent parent) {
+        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name, parent));
     }
 
     public static Parent getNotificationItem(Map<String, Object> properties) {
@@ -88,6 +88,30 @@ public class ScreenManager {
 
     public static Parent getManageChildrenPanel() {
         return loadNode("manage-children.fxml", new ManageChildrenController());
+    }
+
+    public static Parent getChildDetailsPanel(long id, Parent previous, Object previousController) {
+        return loadNode("child-details.fxml", new ChildDetailsController(id, previous, previousController));
+    }
+
+    public static Parent getBodyMetricsItem(Map<String, Object> properties, ChildDetailsController parentController) {
+        return loadNode("body-metrics-item.fxml", new BodyMetricsItemController(properties, parentController));
+    }
+
+    public static Stage getAddBodyMetricsStage(long childId, ChildDetailsController parentController) {
+        return loadStage("Thêm chiều cao cân nặng", "add-body-metrics.fxml", new AddBodyMetricsController(childId, parentController));
+    }
+
+    public static Parent getInjectionItem(Map<String, Object> properties, ChildDetailsController parentController) {
+        return loadNode("injection-item.fxml", new InjectionItemController(properties, parentController));
+    }
+
+    public static Stage getAddInjectionStage(long childId, ChildDetailsController parentController) {
+        return loadStage("Thêm mũi tiêm", "add-injection.fxml", new AddInjectionController(childId, parentController));
+    }
+
+    public static Stage getEditInjectionStage(Map<String,Object> properties, ChildDetailsController parentController) {
+        return loadStage("Sửa mũi tiêm", "edit-injection.fxml", new EditInjectionController(properties, parentController));
     }
 
     public static Parent getManageInjectionsPanel() {

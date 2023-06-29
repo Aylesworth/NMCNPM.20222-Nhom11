@@ -47,7 +47,7 @@ public class NotificationItemController implements Initializable {
         lblTitle.setText(title);
         lblMessage.setText(message);
         lblTime.setText(calculateTimeDifference());
-        container.setStyle("-fx-background-color: " + (seen ? "#f5a105" : "#ffc559") + "; -fx-background-radius: 50");
+        container.setStyle("-fx-background-color: " + (seen ? "#f5a105" : "#ffc559") + "; -fx-background-radius: 20");
     }
 
     private String calculateTimeDifference() {
@@ -70,7 +70,7 @@ public class NotificationItemController implements Initializable {
         YearMonth start = YearMonth.from(now);
         YearMonth end = YearMonth.from(time);
 
-        long days = start.until(end, ChronoUnit.DAYS);
+        long days = Duration.between(time, now).toDays();
         long months = start.until(end, ChronoUnit.MONTHS);
         long years = start.until(end, ChronoUnit.YEARS);
         if (months == 0) {

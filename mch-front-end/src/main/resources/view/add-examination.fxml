@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="866.0" spacing="20.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="281.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="THÊM LỊCH SỬ KHÁM CHỮA BỆNH" textAlignment="CENTER" wrapText="true" />
+         </children>
+      </HBox>
+      <FlowPane columnHalignment="CENTER" prefHeight="339.0" prefWidth="866.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="444.0" spacing="30.0" stylesheets="@../style/material-ui.css">
+               <children>
+                  <JFXTextField fx:id="txtDate" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Ngày khám *" />
+                  <JFXTextField fx:id="txtDate1" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Nơi khám *" />
+                  <JFXTextField fx:id="txtStatus" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Lý do *" />
+                  <JFXTextField fx:id="txtStatus1" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Chẩn đoán *" />
+                  <JFXTextField fx:id="txtNote" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Ghi chú" />
+               </children>
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="418.0" spacing="30.0" stylesheets="@../style/material-ui.css">
+               <children>
+                  <AnchorPane prefHeight="275.0" prefWidth="418.0">
+                     <children>
+                        <JFXListView layoutX="95.0" layoutY="77.0" maxWidth="-Infinity" prefHeight="173.0" prefWidth="227.0" />
+                        <Label layoutX="175.0" layoutY="4.0" style="-fx-font-size: 14px;" text="Đơn thuốc:" />
+                        <JFXTextField labelFloat="true" layoutX="95.0" layoutY="33.0" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Tên thuốc" />
+                        <JFXButton layoutX="331.0" layoutY="33.0" onAction="#add" text="Thêm" />
+                        <JFXButton layoutX="331.0" layoutY="149.0" onAction="#add" prefHeight="30.0" prefWidth="57.0" text="Xóa" />
+                     </children>
+                     <padding>
+                        <Insets right="100.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets right="50.0" />
+               </padding>
+            </VBox>
+         </children>
+      </FlowPane>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="866.0" spacing="20.0">
+         <children>
+            <JFXButton onAction="#add" text="Thêm" />
+            <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
