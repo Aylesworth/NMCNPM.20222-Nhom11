@@ -17,4 +17,12 @@ public interface InjectionService {
     List<Vaccine> getAllVaccines();
 
     void handleReaction(Long childId, Long injectionId, String reaction, String handling);
+
+    List<InjectionDto> getSchedule();
+
+    List<InjectionDto> getPendingRegistrations();
+
+    void approveRegistration(Long injectionId);
+
+    void rejectRegistration(Long injectionId, String reason);
 }

@@ -8,7 +8,11 @@ import java.util.Map;
 public class RequestBodyMap {
 
     public RequestBodyMap() {
-        map = new HashMap<>();
+        this.map = new HashMap<>();
+    }
+
+    public RequestBodyMap(Map<String, Object> map) {
+        this.map = new HashMap<>(map);
     }
 
     private final Map<String, Object> map;

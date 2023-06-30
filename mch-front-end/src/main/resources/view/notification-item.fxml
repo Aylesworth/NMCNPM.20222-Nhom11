@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="90.0" prefWidth="1026.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="container" alignment="CENTER" layoutX="132.0" prefHeight="109.0" prefWidth="769.0" spacing="10.0" style="-fx-background-color: orange; -fx-background-radius: 10;">
+      <VBox fx:id="container" alignment="CENTER" layoutX="132.0" prefHeight="109.0" prefWidth="769.0" spacing="10.0" style="-fx-background-radius: 10;">
          <children>
             <Label fx:id="lblTitle" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Title">
                <font>

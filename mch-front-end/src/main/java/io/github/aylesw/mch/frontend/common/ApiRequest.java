@@ -70,8 +70,9 @@ public class ApiRequest<T> {
         Response response = null;
 
         response = client.newCall(request).execute();
-        if (!response.isSuccessful())
+        if (!response.isSuccessful()) {
             throw new ApiRequestException(response.body().string());
+        }
 
         String responseBody = response.body().string();
         Type type = new TypeToken<T>() {

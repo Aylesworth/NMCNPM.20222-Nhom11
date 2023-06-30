@@ -49,7 +49,7 @@ public class EditInjectionController implements Initializable {
         ObservableList<String> vaccines = FXCollections.observableArrayList();
         try {
             data = new ApiRequest.Builder<List<Map<String, Object>>>()
-                    .url(AppConstants.BASE_URL + "/vaccines")
+                    .url(AppConstants.BASE_URL + "/injections/vaccines")
                     .token(Utils.getToken())
                     .method("GET")
                     .build().request();

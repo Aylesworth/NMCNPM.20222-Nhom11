@@ -1,6 +1,7 @@
 package io.github.aylesw.mch.backend.dto;
 
 import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.model.Injection;
 import io.github.aylesw.mch.backend.model.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;

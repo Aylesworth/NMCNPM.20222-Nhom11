@@ -333,6 +333,9 @@ public class ChildDetailsController implements Initializable {
             case ManageChildrenController manageChildrenController -> {
                 manageChildrenController.loadChildrenData();
             }
+            case ManageInjectionsController manageInjectionsController -> {
+                manageInjectionsController.loadScheduleData();
+            }
             default -> throw new IllegalStateException("Unexpected value: " + previousController);
         }
         ScreenManager.setMainPanel(previous);

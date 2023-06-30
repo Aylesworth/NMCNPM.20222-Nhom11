@@ -83,7 +83,7 @@ public class AddUserController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm người dùng thành công!");
+//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm người dùng thành công!");
             ((Stage)txtEmail.getScene().getWindow()).close();
             parent.loadUsersData();
         } catch (Exception e) {

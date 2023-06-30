@@ -2,8 +2,10 @@ package io.github.aylesw.mch.backend.repository;
 
 import io.github.aylesw.mch.backend.model.SystemNotification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,4 +17,13 @@ public interface SystemNotificationRepository extends JpaRepository<SystemNotifi
             "ORDER BY n.time DESC")
     List<SystemNotification> findByUserIdBeforeTime(Long userId, Timestamp time);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE SystemNotification n SET n.seen = true WHERE n.user.id = ?1 AND n.time <= ?2")
+    int updateSeenByUserIdBeforeTime(Long userId, Timestamp time);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM SystemNotification n WHERE n.title LIKE %?1% AND n.message LIKE %?2%")
+    int deleteByTitleAndMessage(String title, String message);
 }

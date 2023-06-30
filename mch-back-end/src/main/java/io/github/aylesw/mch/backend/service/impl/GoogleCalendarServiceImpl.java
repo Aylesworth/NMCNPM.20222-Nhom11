@@ -1,6 +1,8 @@
 package io.github.aylesw.mch.backend.service.impl;
 
+import com.google.api.services.calendar.model.Events;
 import io.github.aylesw.mch.backend.exception.ApiException;
+import io.github.aylesw.mch.backend.model.Injection;
 import io.github.aylesw.mch.backend.service.GoogleCalendarService;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -27,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -91,7 +94,7 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
             event.setSummary(eventTitle);
             event.setDescription(eventDescription);
 
-            LocalDateTime endDateTime = eventDateTime.plusMinutes(60); // Adjust end time as desired
+            LocalDateTime endDateTime = eventDateTime.plusHours(8); // Adjust end time as desired
 
             EventDateTime start = new EventDateTime();
             start.setDateTime(convertToDateTime(eventDateTime));
@@ -114,6 +117,70 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
                     .execute();
 
             System.out.println("Event invitation sent to " + recipientEmail);
+        } catch (Exception e) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @Override
+    public void createEventOfInjection(Injection injection) {
+        LocalDateTime eventDateTime = injection.getDate().toLocalDate().atTime(LocalTime.of(9, 0));
+
+        sendEventInvitation(
+                injection.getChild().getParent().getEmail(),
+                "Tiêm vaccine %s mũi số %d cho bé %s".formatted(
+                        injection.getVaccine().getName(),
+                        injection.getVaccine().getDoseNo(),
+                        injection.getChild().getFullName()),
+                "",
+                eventDateTime);
+    }
+
+    @Override
+    public void deleteEventOfInjection(Injection injection) {
+        try {
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+
+            Events events = service.events().list("primary")
+                    .setQ("vaccine %s mũi số %d cho bé %s"
+                            .formatted(injection.getVaccine().getName(),
+                                    injection.getVaccine().getDoseNo(),
+                                    injection.getChild().getFullName()))
+                    .execute();
+            String eventId = events.getItems().get(0).getId();
+            service.events().delete("primary", eventId).setSendNotifications(true).execute();
+        } catch (Exception e) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateEventDateOfInjection(Injection injection) {
+        try {
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+
+            Events events = service.events().list("primary")
+                    .setQ("vaccine %s mũi số %d cho bé %s"
+                            .formatted(injection.getVaccine().getName(),
+                                    injection.getVaccine().getDoseNo(),
+                                    injection.getChild().getFullName()))
+                    .execute();
+            Event event = events.getItems().get(0);
+            String eventId = event.getId();
+
+            LocalDateTime startDateTime = injection.getDate().toLocalDate().atTime(9, 0);
+            LocalDateTime endDateTime = startDateTime.plusHours(8);
+
+            event.setStart(new EventDateTime().setDateTime(convertToDateTime(startDateTime)));
+            event.setEnd(new EventDateTime().setDateTime(convertToDateTime(endDateTime)));
+
+            service.events().update("primary", eventId, event).setSendNotifications(true).execute();
         } catch (Exception e) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }

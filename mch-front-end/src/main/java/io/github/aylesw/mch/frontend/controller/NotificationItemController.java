@@ -47,7 +47,7 @@ public class NotificationItemController implements Initializable {
         lblTitle.setText(title);
         lblMessage.setText(message);
         lblTime.setText(calculateTimeDifference());
-        container.setStyle("-fx-background-color: " + (seen ? "#f5a105" : "#ffc559") + "; -fx-background-radius: 20");
+        container.setStyle("-fx-background-color: " + (seen ? "#ffc559" : "#f5a105") + "; -fx-background-radius: 20");
     }
 
     private String calculateTimeDifference() {

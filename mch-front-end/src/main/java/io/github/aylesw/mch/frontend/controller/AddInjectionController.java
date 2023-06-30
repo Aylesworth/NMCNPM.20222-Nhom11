@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.LinkedHashSet;
@@ -24,12 +25,19 @@ public class AddInjectionController implements Initializable {
 
     private long childId;
 
-    private ChildDetailsController parentController;
+    private Object parentController;
 
-    public AddInjectionController(long childId, ChildDetailsController parentController) {
+    public AddInjectionController(long childId, Object parentController) {
         this.childId = childId;
         this.parentController = parentController;
     }
+
+    public AddInjectionController(Object parentController) {
+        this(-1, parentController);
+    }
+
+    @FXML
+    private JFXComboBox<Map<String, Object>> cbxChild;
 
     @FXML
     private JFXComboBox<String> cbxVaccine;
@@ -50,11 +58,16 @@ public class AddInjectionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbxDoseNo.setDisable(true);
 
+        setUpVaccineComboBoxes();
+        setUpChildComboBox();
+    }
+
+    private void setUpVaccineComboBoxes() {
         List<Map<String, Object>> data;
         ObservableList<String> vaccines = FXCollections.observableArrayList();
         try {
             data = new ApiRequest.Builder<List<Map<String, Object>>>()
-                    .url(AppConstants.BASE_URL + "/vaccines")
+                    .url(AppConstants.BASE_URL + "/injections/vaccines")
                     .token(Utils.getToken())
                     .method("GET")
                     .build().request();
@@ -85,9 +98,50 @@ public class AddInjectionController implements Initializable {
         });
     }
 
+    private void setUpChildComboBox() {
+        try {
+            var result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                    .url(AppConstants.BASE_URL + "/children")
+                    .method("GET")
+                    .build().request();
+
+            cbxChild.setItems(FXCollections.observableArrayList(result));
+            cbxChild.setCellFactory(view -> new JFXListCell<>() {
+                @Override
+                protected void updateItem(Map<String, Object> item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item != null) {
+                        setText(item.get("fullName").toString());
+                    }
+                }
+            });
+            cbxChild.setConverter(new StringConverter<Map<String, Object>>() {
+                @Override
+                public String toString(Map<String, Object> stringObjectMap) {
+                    return stringObjectMap.get("fullName").toString();
+                }
+
+                @Override
+                public Map<String, Object> fromString(String s) {
+                    return null;
+                }
+            });
+
+            if (childId != -1) {
+                cbxChild.getSelectionModel().select(cbxChild.getItems()
+                        .filtered(map -> ((Double) map.get("id")).longValue() == childId)
+                        .get(0));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void add(ActionEvent event) {
         try {
+            long childId = ((Double) cbxChild.getSelectionModel().getSelectedItem().get("id")).longValue();
             String requestBody = new RequestBodyMap()
                     .put("vaccineName", cbxVaccine.getValue())
                     .put("vaccineDoseNo", cbxDoseNo.getValue())
@@ -105,7 +159,16 @@ public class AddInjectionController implements Initializable {
 
 //            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
             ((Stage) txtDate.getScene().getWindow()).close();
-            parentController.loadInjections();
+            switch (parentController) {
+                case ChildDetailsController childDetailsController -> {
+                    childDetailsController.loadInjections();
+                }
+                case ManageInjectionsController manageInjectionsController -> {
+                    manageInjectionsController.loadScheduleData();
+                    manageInjectionsController.loadRegistrations();
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + parentController);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

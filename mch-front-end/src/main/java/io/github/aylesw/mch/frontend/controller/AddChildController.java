@@ -179,7 +179,7 @@ public class AddChildController implements Initializable {
         service.setOnSucceeded(e -> {
             if (service.getValue() != null) {
                 spinner.setVisible(false);
-                Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm hồ sơ trẻ thành công!");
+//                Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm hồ sơ trẻ thành công!");
                 ((Stage) txtFullName.getScene().getWindow()).close();
 
                 if (parent instanceof UserDetailsController userDetailsController) {

@@ -45,7 +45,7 @@ public class InjectionController {
         return ResponseEntity.ok("Injection information deleted successfully");
     }
 
-    @GetMapping("/vaccines")
+    @GetMapping("/injections/vaccines")
     public ResponseEntity<List<Vaccine>> getAllVaccines() {
         return ResponseEntity.ok(injectionService.getAllVaccines());
     }
@@ -54,9 +54,32 @@ public class InjectionController {
     public ResponseEntity<String> handleReaction(
             @PathVariable("child-id") Long childId,
             @PathVariable("id") Long injectionId,
-            @RequestBody Map<String,String> requestBody
-            ) {
+            @RequestBody Map<String, String> requestBody
+    ) {
         injectionService.handleReaction(childId, injectionId, requestBody.get("reaction"), requestBody.get("advice"));
         return ResponseEntity.ok("Advice for reaction sent successfully");
+    }
+
+    @GetMapping("/injections/schedule")
+    public ResponseEntity<List<InjectionDto>> getSchedule() {
+        return ResponseEntity.ok(injectionService.getSchedule());
+    }
+
+    @GetMapping("/injections/pending-registrations")
+    public ResponseEntity<List<InjectionDto>> getPendingRegistrations() {
+        return ResponseEntity.ok(injectionService.getPendingRegistrations());
+    }
+
+    @PostMapping("/injections/approve-registration")
+    public ResponseEntity<String> approveRegistration(@RequestParam("id") Long injectionId) {
+        injectionService.approveRegistration(injectionId);
+        return ResponseEntity.ok("Injection registration approved successfully");
+    }
+
+    @PostMapping("/injections/reject-registration")
+    public ResponseEntity<String> rejectRegistration(@RequestParam("id") Long injectionId,
+                                                     @RequestParam("reason") String reason) {
+        injectionService.rejectRegistration(injectionId, reason);
+        return ResponseEntity.ok("Injection registration rejected successfully");
     }
 }

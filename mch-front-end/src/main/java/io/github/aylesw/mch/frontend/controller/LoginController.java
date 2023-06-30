@@ -32,6 +32,8 @@ public class LoginController {
 
     @FXML
     void login() {
+        Utils.saveToken("");
+
         String url = BASE_URL + "/auth/login";
         String method = "POST";
         String requestBody = new RequestBodyMap()

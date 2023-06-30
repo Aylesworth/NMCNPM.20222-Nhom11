@@ -21,6 +21,10 @@ public class InjectionDto {
 
     private String childName;
 
+    private Date childDob;
+
+    private Long childAgeInMonths;
+
     private Long vaccineId;
 
     @NotEmpty
