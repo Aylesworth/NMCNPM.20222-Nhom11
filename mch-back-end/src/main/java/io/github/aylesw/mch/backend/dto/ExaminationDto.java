@@ -32,5 +32,7 @@ public class ExaminationDto {
 
     private String note;
 
-    private List<Medicine> medicines;
+    private List<String> medicines;
+
+    private Long childId;
 }

@@ -17,7 +17,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="68.0" prefWidth="866.0" spacing="20.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="281.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="THÊM LỊCH SỬ KHÁM CHỮA BỆNH" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="281.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="SỬA THÔNG TIN KHÁM CHỮA BỆNH" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
       <FlowPane columnHalignment="CENTER" prefHeight="339.0" prefWidth="866.0">
@@ -76,7 +76,7 @@
       </FlowPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="866.0" spacing="20.0">
          <children>
-            <JFXButton onAction="#add" text="Thêm" />
+            <JFXButton onAction="#save" prefHeight="30.0" prefWidth="60.0" text="Lưu" />
             <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
          </children>
       </HBox>

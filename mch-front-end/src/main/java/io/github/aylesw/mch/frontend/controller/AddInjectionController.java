@@ -103,7 +103,7 @@ public class AddInjectionController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
+//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
             ((Stage) txtDate.getScene().getWindow()).close();
             parentController.loadInjections();
         } catch (Exception e) {

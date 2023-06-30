@@ -255,13 +255,13 @@
             </Tab>
             <Tab text="Khám chữa bệnh">
                <content>
-                  <FlowPane>
+                  <VBox alignment="TOP_CENTER">
                      <children>
-                        <ScrollPane>
+                        <JFXButton fx:id="btnAddExamination" onAction="#addExamination" prefHeight="25.0" prefWidth="97.0" text="Thêm" />
+                        <ScrollPane prefHeight="678.0" prefWidth="1032.0">
                            <content>
-                              <VBox fx:id="examinationsContainer" alignment="TOP_CENTER" prefHeight="770.0" prefWidth="1030.0" spacing="20.0" style="-fx-background-color: white;">
+                              <VBox fx:id="examinationsContainer" alignment="TOP_CENTER" prefWidth="1030.0" spacing="20.0" style="-fx-background-color: white;">
                                  <children>
-                                    <JFXButton fx:id="btnAddExamination" onAction="#addExamination" prefHeight="25.0" prefWidth="97.0" text="Thêm" />
                                     <AnchorPane prefHeight="194.0" prefWidth="990.0" style="-fx-background-color: ivory; -fx-background-radius: 50;">
                                        <children>
                                           <Label layoutX="163.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" text="Lý do:" />
@@ -288,7 +288,10 @@
                            </content>
                         </ScrollPane>
                      </children>
-                  </FlowPane>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </VBox>
                </content>
             </Tab>
         </tabs>

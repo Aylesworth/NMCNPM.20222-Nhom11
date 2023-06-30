@@ -194,3 +194,29 @@
 .scroll-pane .scroll-bar:horizontal:pressed {
     -fx-background-color: #757575;
 }
+
+/* List view */
+.list-view {
+    -fx-background-color: #ffffff; /* Background color */
+}
+
+.list-view .list-cell {
+    -fx-padding: 8 16; /* Padding around each cell */
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #e0e0e0; /* Hover background color */
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #2196f3; /* Selected background color */
+    -fx-text-fill: #ffffff; /* Selected text color */
+}
+
+.list-view .list-cell:empty {
+    -fx-opacity: 0.5; /* Opacity for empty cells */
+}
+
+.list-view .list-cell .list-cell-label {
+    -fx-font-size: 14px; /* Font size for cell label */
+}

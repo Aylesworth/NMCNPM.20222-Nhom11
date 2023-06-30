@@ -108,7 +108,7 @@ public class EditInjectionController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Sửa thông tin mũi tiêm thành công!");
+//            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật thông tin mũi tiêm thành công!");
             ((Stage) txtDate.getScene().getWindow()).close();
             parentController.loadInjections();
         } catch (Exception e) {

@@ -110,8 +110,20 @@ public class ScreenManager {
         return loadStage("Thêm mũi tiêm", "add-injection.fxml", new AddInjectionController(childId, parentController));
     }
 
-    public static Stage getEditInjectionStage(Map<String,Object> properties, ChildDetailsController parentController) {
+    public static Stage getEditInjectionStage(Map<String, Object> properties, ChildDetailsController parentController) {
         return loadStage("Sửa mũi tiêm", "edit-injection.fxml", new EditInjectionController(properties, parentController));
+    }
+
+    public static Stage getAddExaminationStage(long childId, ChildDetailsController parentController) {
+        return loadStage("Thêm thông tin khám chữa bệnh", "add-examination.fxml", new AddExaminationController(childId, parentController));
+    }
+
+    public static Parent getExaminationItem(Map<String, Object> properties, ChildDetailsController parentController) {
+        return loadNode("examination-item.fxml", new ExaminationItemController(properties, parentController));
+    }
+
+    public static Stage getEditExaminationStage(Map<String, Object> properties, ChildDetailsController parentController) {
+        return loadStage("Sửa thông tin khám chữa bệnh", "edit-examination.fxml", new EditExaminationController(properties, parentController));
     }
 
     public static Parent getManageInjectionsPanel() {

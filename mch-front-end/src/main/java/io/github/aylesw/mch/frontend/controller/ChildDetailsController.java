@@ -104,6 +104,7 @@ public class ChildDetailsController implements Initializable {
         loadData();
         loadBodyMetrics();
         loadInjections();
+        loadExaminations();
     }
 
     private void lockFields() {
@@ -214,9 +215,25 @@ public class ChildDetailsController implements Initializable {
         }
     }
 
+    void loadExaminations() {
+        try {
+            List<Map<String, Object>> result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                    .url(AppConstants.BASE_URL + "/children/" + id + "/examinations")
+                    .token(Utils.getToken())
+                    .method("GET")
+                    .build().request();
+
+            var items = result.stream().map(map -> ScreenManager.getExaminationItem(map, this)).toList();
+
+            examinationsContainer.getChildren().setAll(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void addExamination(ActionEvent event) {
-
+        ScreenManager.getAddExaminationStage(id, this).show();
     }
 
     @FXML

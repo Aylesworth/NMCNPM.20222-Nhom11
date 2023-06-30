@@ -5,6 +5,7 @@ import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Child;
 import io.github.aylesw.mch.backend.model.Examination;
+import io.github.aylesw.mch.backend.model.Medicine;
 import io.github.aylesw.mch.backend.repository.ChildRepository;
 import io.github.aylesw.mch.backend.repository.ExaminationRepository;
 import io.github.aylesw.mch.backend.repository.MedicineRepository;
@@ -27,7 +28,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public List<ExaminationDto> getExaminations(Long childId) {
         return examinationRepository.findByChildId(childId).stream()
-                .map(examination -> mapper.map(examination, ExaminationDto.class))
+                .map(this::mapToDto)
                 .toList();
     }
 
@@ -36,16 +37,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         Child child = childRepository.findById(childId)
                 .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
 
-        examinationDto.setMedicines(
-                examinationDto.getMedicines().stream()
-                        .map(medicine -> {
-                            if (medicineRepository.existsByName(medicine.getName()))
-                                return medicineRepository.findByName(medicine.getName());
-                            return medicineRepository.save(medicine);
-                        }).toList()
-        );
-
-        Examination examination = mapper.map(examinationDto, Examination.class);
+        Examination examination = mapToEntity(examinationDto);
         examination.setId(null);
         examination.setChild(child);
         examinationRepository.save(examination);
@@ -62,16 +54,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         if (!examination.getChild().getId().equals(childId))
             throw new ApiException(HttpStatus.BAD_REQUEST, "Examination does not belong to child");
 
-        examinationDto.setMedicines(
-                examinationDto.getMedicines().stream()
-                        .map(medicine -> {
-                            if (medicineRepository.existsByName(medicine.getName()))
-                                return medicineRepository.findByName(medicine.getName());
-                            return medicineRepository.save(medicine);
-                        }).toList()
-        );
-
-        examination = mapper.map(examinationDto, Examination.class);
+        examination = mapToEntity(examinationDto);
         examination.setId(examinationId);
         examination.setChild(child);
         examinationRepository.save(examination);
@@ -89,5 +72,25 @@ public class ExaminationServiceImpl implements ExaminationService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Examination does not belong to child");
 
         examinationRepository.delete(examination);
+    }
+
+    private Examination mapToEntity(ExaminationDto dto) {
+        Examination examination = mapper.map(dto, Examination.class);
+        examination.setMedicines(
+                dto.getMedicines().stream()
+                        .map(name -> {
+                            if (medicineRepository.existsByName(name))
+                                return medicineRepository.findByName(name);
+                            return medicineRepository.save(Medicine.builder().name(name).build());
+                        }).toList()
+        );
+        return examination;
+    }
+
+    private ExaminationDto mapToDto(Examination examination) {
+        ExaminationDto dto = mapper.map(examination, ExaminationDto.class);
+        dto.setChildId(examination.getChild().getId());
+        dto.setMedicines(examination.getMedicines().stream().map(Medicine::getName).toList());
+        return dto;
     }
 }

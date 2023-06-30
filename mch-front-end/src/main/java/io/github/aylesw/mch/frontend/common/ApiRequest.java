@@ -15,7 +15,7 @@ public class ApiRequest<T> {
 
     private String url;
 
-    private String token;
+    private String token = Utils.getToken();
 
     private String method;
 
@@ -56,25 +56,6 @@ public class ApiRequest<T> {
             return apiRequest;
         }
     }
-//    public ApiRequest<T> url(String url) {
-//        this.url = url;
-//        return this;
-//    }
-//
-//    public ApiRequest<T> token(String token) {
-//        this.token = token;
-//        return this;
-//    }
-//
-//    public ApiRequest<T> method(String method) {
-//        this.method = method;
-//        return this;
-//    }
-//
-//    public ApiRequest<T> requestBody(String requestBody) {
-//        this.url = url;
-//        return this;
-//    }
 
     public T request() throws Exception {
         Request request = new Request.Builder()
