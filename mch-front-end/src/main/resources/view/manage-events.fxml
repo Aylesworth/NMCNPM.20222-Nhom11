@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -12,53 +13,57 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="Quản lý sự kiện">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <JFXListView layoutX="59.0" layoutY="147.0" prefHeight="572.0" prefWidth="214.0" />
-                  <JFXTextField labelFloat="true" layoutX="59.0" layoutY="56.0" prefHeight="25.0" prefWidth="213.0" promptText="Tìm kiếm" />
-                  <JFXButton layoutX="484.0" layoutY="56.0" style="-fx-background-color: aqua;" text="Sự kiện mới" />
-                  <JFXButton layoutX="627.0" layoutY="56.0" style="-fx-background-color: aqua;" text="Xóa sự kiện" />
-                  <TableView layoutX="329.0" layoutY="371.0" prefHeight="347.0" prefWidth="549.0">
+                  <JFXListView fx:id="listEvents" layoutX="59.0" layoutY="147.0" prefHeight="491.0" prefWidth="214.0" />
+                  <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="59.0" layoutY="56.0" onKeyReleased="#search" prefHeight="25.0" prefWidth="213.0" promptText="Tìm kiếm" />
+                  <HBox alignment="CENTER" layoutX="345.0" layoutY="275.0" prefHeight="30.0" prefWidth="545.0" spacing="30.0">
+                     <children>
+                        <JFXButton fx:id="btnSendNotification" onAction="#sendNotification" text="Gửi thông báo" />
+                        <JFXButton fx:id="btnUpdate" onAction="#updateEvent" prefHeight="30.0" prefWidth="102.0" text="Cập nhật" />
+                        <JFXButton fx:id="btnDelete" onAction="#deleteEvent" text="Xóa sự kiện" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tblParticipants" layoutX="345.0" layoutY="371.0" prefHeight="347.0" prefWidth="545.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Email" />
                       <TableColumn prefWidth="75.0" text="Họ tên" />
+                      <TableColumn prefWidth="75.0" text="Email" />
                         <TableColumn prefWidth="75.0" text="Tuổi" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton layoutX="915.0" layoutY="501.0" style="-fx-background-color: aqua;" text="Xem hồ sơ" />
-                  <JFXButton layoutX="915.0" layoutY="558.0" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: aqua;" text="Xóa" />
-                  <Label layoutX="517.0" layoutY="328.0" text="Danh sách người tham gia">
+                  <JFXButton fx:id="btnViewProfile" layoutX="906.0" layoutY="501.0" onAction="#viewProfile" text="Xem hồ sơ" />
+                  <JFXButton fx:id="btnRemoveUser" layoutX="906.0" layoutY="558.0" onAction="#removeUser" prefHeight="30.0" prefWidth="89.0" text="Xóa" />
+                  <Label layoutX="531.0" layoutY="328.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Danh sách người tham gia">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField labelFloat="true" layoutX="345.0" layoutY="120.0" promptText="Tên sự kiện" />
-                  <JFXTextField labelFloat="true" layoutX="622.0" layoutY="119.0" prefHeight="25.0" prefWidth="87.0" />
-                  <Label layoutX="563.0" layoutY="117.0" prefHeight="31.0" prefWidth="63.0" text="Ngày:" />
-                  <JFXTextArea labelFloat="true" layoutX="345.0" layoutY="184.0" prefHeight="49.0" prefWidth="172.0" promptText="Mô tả" />
-                  <JFXTextField labelFloat="true" layoutX="762.0" layoutY="119.0" prefHeight="25.0" prefWidth="83.0" />
-                  <Label layoutX="726.0" layoutY="117.0" prefHeight="31.0" prefWidth="36.0" text="đến" />
-                  <JFXTextField labelFloat="true" layoutX="622.0" layoutY="186.0" prefHeight="25.0" prefWidth="87.0" />
-                  <Label layoutX="563.0" layoutY="184.0" prefHeight="31.0" prefWidth="63.0" text="Độ tuổi:" />
-                  <JFXTextField labelFloat="true" layoutX="762.0" layoutY="186.0" prefHeight="25.0" prefWidth="83.0" />
-                  <Label layoutX="726.0" layoutY="184.0" prefHeight="31.0" prefWidth="36.0" text="đến" />
-                  <JFXButton layoutX="563.0" layoutY="261.0" style="-fx-background-color: aqua;" text="Cập nhật" />
-                  <JFXButton layoutX="915.0" layoutY="443.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: aqua;" text="Thêm" />
-                  <JFXRadioButton layoutX="59.0" layoutY="108.0" selected="true" text="Tất cả">
+                  <JFXTextField fx:id="txtName" labelFloat="true" layoutX="344.0" layoutY="46.0" prefHeight="30.0" prefWidth="547.0" promptText="Tên sự kiện" />
+                  <JFXTextArea fx:id="txtDescription" labelFloat="true" layoutX="344.0" layoutY="100.0" prefHeight="147.0" prefWidth="197.0" promptText="Mô tả" />
+                  <JFXTextField fx:id="txtMinAge" labelFloat="true" layoutX="608.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" promptText="Tuổi tối thiểu" />
+                  <JFXTextField fx:id="txtMaxAge" labelFloat="true" layoutX="720.0" layoutY="218.0" prefHeight="25.0" prefWidth="83.0" promptText="Tuổi tối đa" />
+                  <JFXButton fx:id="btnAddUser" layoutX="906.0" layoutY="443.0" onAction="#addUser" prefHeight="30.0" prefWidth="89.0" text="Thêm" />
+                  <JFXRadioButton fx:id="rbtnAll" layoutX="59.0" layoutY="108.0" selected="true" text="Tất cả">
                      <toggleGroup>
                         <ToggleGroup fx:id="filter" />
                      </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton layoutX="152.0" layoutY="108.0" text="Đang diễn ra" toggleGroup="$filter" />
+                  <JFXRadioButton fx:id="rbtnCurrent" layoutX="144.0" layoutY="108.0" text="Đang diễn ra" toggleGroup="$filter" />
+                  <DatePicker fx:id="dpFromDate" layoutX="695.0" layoutY="99.0" promptText="Từ ngày" />
+                  <DatePicker fx:id="dpToDate" layoutX="695.0" layoutY="156.0" promptText="Đến ngày" />
+                  <Label layoutX="608.0" layoutY="111.0" style="-fx-font-size: 14px;" text="Từ ngày:" />
+                  <Label layoutX="608.0" layoutY="168.0" style="-fx-font-size: 14px;" text="Đến ngày:" />
+                  <JFXButton layoutX="160.0" layoutY="660.0" onAction="#addEvent" prefHeight="30.0" prefWidth="111.0" text="Thêm sự kiện" />
                </children>
             </AnchorPane>
          </content>

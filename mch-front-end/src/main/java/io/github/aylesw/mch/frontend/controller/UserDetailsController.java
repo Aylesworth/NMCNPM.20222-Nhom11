@@ -91,6 +91,7 @@ public class UserDetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData();
         loadChildrenList();
+        loadEventsList();
     }
 
     private void lockFields() {
@@ -172,7 +173,7 @@ public class UserDetailsController implements Initializable {
     }
 
     void loadChildrenList() {
-        String url = AppConstants.BASE_URL + "/children/find-by-parent?parent-id=" + id;
+        String url = AppConstants.BASE_URL + "/children/find-by-parent?id=" + id;
         String token = Utils.getToken();
         String method = "GET";
 
@@ -215,6 +216,25 @@ public class UserDetailsController implements Initializable {
         service.start();
     }
 
+    void loadEventsList() {
+        try {
+            var result = new ApiRequest.Builder<List<Map<String, Object>>>()
+                    .url(AppConstants.BASE_URL + "/events/find-by-user?id=" + id)
+                    .method("GET")
+                    .build().request();
+            var items = result.stream().map(event -> {
+                Label label = new Label(event.get("name").toString());
+                label.setStyle("    -fx-text-fill: #212121;\n" +
+                        "    -fx-font-family: \"Roboto\", sans-serif;\n" +
+                        "    -fx-font-size: 14px;");
+                return label;
+            }).toList();
+            eventsPane.getChildren().setAll(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void back(ActionEvent event) {
         switch (previousController) {
@@ -224,7 +244,8 @@ public class UserDetailsController implements Initializable {
             case ChildDetailsController childDetailsController -> {
                 childDetailsController.loadData();
             }
-            default -> throw new IllegalStateException("Unexpected value: " + previousController);
+            default -> {
+            }
         }
         ScreenManager.setMainPanel(previous);
     }
@@ -249,7 +270,6 @@ public class UserDetailsController implements Initializable {
             new ApiRequest.Builder<String>().url(url).token(token).method(method).build().request();
             Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Xóa người dùng thành công!");
 
-//            previousController.loadUsersData();
             back(event);
         } catch (Exception e) {
             throw new RuntimeException(e);

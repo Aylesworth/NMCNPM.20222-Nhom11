@@ -134,7 +134,7 @@ public class ChildDetailsController implements Initializable {
         btnCancel.setVisible(true);
     }
 
-    void loadData() {
+    public void loadData() {
         spinner1.setVisible(true);
         lockFields();
 

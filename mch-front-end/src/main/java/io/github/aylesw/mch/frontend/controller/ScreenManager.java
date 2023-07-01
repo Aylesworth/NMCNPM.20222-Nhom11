@@ -135,7 +135,15 @@ public class ScreenManager {
     }
 
     public static Parent getManageEventsPanel() {
-        return loadNode("manage-events.fxml", null);
+        return loadNode("manage-events.fxml", new ManageEventsController());
+    }
+
+    public static Stage getAddEventStage(ManageEventsController parentController) {
+        return loadStage("Thêm sự kiện", "add-event.fxml", new AddEventController(parentController));
+    }
+
+    public static Stage getAddUserToEventStage(long eventId, ManageEventsController parentController) {
+        return loadStage("Thêm người tham dự", "add-user-to-event.fxml", new AddUserToEventController(eventId, parentController));
     }
 
     public static Stage loadStage(String title, String resourceName, Object controller) {
