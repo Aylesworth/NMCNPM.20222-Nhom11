@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tab?>
@@ -38,14 +39,15 @@
                   <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" layoutX="712.0" layoutY="200.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
                   <Label fx:id="lblId" layoutX="422.0" layoutY="147.0" prefHeight="17.0" prefWidth="111.0" text="ID:" />
                   <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="712.0" layoutY="257.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
-                  <JFXTextField fx:id="txtDob" labelFloat="true" layoutX="422.0" layoutY="372.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
                   <JFXTextField fx:id="txtCitizenId" labelFloat="true" layoutX="712.0" layoutY="313.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
                   <JFXTextField fx:id="txtInsuranceId" labelFloat="true" layoutX="712.0" layoutY="372.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXComboBox fx:id="cbxSex" labelFloat="true" layoutX="422.0" layoutY="313.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính" />
+                  <JFXComboBox fx:id="cbxSex" labelFloat="true" layoutX="422.0" layoutY="313.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
                   <JFXButton fx:id="btnDeleteUser" layoutX="684.0" layoutY="489.0" onAction="#deleteUser" prefHeight="30.0" prefWidth="131.0" text="Xóa người dùng" />
                   <JFXButton fx:id="btnUpdateUser" layoutX="613.0" layoutY="436.0" onAction="#updateUser" prefHeight="25.0" prefWidth="102.0" text="Cập nhật" />
                   <JFXButton fx:id="btnViewProfile" layoutX="512.0" layoutY="489.0" onAction="#viewProfile" prefHeight="30.0" prefWidth="135.0" text="Xem hồ sơ chính" />
                   <JFXButton layoutX="209.0" layoutY="673.0" onAction="#addUser" prefHeight="30.0" prefWidth="145.0" text="Thêm người dùng" />
+                  <Label fx:id="lblError" alignment="CENTER" layoutX="448.0" layoutY="553.0" prefHeight="19.0" prefWidth="431.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
+                  <DatePicker fx:id="dpDob" layoutX="418.0" layoutY="366.0" prefHeight="42.0" prefWidth="209.0" promptText="Ngày sinh *" />
                </children>
             </AnchorPane>
          </content>

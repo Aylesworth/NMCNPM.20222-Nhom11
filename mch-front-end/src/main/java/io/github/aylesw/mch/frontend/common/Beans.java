@@ -21,6 +21,8 @@ public class Beans {
 
     public static final TimeFormatConverter TIME_FORMAT_CONVERTER = new TimeFormatConverter();
 
+    public static final LocalDateStringConverter DATE_STRING_CONVERTER = new LocalDateStringConverter(DATE_FORMATTER, null);
+
     public static class DateFormatConverter {
         public String toCustom(String isoFormat) {
             return LocalDate.parse(isoFormat).format(DATE_FORMATTER);

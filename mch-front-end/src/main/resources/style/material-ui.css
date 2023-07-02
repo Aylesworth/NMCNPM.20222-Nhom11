@@ -21,14 +21,17 @@
     -fx-font-family: "Roboto", sans-serif;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
 .nav-button:hover {
     -fx-background-color: #03A9F4;
+    -fx-alignment: center;
 }
 
 .nav-button:pressed {
     -fx-background-color: #03A9F4;
+    -fx-alignment: center;
 }
 
 .menu-button {
@@ -223,9 +226,9 @@
 
 /* Date picker */
 .date-picker {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #bdbdbd;
-    -fx-border-width: 1px;
+    -fx-background-color: transparent;
+    -fx-border-color: #ffcce6;
+    -fx-border-width: 0 0 1 0;
     -fx-padding: 5px;
 }
 
@@ -272,4 +275,14 @@
 .date-picker .day-cell:selected {
     -fx-background-color: #2196f3;
     -fx-text-fill: #ffffff;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #212121;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-text-fill: #212121;
 }

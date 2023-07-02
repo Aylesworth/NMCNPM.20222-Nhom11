@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -43,14 +44,14 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="100.0" />
          </padding>
       </VBox>
    </left>
    <right>
       <VBox alignment="CENTER" prefHeight="524.0" prefWidth="499.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Ngày sinh (dd/mm/yyyy) *" />
+            <DatePicker fx:id="dpDob" prefWidth="257.0" promptText="Ngày sinh" />
             <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số điện thoại *">
                <VBox.margin>
                   <Insets />
@@ -61,13 +62,14 @@
             <JFXTextField fx:id="txtInsuranceId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số BHYT" />
          </children>
          <padding>
-            <Insets right="50.0" />
+            <Insets right="100.0" />
          </padding>
       </VBox>
    </right>
    <bottom>
-      <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="900.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="145.0" prefWidth="900.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;" />
             <JFXButton onAction="#signUp" text="Đăng ký" textFill="WHITE" />
          </children>
       </VBox>

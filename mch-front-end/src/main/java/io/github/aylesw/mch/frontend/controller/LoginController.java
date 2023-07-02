@@ -9,11 +9,13 @@ import io.github.aylesw.mch.frontend.common.RequestBodyMap;
 import io.github.aylesw.mch.frontend.common.UserIdentity;
 import io.github.aylesw.mch.frontend.common.Utils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.util.Map;
 
 import static io.github.aylesw.mch.frontend.common.AppConstants.BASE_URL;
+import static io.github.aylesw.mch.frontend.common.AppConstants.ERROR_BACKGROUND;
 
 public class LoginController {
 
@@ -33,8 +35,18 @@ public class LoginController {
     private JFXButton btnSignUp;
 
     @FXML
+    private Label lblError;
+
+    @FXML
     void login() {
         Utils.saveToken("");
+
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
 
         String url = BASE_URL + "/auth/login";
         String method = "POST";
@@ -62,11 +74,26 @@ public class LoginController {
             ScreenManager.setNavBar();
             ScreenManager.setHeaderBar();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("No value present") || e.getMessage().contains("Bad credentials")) {
+                lblError.setText("Email hoặc mật khẩu không đúng!");
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 
     private void validateFields() throws Exception {
+        txtEmail.setStyle("");
+        txtPassword.setStyle("");
+        lblError.setText("");
+        if (txtEmail.getText().isBlank()) {
+            txtEmail.setStyle(ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập email!");
+        }
+        if (txtPassword.getText().isEmpty()) {
+            txtPassword.setStyle(ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập mật khẩu!");
+        }
     }
 
     @FXML

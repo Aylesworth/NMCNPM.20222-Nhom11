@@ -67,11 +67,16 @@
       </VBox>
    </right>
    <bottom>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="123.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton onAction="#addUser" text="Thêm" />
-            <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="56.0" text="Hủy" />
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="900.0" spacing="20.0">
+               <children>
+                  <JFXButton onAction="#addUser" text="Thêm" />
+                  <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="56.0" text="Hủy" />
+               </children>
+            </HBox>
+            <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;" />
          </children>
-      </HBox>
+      </VBox>
    </bottom>
 </BorderPane>

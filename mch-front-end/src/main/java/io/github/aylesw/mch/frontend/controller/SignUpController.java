@@ -9,6 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -32,7 +36,7 @@ public class SignUpController implements Initializable {
     private JFXComboBox<String> boxSex;
 
     @FXML
-    private JFXTextField txtDob;
+    private DatePicker dpDob;
 
     @FXML
     private JFXTextField txtPhoneNumber;
@@ -46,13 +50,24 @@ public class SignUpController implements Initializable {
     @FXML
     private JFXTextField txtInsuranceId;
 
+    @FXML
+    private Label lblError;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
     }
 
     @FXML
     void signUp(ActionEvent event) {
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         String url = AppConstants.BASE_URL + "/auth/register";
         String method = "POST";
         String requestBody = new RequestBodyMap()
@@ -60,7 +75,7 @@ public class SignUpController implements Initializable {
                 .put("password", txtPassword.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", boxSex.getValue())
-                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
+                .put("dob", dpDob.getValue().toString())
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())
@@ -75,10 +90,82 @@ public class SignUpController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Đăng ký thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Tài khoản của bạn đang chờ được kích hoạt.");
+
+            ((Stage) txtEmail.getScene().getWindow()).close();
         } catch (Exception e) {
-            e.printStackTrace();
-            Utils.showAlert(Alert.AlertType.ERROR, "Lỗi", null, "Đã có lỗi xảy ra!");
+            if (e.getMessage().contains("Email already used")) {
+                lblError.setText("Email đã được sử dụng!");
+            } else {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        txtEmail.setStyle("");
+        txtPassword.setStyle("");
+        txtConfirmPassword.setStyle("");
+        txtFullName.setStyle("");
+        boxSex.setStyle("");
+        dpDob.setStyle("");
+        txtPhoneNumber.setStyle("");
+        txtAddress.setStyle("");
+        txtCitizenId.setStyle("");
+        txtInsuranceId.setStyle("");
+
+        if (txtEmail.getText().isBlank()) {
+            txtEmail.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập email!");
+        }
+        if (!txtEmail.getText().matches("[A-Za-z0-9.]+@[A-Za-z0-9]+([.][A-Za-z0-9]+)+")) {
+            txtEmail.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Email không hợp lệ!");
+        }
+        if (txtPassword.getText().isBlank()) {
+            txtPassword.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập mật khẩu!");
+        }
+        if (txtPassword.getText().length() < 8) {
+            txtPassword.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Mật khẩu cần có 8 ký tự trở lên!");
+        }
+        if (!txtConfirmPassword.getText().equals(txtPassword.getText())) {
+            txtConfirmPassword.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Mật khẩu xác nhận không khớp!");
+        }
+        if (txtFullName.getText().isBlank()) {
+            txtFullName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền họ tên!");
+        }
+        if (boxSex.getSelectionModel().getSelectedItem() == null) {
+            boxSex.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn giới tính!");
+        }
+        if (dpDob.getValue() == null) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn ngày sinh!");
+        }
+        if (txtPhoneNumber.getText().isBlank()) {
+            txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập số điện thoại!");
+        }
+        if (!txtPhoneNumber.getText().matches("[0-9]{10,12}")) {
+            txtPhoneNumber.setText(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số điện thoại không hợp lệ!");
+        }
+        if (txtAddress.getText().isBlank()) {
+            txtAddress.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền địa chỉ!");
+        }
+        if (!txtCitizenId.getText().isBlank() && !txtCitizenId.getText().matches("[0-9]{12}")) {
+            txtCitizenId.setText(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số CCCD không hợp lệ!");
+        }
+        if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
+            txtInsuranceId.setText(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số BHYT khỗng hợp lệ!");
         }
     }
 

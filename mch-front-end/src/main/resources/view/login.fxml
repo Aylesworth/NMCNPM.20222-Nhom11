@@ -8,33 +8,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="373.0" spacing="30.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label style="-fx-font-size: 18; -fx-font-weight: bold;" stylesheets="@../style/material-ui.css" text="ĐĂNG NHẬP">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="30.0" />
          </VBox.margin></Label>
       <JFXTextField fx:id="txtEmail" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Email" stylesheets="@../style/material-ui.css">
          <VBox.margin>
-            <Insets />
+            <Insets bottom="30.0" />
          </VBox.margin>
       </JFXTextField>
       <JFXPasswordField fx:id="txtPassword" labelFloat="true" maxWidth="-Infinity" onAction="#login" prefWidth="200.0" promptText="Mật khẩu" stylesheets="@../style/material-ui.css">
          <VBox.margin>
-            <Insets />
+            <Insets bottom="30.0" />
          </VBox.margin>
       </JFXPasswordField>
       <JFXButton fx:id="btnLogin" alignment="CENTER" onAction="#login" prefHeight="28.0" prefWidth="94.0" stylesheets="@../style/material-ui.css" text="Đăng nhập" textAlignment="CENTER" textFill="WHITE">
          <VBox.margin>
-            <Insets bottom="10.0" />
+            <Insets bottom="15.0" />
          </VBox.margin>
          <font>
             <Font size="13.0" />
          </font></JFXButton>
-      <JFXButton fx:id="btnForgotPassword" onAction="#goToForgotPassword" style="-fx-background-color: none; -fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff" />
-      <JFXButton fx:id="btnSignUp" onAction="#goToSignUp" style="-fx-background-color: none; -fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff" />
+      <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;">
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </Label>
+      <JFXButton fx:id="btnForgotPassword" onAction="#goToForgotPassword" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff">
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="btnSignUp" onAction="#goToSignUp" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff" />
    </children>
 </VBox>
