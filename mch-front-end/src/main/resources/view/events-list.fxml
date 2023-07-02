@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+
+<TabPane prefHeight="800.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab text="Danh sách sự kiện">
+         <content>
+            <ScrollPane maxHeight="-Infinity" prefHeight="739.0" prefWidth="1030.0">
+               <content>
+                  <FlowPane fx:id="currentEventsList" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1020.0" vgap="20.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+      <Tab text="Sự kiện đã đăng ký">
+         <content>
+            <ScrollPane maxHeight="-Infinity" prefHeight="739.0" prefWidth="1030.0">
+               <content>
+                  <FlowPane fx:id="myEventsList" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1020.0" vgap="20.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

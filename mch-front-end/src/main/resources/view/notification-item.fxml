@@ -26,7 +26,7 @@
             </Label>
          </children>
          <padding>
-            <Insets left="10.0" right="10.0" />
+            <Insets left="20.0" right="20.0" />
          </padding>
       </VBox>
    </children>

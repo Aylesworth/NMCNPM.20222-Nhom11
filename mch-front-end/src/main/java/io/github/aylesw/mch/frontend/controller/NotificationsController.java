@@ -3,6 +3,7 @@ package io.github.aylesw.mch.frontend.controller;
 import io.github.aylesw.mch.frontend.App;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.AppConstants;
+import io.github.aylesw.mch.frontend.common.UserIdentity;
 import io.github.aylesw.mch.frontend.common.Utils;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -18,6 +19,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class NotificationsController implements Initializable {
+
+    private long userId;
+
+    public NotificationsController(long userId) {
+        this.userId = userId;
+    }
 
     @FXML
     private VBox notificationList;
@@ -37,7 +44,7 @@ public class NotificationsController implements Initializable {
                     protected List<Parent> call() throws Exception {
                         try {
                             var result = new ApiRequest.Builder<List<Map<String, Object>>>()
-                                    .url(AppConstants.BASE_URL + "/users/" + App.getUserId() + "/notifications")
+                                    .url(AppConstants.BASE_URL + "/users/" + userId + "/notifications")
                                     .token(Utils.getToken())
                                     .method("GET")
                                     .build().request();

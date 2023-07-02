@@ -23,12 +23,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepository.findByEmail(username).get();
-            }
-        };
+        return username -> userRepository.findByEmail(username).get();
     }
 
     @Bean

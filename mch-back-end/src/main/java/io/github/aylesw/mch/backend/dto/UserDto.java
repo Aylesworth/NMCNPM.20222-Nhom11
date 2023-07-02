@@ -27,6 +27,8 @@ public class UserDto {
     @NotNull
     private Date dob;
 
+    private Long age;
+
     @NotEmpty
     private String sex;
 

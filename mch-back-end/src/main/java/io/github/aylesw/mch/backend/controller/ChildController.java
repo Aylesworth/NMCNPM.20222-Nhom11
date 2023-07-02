@@ -18,7 +18,7 @@ public class ChildController {
     private final ChildService childService;
 
     @GetMapping("/find-by-parent")
-    public ResponseEntity<List<ChildDto>> getByParentId(@RequestParam("parent-id") Long parentId) {
+    public ResponseEntity<List<ChildDto>> getByParentId(@RequestParam(value = "id", required = true) Long parentId) {
         return ResponseEntity.ok(childService.getByParentId(parentId));
     }
 

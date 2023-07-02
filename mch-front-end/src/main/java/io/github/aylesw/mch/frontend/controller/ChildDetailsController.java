@@ -10,7 +10,6 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -37,46 +36,19 @@ public class ChildDetailsController implements Initializable {
     }
 
     @FXML
+    private VBox root;
+
+    @FXML
     private Label lblName;
 
     @FXML
-    private JFXButton btnUpdate;
+    private JFXButton btnEditProfile;
 
     @FXML
-    private JFXButton btnCancel;
-
-    @FXML
-    private JFXButton btnParentRef;
-
-    @FXML
-    private ProgressIndicator spinner1;
-
-    @FXML
-    private FlowPane metricsContainer;
-
-    @FXML
-    private JFXButton btnAddMetrics;
-
-    @FXML
-    private JFXButton btnRequestUpdate;
-
-    @FXML
-    private VBox injectionsContainer;
-
-    @FXML
-    private JFXButton addInjection;
-
-    @FXML
-    private VBox examinationsContainer;
-
-    @FXML
-    private JFXButton btnAddExamination;
+    private JFXButton btnDeleteProfile;
 
     @FXML
     private JFXTextField txtFullName;
-
-    @FXML
-    private JFXTextField txtSex;
 
     @FXML
     private JFXTextField txtDob;
@@ -94,12 +66,53 @@ public class ChildDetailsController implements Initializable {
     private JFXComboBox<String> cbxSex;
 
     @FXML
-    private VBox root;
+    private JFXTextField txtSex;
+
+    @FXML
+    private JFXButton btnUpdate;
+
+    @FXML
+    private JFXButton btnCancel;
+
+    @FXML
+    private JFXButton btnParentRef;
+
+    @FXML
+    private ProgressIndicator spinner1;
+
+    @FXML
+    private JFXButton btnAddMetrics;
+
+    @FXML
+    private JFXButton btnRequestUpdate;
+
+    @FXML
+    private FlowPane metricsContainer;
+
+    @FXML
+    private JFXButton btnAddInjection;
+
+    @FXML
+    private VBox injectionsContainer;
+
+    @FXML
+    private JFXButton btnAddExamination;
+
+    @FXML
+    private VBox examinationsContainer;
 
     private long parentId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!UserIdentity.getRoles().contains("ADMIN")) {
+            btnDeleteProfile.setManaged(false);
+            btnEditProfile.setText("Cập nhật hồ sơ");
+            btnRequestUpdate.setManaged(false);
+            btnAddMetrics.setText("Cập nhật");
+            btnAddInjection.setText("Đăng ký tiêm");
+            btnAddExamination.setManaged(false);
+        }
         cbxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
         loadData();
         loadBodyMetrics();
@@ -172,7 +185,7 @@ public class ChildDetailsController implements Initializable {
                 txtEthnicity.setText(Optional.ofNullable(map.get("ethnicity")).orElse("").toString());
                 txtBirthplace.setText(Optional.ofNullable(map.get("birthplace")).orElse("").toString());
                 txtInsuranceId.setText(Optional.ofNullable(map.get("insuranceId")).orElse("").toString());
-                lblName.setText("Bé " + txtFullName.getText());
+                lblName.setText("Bé " + txtFullName.getText().toUpperCase());
                 parentId = ((Double) map.get("parentId")).longValue();
                 btnParentRef.setText(map.get("parentName").toString());
 
@@ -303,14 +316,23 @@ public class ChildDetailsController implements Initializable {
                 .toJson();
 
         try {
-            new ApiRequest.Builder<String>()
-                    .url(AppConstants.BASE_URL + "/children/" + id)
-                    .token(Utils.getToken())
-                    .method("PUT")
-                    .requestBody(requestBody)
-                    .build().request();
+            if (UserIdentity.isAdmin()) {
+                new ApiRequest.Builder<String>()
+                        .url(AppConstants.BASE_URL + "/children/" + id)
+                        .method("PUT")
+                        .requestBody(requestBody)
+                        .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật hồ sơ trẻ thành công!");
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật hồ sơ trẻ thành công!");
+            } else {
+                new ApiRequest.Builder<String>()
+                        .url(AppConstants.BASE_URL + "/children/" + id + "/request-change")
+                        .method("POST")
+                        .requestBody(requestBody)
+                        .build().request();
+
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Yêu cầu thay đổi đang chờ được phê duyệt.");
+            }
             loadData();
             lockFields();
         } catch (Exception e) {
@@ -335,6 +357,9 @@ public class ChildDetailsController implements Initializable {
             }
             case ManageInjectionsController manageInjectionsController -> {
                 manageInjectionsController.loadScheduleData();
+            }
+            case ChildrenListController childrenListController -> {
+                childrenListController.loadChildren();
             }
             default -> throw new IllegalStateException("Unexpected value: " + previousController);
         }

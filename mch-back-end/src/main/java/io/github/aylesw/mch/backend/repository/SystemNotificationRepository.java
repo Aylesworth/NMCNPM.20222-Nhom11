@@ -20,10 +20,10 @@ public interface SystemNotificationRepository extends JpaRepository<SystemNotifi
     @Modifying
     @Transactional
     @Query("UPDATE SystemNotification n SET n.seen = true WHERE n.user.id = ?1 AND n.time <= ?2")
-    int updateSeenByUserIdBeforeTime(Long userId, Timestamp time);
+    void updateSeenByUserIdBeforeTime(Long userId, Timestamp time);
 
     @Modifying
     @Transactional
     @Query("DELETE FROM SystemNotification n WHERE n.title LIKE %?1% AND n.message LIKE %?2%")
-    int deleteByTitleAndMessage(String title, String message);
+    void deleteByTitleAndMessage(String title, String message);
 }

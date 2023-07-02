@@ -20,4 +20,6 @@ public interface NotificationService {
     void deleteNotificationsAboutInjection(Injection injection);
 
     void updateNotificationsAboutInjection(Injection injection);
+
+    Long countNewNotificationsOfUser(Long userId);
 }

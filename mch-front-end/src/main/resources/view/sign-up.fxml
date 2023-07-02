@@ -42,6 +42,9 @@
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
       </VBox>
    </left>
    <right>
@@ -57,6 +60,9 @@
             <JFXTextField fx:id="txtCitizenId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Mã CCCD" />
             <JFXTextField fx:id="txtInsuranceId" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số BHYT" />
          </children>
+         <padding>
+            <Insets right="50.0" />
+         </padding>
       </VBox>
    </right>
    <bottom>

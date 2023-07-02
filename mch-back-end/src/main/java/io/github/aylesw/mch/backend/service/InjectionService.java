@@ -25,4 +25,8 @@ public interface InjectionService {
     void approveRegistration(Long injectionId);
 
     void rejectRegistration(Long injectionId, String reason);
+
+    void addReaction(Long childId, Long injectionId, String reaction);
+
+    void removeReaction(Long childId, Long injectionId, String reaction);
 }

@@ -7,12 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 
+import javax.swing.text.html.ImageView;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -46,21 +45,49 @@ public class InjectionItemController implements Initializable {
     private JFXButton btnHandleReaction;
 
     @FXML
+    private Button btnAddReaction;
+
+    @FXML
+    private Button btnRemoveReaction;
+
+    @FXML
+    private JFXButton btnDelete;
+
+    @FXML
+    private JFXButton btnEdit;
+
+    @FXML
     private JFXListView<String> listReactions;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (UserIdentity.isAdmin() ||
+                LocalDate.parse(properties.get("date").toString()).isAfter(LocalDate.now())) {
+            btnAddReaction.setVisible(false);
+            btnAddReaction.setManaged(false);
+            btnRemoveReaction.setVisible(false);
+            btnRemoveReaction.setManaged(false);
+        }
+        if (!UserIdentity.isAdmin()) {
+            btnEdit.setManaged(false);
+            btnDelete.setManaged(false);
+            btnHandleReaction.setManaged(false);
+        }
         btnHandleReaction.setVisible(false);
+        btnRemoveReaction.setVisible(false);
         lblDate.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(properties.get("date").toString()));
         lblVaccineName.setText(properties.get("vaccineName").toString());
         lblDoseNo.setText(((Double) properties.get("vaccineDoseNo")).longValue() + "");
         lblNote.setText(Optional.ofNullable(properties.get("note")).orElse("").toString());
-        lblStatus.setText(properties.get("status").toString());
+        lblStatus.setText(Optional.ofNullable(properties.get("status")).orElse("").toString());
         var reactions = (List<String>) properties.get("reactions");
         listReactions.setItems(FXCollections.observableArrayList(reactions));
         listReactions.getSelectionModel().selectedItemProperty().addListener((observale, oldValue, newValue) -> {
             if (newValue != null) {
-                btnHandleReaction.setVisible(true);
+                if (btnHandleReaction.isManaged())
+                    btnHandleReaction.setVisible(true);
+                if (btnRemoveReaction.isManaged())
+                    btnRemoveReaction.setVisible(true);
             }
         });
     }
@@ -119,6 +146,48 @@ public class InjectionItemController implements Initializable {
                     .build().request();
 
             Utils.showAlert(Alert.AlertType.INFORMATION, "Gửi hướng dẫn xử lý triệu chứng thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void addReaction(ActionEvent event) {
+        try {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Thêm triệu chứng");
+            dialog.setHeaderText("Nhập triệu chứng mới:");
+            dialog.setContentText(null);
+            var input = dialog.showAndWait();
+
+            if (input.isEmpty()) return;
+
+            long childId = ((Double) properties.get("childId")).longValue();
+            long id = ((Double) properties.get("id")).longValue();
+            new ApiRequest.Builder<String>()
+                    .url(AppConstants.BASE_URL + "/children/" + childId + "/injections/" + id + "/add-reaction?details=" + input.get())
+                    .method("POST")
+                    .build().request();
+
+            listReactions.getItems().add(input.get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void removeReaction(ActionEvent event) {
+        try {
+            String reaction = listReactions.getSelectionModel().getSelectedItem();
+
+            long childId = ((Double) properties.get("childId")).longValue();
+            long id = ((Double) properties.get("id")).longValue();
+            new ApiRequest.Builder<String>()
+                    .url(AppConstants.BASE_URL + "/children/" + childId + "/injections/" + id + "/remove-reaction?details=" + reaction)
+                    .method("DELETE")
+                    .build().request();
+
+            listReactions.getItems().remove(reaction);
         } catch (Exception e) {
             e.printStackTrace();
         }

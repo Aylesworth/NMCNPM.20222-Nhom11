@@ -1,9 +1,7 @@
 package io.github.aylesw.mch.frontend.controller;
 
-import io.github.aylesw.mch.frontend.common.ApiRequest;
-import io.github.aylesw.mch.frontend.common.AppConstants;
-import io.github.aylesw.mch.frontend.common.Beans;
-import io.github.aylesw.mch.frontend.common.Utils;
+import com.jfoenix.controls.JFXButton;
+import io.github.aylesw.mch.frontend.common.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,8 +44,14 @@ public class BodyMetricsItemController implements Initializable {
     @FXML
     private Label lblEvaluation;
 
+    @FXML
+    private JFXButton btnDelete;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!UserIdentity.isAdmin()) {
+            btnDelete.setManaged(false);
+        }
         double height = (Double) properties.get("height");
         double weight = (Double) properties.get("weight");
         lblHeight.setText("%.0f cm".formatted(height));

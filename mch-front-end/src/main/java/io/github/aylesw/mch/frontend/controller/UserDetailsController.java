@@ -40,6 +40,9 @@ public class UserDetailsController implements Initializable {
     }
 
     @FXML
+    private VBox vBox;
+
+    @FXML
     private Label lblName;
 
     @FXML
@@ -82,6 +85,18 @@ public class UserDetailsController implements Initializable {
     private VBox eventsPane;
 
     @FXML
+    private JFXButton btnBack;
+
+    @FXML
+    private JFXButton btnEdit;
+
+    @FXML
+    private JFXButton btnDelete;
+
+    @FXML
+    private JFXButton btnAddChild;
+
+    @FXML
     private ProgressIndicator spinner1;
 
     @FXML
@@ -89,6 +104,14 @@ public class UserDetailsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (previous==null) {
+            btnBack.setManaged(false);
+        }
+        if (!UserIdentity.getRoles().contains("ADMIN")) {
+            btnDelete.setManaged(false);
+            btnAddChild.setManaged(false);
+            btnEdit.setText("Cập nhật hồ sơ");
+        }
         loadData();
         loadChildrenList();
         loadEventsList();
@@ -161,7 +184,7 @@ public class UserDetailsController implements Initializable {
             txtAddress.setText(map.get("address").toString());
             txtCitizenId.setText(Optional.ofNullable(map.get("citizenId")).orElse("").toString());
             txtInsuranceId.setText(Optional.ofNullable(map.get("insuranceId")).orElse("").toString());
-            lblName.setText(txtFullName.getText());
+            lblName.setText(txtFullName.getText().toUpperCase());
 
             cbxSex.getSelectionModel().selectFirst();
             while (!cbxSex.getSelectionModel().getSelectedItem().equals(map.get("sex").toString()))
@@ -283,9 +306,6 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     void saveProfile(ActionEvent event) {
-        String url = AppConstants.BASE_URL + "/users/" + id;
-        String token = Utils.getToken();
-        String method = "PUT";
         String requestBody = new RequestBodyMap()
                 .put("email", txtEmail.getText())
                 .put("fullName", txtFullName.getText())
@@ -296,10 +316,15 @@ public class UserDetailsController implements Initializable {
                 .put("citizenId", txtCitizenId.getText())
                 .put("insuranceId", txtInsuranceId.getText())
                 .toJson();
-        System.out.println(requestBody);
+
         try {
-            new ApiRequest.Builder<String>().url(url).token(token).method(method).requestBody(requestBody).build().request();
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Cập nhật hồ sơ người dùng thành công!");
+            if (UserIdentity.getRoles().contains("ADMIN")) {
+                new ApiRequest.Builder<String>().url(AppConstants.BASE_URL + "/users/" + id).method("PUT").requestBody(requestBody).build().request();
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật hồ sơ người dùng thành công!");
+            } else {
+                new ApiRequest.Builder<String>().url(AppConstants.BASE_URL + "/users/" + id + "/request-change").method("POST").requestBody(requestBody).build().request();
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Vui lòng chờ quản trị viên phê duyệt thay đổi.");
+            }
 
             loadData();
         } catch (Exception e) {

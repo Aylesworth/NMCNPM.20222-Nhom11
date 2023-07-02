@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,5 +22,12 @@ public class NotificationController {
     @GetMapping("/users/{id}/notifications")
     public ResponseEntity<List<SystemNotification>> getSystemNotifications(@PathVariable("id") Long userId) {
         return ResponseEntity.ok(notificationService.getSystemNotifications(userId));
+    }
+
+    @GetMapping("/users/{id}/notifications/count-new")
+    public ResponseEntity<Map<String, Object>> countNewNotificationsOfUser(@PathVariable("id") Long userId) {
+        var response = new HashMap<String, Object>();
+        response.put("count", notificationService.countNewNotificationsOfUser(userId));
+        return ResponseEntity.ok(response);
     }
 }

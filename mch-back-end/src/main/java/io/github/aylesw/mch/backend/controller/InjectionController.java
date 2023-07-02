@@ -82,4 +82,24 @@ public class InjectionController {
         injectionService.rejectRegistration(injectionId, reason);
         return ResponseEntity.ok("Injection registration rejected successfully");
     }
+
+    @PostMapping("/children/{child-id}/injections/{id}/add-reaction")
+    public ResponseEntity<String> addReaction(
+            @PathVariable("child-id") Long childId,
+            @PathVariable("id") Long injectionId,
+            @RequestParam(value = "details", required = true) String reaction) {
+
+        injectionService.addReaction(childId, injectionId, reaction);
+        return ResponseEntity.ok("Reaction added successfully");
+    }
+
+    @DeleteMapping("/children/{child-id}/injections/{id}/remove-reaction")
+    public ResponseEntity<String> removeReaction(
+            @PathVariable("child-id") Long childId,
+            @PathVariable("id") Long injectionId,
+            @RequestParam(value = "details", required = true) String reaction) {
+
+        injectionService.removeReaction(childId, injectionId, reaction);
+        return ResponseEntity.ok("Reaction removed successfully");
+    }
 }

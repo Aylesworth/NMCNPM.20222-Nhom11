@@ -12,7 +12,7 @@
             <Font name="Segoe UI" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="RIGHT" onAction="#notifications" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Thông báo ">
+      <JFXButton contentDisplay="RIGHT" onAction="#notifications" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Thông báo">
          <font>
             <Font size="18.0" />
          </font>
@@ -24,17 +24,12 @@
             </Label>
          </graphic>
       </JFXButton>
-      <JFXButton onAction="#users" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Người dùng">
+      <JFXButton onAction="#myProfile" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ của tôi">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton onAction="#children" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Trẻ em">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
-      <JFXButton onAction="#injections" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Tiêm chủng">
+      <JFXButton onAction="#children" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ trẻ em">
          <font>
             <Font size="18.0" />
          </font>

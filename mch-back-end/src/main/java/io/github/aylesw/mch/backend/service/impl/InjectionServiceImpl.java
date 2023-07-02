@@ -9,10 +9,7 @@ import io.github.aylesw.mch.backend.model.Child;
 import io.github.aylesw.mch.backend.model.Injection;
 import io.github.aylesw.mch.backend.model.Reaction;
 import io.github.aylesw.mch.backend.model.Vaccine;
-import io.github.aylesw.mch.backend.repository.ChildRepository;
-import io.github.aylesw.mch.backend.repository.InjectionRepository;
-import io.github.aylesw.mch.backend.repository.ReactionRepository;
-import io.github.aylesw.mch.backend.repository.VaccineRepository;
+import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.GoogleCalendarService;
 import io.github.aylesw.mch.backend.service.InjectionService;
 import io.github.aylesw.mch.backend.service.NotificationService;
@@ -32,6 +29,7 @@ public class InjectionServiceImpl implements InjectionService {
     private final GoogleCalendarService googleCalendarService;
     private final InjectionRepository injectionRepository;
     private final ChildRepository childRepository;
+    private final UserRepository userRepository;
     private final VaccineRepository vaccineRepository;
     private final ReactionRepository reactionRepository;
 
@@ -236,5 +234,52 @@ public class InjectionServiceImpl implements InjectionService {
             );
 
         return injection;
+    }
+
+    @Override
+    public void addReaction(Long childId, Long injectionId, String reaction) {
+        Child child = childRepository.findById(childId)
+                .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
+
+        Injection injection = injectionRepository.findById(injectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Injection", "id", injectionId));
+
+        if (!injection.getChild().getId().equals(childId))
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Injection does not belong to child");
+
+        Reaction reactionEntity = Reaction.builder().details(reaction).injection(injection).build();
+        reactionRepository.save(reactionEntity);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .time(Utils.currentTimestamp())
+                .title("Triệu chứng sau tiêm mới")
+                .message("Triệu chứng mới sau mũi tiêm %s mũi số %d của bé %s: %s"
+                        .formatted(injection.getVaccine().getName(),
+                                injection.getVaccine().getDoseNo(),
+                                injection.getChild().getFullName(),
+                                reaction))
+                .build();
+
+        userRepository.findAll().stream()
+                .filter(user -> user.getRoles().stream()
+                        .map(role -> role.getName()).toList().contains("ADMIN"))
+                .forEach(user -> {
+                    notificationDetails.setUser(user);
+                    notificationService.createSystemNotification(notificationDetails);
+                });
+    }
+
+    @Override
+    public void removeReaction(Long childId, Long injectionId, String reaction) {
+        Child child = childRepository.findById(childId)
+                .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
+
+        Injection injection = injectionRepository.findById(injectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Injection", "id", injectionId));
+
+        if (!injection.getChild().getId().equals(childId))
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Injection does not belong to child");
+
+        reactionRepository.deleteByInjectionIdAndDetails(injectionId, reaction);
     }
 }

@@ -16,11 +16,11 @@
 
 <ScrollPane prefHeight="800.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="892.0" prefWidth="1014.0" spacing="30.0" stylesheets="@../style/material-ui.css">
+      <VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="892.0" prefWidth="1014.0" spacing="30.0" stylesheets="@../style/material-ui.css">
          <children>
             <FlowPane prefHeight="49.0" prefWidth="1030.0">
                <children>
-                  <JFXButton onAction="#back" text="Quay lại" />
+                  <JFXButton fx:id="btnBack" onAction="#back" text="Quay lại" />
                </children>
             </FlowPane>
             <Label fx:id="lblName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
@@ -30,8 +30,8 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="1030.0" spacing="20.0">
                <children>
-                  <JFXButton onAction="#editProfile" text="Sửa hồ sơ" />
-                  <JFXButton onAction="#deleteProfile" text="Xóa hồ sơ" />
+                  <JFXButton fx:id="btnEdit" onAction="#editProfile" text="Sửa hồ sơ" />
+                  <JFXButton fx:id="btnDelete" onAction="#deleteProfile" text="Xóa hồ sơ" />
                </children>
             </HBox>
             <TitledPane animated="false" text="Thông tin cá nhân">
@@ -65,7 +65,7 @@
                         <FlowPane fx:id="childrenPane" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" prefHeight="22.0" prefWidth="1028.0">
                            <children>
                               <JFXButton style="-fx-background-color: AQUA; -fx-text-fill: #212121;" />
-                              <JFXButton onAction="#addChild" text="Thêm" />
+                              <JFXButton fx:id="btnAddChild" onAction="#addChild" text="Thêm" />
                            </children>
                         </FlowPane>
                         <ProgressIndicator fx:id="spinner2" />

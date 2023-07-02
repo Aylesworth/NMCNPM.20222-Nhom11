@@ -56,6 +56,11 @@ public class AddInjectionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!UserIdentity.isAdmin()) {
+            cbxChild.setDisable(true);
+            txtStatus.setText("Chờ xác nhận");
+            txtStatus.setEditable(false);
+        }
         cbxDoseNo.setDisable(true);
 
         setUpVaccineComboBoxes();
@@ -152,12 +157,16 @@ public class AddInjectionController implements Initializable {
 
             new ApiRequest.Builder<String>()
                     .url(AppConstants.BASE_URL + "/children/" + childId + "/injections")
-                    .token(Utils.getToken())
                     .method("POST")
                     .requestBody(requestBody)
                     .build().request();
 
 //            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
+
+            if (!UserIdentity.isAdmin()) {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tiêm chủng sẽ được quản trị viên xem xét và phê duyệt");
+            }
+
             ((Stage) txtDate.getScene().getWindow()).close();
             switch (parentController) {
                 case ChildDetailsController childDetailsController -> {

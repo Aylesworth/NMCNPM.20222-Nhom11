@@ -47,7 +47,7 @@ public class AddBodyMetricsController {
                     .requestBody(requestBody)
                     .build().request();
 
-            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm chiều cao cân nặng thành công!");
+//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm chiều cao cân nặng thành công!");
             parentController.loadBodyMetrics();
             ((Stage) txtHeight.getScene().getWindow()).close();
         } catch (Exception e) {

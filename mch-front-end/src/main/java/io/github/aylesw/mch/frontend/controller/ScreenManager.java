@@ -1,5 +1,6 @@
 package io.github.aylesw.mch.frontend.controller;
 
+import io.github.aylesw.mch.frontend.common.UserIdentity;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,12 +27,8 @@ public class ScreenManager {
         mainWindowController.getBorderPane().setTop(getHeaderBar());
     }
 
-    public static void setNavBar(boolean adminView) {
-        if (adminView) {
-            mainWindowController.getBorderPane().setLeft(getAdminNavBar());
-        } else {
-
-        }
+    public static void setNavBar() {
+        mainWindowController.getBorderPane().setLeft(getNavBar());
     }
 
     public static void setMainPanel(Parent root) {
@@ -47,11 +44,13 @@ public class ScreenManager {
     }
 
     public static Parent getHeaderBar() {
-        return loadNode("header.fxml", null);
+        return loadNode("header.fxml", new HeaderController());
     }
 
-    public static Parent getAdminNavBar() {
-        return loadNode("nav-bar-admin.fxml", new AdminNavBarController());
+    public static Parent getNavBar() {
+        if (UserIdentity.getRoles().contains("ADMIN"))
+            return loadNode("nav-bar-admin.fxml", new AdminNavBarController(UserIdentity.getUserId()));
+        return loadNode("nav-bar.fxml", new NavBarController(UserIdentity.getUserId()));
     }
 
     public static Parent getManageUsersPanel() {
@@ -82,8 +81,8 @@ public class ScreenManager {
         return loadNode("notification-item.fxml", new NotificationItemController(properties));
     }
 
-    public static Parent getNotificationsPanel() {
-        return loadNode("notifications.fxml", new NotificationsController());
+    public static Parent getNotificationsPanel(long userId) {
+        return loadNode("notifications.fxml", new NotificationsController(userId));
     }
 
     public static Parent getManageChildrenPanel() {
@@ -144,6 +143,22 @@ public class ScreenManager {
 
     public static Stage getAddUserToEventStage(long eventId, ManageEventsController parentController) {
         return loadStage("Thêm người tham dự", "add-user-to-event.fxml", new AddUserToEventController(eventId, parentController));
+    }
+
+    public static Parent getChildCard(Map<String, Object> properties, Parent parent, ChildrenListController parentController) {
+        return loadNode("child-card.fxml", new ChildCardController(properties, parent, parentController));
+    }
+
+    public static Parent getChildrenListPanel(long userId) {
+        return loadNode("children-list.fxml", new ChildrenListController(userId));
+    }
+
+    public static Parent getEventCard(Map<String, Object> properties, int state, EventsListController parentController) {
+        return loadNode("event-card.fxml", new EventCardController(properties, state, parentController));
+    }
+
+    public static Parent getEventsListPanel(long userId) {
+        return loadNode("events-list.fxml", new EventsListController(userId));
     }
 
     public static Stage loadStage(String title, String resourceName, Object controller) {

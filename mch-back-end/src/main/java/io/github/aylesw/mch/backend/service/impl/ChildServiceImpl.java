@@ -51,6 +51,18 @@ public class ChildServiceImpl implements ChildService {
         childRegistration.setRequested(Utils.currentTimestamp());
 
         childRegistrationRepository.save(childRegistration);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .time(Utils.currentTimestamp())
+                .title("Đăng ký hồ sở trẻ em mới")
+                .message("Có một yêu cầu đăng ký hồ sơ cho bé %s từ người dùng %s"
+                        .formatted(childRegistration.getFullName(), parent.getFullName()))
+                .build();
+
+        userRepository.findAdmins().forEach(user -> {
+            notificationDetails.setUser(user);
+            notificationService.createSystemNotification(notificationDetails);
+        });
     }
 
     @Override
@@ -63,6 +75,18 @@ public class ChildServiceImpl implements ChildService {
         childChange.setChild(child);
         childChange.setRequested(Utils.currentTimestamp());
         childChangeRepository.save(childChange);
+
+        NotificationDetails notificationDetails = NotificationDetails.builder()
+                .time(Utils.currentTimestamp())
+                .title("Yêu cầu thay đổi mới")
+                .message("Có một yêu cầu thay đổi hồ sơ thông tin của bé %s từ người dùng %s"
+                        .formatted(child.getFullName(), child.getParent().getFullName()))
+                .build();
+
+        userRepository.findAdmins().forEach(user -> {
+            notificationDetails.setUser(user);
+            notificationService.createSystemNotification(notificationDetails);
+        });
     }
 
     @Override

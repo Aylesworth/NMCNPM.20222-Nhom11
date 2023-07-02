@@ -6,8 +6,10 @@ import com.jfoenix.controls.JFXTextField;
 import io.github.aylesw.mch.frontend.App;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.RequestBodyMap;
+import io.github.aylesw.mch.frontend.common.UserIdentity;
 import io.github.aylesw.mch.frontend.common.Utils;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 import java.util.Map;
 
@@ -51,7 +53,14 @@ public class LoginController {
 
             String token = response.get("token").toString();
             Utils.saveToken(token);
-            App.updateUserIdentity();
+            UserIdentity.updateUserIdentity();
+
+            ((Stage) txtEmail.getScene().getWindow()).close();
+
+            ScreenManager.getMainStage().show();
+            ScreenManager.setMainPanel(null);
+            ScreenManager.setNavBar();
+            ScreenManager.setHeaderBar();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -68,10 +68,6 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public List<SystemNotification> getSystemNotifications(Long userId) {
         var notifications = systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp());
-//        notifications.forEach(notification -> {
-//            notification.setSeen(true);
-//            systemNotificationRepository.save(notification);
-//        });
         systemNotificationRepository.updateSeenByUserIdBeforeTime(userId, Utils.currentTimestamp());
         return notifications;
     }
@@ -213,5 +209,12 @@ public class NotificationServiceImpl implements NotificationService {
         notificationDetails.setTime(Timestamp.valueOf(eventDateTime.minusHours(1)));
         createSystemNotification(notificationDetails);
         createEmailNotification(notificationDetails);
+    }
+
+    @Override
+    public Long countNewNotificationsOfUser(Long userId) {
+        return systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp())
+                .stream().filter(n -> n.getSeen().equals(false))
+                .count();
     }
 }

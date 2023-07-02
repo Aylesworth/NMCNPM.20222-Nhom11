@@ -7,54 +7,54 @@
 
 <AnchorPane maxWidth="-Infinity" prefHeight="139.0" prefWidth="950.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="168.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày đo:">
+      <Label layoutX="217.0" layoutY="62.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày đo:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="168.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:">
+      <Label layoutX="217.0" layoutY="98.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="168.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Chiều cao:">
+      <Label layoutX="217.0" layoutY="25.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Chiều cao:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="426.0" layoutY="24.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Cân nặng:">
+      <Label layoutX="501.0" layoutY="23.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Cân nặng:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="426.0" layoutY="61.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="BMI:">
+      <Label layoutX="501.0" layoutY="60.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="BMI:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="426.0" layoutY="97.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Đánh giá:">
+      <Label layoutX="501.0" layoutY="96.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Đánh giá:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblHeight" layoutX="257.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="10 cm">
+      <Label fx:id="lblHeight" layoutX="306.0" layoutY="25.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: brown;" text="10 cm">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblDate" layoutX="257.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023">
+      <Label fx:id="lblDate" layoutX="306.0" layoutY="62.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblNote" layoutX="257.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="1 kg">
+      <Label fx:id="lblNote" layoutX="306.0" layoutY="98.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="1 kg">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblWeight" layoutX="515.0" layoutY="24.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="1 kg">
+      <Label fx:id="lblWeight" layoutX="590.0" layoutY="23.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: brown;" text="1 kg">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblBmi" layoutX="515.0" layoutY="61.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="6.9">
+      <Label fx:id="lblBmi" layoutX="590.0" layoutY="60.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="6.9">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="lblEvaluation" layoutX="515.0" layoutY="97.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Suy dinh dưỡng">
+      <Label fx:id="lblEvaluation" layoutX="590.0" layoutY="96.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Suy dinh dưỡng">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <JFXButton layoutX="788.0" layoutY="55.0" onAction="#delete" prefHeight="25.0" prefWidth="85.0" text="Xóa" />
+      <JFXButton fx:id="btnDelete" layoutX="788.0" layoutY="55.0" onAction="#delete" prefHeight="25.0" prefWidth="85.0" text="Xóa" />
    </children>
 </AnchorPane>

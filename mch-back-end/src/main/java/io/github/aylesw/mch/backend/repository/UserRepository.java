@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	public boolean existsByEmail(String email);
 
+	@Query("SELECT u FROM User u JOIN FETCH u.roles r WHERE r.name LIKE 'ADMIN'")
+	public List<User> findAdmins();
+
 }

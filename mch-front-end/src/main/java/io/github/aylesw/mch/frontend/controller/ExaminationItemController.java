@@ -1,10 +1,8 @@
 package io.github.aylesw.mch.frontend.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import io.github.aylesw.mch.frontend.common.ApiRequest;
-import io.github.aylesw.mch.frontend.common.AppConstants;
-import io.github.aylesw.mch.frontend.common.Beans;
-import io.github.aylesw.mch.frontend.common.Utils;
+import io.github.aylesw.mch.frontend.common.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,10 +44,20 @@ public class ExaminationItemController implements Initializable {
     private Label lblResult;
 
     @FXML
+    private JFXButton btnDelete;
+
+    @FXML
+    private JFXButton btnEdit;
+
+    @FXML
     private JFXListView<String> listMedicines;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!UserIdentity.isAdmin()) {
+            btnEdit.setManaged(false);
+            btnDelete.setManaged(false);
+        }
         lblDate.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(properties.get("date").toString()));
         lblFacility.setText(properties.get("facility").toString());
         lblReason.setText(properties.get("reason").toString());

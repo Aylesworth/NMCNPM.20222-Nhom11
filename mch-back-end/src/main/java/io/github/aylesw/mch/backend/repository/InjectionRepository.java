@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface InjectionRepository extends JpaRepository<Injection, Long> {
-    @Query("SELECT i FROM Injection i JOIN FETCH i.child c WHERE c.id = ?1")
+    @Query("SELECT i FROM Injection i JOIN FETCH i.child c WHERE c.id = ?1 ORDER BY i.date")
     List<Injection> findByChildId(Long childId);
 
     @Query("SELECT i FROM Injection i WHERE i.date >= ?1 AND i.status NOT LIKE ?2 ORDER BY i.date")

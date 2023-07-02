@@ -33,8 +33,8 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="49.0" prefWidth="1030.0" spacing="20.0">
                            <children>
-                              <JFXButton onAction="#editProfile" text="Sửa hồ sơ" />
-                              <JFXButton onAction="#deleteProfile" text="Xóa hồ sơ" />
+                              <JFXButton fx:id="btnEditProfile" onAction="#editProfile" text="Sửa hồ sơ" />
+                              <JFXButton fx:id="btnDeleteProfile" onAction="#deleteProfile" text="Xóa hồ sơ" />
                            </children>
                         </HBox>
                         <AnchorPane prefHeight="337.0" prefWidth="1030.0">
@@ -217,7 +217,7 @@
                <content>
                   <VBox alignment="TOP_CENTER">
                      <children>
-                        <JFXButton fx:id="addInjection" onAction="#addInjection" prefHeight="30.0" prefWidth="139.0" text="Thêm mũi tiêm" />
+                        <JFXButton fx:id="btnAddInjection" onAction="#addInjection" prefHeight="30.0" prefWidth="139.0" text="Thêm mũi tiêm" />
                         <ScrollPane prefHeight="685.0" prefWidth="1030.0">
                            <content>
                               <VBox fx:id="injectionsContainer" alignment="TOP_CENTER" prefHeight="770.0" prefWidth="1008.0" spacing="20.0" style="-fx-background-color: white;">
