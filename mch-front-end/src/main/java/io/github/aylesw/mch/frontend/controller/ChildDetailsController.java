@@ -11,14 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class ChildDetailsController implements Initializable {
@@ -101,6 +99,12 @@ public class ChildDetailsController implements Initializable {
     @FXML
     private VBox examinationsContainer;
 
+    @FXML
+    private Label lblError;
+
+    @FXML
+    private DatePicker dpDob;
+
     private long parentId;
 
     @Override
@@ -114,6 +118,7 @@ public class ChildDetailsController implements Initializable {
             btnAddExamination.setManaged(false);
         }
         cbxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
         loadData();
         loadBodyMetrics();
         loadInjections();
@@ -125,6 +130,8 @@ public class ChildDetailsController implements Initializable {
         cbxSex.setVisible(false);
         txtSex.setVisible(true);
         txtSex.setEditable(false);
+        dpDob.setVisible(false);
+        txtDob.setVisible(true);
         txtDob.setEditable(false);
         txtEthnicity.setEditable(false);
         txtBirthplace.setEditable(false);
@@ -138,7 +145,8 @@ public class ChildDetailsController implements Initializable {
         txtFullName.setEditable(true);
         txtSex.setVisible(false);
         cbxSex.setVisible(true);
-        txtDob.setEditable(true);
+        txtDob.setVisible(false);
+        dpDob.setVisible(true);
         txtEthnicity.setEditable(true);
         txtBirthplace.setEditable(true);
         txtInsuranceId.setEditable(true);
@@ -177,10 +185,6 @@ public class ChildDetailsController implements Initializable {
             if (map != null) {
                 txtFullName.setText(map.get("fullName").toString());
                 txtSex.setText(map.get("sex").toString());
-                cbxSex.getSelectionModel().selectFirst();
-                while (!cbxSex.getSelectionModel().getSelectedItem().equals(map.get("sex").toString())) {
-                    cbxSex.getSelectionModel().selectNext();
-                }
                 txtDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(map.get("dob").toString()));
                 txtEthnicity.setText(Optional.ofNullable(map.get("ethnicity")).orElse("").toString());
                 txtBirthplace.setText(Optional.ofNullable(map.get("birthplace")).orElse("").toString());
@@ -285,6 +289,11 @@ public class ChildDetailsController implements Initializable {
 
     @FXML
     void editProfile(ActionEvent event) {
+        cbxSex.getSelectionModel().selectFirst();
+        while (!cbxSex.getSelectionModel().getSelectedItem().equals(txtSex.getText())) {
+            cbxSex.getSelectionModel().selectNext();
+        }
+        dpDob.setValue(LocalDate.parse(txtDob.getText(), Beans.DATE_FORMATTER));
         unlockFields();
     }
 
@@ -306,6 +315,13 @@ public class ChildDetailsController implements Initializable {
 
     @FXML
     void updateProfile(ActionEvent event) {
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         String requestBody = new RequestBodyMap()
                 .put("fullName", txtFullName.getText())
                 .put("sex", cbxSex.getSelectionModel().getSelectedItem())
@@ -337,6 +353,35 @@ public class ChildDetailsController implements Initializable {
             lockFields();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        txtFullName.setStyle("");
+        cbxSex.setStyle("");
+        dpDob.setStyle("");
+        txtEthnicity.setStyle("");
+        txtBirthplace.setStyle("");
+        txtInsuranceId.setStyle("");
+
+        if (txtFullName.getText().isBlank()) {
+            txtFullName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền họ tên!");
+        }
+        if (cbxSex.getSelectionModel().getSelectedItem() == null) {
+            cbxSex.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn giới tính!");
+        }
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày sinh không hợp lệ!");
+        }
+        if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số BHYT khỗng hợp lệ!");
         }
     }
 

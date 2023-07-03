@@ -69,8 +69,8 @@
    <bottom>
       <VBox alignment="TOP_CENTER" prefHeight="145.0" prefWidth="900.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;" />
             <JFXButton onAction="#signUp" text="Đăng ký" textFill="WHITE" />
+            <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;" />
          </children>
       </VBox>
    </bottom>

@@ -76,6 +76,9 @@ public class ManageEventsController implements Initializable {
     @FXML
     private JFXButton btnSendNotification;
 
+    @FXML
+    private Label lblError;
+
     private ObservableList<Map<String, Object>> events;
     private ObservableList<Map<String, Object>> participants;
 
@@ -118,6 +121,7 @@ public class ManageEventsController implements Initializable {
         btnDelete.setVisible(false);
         btnAddUser.setVisible(false);
 
+        listEvents.getSelectionModel().clearSelection();
         listEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 long eventId = ((Double) newValue.get("id")).longValue();
@@ -154,6 +158,7 @@ public class ManageEventsController implements Initializable {
         txtMinAge.setText("");
         dpFromDate.setValue(null);
         dpToDate.setValue(null);
+        btnSendNotification.setVisible(false);
         btnUpdate.setVisible(false);
         btnDelete.setVisible(false);
     }
@@ -303,6 +308,13 @@ public class ManageEventsController implements Initializable {
 
     @FXML
     void updateEvent(ActionEvent event) {
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         long eventId = ((Double) listEvents.getSelectionModel().getSelectedItem().get("id")).longValue();
         String requestBody = new RequestBodyMap()
                 .put("name", txtName.getText())
@@ -324,6 +336,78 @@ public class ManageEventsController implements Initializable {
             setUpEventList();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        txtName.setStyle("");
+        txtDescription.setStyle("");
+        dpFromDate.setStyle("");
+        dpToDate.setStyle("");
+        txtMinAge.setStyle("");
+        txtMaxAge.setStyle("");
+
+        if (txtName.getText().isBlank()) {
+            txtName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền tên sự kiện!");
+        }
+        LocalDate fromDate, toDate;
+        try {
+            fromDate = LocalDate.parse(dpFromDate.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpFromDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày bắt đầu không hợp lệ!");
+        }
+        try {
+            toDate = LocalDate.parse(dpToDate.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpToDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày kết thúc không hợp lệ!");
+        }
+
+        if (fromDate.isAfter(toDate)) {
+            dpFromDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            dpToDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày kết thúc không được đứng trước ngày bắt đầu!");
+        }
+
+        if (txtMinAge.getText().isBlank()) {
+            txtMinAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập độ tuổi tối thiểu!");
+        }
+        double minAge;
+        try {
+            minAge = Double.parseDouble(txtMinAge.getText());
+        } catch (Exception e) {
+            txtMinAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Tuổi tối thiểu không hợp lệ!");
+        }
+        if (minAge <= 0 || minAge > 100) {
+            txtMinAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Tuổi tối thiểu không hợp lệ!");
+        }
+
+        if (txtMaxAge.getText().isBlank()) {
+            txtMaxAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập độ tuổi tối thiểu!");
+        }
+        double maxAge;
+        try {
+            maxAge = Double.parseDouble(txtMaxAge.getText());
+        } catch (Exception e) {
+            txtMaxAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Tuổi tối đa không hợp lệ!");
+        }
+        if (maxAge <= 0 || maxAge > 100) {
+            txtMaxAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Tuổi tối đa không hợp lệ!");
+        }
+
+        if (maxAge < minAge) {
+            txtMinAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            txtMaxAge.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Tuổi tối đa không được nhỏ hơn tuổi tối thiểu!");
         }
     }
 

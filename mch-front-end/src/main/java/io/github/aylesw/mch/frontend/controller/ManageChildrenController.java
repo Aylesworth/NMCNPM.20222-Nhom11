@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class ManageChildrenController implements Initializable {
     private JFXTextField txtEthnicity;
 
     @FXML
-    private JFXTextField txtDob;
+    private DatePicker dpDob;
 
     @FXML
     private JFXTextField txtBirthplace;
@@ -155,6 +156,9 @@ public class ManageChildrenController implements Initializable {
     @FXML
     private JFXTextField txtParent;
 
+    @FXML
+    private Label lblError;
+
     private ObservableList<Map<String, Object>> children;
     private ObservableList<Map<String, Object>> registrations;
     private ObservableList<Map<String, Object>> changes;
@@ -165,6 +169,7 @@ public class ManageChildrenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
 
         loadChildrenData();
         loadRegistrationsData();
@@ -175,7 +180,7 @@ public class ManageChildrenController implements Initializable {
         lblId.setText("ID: ");
         txtFullName.setText("");
         cbxSex.getSelectionModel().clearSelection();
-        txtDob.setText("");
+        dpDob.setValue(null);
         txtEthnicity.setText("");
         txtBirthplace.setText("");
         txtInsuranceId.setText("");
@@ -212,7 +217,7 @@ public class ManageChildrenController implements Initializable {
                 cbxSex.getSelectionModel().selectFirst();
                 while (!cbxSex.getSelectionModel().getSelectedItem().equals(newValue.get("sex").toString()))
                     cbxSex.getSelectionModel().selectNext();
-                txtDob.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(newValue.get("dob").toString()));
+                dpDob.setValue(LocalDate.parse(newValue.get("dob").toString()));
                 txtEthnicity.setText(Optional.ofNullable(newValue.get("ethnicity")).orElse("").toString());
                 txtBirthplace.setText(Optional.ofNullable(newValue.get("birthplace")).orElse("").toString());
                 txtInsuranceId.setText(Optional.ofNullable(newValue.get("insuranceId")).orElse("").toString());
@@ -384,6 +389,14 @@ public class ManageChildrenController implements Initializable {
             if (newValue == null) {
                 clearChangeInfo();
             } else {
+                lblError.setText("");
+                txtFullName.setStyle("");
+                cbxSex.setStyle("");
+                dpDob.setStyle("");
+                txtEthnicity.setStyle("");
+                txtBirthplace.setStyle("");
+                txtInsuranceId.setText("");
+
                 selectedChangeId = ((Double) newValue.get("id")).longValue();
 
                 txtNewFullName.setText(newValue.get("fullName").toString());
@@ -502,7 +515,11 @@ public class ManageChildrenController implements Initializable {
         dialog.setHeaderText("Vui lòng nhập lý do từ chối:");
         dialog.setContentText("");
         var reason = dialog.showAndWait();
-        if (reason.isEmpty()) return;
+        while (reason.isEmpty() || reason.get().isBlank()) {
+            if (reason.isEmpty()) return;
+            Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+            reason = dialog.showAndWait();
+        }
 
         try {
             new ApiRequest.Builder<String>()
@@ -526,7 +543,11 @@ public class ManageChildrenController implements Initializable {
         dialog.setHeaderText("Vui lòng nhập lý do từ chối:");
         dialog.setContentText("");
         var reason = dialog.showAndWait();
-        if (reason.isEmpty()) return;
+        while (reason.isEmpty() || reason.get().isBlank()) {
+            if (reason.isEmpty()) return;
+            Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+            reason = dialog.showAndWait();
+        }
 
         try {
             new ApiRequest.Builder<String>()
@@ -571,10 +592,17 @@ public class ManageChildrenController implements Initializable {
 
     @FXML
     void updateChild(ActionEvent event) {
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         var requestBody = new RequestBodyMap()
                 .put("fullName", txtFullName.getText().toString())
                 .put("sex", cbxSex.getSelectionModel().getSelectedItem())
-                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
+                .put("dob", dpDob.getValue().toString())
                 .put("ethnicity", txtEthnicity.getText())
                 .put("birthplace", txtBirthplace.getText())
                 .put("insuranceId", txtInsuranceId.getText())
@@ -595,6 +623,35 @@ public class ManageChildrenController implements Initializable {
         }
     }
 
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        txtFullName.setStyle("");
+        cbxSex.setStyle("");
+        dpDob.setStyle("");
+        txtEthnicity.setStyle("");
+        txtBirthplace.setStyle("");
+        txtInsuranceId.setStyle("");
+
+        if (txtFullName.getText().isBlank()) {
+            txtFullName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền họ tên!");
+        }
+        if (cbxSex.getSelectionModel().getSelectedItem() == null) {
+            cbxSex.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn giới tính!");
+        }
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày sinh không hợp lệ!");
+        }
+        if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số BHYT khỗng hợp lệ!");
+        }
+    }
+
     @FXML
     void viewProfile(ActionEvent event) {
         ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(selectedChildId, root, this));
@@ -602,7 +659,7 @@ public class ManageChildrenController implements Initializable {
 
     @FXML
     void viewProfile2(ActionEvent event) {
-        long id = ((Double)((Map<String,Object>)(tblChildChanges.getSelectionModel().getSelectedItem()).get("child")).get("id")).longValue();
+        long id = ((Double) ((Map<String, Object>) (tblChildChanges.getSelectionModel().getSelectedItem()).get("child")).get("id")).longValue();
         ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(id, root, this));
     }
 

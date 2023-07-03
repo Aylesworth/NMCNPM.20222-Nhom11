@@ -10,10 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +49,7 @@ public class AddInjectionController implements Initializable {
     private JFXComboBox<String> cbxDoseNo;
 
     @FXML
-    private JFXTextField txtDate;
+    private DatePicker dpDate;
 
     @FXML
     private JFXTextField txtStatus;
@@ -54,15 +57,19 @@ public class AddInjectionController implements Initializable {
     @FXML
     private JFXTextField txtNote;
 
+    @FXML
+    private Label lblError;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!UserIdentity.isAdmin()) {
-            cbxChild.setDisable(true);
+            cbxChild.setVisible(false);
+            cbxChild.setManaged(false);
             txtStatus.setText("Chờ xác nhận");
-            txtStatus.setEditable(false);
+            txtStatus.setManaged(false);
         }
         cbxDoseNo.setDisable(true);
-
+        dpDate.setConverter(Beans.DATE_STRING_CONVERTER);
         setUpVaccineComboBoxes();
         setUpChildComboBox();
     }
@@ -146,11 +153,18 @@ public class AddInjectionController implements Initializable {
     @FXML
     void add(ActionEvent event) {
         try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
+        try {
             long childId = ((Double) cbxChild.getSelectionModel().getSelectedItem().get("id")).longValue();
             String requestBody = new RequestBodyMap()
                     .put("vaccineName", cbxVaccine.getValue())
                     .put("vaccineDoseNo", cbxDoseNo.getValue())
-                    .put("date", Beans.DATE_FORMAT_CONVERTER.toISO(txtDate.getText()))
+                    .put("date", dpDate.getValue().toString())
                     .put("note", txtNote.getText())
                     .put("status", txtStatus.getText())
                     .toJson();
@@ -164,10 +178,10 @@ public class AddInjectionController implements Initializable {
 //            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
 
             if (!UserIdentity.isAdmin()) {
-                Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tiêm chủng sẽ được quản trị viên xem xét và phê duyệt");
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tiêm chủng sẽ được quản trị viên xem xét và xác nhận");
             }
 
-            ((Stage) txtDate.getScene().getWindow()).close();
+            ((Stage) dpDate.getScene().getWindow()).close();
             switch (parentController) {
                 case ChildDetailsController childDetailsController -> {
                     childDetailsController.loadInjections();
@@ -179,13 +193,56 @@ public class AddInjectionController implements Initializable {
                 default -> throw new IllegalStateException("Unexpected value: " + parentController);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("already injected")) {
+                lblError.setText("Trẻ đã tiêm hoặc đã đăng ký tiêm mũi tiêm này!");
+            } else {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        cbxChild.setStyle("");
+        cbxVaccine.setStyle("");
+        cbxDoseNo.setStyle("");
+        dpDate.setStyle("");
+        txtStatus.setStyle("");
+        txtNote.setStyle("");
+
+        if (cbxChild.getSelectionModel().getSelectedItem() == null) {
+            cbxChild.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn trẻ em!");
+        }
+        if (cbxVaccine.getSelectionModel().getSelectedItem() == null) {
+            cbxVaccine.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn vaccine!");
+        }
+        if (cbxDoseNo.getSelectionModel().getSelectedItem() == null) {
+            cbxDoseNo.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn số mũi vaccine!");
+        }
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dpDate.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày tiêm không hợp lệ!");
+        }
+        if (!UserIdentity.isAdmin() && date.isBefore(LocalDate.now())) {
+            dpDate.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn ngày trong thời gian tới!");
+        }
+        if (txtStatus.getText().isBlank()) {
+            txtStatus.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập trạng thái!");
         }
     }
 
     @FXML
     void cancel(ActionEvent event) {
-        ((Stage) txtDate.getScene().getWindow()).close();
+        ((Stage) dpDate.getScene().getWindow()).close();
     }
 
 }

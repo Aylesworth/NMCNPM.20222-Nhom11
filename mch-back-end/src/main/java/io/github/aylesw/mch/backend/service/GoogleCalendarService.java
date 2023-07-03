@@ -11,5 +11,5 @@ public interface GoogleCalendarService {
 
     void deleteEventOfInjection(Injection injection);
 
-    void updateEventDateOfInjection(Injection injection);
+    void updateEventOfInjection(Injection injection);
 }

@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
@@ -40,16 +41,21 @@
                         <AnchorPane prefHeight="337.0" prefWidth="1030.0">
                            <children>
                               <JFXTextField fx:id="txtFullName" editable="false" labelFloat="true" layoutX="224.0" layoutY="76.0" prefHeight="25.0" prefWidth="233.0" promptText="Họ tên *" />
-                              <JFXTextField fx:id="txtDob" editable="false" labelFloat="true" layoutX="224.0" layoutY="207.0" prefHeight="25.0" prefWidth="233.0" promptText="Ngày sinh *" />
-                              <JFXTextField fx:id="txtEthnicity" editable="false" labelFloat="true" layoutX="573.0" layoutY="75.0" prefHeight="25.0" prefWidth="233.0" promptText="Dân tộc" />
-                              <JFXTextField fx:id="txtBirthplace" editable="false" labelFloat="true" layoutX="573.0" layoutY="140.0" prefHeight="25.0" prefWidth="233.0" promptText="Nơi sinh" />
-                              <JFXTextField fx:id="txtInsuranceId" editable="false" labelFloat="true" layoutX="573.0" layoutY="207.0" prefHeight="25.0" prefWidth="233.0" promptText="Số BHYT" />
                               <StackPane layoutX="224.0" layoutY="140.0">
                                  <children>
                                     <JFXComboBox fx:id="cbxSex" labelFloat="true" prefHeight="25.0" prefWidth="233.0" promptText="Giới tính *" visible="false" />
                                     <JFXTextField fx:id="txtSex" editable="false" labelFloat="true" prefHeight="25.0" prefWidth="233.0" promptText="Giới tính *" />
                                  </children>
                               </StackPane>
+                              <StackPane layoutX="224.0" layoutY="201.0">
+                                 <children>
+                                    <JFXTextField fx:id="txtDob" editable="false" labelFloat="true" prefHeight="25.0" prefWidth="233.0" promptText="Ngày sinh *" />
+                                    <DatePicker fx:id="dpDob" prefHeight="42.0" prefWidth="230.0" promptText="Ngày sinh *" />
+                                 </children>
+                              </StackPane>
+                              <JFXTextField fx:id="txtEthnicity" editable="false" labelFloat="true" layoutX="573.0" layoutY="75.0" prefHeight="25.0" prefWidth="233.0" promptText="Dân tộc" />
+                              <JFXTextField fx:id="txtBirthplace" editable="false" labelFloat="true" layoutX="573.0" layoutY="140.0" prefHeight="25.0" prefWidth="233.0" promptText="Nơi sinh" />
+                              <JFXTextField fx:id="txtInsuranceId" editable="false" labelFloat="true" layoutX="573.0" layoutY="207.0" prefHeight="25.0" prefWidth="233.0" promptText="Số BHYT" />
                               <JFXButton fx:id="btnUpdate" layoutX="416.0" layoutY="278.0" onAction="#updateProfile" prefHeight="30.0" prefWidth="90.0" text="Cập nhật" />
                               <JFXButton fx:id="btnCancel" layoutX="525.0" layoutY="278.0" onAction="#cancel" prefHeight="30.0" prefWidth="90.0" text="Hủy" />
                               <Label layoutX="375.0" layoutY="14.0" style="-fx-font-size: 16px;" text="Cha/mẹ:">
@@ -61,6 +67,7 @@
                               <ProgressIndicator fx:id="spinner1" layoutX="489.0" layoutY="142.0" />
                            </children>
                         </AnchorPane>
+                        <Label fx:id="lblError" alignment="CENTER" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
                      </children>
                      <padding>
                         <Insets top="80.0" />

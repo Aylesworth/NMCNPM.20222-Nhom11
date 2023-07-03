@@ -12,14 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -102,6 +100,12 @@ public class UserDetailsController implements Initializable {
     @FXML
     private ProgressIndicator spinner2;
 
+    @FXML
+    private DatePicker dpDob;
+
+    @FXML
+    private Label lblError;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (previous==null) {
@@ -112,6 +116,7 @@ public class UserDetailsController implements Initializable {
             btnAddChild.setManaged(false);
             btnEdit.setText("Cập nhật hồ sơ");
         }
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
         loadData();
         loadChildrenList();
         loadEventsList();
@@ -121,7 +126,6 @@ public class UserDetailsController implements Initializable {
         txtEmail.setEditable(false);
         txtFullName.setEditable(false);
         txtSex.setEditable(false);
-        txtDob.setEditable(false);
         txtPhoneNumber.setEditable(false);
         txtAddress.setEditable(false);
         txtCitizenId.setEditable(false);
@@ -130,6 +134,9 @@ public class UserDetailsController implements Initializable {
         cbxSex.setVisible(false);
         txtSex.setVisible(true);
 
+        dpDob.setVisible(false);
+        txtDob.setVisible(true);
+
         btnSave.setVisible(false);
         btnCancel.setVisible(false);
     }
@@ -137,7 +144,6 @@ public class UserDetailsController implements Initializable {
     private void unlockFields() {
         txtEmail.setEditable(true);
         txtFullName.setEditable(true);
-        txtDob.setEditable(true);
         txtPhoneNumber.setEditable(true);
         txtAddress.setEditable(true);
         txtCitizenId.setEditable(true);
@@ -145,6 +151,9 @@ public class UserDetailsController implements Initializable {
 
         txtSex.setVisible(false);
         cbxSex.setVisible(true);
+
+        txtDob.setVisible(false);
+        dpDob.setVisible(true);
 
         btnSave.setVisible(true);
         btnCancel.setVisible(true);
@@ -185,10 +194,6 @@ public class UserDetailsController implements Initializable {
             txtCitizenId.setText(Optional.ofNullable(map.get("citizenId")).orElse("").toString());
             txtInsuranceId.setText(Optional.ofNullable(map.get("insuranceId")).orElse("").toString());
             lblName.setText(txtFullName.getText().toUpperCase());
-
-            cbxSex.getSelectionModel().selectFirst();
-            while (!cbxSex.getSelectionModel().getSelectedItem().equals(map.get("sex").toString()))
-                cbxSex.getSelectionModel().selectNext();
 
             spinner1.setVisible(false);
         });
@@ -301,16 +306,27 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     void editProfile(ActionEvent event) {
+        cbxSex.getSelectionModel().selectFirst();
+        while (!cbxSex.getSelectionModel().getSelectedItem().equals(txtSex.getText()))
+            cbxSex.getSelectionModel().selectNext();
+        dpDob.setValue(LocalDate.parse(txtDob.getText(), Beans.DATE_FORMATTER));
         unlockFields();
     }
 
     @FXML
     void saveProfile(ActionEvent event) {
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         String requestBody = new RequestBodyMap()
                 .put("email", txtEmail.getText())
                 .put("fullName", txtFullName.getText())
                 .put("sex", cbxSex.getValue())
-                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
+                .put("dob", dpDob.getValue().toString())
                 .put("phoneNumber", txtPhoneNumber.getText())
                 .put("address", txtAddress.getText())
                 .put("citizenId", txtCitizenId.getText())
@@ -329,6 +345,61 @@ public class UserDetailsController implements Initializable {
             loadData();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        txtEmail.setStyle("");
+        txtFullName.setStyle("");
+        cbxSex.setStyle("");
+        dpDob.setStyle("");
+        txtPhoneNumber.setStyle("");
+        txtAddress.setStyle("");
+        txtCitizenId.setStyle("");
+        txtInsuranceId.setStyle("");
+
+        if (txtFullName.getText().isBlank()) {
+            txtFullName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền họ tên!");
+        }
+        if (txtEmail.getText().isBlank()) {
+            txtEmail.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập email!");
+        }
+        if (!txtEmail.getText().matches("[A-Za-z0-9.]+@[A-Za-z0-9]+([.][A-Za-z0-9]+)+")) {
+            txtEmail.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Email không hợp lệ!");
+        }
+        if (cbxSex.getSelectionModel().getSelectedItem() == null) {
+            cbxSex.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn giới tính!");
+        }
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày sinh không hợp lệ!");
+        }
+        if (txtPhoneNumber.getText().isBlank()) {
+            txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập số điện thoại!");
+        }
+        if (!txtPhoneNumber.getText().matches("[0-9]{10,12}")) {
+            txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số điện thoại không hợp lệ!");
+        }
+        if (txtAddress.getText().isBlank()) {
+            txtAddress.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền địa chỉ!");
+        }
+        if (!txtCitizenId.getText().isBlank() && !txtCitizenId.getText().matches("[0-9]{12}")) {
+            txtCitizenId.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số CCCD không hợp lệ!");
+        }
+        if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số BHYT khỗng hợp lệ!");
         }
     }
 

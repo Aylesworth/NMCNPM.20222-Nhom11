@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ExaminationRepository extends JpaRepository<Examination, Long> {
-    @Query("SELECT e FROM Examination e JOIN FETCH e.child c WHERE c.id = ?1")
+    @Query("SELECT e FROM Examination e JOIN FETCH e.child c WHERE c.id = ?1 ORDER BY e.date")
     List<Examination> findByChildId(Long childId);
 }

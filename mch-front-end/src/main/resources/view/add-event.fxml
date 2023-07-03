@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="395.0" spacing="30.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="395.0" spacing="25.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="THÊM SỰ KIỆN" />
       <JFXTextField fx:id="txtName" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Tên sự kiện *" />
@@ -27,5 +27,6 @@
             <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
          </children>
       </HBox>
+      <Label fx:id="lblError" alignment="CENTER" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
    </children>
 </VBox>

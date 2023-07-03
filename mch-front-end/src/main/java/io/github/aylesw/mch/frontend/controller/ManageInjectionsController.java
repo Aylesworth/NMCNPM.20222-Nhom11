@@ -213,7 +213,11 @@ public class ManageInjectionsController implements Initializable {
             dialog.setContentText(null);
             var input = dialog.showAndWait();
 
-            if (input.isEmpty()) return;
+            while (input.isEmpty() || input.get().isBlank()) {
+                if (input.isEmpty()) return;
+                Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+                input = dialog.showAndWait();
+            }
 
             String reason = input.get();
             long id = ((Double) tblRegistrations.getSelectionModel().getSelectedItem().get("id")).longValue();
@@ -233,11 +237,21 @@ public class ManageInjectionsController implements Initializable {
     void changeDate(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Thay đổi ngày");
-        dialog.setHeaderText("Vui lòng nhập ngày mới:");
+        dialog.setHeaderText("Vui lòng nhập ngày mới (DD/MM/YYYY):");
         dialog.setContentText("");
         var input = dialog.showAndWait();
 
-        if (input.isEmpty()) return;
+        while (true) {
+            if (input.isEmpty()) return;
+
+            try {
+                LocalDate.parse(input.get(), Beans.DATE_FORMATTER);
+                break;
+            } catch (Exception e) {
+                Utils.showAlert(Alert.AlertType.ERROR, "Ngày không hợp lệ!");
+                input = dialog.showAndWait();
+            }
+        }
 
         var selectedItem = tblSchedule.getSelectionModel().getSelectedItem();
 
@@ -320,7 +334,7 @@ public class ManageInjectionsController implements Initializable {
 
     @FXML
     void exportSchedule(ActionEvent actionEvent) {
-
+//TODO:
     }
 
 }

@@ -126,7 +126,11 @@ public class InjectionItemController implements Initializable {
         dialog.setHeaderText("Vui lòng điền hướng dẫn xử lý triệu chứng:");
         dialog.setContentText("");
         var input = dialog.showAndWait();
-        if (input.isEmpty()) return;
+        while (input.isEmpty() || input.get().isBlank()) {
+            if (input.isEmpty()) return;
+            Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+            input = dialog.showAndWait();
+        }
 
         long childId = ((Double) properties.get("childId")).longValue();
         long id = ((Double) properties.get("id")).longValue();

@@ -23,7 +23,7 @@ public class SystemNotification {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(1024)")
     private String message;
 
     @ManyToOne

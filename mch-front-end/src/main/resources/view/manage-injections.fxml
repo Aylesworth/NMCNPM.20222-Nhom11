@@ -87,7 +87,7 @@
                               <JFXTextField fx:id="txtAge" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Tuổi (tháng)" />
                               <JFXTextField fx:id="txtVaccine" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Vaccine" />
                               <JFXTextField fx:id="txtDoseNo" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Mũi số" />
-                              <JFXTextField fx:id="txtDate" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ngày tiêm" />
+                              <JFXTextField fx:id="txtDate" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ngày tiêm" />
                               <JFXTextField fx:id="txtNote" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ghi chú" />
                               <JFXButton fx:id="btnConfirm" onAction="#confirm" prefHeight="30.0" prefWidth="118.0" text="Xác nhận" />
                               <JFXButton fx:id="btnCancel" onAction="#cancel" prefHeight="30.0" prefWidth="118.0" text="Hủy mũi tiêm" />

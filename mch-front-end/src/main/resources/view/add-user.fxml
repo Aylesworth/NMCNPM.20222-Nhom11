@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -51,7 +52,7 @@
    <right>
       <VBox alignment="CENTER" prefHeight="524.0" prefWidth="499.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Ngày sinh (dd/mm/yyyy) *" />
+            <DatePicker fx:id="dpDob" prefWidth="250.0" promptText="Ngày sinh *" />
             <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Số điện thoại *">
                <VBox.margin>
                   <Insets />

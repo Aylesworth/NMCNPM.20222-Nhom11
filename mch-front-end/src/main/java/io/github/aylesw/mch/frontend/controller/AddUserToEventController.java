@@ -5,11 +5,14 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.AppConstants;
+import io.github.aylesw.mch.frontend.common.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyEvent;
@@ -33,6 +36,9 @@ public class AddUserToEventController implements Initializable {
 
     @FXML
     private JFXTextField txtSearch;
+
+    @FXML
+    private Label lblError;
 
     @FXML
     private JFXListView<Map<String, Object>> listUsers;
@@ -71,6 +77,12 @@ public class AddUserToEventController implements Initializable {
 
     @FXML
     void add(ActionEvent event) {
+        lblError.setText("");
+        if (listUsers.getSelectionModel().getSelectedItem()==null) {
+            lblError.setText("Bạn chưa chọn người dùng nào!");
+            return;
+        }
+
         try {
             long userId = ((Double) listUsers.getSelectionModel().getSelectedItem().get("id")).longValue();
             new ApiRequest.Builder<String>()
@@ -81,7 +93,11 @@ public class AddUserToEventController implements Initializable {
             ((Stage) txtSearch.getScene().getWindow()).close();
             parentController.loadParticipants(eventId);
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("age condition")) {
+                lblError.setText("Người dùng không thuộc độ tuổi của sự kiện này!");
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 

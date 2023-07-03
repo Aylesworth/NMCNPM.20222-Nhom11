@@ -90,8 +90,13 @@ public class EventServiceImpl implements EventService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
 
-        if (event.getParticipants().contains(user))
+        if (event.getParticipants().contains(user)) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "User already registered for event");
+        }
+
+        if (user.getAge() < event.getMinAge() || user.getAge() > event.getMaxAge()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "User does not satisfy event's age condition");
+        }
 
         event.getParticipants().add(user);
         eventRepository.save(event);

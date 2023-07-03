@@ -143,16 +143,18 @@ public class SignUpController implements Initializable {
             boxSex.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Vui lòng chọn giới tính!");
         }
-        if (dpDob.getValue() == null) {
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
             dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
-            throw new Exception("Vui lòng chọn ngày sinh!");
+            throw new Exception("Ngày sinh không hợp lệ!");
         }
         if (txtPhoneNumber.getText().isBlank()) {
             txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Vui lòng nhập số điện thoại!");
         }
         if (!txtPhoneNumber.getText().matches("[0-9]{10,12}")) {
-            txtPhoneNumber.setText(AppConstants.ERROR_BACKGROUND);
+            txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số điện thoại không hợp lệ!");
         }
         if (txtAddress.getText().isBlank()) {
@@ -160,11 +162,11 @@ public class SignUpController implements Initializable {
             throw new Exception("Vui lòng điền địa chỉ!");
         }
         if (!txtCitizenId.getText().isBlank() && !txtCitizenId.getText().matches("[0-9]{12}")) {
-            txtCitizenId.setText(AppConstants.ERROR_BACKGROUND);
+            txtCitizenId.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số CCCD không hợp lệ!");
         }
         if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
-            txtInsuranceId.setText(AppConstants.ERROR_BACKGROUND);
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số BHYT khỗng hợp lệ!");
         }
     }

@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="527.0" prefWidth="866.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="68.0" prefWidth="866.0" spacing="20.0">
          <children>
@@ -24,7 +25,7 @@
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="444.0" spacing="30.0" stylesheets="@../style/material-ui.css">
                <children>
-                  <JFXTextField fx:id="txtDate" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Ngày khám *" />
+                  <DatePicker fx:id="dpDate" prefWidth="227.0" promptText="Ngày khám *" />
                   <JFXTextField fx:id="txtFacility" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Nơi khám *" />
                   <JFXTextField fx:id="txtReason" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Lý do *" />
                   <JFXTextField fx:id="txtResult" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="227.0" promptText="Chẩn đoán *" />
@@ -74,11 +75,16 @@
             </VBox>
          </children>
       </FlowPane>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="866.0" spacing="20.0">
+      <VBox alignment="TOP_CENTER">
          <children>
-            <JFXButton onAction="#save" prefHeight="30.0" prefWidth="60.0" text="Lưu" />
-            <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="866.0" spacing="20.0">
+               <children>
+                  <JFXButton onAction="#save" prefHeight="30.0" prefWidth="59.0" text="Lưu" />
+                  <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
+               </children>
+            </HBox>
+            <Label fx:id="lblError" alignment="CENTER" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
          </children>
-      </HBox>
+      </VBox>
    </children>
 </VBox>

@@ -150,6 +150,7 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
                                     injection.getVaccine().getDoseNo(),
                                     injection.getChild().getFullName()))
                     .execute();
+            if (events.getItems().isEmpty()) return;
             String eventId = events.getItems().get(0).getId();
             service.events().delete("primary", eventId).setSendNotifications(true).execute();
         } catch (Exception e) {
@@ -158,7 +159,7 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
     }
 
     @Override
-    public void updateEventDateOfInjection(Injection injection) {
+    public void updateEventOfInjection(Injection injection) {
         try {
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
             Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
@@ -171,12 +172,17 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
                                     injection.getVaccine().getDoseNo(),
                                     injection.getChild().getFullName()))
                     .execute();
+            if (events.getItems().isEmpty()) return;
             Event event = events.getItems().get(0);
             String eventId = event.getId();
 
             LocalDateTime startDateTime = injection.getDate().toLocalDate().atTime(9, 0);
             LocalDateTime endDateTime = startDateTime.plusHours(8);
 
+            event.setSummary("Tiêm vaccine %s mũi số %d cho bé %s".formatted(
+                    injection.getVaccine().getName(),
+                    injection.getVaccine().getDoseNo(),
+                    injection.getChild().getFullName()));
             event.setStart(new EventDateTime().setDateTime(convertToDateTime(startDateTime)));
             event.setEnd(new EventDateTime().setDateTime(convertToDateTime(endDateTime)));
 

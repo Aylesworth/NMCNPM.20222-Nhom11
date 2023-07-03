@@ -87,7 +87,11 @@ public class EventCardController implements Initializable {
             Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tham gia sự kiện thành công!");
             parentController.loadEvents();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("age condition")) {
+                Utils.showAlert(Alert.AlertType.ERROR, "Bạn không thuộc độ tuổi của sự kiện này!");
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 

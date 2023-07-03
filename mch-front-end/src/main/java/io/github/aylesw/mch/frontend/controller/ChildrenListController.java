@@ -2,6 +2,7 @@ package io.github.aylesw.mch.frontend.controller;
 
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.AppConstants;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
@@ -20,6 +21,9 @@ public class ChildrenListController implements Initializable {
     }
 
     @FXML
+    private FlowPane root;
+
+    @FXML
     private FlowPane flowPane;
 
     @Override
@@ -34,10 +38,15 @@ public class ChildrenListController implements Initializable {
                     .method("GET")
                     .build().request();
 
-            var items = result.stream().map(child -> ScreenManager.getChildCard(child, flowPane, this)).toList();
+            var items = result.stream().map(child -> ScreenManager.getChildCard(child, root, this)).toList();
             flowPane.getChildren().setAll(items);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void addChild(ActionEvent event) {
+        ScreenManager.getAddChildStage(userId, this).show();
     }
 }

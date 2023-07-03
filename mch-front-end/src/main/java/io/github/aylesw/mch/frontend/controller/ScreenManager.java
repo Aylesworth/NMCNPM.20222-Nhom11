@@ -65,12 +65,16 @@ public class ScreenManager {
         return loadNode("user-details.fxml", new UserDetailsController(id, previous, previousController));
     }
 
-    public static Stage getAddChildStage(ManageChildrenController parent) {
-        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parent));
+    public static Stage getAddChildStage(ManageChildrenController parentController) {
+        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentController));
     }
 
-    public static Stage getAddChildStage(long parentId, UserDetailsController parent) {
-        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parent));
+    public static Stage getAddChildStage(long parentId, UserDetailsController parentController) {
+        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parentController));
+    }
+
+    public static Stage getAddChildStage(long parentId, ChildrenListController parentController) {
+        return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parentController));
     }
 
     public static Parent getChildRefItem(long id, String name, Parent parent) {

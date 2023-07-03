@@ -4,14 +4,13 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" spacing="25.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="437.0" spacing="25.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="27.0" prefWidth="187.0" text="THÊM HỒ SƠ TRẺ" textAlignment="CENTER">
          <font>
@@ -24,16 +23,19 @@
       <JFXComboBox fx:id="cbxParent" labelFloat="true" prefWidth="240.0" promptText="Cha/mẹ" />
       <JFXTextField fx:id="txtFullName" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Họ tên *" />
       <JFXComboBox fx:id="cbxSex" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Giới tính *" />
-      <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Ngày sinh (DD/MM/YYYY) *" />
+      <DatePicker fx:id="dpDob" prefHeight="42.0" prefWidth="250.0" promptText="Ngày sinh *" />
       <JFXTextField fx:id="txtEthnicity" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Dân tộc" />
       <JFXTextField fx:id="txtBirthplace" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Nơi sinh" />
       <JFXTextField fx:id="txtInsuranceId" labelFloat="true" maxWidth="-Infinity" prefWidth="240.0" promptText="Số BHYT" />
-      <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0" spacing="20.0" stylesheets="@../style/material-ui.css">
+      <HBox alignment="CENTER" prefHeight="44.0" prefWidth="437.0" spacing="20.0" stylesheets="@../style/material-ui.css">
          <children>
             <JFXButton onAction="#addChild" text="Thêm" />
             <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="56.0" text="Hủy" />
          </children>
       </HBox>
-      <ProgressIndicator fx:id="spinner" prefHeight="30.0" prefWidth="27.0" />
+      <Label fx:id="lblError" alignment="CENTER" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
    </children>
+   <padding>
+      <Insets bottom="10.0" />
+   </padding>
 </VBox>

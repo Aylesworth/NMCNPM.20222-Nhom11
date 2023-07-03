@@ -11,11 +11,14 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +26,15 @@ import java.util.ResourceBundle;
 
 public class AddChildController implements Initializable {
 
-    private Object parent;
+    private Object parentController;
 
-    public AddChildController(Object parent) {
-        this(-1, parent);
+    public AddChildController(Object parentController) {
+        this(-1, parentController);
     }
 
-    public AddChildController(long parentId, Object parent) {
+    public AddChildController(long parentId, Object parentController) {
         this.parentId = parentId;
-        this.parent = parent;
+        this.parentController = parentController;
     }
 
     private long parentId;
@@ -46,7 +49,7 @@ public class AddChildController implements Initializable {
     private JFXComboBox<String> cbxSex;
 
     @FXML
-    private JFXTextField txtDob;
+    private DatePicker dpDob;
 
     @FXML
     private JFXTextField txtEthnicity;
@@ -58,15 +61,19 @@ public class AddChildController implements Initializable {
     private JFXTextField txtInsuranceId;
 
     @FXML
-    private ProgressIndicator spinner;
+    private Label lblError;
 
     private ObservableList<Map<String, Object>> parents;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        spinner.setVisible(true);
         cbxSex.setItems(FXCollections.observableArrayList("Nam", "Nữ"));
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
         setUpParentComboBox();
+        if (parentController instanceof ChildrenListController) {
+            cbxParent.setVisible(false);
+            cbxParent.setManaged(false);
+        }
     }
 
     private void setUpParentComboBox() {
@@ -127,12 +134,11 @@ public class AddChildController implements Initializable {
 
         service.setOnSucceeded(e -> {
             if (service.getValue() != null) {
-                spinner.setVisible(false);
                 parents.setAll(service.getValue());
                 if (parentId != -1) {
-                    var parent = parents.filtered(p ->
+                    var parentController = parents.filtered(p ->
                             ((Double) p.get("id")).longValue() == parentId).get(0);
-                    cbxParent.getSelectionModel().select(parent);
+                    cbxParent.getSelectionModel().select(parentController);
                 }
             }
         });
@@ -142,15 +148,19 @@ public class AddChildController implements Initializable {
 
     @FXML
     void addChild(ActionEvent event) {
-        spinner.setVisible(true);
 
-        String url = AppConstants.BASE_URL + "/children?parent-id=" + parentId;
-        String token = Utils.getToken();
+        try {
+            validateFields();
+        } catch (Exception e) {
+            lblError.setText(e.getMessage());
+            return;
+        }
+
         String method = "POST";
         String requestBody = new RequestBodyMap()
                 .put("fullName", txtFullName.getText())
                 .put("sex", cbxSex.getValue())
-                .put("dob", Beans.DATE_FORMAT_CONVERTER.toISO(txtDob.getText()))
+                .put("dob", dpDob.getValue().toString())
                 .put("ethnicity", txtEthnicity.getText())
                 .put("birthplace", txtBirthplace.getText())
                 .put("insuranceId", txtInsuranceId.getText())
@@ -163,8 +173,17 @@ public class AddChildController implements Initializable {
                     @Override
                     protected String call() throws Exception {
                         try {
+                            if (parentController instanceof ChildrenListController)
+                                return new ApiRequest.Builder<String>()
+                                        .url(AppConstants.BASE_URL + "/children/register?parent-id=" + parentId)
+                                        .method(method)
+                                        .requestBody(requestBody)
+                                        .build().request();
+
                             return new ApiRequest.Builder<String>()
-                                    .url(url).token(token).method(method).requestBody(requestBody)
+                                    .url(AppConstants.BASE_URL + "/children?parent-id=" + parentId)
+                                    .method(method)
+                                    .requestBody(requestBody)
                                     .build().request();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -177,23 +196,64 @@ public class AddChildController implements Initializable {
 
         service.setOnSucceeded(e -> {
             if (service.getValue() != null) {
-                spinner.setVisible(false);
 //                Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm hồ sơ trẻ thành công!");
+                if (parentController instanceof ChildrenListController) {
+                    Utils.showAlert(Alert.AlertType.INFORMATION, "Hồ sơ trẻ đang chờ được phê duyệt.");
+                }
                 ((Stage) txtFullName.getScene().getWindow()).close();
 
-                if (parent instanceof UserDetailsController userDetailsController) {
+                if (parentController instanceof UserDetailsController userDetailsController) {
                     userDetailsController.loadChildrenList();
                     return;
                 }
 
-                if (parent instanceof ManageChildrenController manageChildrenController) {
+                if (parentController instanceof ManageChildrenController manageChildrenController) {
                     manageChildrenController.loadChildrenData();
+                    return;
+                }
+
+                if (parentController instanceof ChildrenListController childrenListController) {
+                    childrenListController.loadChildren();
                     return;
                 }
             }
         });
 
         service.start();
+    }
+
+    private void validateFields() throws Exception {
+        lblError.setText("");
+        cbxParent.setStyle("");
+        txtFullName.setStyle("");
+        cbxSex.setStyle("");
+        dpDob.setStyle("");
+        txtEthnicity.setStyle("");
+        txtBirthplace.setStyle("");
+        txtInsuranceId.setStyle("");
+
+        if (cbxParent.getSelectionModel().getSelectedItem() == null) {
+            cbxParent.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn cha/mẹ!");
+        }
+        if (txtFullName.getText().isBlank()) {
+            txtFullName.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng điền họ tên!");
+        }
+        if (cbxSex.getSelectionModel().getSelectedItem() == null) {
+            cbxSex.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng chọn giới tính!");
+        }
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày sinh không hợp lệ!");
+        }
+        if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Số BHYT khỗng hợp lệ!");
+        }
     }
 
     @FXML

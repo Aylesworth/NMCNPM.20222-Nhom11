@@ -46,13 +46,37 @@ public class InjectionServiceImpl implements InjectionService {
 
         Injection injection = mapToEntity(injectionDto);
         injection.setChild(child);
-        injectionRepository.save(injection);
+
+        if (injectionRepository.findByChildIdAndVaccineNameAndDoseNo(
+                childId,
+                injection.getVaccine().getName(),
+                injection.getVaccine().getDoseNo()
+        ).isPresent()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Child already injected with this vaccine");
+        }
+
         saveInjection(injection);
 
         if (!injection.getStatus().equals("Chờ xác nhận")
                 && !injection.getDate().toLocalDate().isBefore(LocalDate.now())) {
             notificationService.createNotificationsAboutInjection(injection);
             googleCalendarService.createEventOfInjection(injection);
+        }
+        if (injection.getStatus().equals("Chờ xác nhận")) {
+            NotificationDetails notificationDetails = NotificationDetails.builder()
+                    .title("Đăng ký tiêm chủng mới")
+                    .message("Người dùng %s đã đăng ký tiêm vaccine %s mũi %d cho bé %s."
+                            .formatted(child.getParent().getFullName(),
+                                    injection.getVaccine().getName(),
+                                    injection.getVaccine().getDoseNo(),
+                                    child.getFullName()))
+                    .time(Utils.currentTimestamp())
+                    .build();
+
+            userRepository.findAdmins().forEach(user -> {
+                notificationDetails.setUser(user);
+                notificationService.createSystemNotification(notificationDetails);
+            });
         }
     }
 
@@ -67,17 +91,30 @@ public class InjectionServiceImpl implements InjectionService {
         if (!injection.getChild().getId().equals(childId))
             throw new ApiException(HttpStatus.BAD_REQUEST, "Injection does not belong to child");
 
+        boolean vaccineChanged = !injectionDto.getVaccineName().equals(injection.getVaccine().getName())
+                || !injectionDto.getVaccineDoseNo().equals(injection.getVaccine().getDoseNo());
+        boolean injectionExists = injectionRepository.findByChildIdAndVaccineNameAndDoseNo(
+                childId,
+                injectionDto.getVaccineName(),
+                injectionDto.getVaccineDoseNo()
+        ).isPresent();
+
+        if (vaccineChanged && injectionExists) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Child already injected with this vaccine");
+        }
+
         Date originalDate = injection.getDate();
         injection = mapToEntity(injectionDto);
         injection.setId(injectionId);
         injection.setChild(child);
+
         saveInjection(injection);
 
         if (!injection.getDate().equals(originalDate)
                 && !injection.getStatus().equals("Chờ xác nhận")
                 && !injection.getDate().toLocalDate().isBefore(LocalDate.now())) {
             notificationService.updateNotificationsAboutInjection(injection);
-            googleCalendarService.updateEventDateOfInjection(injection);
+            googleCalendarService.updateEventOfInjection(injection);
         }
     }
 

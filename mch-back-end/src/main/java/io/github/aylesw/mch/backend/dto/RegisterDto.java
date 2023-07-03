@@ -1,9 +1,6 @@
 package io.github.aylesw.mch.backend.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.sql.Date;
@@ -33,12 +30,15 @@ public class RegisterDto {
     private String sex;
 
     @NotEmpty
+    @Pattern(regexp = "[0-9]{10,12}")
     private String phoneNumber;
 
     @NotEmpty
     private String address;
 
+    @Pattern(regexp = "[0-9]{12}")
     private String citizenId;
 
+    @Pattern(regexp = "[A-Z0-9]{15}")
     private String insuranceId;
 }

@@ -3,13 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="319.0" spacing="20.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="319.0" spacing="20.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label style="-fx-font-size: 14px;" text="Chọn những người dùng bạn muốn thêm:" />
+      <Label style="-fx-font-size: 14px;" text="Chọn người dùng bạn muốn thêm:" />
       <JFXTextField fx:id="txtSearch" labelFloat="true" maxWidth="-Infinity" onKeyReleased="#search" prefHeight="30.0" prefWidth="225.0" promptText="Tìm kiếm" />
       <JFXListView fx:id="listUsers" maxWidth="-Infinity" prefHeight="227.0" prefWidth="225.0" />
       <HBox alignment="CENTER" spacing="20.0">
@@ -18,5 +19,9 @@
             <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="58.0" text="Hủy" />
          </children>
       </HBox>
+      <Label fx:id="lblError" alignment="CENTER" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
    </children>
+   <padding>
+      <Insets bottom="10.0" />
+   </padding>
 </VBox>

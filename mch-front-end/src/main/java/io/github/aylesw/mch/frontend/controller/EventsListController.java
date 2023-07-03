@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -34,7 +35,8 @@ public class EventsListController implements Initializable {
             var myEvents = new ApiRequest.Builder<List<Map<String, Object>>>()
                     .url(AppConstants.BASE_URL + "/events/find-by-user?id=" + userId)
                     .method("GET")
-                    .build().request();
+                    .build().request()
+                    .stream().filter(event -> !LocalDate.parse(event.get("toDate").toString()).isBefore(LocalDate.now())).toList();
 
             var currentEvents = new ApiRequest.Builder<List<Map<String, Object>>>()
                     .url(AppConstants.BASE_URL + "/events/current")

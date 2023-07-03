@@ -188,6 +188,7 @@ public class ManageUsersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dpDob.setConverter(Beans.DATE_STRING_CONVERTER);
         loadUsersData();
         loadUserRegistrationsData();
         loadUserChangesData();
@@ -269,6 +270,16 @@ public class ManageUsersController implements Initializable {
                 btnUpdateUser.setVisible(true);
                 btnViewProfile.setVisible(true);
                 btnDeleteUser.setVisible(true);
+
+                lblError.setText("");
+                txtEmail.setStyle("");
+                txtFullName.setStyle("");
+                cbxSex.setStyle("");
+                dpDob.setStyle("");
+                txtPhoneNumber.setStyle("");
+                txtAddress.setStyle("");
+                txtCitizenId.setStyle("");
+                txtInsuranceId.setStyle("");
 
                 selectedUserId = ((Double) tblUsers.getSelectionModel().getSelectedItem().get("id")).longValue();
 
@@ -600,9 +611,10 @@ public class ManageUsersController implements Initializable {
         dialog.setContentText(null);
         Optional<String> reason = dialog.showAndWait();
 
-        if (reason.isEmpty()) {
-            //
-            return;
+        while (reason.isEmpty() || reason.get().isBlank()) {
+            if (reason.isEmpty()) return;
+            Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+            reason = dialog.showAndWait();
         }
 
         String url = AppConstants.BASE_URL + "/users/reject-registration?id=" + selectedUserRegistrationId + "&reason=" + reason.get();
@@ -680,12 +692,15 @@ public class ManageUsersController implements Initializable {
         dialog.setTitle("Lý do");
         dialog.setHeaderText("Vui lòng nhập lý do từ chối:");
         dialog.setContentText(null);
-        Optional<String> reason = dialog.showAndWait();
+        Optional<String> input = dialog.showAndWait();
 
-        if (reason.isEmpty()) {
-            //
-            return;
+        while (input.isEmpty() || input.get().isBlank()) {
+            if (input.isEmpty()) return;
+            Utils.showAlert(Alert.AlertType.ERROR, "Vui lòng nhập gì đó!");
+            input = dialog.showAndWait();
         }
+
+        final String reason = input.get();
 
         Service<String> service = new Service<String>() {
             @Override
@@ -695,7 +710,7 @@ public class ManageUsersController implements Initializable {
                     protected String call() throws Exception {
                         try {
                             return new ApiRequest.Builder<String>()
-                                    .url(AppConstants.BASE_URL + "/users/reject-change?id=" + selectedUserChangeId + "&reason=" + reason.get())
+                                    .url(AppConstants.BASE_URL + "/users/reject-change?id=" + selectedUserChangeId + "&reason=" + reason)
                                     .token(Utils.getToken())
                                     .method("POST")
                                     .build().request();
@@ -801,16 +816,18 @@ public class ManageUsersController implements Initializable {
             cbxSex.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Vui lòng chọn giới tính!");
         }
-        if (dpDob.getValue() == null) {
+        try {
+            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+        } catch (Exception e) {
             dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
-            throw new Exception("Vui lòng chọn ngày sinh!");
+            throw new Exception("Ngày sinh không hợp lệ!");
         }
         if (txtPhoneNumber.getText().isBlank()) {
             txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Vui lòng nhập số điện thoại!");
         }
         if (!txtPhoneNumber.getText().matches("[0-9]{10,12}")) {
-            txtPhoneNumber.setText(AppConstants.ERROR_BACKGROUND);
+            txtPhoneNumber.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số điện thoại không hợp lệ!");
         }
         if (txtAddress.getText().isBlank()) {
@@ -818,11 +835,11 @@ public class ManageUsersController implements Initializable {
             throw new Exception("Vui lòng điền địa chỉ!");
         }
         if (!txtCitizenId.getText().isBlank() && !txtCitizenId.getText().matches("[0-9]{12}")) {
-            txtCitizenId.setText(AppConstants.ERROR_BACKGROUND);
+            txtCitizenId.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số CCCD không hợp lệ!");
         }
         if (!txtInsuranceId.getText().isBlank() && !txtInsuranceId.getText().matches("[A-Z]{2}[0-9]{13}")) {
-            txtInsuranceId.setText(AppConstants.ERROR_BACKGROUND);
+            txtInsuranceId.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Số BHYT khỗng hợp lệ!");
         }
     }

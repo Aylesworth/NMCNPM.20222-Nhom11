@@ -31,7 +31,7 @@
                         <JFXButton fx:id="btnDelete" onAction="#deleteEvent" text="Xóa sự kiện" />
                      </children>
                   </HBox>
-                  <TableView fx:id="tblParticipants" layoutX="345.0" layoutY="371.0" prefHeight="347.0" prefWidth="545.0">
+                  <TableView fx:id="tblParticipants" layoutX="345.0" layoutY="384.0" prefHeight="347.0" prefWidth="545.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Họ tên" />
                       <TableColumn prefWidth="75.0" text="Email" />
@@ -43,7 +43,7 @@
                   </TableView>
                   <JFXButton fx:id="btnViewProfile" layoutX="906.0" layoutY="501.0" onAction="#viewProfile" text="Xem hồ sơ" />
                   <JFXButton fx:id="btnRemoveUser" layoutX="906.0" layoutY="558.0" onAction="#removeUser" prefHeight="30.0" prefWidth="89.0" text="Xóa" />
-                  <Label layoutX="531.0" layoutY="328.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Danh sách người tham gia">
+                  <Label layoutX="531.0" layoutY="358.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Danh sách người tham gia">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -64,6 +64,7 @@
                   <Label layoutX="608.0" layoutY="111.0" style="-fx-font-size: 14px;" text="Từ ngày:" />
                   <Label layoutX="608.0" layoutY="168.0" style="-fx-font-size: 14px;" text="Đến ngày:" />
                   <JFXButton layoutX="160.0" layoutY="660.0" onAction="#addEvent" prefHeight="30.0" prefWidth="111.0" text="Thêm sự kiện" />
+                  <Label fx:id="lblError" alignment="CENTER" layoutX="416.0" layoutY="325.0" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
                </children>
             </AnchorPane>
          </content>
