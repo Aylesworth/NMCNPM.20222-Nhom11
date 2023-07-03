@@ -131,6 +131,10 @@ public class SignUpController implements Initializable {
             txtPassword.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Mật khẩu cần có 8 ký tự trở lên!");
         }
+        if (txtConfirmPassword.getText().isBlank()) {
+            txtConfirmPassword.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Vui lòng nhập lại mật khẩu!");
+        }
         if (!txtConfirmPassword.getText().equals(txtPassword.getText())) {
             txtConfirmPassword.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Mật khẩu xác nhận không khớp!");

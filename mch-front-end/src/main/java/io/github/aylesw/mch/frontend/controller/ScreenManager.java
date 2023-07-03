@@ -165,6 +165,14 @@ public class ScreenManager {
         return loadNode("events-list.fxml", new EventsListController(userId));
     }
 
+    public static Stage getChangePasswordStage() {
+        return loadStage("Đổi mật khẩu", "change-password.fxml", new ChangePasswordController());
+    }
+
+    public static Stage getResetPasswordStage() {
+        return loadStage("Quên mật khẩu", "reset-password.fxml", new ResetPasswordController());
+    }
+
     public static Stage loadStage(String title, String resourceName, Object controller) {
         Stage stage = new Stage();
         stage.setTitle(title);

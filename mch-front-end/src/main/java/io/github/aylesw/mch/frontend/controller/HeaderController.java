@@ -24,7 +24,7 @@ public class HeaderController implements Initializable {
 
     @FXML
     void changePassword(ActionEvent event) {
-
+        ScreenManager.getChangePasswordStage().show();
     }
 
     @FXML

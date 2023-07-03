@@ -167,7 +167,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .value(value)
                 .userEmail(userEmail)
                 .usedFor(usedFor)
-                .expiresAt(Timestamp.valueOf(LocalDateTime.now().plusSeconds(60)))
+                .expiresAt(Timestamp.valueOf(LocalDateTime.now().plusSeconds(5 * 60)))
                 .used(false)
                 .build();
         authCodeRepository.save(authCode);

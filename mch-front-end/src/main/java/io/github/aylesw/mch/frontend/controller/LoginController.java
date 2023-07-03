@@ -3,7 +3,6 @@ package io.github.aylesw.mch.frontend.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import io.github.aylesw.mch.frontend.App;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.RequestBodyMap;
 import io.github.aylesw.mch.frontend.common.UserIdentity;
@@ -97,12 +96,12 @@ public class LoginController {
     }
 
     @FXML
-    void goToForgotPassword() {
-
+    void resetPassword() {
+        ScreenManager.getResetPasswordStage().show();
     }
 
     @FXML
-    void goToSignUp() {
+    void signUp() {
         ScreenManager.getSignUpStage().show();
     }
 }

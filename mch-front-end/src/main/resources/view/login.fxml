@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label style="-fx-font-size: 18; -fx-font-weight: bold;" stylesheets="@../style/material-ui.css" text="ĐĂNG NHẬP">
          <font>
@@ -39,10 +39,10 @@
             <Insets bottom="15.0" />
          </VBox.margin>
       </Label>
-      <JFXButton fx:id="btnForgotPassword" onAction="#goToForgotPassword" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff">
+      <JFXButton fx:id="btnForgotPassword" onAction="#resetPassword" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff">
          <VBox.margin>
             <Insets bottom="15.0" />
          </VBox.margin></JFXButton>
-      <JFXButton fx:id="btnSignUp" onAction="#goToSignUp" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff" />
+      <JFXButton fx:id="btnSignUp" onAction="#signUp" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff" />
    </children>
 </VBox>
