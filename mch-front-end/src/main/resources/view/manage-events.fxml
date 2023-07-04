@@ -48,10 +48,10 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtName" labelFloat="true" layoutX="344.0" layoutY="46.0" prefHeight="30.0" prefWidth="547.0" promptText="Tên sự kiện" />
-                  <JFXTextArea fx:id="txtDescription" labelFloat="true" layoutX="344.0" layoutY="100.0" prefHeight="147.0" prefWidth="197.0" promptText="Mô tả" />
-                  <JFXTextField fx:id="txtMinAge" labelFloat="true" layoutX="608.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" promptText="Tuổi tối thiểu" />
-                  <JFXTextField fx:id="txtMaxAge" labelFloat="true" layoutX="720.0" layoutY="218.0" prefHeight="25.0" prefWidth="83.0" promptText="Tuổi tối đa" />
+                  <JFXTextField fx:id="txtName" editable="false" labelFloat="true" layoutX="344.0" layoutY="46.0" prefHeight="30.0" prefWidth="547.0" promptText="Tên sự kiện" />
+                  <JFXTextArea fx:id="txtDescription" editable="false" labelFloat="true" layoutX="344.0" layoutY="100.0" prefHeight="147.0" prefWidth="197.0" promptText="Mô tả" />
+                  <JFXTextField fx:id="txtMinAge" editable="false" labelFloat="true" layoutX="608.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" promptText="Tuổi tối thiểu" />
+                  <JFXTextField fx:id="txtMaxAge" editable="false" labelFloat="true" layoutX="720.0" layoutY="218.0" prefHeight="25.0" prefWidth="83.0" promptText="Tuổi tối đa" />
                   <JFXButton fx:id="btnAddUser" layoutX="906.0" layoutY="443.0" onAction="#addUser" prefHeight="30.0" prefWidth="89.0" text="Thêm" />
                   <JFXRadioButton fx:id="rbtnAll" layoutX="59.0" layoutY="108.0" selected="true" text="Tất cả">
                      <toggleGroup>
@@ -59,8 +59,8 @@
                      </toggleGroup>
                   </JFXRadioButton>
                   <JFXRadioButton fx:id="rbtnCurrent" layoutX="144.0" layoutY="108.0" text="Đang diễn ra" toggleGroup="$filter" />
-                  <DatePicker fx:id="dpFromDate" layoutX="695.0" layoutY="99.0" promptText="Từ ngày" />
-                  <DatePicker fx:id="dpToDate" layoutX="695.0" layoutY="156.0" promptText="Đến ngày" />
+                  <DatePicker fx:id="dpFromDate" editable="false" layoutX="695.0" layoutY="99.0" promptText="Từ ngày" />
+                  <DatePicker fx:id="dpToDate" editable="false" layoutX="695.0" layoutY="156.0" promptText="Đến ngày" />
                   <Label layoutX="608.0" layoutY="111.0" style="-fx-font-size: 14px;" text="Từ ngày:" />
                   <Label layoutX="608.0" layoutY="168.0" style="-fx-font-size: 14px;" text="Đến ngày:" />
                   <JFXButton layoutX="160.0" layoutY="660.0" onAction="#addEvent" prefHeight="30.0" prefWidth="111.0" text="Thêm sự kiện" />

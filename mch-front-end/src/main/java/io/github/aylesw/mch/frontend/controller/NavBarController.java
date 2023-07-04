@@ -24,6 +24,7 @@ public class NavBarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        home(null);
         updateNotiCount();
     }
 
@@ -61,6 +62,7 @@ public class NavBarController implements Initializable {
 
     @FXML
     void home(ActionEvent event) {
+        ScreenManager.setMainPanel(ScreenManager.getHomePage());
         updateNotiCount();
     }
 

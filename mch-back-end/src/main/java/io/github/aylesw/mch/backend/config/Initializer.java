@@ -1,11 +1,17 @@
 package io.github.aylesw.mch.backend.config;
 
+import io.github.aylesw.mch.backend.dto.RegisterDto;
+import io.github.aylesw.mch.backend.dto.UserDto;
+import io.github.aylesw.mch.backend.model.Role;
 import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -21,13 +27,13 @@ public class Initializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        notificationService.scheduleEmailsOnStart();
-
+//
+//        notificationService.scheduleEmailsOnStart();
+//
 //            roleRepository.save(new Role(null, "ADMIN", Set.of()));
 //            roleRepository.save(new Role(null, "USER", Set.of()));
-
-//            UserDto userDto = UserDto.builder()
+//
+//            RegisterDto registerDto = RegisterDto.builder()
 //                    .email("admin")
 //                    .password("admin")
 //                    .fullName("Admin")
@@ -37,7 +43,7 @@ public class Initializer implements CommandLineRunner {
 //                    .address("null")
 //                    .build();
 //
-//            userService.createUser(userDto);
+//            userService.createUser(registerDto);
 
 //            System.out.println(userService.search("Admin"));
 

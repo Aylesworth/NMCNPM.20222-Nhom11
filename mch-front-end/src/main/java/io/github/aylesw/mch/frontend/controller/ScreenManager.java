@@ -53,6 +53,10 @@ public class ScreenManager {
         return loadNode("nav-bar.fxml", new NavBarController(UserIdentity.getUserId()));
     }
 
+    public static Parent getHomePage(){
+        return loadNode("home.fxml",new HomeController());
+    }
+
     public static Parent getManageUsersPanel() {
         return loadNode("manage-users.fxml", new ManageUsersController());
     }

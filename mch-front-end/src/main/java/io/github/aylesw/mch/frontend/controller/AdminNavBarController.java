@@ -25,6 +25,7 @@ public class AdminNavBarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        home(null);
         updateNotiCount();
     }
 
@@ -62,7 +63,7 @@ public class AdminNavBarController implements Initializable {
 
     @FXML
     void home(ActionEvent event) {
-        ScreenManager.setMainPanel(null);
+        ScreenManager.setMainPanel(ScreenManager.getHomePage());
         updateNotiCount();
     }
 
