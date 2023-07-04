@@ -153,9 +153,14 @@ public class AddUserController implements Initializable {
             boxSex.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Vui lòng chọn giới tính!");
         }
+        LocalDate dob;
         try {
-            LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
+            dob = LocalDate.parse(dpDob.getEditor().getText(), Beans.DATE_FORMATTER);
         } catch (Exception e) {
+            dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
+            throw new Exception("Ngày sinh không hợp lệ!");
+        }
+        if (dob.isAfter(LocalDate.now())) {
             dpDob.setStyle(AppConstants.ERROR_BACKGROUND);
             throw new Exception("Ngày sinh không hợp lệ!");
         }

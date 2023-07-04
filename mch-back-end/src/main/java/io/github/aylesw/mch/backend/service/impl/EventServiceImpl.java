@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service.impl;
 
-import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.EventDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.dto.UserDto;
@@ -73,7 +73,7 @@ public class EventServiceImpl implements EventService {
         event.getParticipants().forEach(user -> {
             NotificationDetails notificationDetails = NotificationDetails.builder()
                     .user(user)
-                    .time(Utils.currentTimestamp())
+                    .time(DateTimeUtils.currentTimestamp())
                     .title("Sự kiện bị hủy")
                     .message("Sự kiện %s mà bạn tham gia đã bị hủy.".formatted(event.getName()))
                     .build();
@@ -135,7 +135,7 @@ public class EventServiceImpl implements EventService {
         event.getParticipants().forEach(user -> {
             NotificationDetails notificationDetails = NotificationDetails.builder()
                     .user(user)
-                    .time(Utils.currentTimestamp())
+                    .time(DateTimeUtils.currentTimestamp())
                     .title("Thông báo mới về sự kiện")
                     .message("Sự kiện %s mà bạn tham gia có thông báo mới với nội dung: %s"
                             .formatted(event.getName(), notification))

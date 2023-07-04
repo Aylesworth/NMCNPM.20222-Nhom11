@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service.impl;
 
-import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
@@ -70,7 +70,7 @@ public class InjectionServiceImpl implements InjectionService {
                                     injection.getVaccine().getName(),
                                     injection.getVaccine().getDoseNo(),
                                     child.getFullName()))
-                    .time(Utils.currentTimestamp())
+                    .time(DateTimeUtils.currentTimestamp())
                     .build();
 
             userRepository.findAdmins().forEach(user -> {
@@ -179,7 +179,7 @@ public class InjectionServiceImpl implements InjectionService {
                                 child.getFullName(),
                                 advice
                         ))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
@@ -187,7 +187,7 @@ public class InjectionServiceImpl implements InjectionService {
 
     @Override
     public List<InjectionDto> getSchedule() {
-        return injectionRepository.findAfterDateWithStatusOtherThan(Utils.currentDate(), "Chờ xác nhận").stream()
+        return injectionRepository.findAfterDateWithStatusOtherThan(DateTimeUtils.currentDate(), "Chờ xác nhận").stream()
                 .map(this::mapToDto)
                 .toList();
     }
@@ -224,7 +224,7 @@ public class InjectionServiceImpl implements InjectionService {
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
                 .user(injection.getChild().getParent())
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Đăng ký tiêm chủng bị hủy")
                 .message("Đăng ký tiêm vaccine %s mũi số %d cho bé %s không được phê duyệt với lý do: %s"
                         .formatted(injection.getVaccine().getName(),
@@ -288,7 +288,7 @@ public class InjectionServiceImpl implements InjectionService {
         reactionRepository.save(reactionEntity);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Triệu chứng sau tiêm mới")
                 .message("Triệu chứng mới sau mũi tiêm %s mũi số %d của bé %s: %s"
                         .formatted(injection.getVaccine().getName(),

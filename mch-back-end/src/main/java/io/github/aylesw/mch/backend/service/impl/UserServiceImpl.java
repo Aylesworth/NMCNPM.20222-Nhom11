@@ -2,7 +2,7 @@ package io.github.aylesw.mch.backend.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.*;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
         UserChange userChange = mapper.map(userDto, UserChange.class);
         userChange.setUser(user);
-        userChange.setRequested(Utils.currentTimestamp());
+        userChange.setRequested(DateTimeUtils.currentTimestamp());
         userChangeRepository.save(userChange);
     }
 
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
         createUser(mapper.map(userRegistration, RegisterDto.class));
 
-        userRegistration.setApproved(Utils.currentTimestamp());
+        userRegistration.setApproved(DateTimeUtils.currentTimestamp());
         userRegistrationRepository.save(userRegistration);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
@@ -152,14 +152,14 @@ public class UserServiceImpl implements UserService {
 
         updateUser(userChange.getUser().getId(), mapper.map(userChange, UserDto.class));
 
-        userChange.setApproved(Utils.currentTimestamp());
+        userChange.setApproved(DateTimeUtils.currentTimestamp());
         userChangeRepository.save(userChange);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
                 .user(userChange.getUser())
                 .title("Thay đổi được phê duyệt")
                 .message("Yêu cầu thay đổi thông tin cá nhân của bạn đã được phê duyệt.")
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService {
                 .user(userChange.getUser())
                 .title("Thay đổi bị từ chối phê duyệt")
                 .message("Yêu cầu thay đổi thông tin cá nhân của bạn đã bị từ chối với lý do: %s".formatted(reason))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);

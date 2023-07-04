@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import io.github.aylesw.mch.frontend.controller.ScreenManager;
+import javafx.scene.control.Alert;
 import lombok.AllArgsConstructor;
 import okhttp3.*;
 
@@ -71,6 +73,10 @@ public class ApiRequest<T> {
 
         response = client.newCall(request).execute();
         if (!response.isSuccessful()) {
+            if (response.body().string().contains("Token has expired")) {
+                Utils.showAlert(Alert.AlertType.WARNING, "Phiên đăng nhập của bạn đã hết hạn!");
+                ScreenManager.getLoginStage().show();
+            }
             throw new ApiRequestException(response.body().string());
         }
 

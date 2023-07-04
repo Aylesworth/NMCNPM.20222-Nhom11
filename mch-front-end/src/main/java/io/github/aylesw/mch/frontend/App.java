@@ -25,11 +25,8 @@ public class App extends Application {
             return;
         }
 
-//        ScreenManager.getLoginStage().show();
-
         ScreenManager.getMainStage().show();
         ScreenManager.setHeaderBar();
         ScreenManager.setNavBar();
-//        ScreenManager.setMainPanel(ScreenManager.getManageUsersPanel());
     }
 }
