@@ -1,7 +1,6 @@
 package io.github.aylesw.mch.backend.service.impl;
 
-import io.github.aylesw.mch.backend.common.Utils;
-import io.github.aylesw.mch.backend.dto.*;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.*;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.model.AuthCode;
@@ -67,7 +66,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Email already used");
 
         UserRegistration userRegistration = mapper.map(registerDto, UserRegistration.class);
-        userRegistration.setRequested(Utils.currentTimestamp());
+        userRegistration.setRequested(DateTimeUtils.currentTimestamp());
         userRegistrationRepository.save(userRegistration);
     }
 
@@ -95,7 +94,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         AuthCode authCode = authCodeRepository.findByValueUnexpiredAtTime(
                 resetPasswordDto.getAuthCode(),
-                Utils.currentTimestamp()
+                DateTimeUtils.currentTimestamp()
         ).orElseThrow(() -> ex);
 
         if (!authCode.getUserEmail().equals(user.getEmail())
@@ -139,7 +138,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         AuthCode authCode = authCodeRepository.findByValueUnexpiredAtTime(
                 verifyEmailDto.getAuthCode(),
-                Utils.currentTimestamp()
+                DateTimeUtils.currentTimestamp()
         ).orElseThrow(() -> ex);
 
         if (!authCode.getUserEmail().equals(user.getEmail())
@@ -160,7 +159,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining());
 
-        if (authCodeRepository.findByValueUnexpiredAtTime(value, Utils.currentTimestamp()).isPresent())
+        if (authCodeRepository.findByValueUnexpiredAtTime(value, DateTimeUtils.currentTimestamp()).isPresent())
             return generateAuthCode(userEmail, usedFor);
 
         AuthCode authCode = AuthCode.builder()

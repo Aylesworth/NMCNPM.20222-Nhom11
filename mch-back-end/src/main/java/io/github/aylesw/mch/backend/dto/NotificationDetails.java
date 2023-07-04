@@ -1,7 +1,6 @@
 package io.github.aylesw.mch.backend.dto;
 
-import io.github.aylesw.mch.backend.common.Utils;
-import io.github.aylesw.mch.backend.model.Injection;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.model.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
@@ -27,7 +26,7 @@ public class NotificationDetails {
     public NotificationDetails(String title, String message, Timestamp time, User user) {
         this.title = title;
         this.message = message;
-        this.time = time == null ? Utils.currentTimestamp() : time;
+        this.time = time == null ? DateTimeUtils.currentTimestamp() : time;
         this.user = user;
     }
 }

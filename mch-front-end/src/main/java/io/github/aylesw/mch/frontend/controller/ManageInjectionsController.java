@@ -289,7 +289,11 @@ public class ManageInjectionsController implements Initializable {
             loadScheduleData();
             loadRegistrations();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("expired")) {
+                Utils.showAlert(Alert.AlertType.ERROR, "Không thể xác nhận do đã qua ngày đăng ký tiêm!");
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 

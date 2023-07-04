@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service.impl;
 
-import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.model.EmailNotification;
@@ -67,8 +67,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<SystemNotification> getSystemNotifications(Long userId) {
-        var notifications = systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp());
-        systemNotificationRepository.updateSeenByUserIdBeforeTime(userId, Utils.currentTimestamp());
+        var notifications = systemNotificationRepository.findByUserIdBeforeTime(userId, DateTimeUtils.currentTimestamp());
+        systemNotificationRepository.updateSeenByUserIdBeforeTime(userId, DateTimeUtils.currentTimestamp());
         return notifications;
     }
 
@@ -114,7 +114,7 @@ public class NotificationServiceImpl implements NotificationService {
         LocalDateTime eventDateTime = injection.getDate().toLocalDate().atTime(LocalTime.of(9, 0));
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Đăng ký tiêm chủng được tiếp nhận")
                 .message("Lịch tiêm vaccine %s mũi số %d cho bé %s sẽ diễn ra vào ngày %s (thời gian tiếp nhận 9:00 - 17:00)"
                         .formatted(injection.getVaccine().getName(),
@@ -156,7 +156,7 @@ public class NotificationServiceImpl implements NotificationService {
         emailNotificationRepository.deleteByMessage(message);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Lịch tiêm bị hủy")
                 .message("Lịch tiêm vaccine %s mũi số %d cho bé %s tạm thời bị hủy"
                         .formatted(injection.getVaccine().getName(),
@@ -179,7 +179,7 @@ public class NotificationServiceImpl implements NotificationService {
         LocalDateTime eventDateTime = injection.getDate().toLocalDate().atTime(LocalTime.of(9, 0));
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Thay đổi lịch tiêm")
                 .message("Lịch tiêm vaccine %s mũi số %d cho bé %s đã được chuyển sang ngày %s (thời gian tiếp nhận 9:00 - 17:00)"
                         .formatted(injection.getVaccine().getName(),
@@ -213,7 +213,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public Long countNewNotificationsOfUser(Long userId) {
-        return systemNotificationRepository.findByUserIdBeforeTime(userId, Utils.currentTimestamp())
+        return systemNotificationRepository.findByUserIdBeforeTime(userId, DateTimeUtils.currentTimestamp())
                 .stream().filter(n -> n.getSeen().equals(false))
                 .count();
     }

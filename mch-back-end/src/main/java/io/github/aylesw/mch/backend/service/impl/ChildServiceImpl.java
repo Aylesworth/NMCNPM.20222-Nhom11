@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service.impl;
 
-import io.github.aylesw.mch.backend.common.Utils;
+import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.ChildDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
@@ -48,12 +48,12 @@ public class ChildServiceImpl implements ChildService {
 
         ChildRegistration childRegistration = mapper.map(childDto, ChildRegistration.class);
         childRegistration.setParent(parent);
-        childRegistration.setRequested(Utils.currentTimestamp());
+        childRegistration.setRequested(DateTimeUtils.currentTimestamp());
 
         childRegistrationRepository.save(childRegistration);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Đăng ký hồ sở trẻ em mới")
                 .message("Có một yêu cầu đăng ký hồ sơ cho bé %s từ người dùng %s"
                         .formatted(childRegistration.getFullName(), parent.getFullName()))
@@ -73,11 +73,11 @@ public class ChildServiceImpl implements ChildService {
         ChildChange childChange = mapper.map(childDto, ChildChange.class);
 
         childChange.setChild(child);
-        childChange.setRequested(Utils.currentTimestamp());
+        childChange.setRequested(DateTimeUtils.currentTimestamp());
         childChangeRepository.save(childChange);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .title("Yêu cầu thay đổi mới")
                 .message("Có một yêu cầu thay đổi hồ sơ thông tin của bé %s từ người dùng %s"
                         .formatted(child.getFullName(), child.getParent().getFullName()))
@@ -112,7 +112,7 @@ public class ChildServiceImpl implements ChildService {
 
         childRepository.save(child);
 
-        childRegistration.setApproved(Utils.currentTimestamp());
+        childRegistration.setApproved(DateTimeUtils.currentTimestamp());
         childRegistrationRepository.save(childRegistration);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
@@ -120,7 +120,7 @@ public class ChildServiceImpl implements ChildService {
                 .title("Hồ sơ trẻ được phê duyệt")
                 .message("Hồ sơ của bé %s mà bạn đăng ký đã được phê duyệt thành công."
                         .formatted(childRegistration.getFullName()))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
@@ -141,7 +141,7 @@ public class ChildServiceImpl implements ChildService {
                 .title("Hồ sơ trẻ bị từ chối")
                 .message("Hồ sơ của bé %s mà bạn đăng ký đã bị từ chối với lý do: %s"
                         .formatted(childRegistration.getFullName(), reason))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
@@ -161,7 +161,7 @@ public class ChildServiceImpl implements ChildService {
 
         childRepository.save(child);
 
-        childChange.setApproved(Utils.currentTimestamp());
+        childChange.setApproved(DateTimeUtils.currentTimestamp());
         childChangeRepository.save(childChange);
 
         NotificationDetails notificationDetails = NotificationDetails.builder()
@@ -169,7 +169,7 @@ public class ChildServiceImpl implements ChildService {
                 .title("Thay đổi hồ sơ trẻ được phê duyệt")
                 .message("Những thay đổi với hồ sơ bé %s đã được phê duyệt thành công."
                         .formatted(childChange.getFullName()))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
@@ -190,7 +190,7 @@ public class ChildServiceImpl implements ChildService {
                 .title("Thay đổi hồ sơ trẻ bị từ chối")
                 .message("Những thay đổi với hồ sơ bé %s đã bị từ chối với lý do: %s."
                         .formatted(childChange.getFullName(), reason))
-                .time(Utils.currentTimestamp())
+                .time(DateTimeUtils.currentTimestamp())
                 .build();
 
         notificationService.createSystemNotification(notificationDetails);
