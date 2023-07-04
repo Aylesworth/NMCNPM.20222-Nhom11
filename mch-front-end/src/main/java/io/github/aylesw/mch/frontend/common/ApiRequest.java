@@ -73,11 +73,13 @@ public class ApiRequest<T> {
 
         response = client.newCall(request).execute();
         if (!response.isSuccessful()) {
-            if (response.body().string().contains("Token has expired")) {
+            if (!url.endsWith("my-identity") && response.body().string().contains("Token has expired")) {
                 Utils.showAlert(Alert.AlertType.WARNING, "Phiên đăng nhập của bạn đã hết hạn!");
                 ScreenManager.getLoginStage().show();
+                return null;
+            } else {
+                throw new ApiRequestException(response.body().string());
             }
-            throw new ApiRequestException(response.body().string());
         }
 
         String responseBody = response.body().string();

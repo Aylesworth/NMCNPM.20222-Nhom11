@@ -33,6 +33,7 @@ public class UserIdentity {
                 .token(Utils.getToken())
                 .method("GET")
                 .build().request();
+        if (result == null) return;
         userId = ((Double) result.get("id")).longValue();
         userFullName = result.get("name").toString();
         roles = (List<String>) result.get("roles");
