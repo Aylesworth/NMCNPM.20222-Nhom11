@@ -6,10 +6,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-
 <TabPane prefHeight="800.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
-      <Tab text="Danh sách sự kiện">
+      <Tab closable="false" text="Danh sách sự kiện">
          <content>
             <ScrollPane maxHeight="-Infinity" prefHeight="739.0" prefWidth="1030.0">
                <content>
@@ -22,7 +21,7 @@
             </ScrollPane>
          </content>
       </Tab>
-      <Tab text="Sự kiện đã đăng ký">
+      <Tab closable="false" text="Sự kiện đã đăng ký">
          <content>
             <ScrollPane maxHeight="-Infinity" prefHeight="739.0" prefWidth="1030.0">
                <content>
