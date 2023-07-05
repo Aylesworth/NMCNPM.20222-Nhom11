@@ -234,7 +234,6 @@
 
 .date-picker .arrow-button {
     -fx-background-color: transparent;
-    -fx-background-image: url('../icon/calendar.png');
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 14px 14px;
