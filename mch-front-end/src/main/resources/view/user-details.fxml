@@ -24,7 +24,7 @@
                   <JFXButton fx:id="btnBack" onAction="#back" text="Quay lại" />
                </children>
             </FlowPane>
-            <Label fx:id="lblName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0">
+            <Label fx:id="lblName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" style="-fx-font-size: 24px;">
                <font>
                   <Font size="24.0" />
                </font>
@@ -35,64 +35,68 @@
                   <JFXButton fx:id="btnDelete" onAction="#deleteProfile" text="Xóa hồ sơ" />
                </children>
             </HBox>
-            <TitledPane animated="false" text="Thông tin cá nhân">
-               <content>
-                  <AnchorPane prefHeight="327.0" prefWidth="1028.0">
-                     <children>
-                        <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="203.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" promptText="Họ tên *" />
-                        <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="203.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Email *" />
-                        <StackPane layoutX="170.0" layoutY="194.0" prefHeight="42.0" prefWidth="295.0">
-                           <children>
-                              <DatePicker fx:id="dpDob" prefHeight="42.0" prefWidth="230.0" promptText="Ngày sinh *" visible="false" />
-                              <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="230.0" promptText="Ngày sinh *" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="203.0" layoutY="141.0">
-                           <children>
-                              <JFXComboBox fx:id="cbxSex" labelFloat="true" prefHeight="25.0" prefWidth="229.0" promptText="Giới tính *" visible="false" />
-                              <JFXTextField fx:id="txtSex" labelFloat="true" prefHeight="25.0" prefWidth="230.0" promptText="Giới tính *" />
-                           </children>
-                        </StackPane>
-                        <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" layoutX="577.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" promptText="Số điện thoại *" />
-                        <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="577.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Địa chỉ *" />
-                        <JFXTextField fx:id="txtCitizenId" labelFloat="true" layoutX="577.0" layoutY="141.0" prefHeight="25.0" prefWidth="230.0" promptText="Mã CCCD" />
-                        <JFXTextField fx:id="txtInsuranceId" labelFloat="true" layoutX="577.0" layoutY="200.0" prefHeight="25.0" prefWidth="230.0" promptText="Số BHYT" />
-                        <JFXButton fx:id="btnSave" layoutX="400.0" layoutY="258.0" onAction="#saveProfile" prefHeight="25.0" prefWidth="77.0" text="Lưu" />
-                        <JFXButton fx:id="btnCancel" layoutX="530.0" layoutY="258.0" onAction="#cancelEdit" prefHeight="25.0" prefWidth="77.0" text="Hủy" />
-                        <ProgressIndicator fx:id="spinner1" layoutX="478.0" layoutY="115.0" />
-                        <Label fx:id="lblError" alignment="CENTER" layoutX="302.0" layoutY="301.0" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-            <TitledPane prefHeight="104.0" prefWidth="1030.0" text="Trẻ em">
-               <content>
-                  <StackPane>
-                     <children>
-                        <FlowPane fx:id="childrenPane" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" prefHeight="22.0" prefWidth="1028.0">
-                           <children>
-                              <JFXButton style="-fx-background-color: AQUA; -fx-text-fill: #212121;" />
-                              <JFXButton fx:id="btnAddChild" onAction="#addChild" text="Thêm" />
-                           </children>
-                        </FlowPane>
-                        <ProgressIndicator fx:id="spinner2" />
-                     </children>
-                  </StackPane>
-               </content>
-            </TitledPane>
-            <TitledPane prefHeight="200.0" prefWidth="200.0" text="Sự kiện đăng ký">
-               <content>
-                  <ScrollPane prefWidth="992.0">
+            <VBox>
+               <children>
+                  <TitledPane animated="false" text="Thông tin cá nhân">
                      <content>
-                        <VBox fx:id="eventsPane" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="1007.0" spacing="20.0">
+                        <AnchorPane prefHeight="327.0" prefWidth="1028.0">
                            <children>
-                              <Label style="-fx-font-size: 14px;" text="Label" />
+                              <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="203.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" promptText="Họ tên *" />
+                              <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="203.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Email *" />
+                              <StackPane layoutX="170.0" layoutY="194.0" prefHeight="42.0" prefWidth="295.0">
+                                 <children>
+                                    <DatePicker fx:id="dpDob" prefHeight="42.0" prefWidth="230.0" promptText="Ngày sinh *" visible="false" />
+                                    <JFXTextField fx:id="txtDob" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="230.0" promptText="Ngày sinh *" />
+                                 </children>
+                              </StackPane>
+                              <StackPane layoutX="203.0" layoutY="141.0">
+                                 <children>
+                                    <JFXComboBox fx:id="cbxSex" labelFloat="true" prefHeight="25.0" prefWidth="229.0" promptText="Giới tính *" visible="false" />
+                                    <JFXTextField fx:id="txtSex" labelFloat="true" prefHeight="25.0" prefWidth="230.0" promptText="Giới tính *" />
+                                 </children>
+                              </StackPane>
+                              <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" layoutX="577.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" promptText="Số điện thoại *" />
+                              <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="577.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Địa chỉ *" />
+                              <JFXTextField fx:id="txtCitizenId" labelFloat="true" layoutX="577.0" layoutY="141.0" prefHeight="25.0" prefWidth="230.0" promptText="Mã CCCD" />
+                              <JFXTextField fx:id="txtInsuranceId" labelFloat="true" layoutX="577.0" layoutY="200.0" prefHeight="25.0" prefWidth="230.0" promptText="Số BHYT" />
+                              <JFXButton fx:id="btnSave" layoutX="400.0" layoutY="258.0" onAction="#saveProfile" prefHeight="25.0" prefWidth="77.0" text="Lưu" />
+                              <JFXButton fx:id="btnCancel" layoutX="530.0" layoutY="258.0" onAction="#cancelEdit" prefHeight="25.0" prefWidth="77.0" text="Hủy" />
+                              <ProgressIndicator fx:id="spinner1" layoutX="478.0" layoutY="115.0" />
+                              <Label fx:id="lblError" alignment="CENTER" layoutX="302.0" layoutY="301.0" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
                            </children>
-                        </VBox>
+                        </AnchorPane>
                      </content>
-                  </ScrollPane>
-               </content>
-            </TitledPane>
+                  </TitledPane>
+                  <TitledPane prefHeight="31.0" prefWidth="1014.0" text="Trẻ em">
+                     <content>
+                        <StackPane>
+                           <children>
+                              <FlowPane fx:id="childrenPane" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" prefHeight="22.0" prefWidth="1028.0">
+                                 <children>
+                                    <JFXButton style="-fx-background-color: AQUA; -fx-text-fill: #212121;" />
+                                    <JFXButton fx:id="btnAddChild" onAction="#addChild" text="Thêm" />
+                                 </children>
+                              </FlowPane>
+                              <ProgressIndicator fx:id="spinner2" />
+                           </children>
+                        </StackPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" text="Sự kiện đăng ký">
+                     <content>
+                        <ScrollPane prefWidth="992.0">
+                           <content>
+                              <VBox fx:id="eventsPane" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="1007.0" spacing="20.0">
+                                 <children>
+                                    <Label style="-fx-font-size: 14px;" text="Label" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </TitledPane>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </content>
