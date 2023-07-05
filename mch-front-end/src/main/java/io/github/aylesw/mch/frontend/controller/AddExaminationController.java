@@ -144,7 +144,7 @@ public class AddExaminationController implements Initializable {
         lblError.setText("");
         txtMedicine.setStyle("");
 
-        if (txtMedicine.getText().isBlank()) {
+        if (txtMedicine.getText().isEmpty()) {
             txtMedicine.setStyle(AppConstants.ERROR_BACKGROUND);
             lblError.setText("Tên thuốc không hợp lệ!");
             return;

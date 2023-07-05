@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +23,13 @@ public interface InjectionRepository extends JpaRepository<Injection, Long> {
     @Query("SELECT i FROM Injection i JOIN FETCH i.child c JOIN FETCH i.vaccine v " +
             "WHERE c.id = ?1 AND v.name LIKE ?2 AND v.doseNo = ?3")
     Optional<Injection> findByChildIdAndVaccineNameAndDoseNo(Long childId, String vaccineName, Integer doseNo);
+
+    @Query("SELECT COUNT(i) FROM Injection i JOIN i.vaccine v " +
+            "WHERE v.name LIKE ?1 AND i.date >= ?2 AND i.date <= ?3")
+    long countByVaccine(String vaccine, Date fromDate, Date toDate);
+
+    @Query("SELECT COUNT(i) FROM Injection i JOIN i.vaccine v " +
+            "WHERE v.name LIKE ?1 AND v.doseNo = ?2 AND i.date >= ?3 AND i.date <= ?4")
+    long countByVaccine(String vaccine, Integer doseNo, Date fromDate, Date toDate);
+
 }

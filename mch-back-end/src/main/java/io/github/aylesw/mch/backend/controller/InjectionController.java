@@ -1,6 +1,7 @@
 package io.github.aylesw.mch.backend.controller;
 
 import io.github.aylesw.mch.backend.dto.InjectionDto;
+import io.github.aylesw.mch.backend.dto.VaccineStatisticsItem;
 import io.github.aylesw.mch.backend.model.Vaccine;
 import io.github.aylesw.mch.backend.service.InjectionService;
 import jakarta.validation.Valid;
@@ -101,5 +102,13 @@ public class InjectionController {
 
         injectionService.removeReaction(childId, injectionId, reaction);
         return ResponseEntity.ok("Reaction removed successfully");
+    }
+
+    @GetMapping("/injections/vaccine-stats")
+    public ResponseEntity<List<VaccineStatisticsItem>> getVaccineStatistics(
+            @RequestParam(value = "month", required = false) Integer month,
+            @RequestParam(value = "year", required = false) Integer year
+    ) {
+        return ResponseEntity.ok(injectionService.getVaccineStatistics(month, year));
     }
 }

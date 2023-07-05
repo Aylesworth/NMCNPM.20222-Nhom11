@@ -11,5 +11,5 @@ public interface ExaminationService {
 
     void updateExamination(Long childId, Long examinationId, ExaminationDto examinationDto);
 
-    void delete(Long childId, Long examinationId);
+    void deleteExamination(Long childId, Long examinationId);
 }

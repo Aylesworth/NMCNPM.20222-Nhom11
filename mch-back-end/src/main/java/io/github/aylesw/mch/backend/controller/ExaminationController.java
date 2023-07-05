@@ -28,17 +28,17 @@ public class ExaminationController {
     }
 
     @PutMapping("/children/{child-id}/examinations/{id}")
-    public ResponseEntity<String> update(@PathVariable("child-id") Long childId,
-                                         @PathVariable("id") Long examinationId,
-                                         @Valid @RequestBody ExaminationDto examinationDto) {
+    public ResponseEntity<String> updateExamination(@PathVariable("child-id") Long childId,
+                                                    @PathVariable("id") Long examinationId,
+                                                    @Valid @RequestBody ExaminationDto examinationDto) {
         examinationService.updateExamination(childId, examinationId, examinationDto);
         return ResponseEntity.ok("Examination information updated successfully");
     }
 
     @DeleteMapping("/children/{child-id}/examinations/{id}")
-    public ResponseEntity<String> delete(@PathVariable("child-id") Long childId,
-                                         @PathVariable("id") Long examinationId) {
-        examinationService.delete(childId, examinationId);
+    public ResponseEntity<String> deleteExamination(@PathVariable("child-id") Long childId,
+                                                    @PathVariable("id") Long examinationId) {
+        examinationService.deleteExamination(childId, examinationId);
         return ResponseEntity.ok("Examination information deleted successfully");
     }
 

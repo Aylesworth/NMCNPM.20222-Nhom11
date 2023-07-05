@@ -28,8 +28,8 @@ public class BodyMetricsController {
     }
 
     @DeleteMapping("/children/{child-id}/body-metrics/{id}")
-    public ResponseEntity<String> delete(@PathVariable("child-id") Long childId,
-                                         @PathVariable("id") Long bodyMetricsId) {
+    public ResponseEntity<String> deleteBodyMetrics(@PathVariable("child-id") Long childId,
+                                                    @PathVariable("id") Long bodyMetricsId) {
         bodyMetricsService.deleteBodyMetrics(childId, bodyMetricsId);
         return ResponseEntity.ok("Body metrics deleted successfully");
     }

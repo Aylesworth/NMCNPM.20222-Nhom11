@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <TabPane prefHeight="801.0" prefWidth="1030.0" stylesheets="@../style/material-ui.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -102,26 +104,37 @@
     </Tab>
       <Tab text="Thống kê mũi tiêm">
          <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <BarChart layoutX="58.0" layoutY="154.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
-                  <AreaChart layoutX="515.0" layoutY="131.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </AreaChart>
-               </children>
-            </AnchorPane>
+            <ScrollPane prefHeight="741.0" prefWidth="1030.0">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="753.0" prefWidth="1011.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                           <children>
+                              <JFXComboBox fx:id="cbxMonth" labelFloat="true" prefHeight="30.0" prefWidth="87.0" promptText="Tháng" />
+                              <JFXComboBox fx:id="cbxYear" labelFloat="true" prefHeight="30.0" prefWidth="87.0" promptText="Năm" />
+                           </children>
+                        </HBox>
+                        <BarChart fx:id="chartStats" maxWidth="-Infinity" prefHeight="400.0" prefWidth="694.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="yAxis" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <TableView fx:id="tblStats" maxWidth="-Infinity" prefHeight="318.0" prefWidth="697.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </content>
       </Tab>
   </tabs>

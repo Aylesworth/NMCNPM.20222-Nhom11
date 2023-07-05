@@ -36,18 +36,6 @@
 	</style>
 </head>
 <body>
-	<h3>MỤC LỤC</h3>
-	<ul>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> MỤC LỤC</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> GIỚI THIỆU</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> THÀNH VIÊN NHÓM</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> PROJECT : HỆ THỐNG QUẢN LÝ SỨC KHỎE MẸ VÀ BÉ</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> ĐỊNH HƯỚNG PHÁT TRIỂN</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> QUẢN LÝ</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> TRIỂN KHAI</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> GIAI ĐOẠN I</a></li>
-		<li><a href="#"><svg class="material-icons" viewBox="0 0 24 24"><path d="M8.59,16.34L13.17,12L8.59,7.66L10,6.34l6,6l-6,6L8.59,16.34z"/></svg> TIẾN ĐỘ</a></li>
-	</ul>
 	<h3>GIỚI THIỆU</h3>
 	<hr>
 	<h3>THÀNH VIÊN NHÓM</h3>
@@ -86,18 +74,18 @@
     </ul>
 	<h3>PROJECT : HỆ THỐNG QUẢN LÝ SỨC KHỎE MẸ VÀ BÉ</h3>
 	<hr>
-	<p>Yêu cầu chung: Một phần mềm giúp quản lý sức khỏe bé cho các mẹ</p>
-	<p>Chức năng:  Giúp chăm sóc sức khỏe các bé dễ dàng hơn, thêm các sự kiện cho các mẹ và các mũi tiêm định kỳ cho các bé</p>
+	<p>Yêu cầu chung: Phần mềm giúp cơ sở y tế quản lý thông tin sức khỏe bà mẹ và trẻ em</p>
+	<p>Chức năng:  Quản lý thông tin cơ bản như chiều cao, cân nặng, lịch sử khám chữa bệnh, tiêm chủng</p>
 	<h3>ĐỊNH HƯỚNG PHÁT TRIỂN</h3>
 	<hr>
-	<p>Đối tượng sử dụng: Phụ huynh các bé</p>
+	<p>Đối tượng sử dụng: Cán bộ cơ sở y tế, phụ huynh muốn theo dõi sức khỏe con em mình</p>
 	<p>Phần mềm được viết chủ yếu bằng Java.</p>
 	<h3>QUẢN LÝ</h3>
 	<hr>
-	<p>Với việc các yêu cầu tính năng liên tục được thay đổi, dự án sẽ được quản lý theo mô hình Client Sever, với khả năng thích nghi tốt hơn.</p>
+	<p>Với mục đích cho phép phục vụ nhiều người dùng cùng lúc, dự án sẽ được quản lý theo mô hình client-server.</p>
 	<p>Các phần của dự án sẽ được ưu tiên thực hiện với khả năng hoạt động động lập cao, còn gọi là modularity. Các mảnh nhỏ sẽ được thực hiện lần lượt hoặc đồng thời, sau đó được lắp ghép lại.</p>
 	<h3>TRIỂN KHAI</h3>
 	<hr>
-	<p>Phù hợp nhất với yêu cầu sẽ là MVC truyền thống, cho phép tách các phần của dự án làm 3 yêu tố riêng biệt.</p>
+	<p>Server sẽ được cấu hình và triển khai 24/24. Người dùng sẽ sử dụng giao diện client để thao tác với dữ liệu trong server.</p>
 </body>
 </html>

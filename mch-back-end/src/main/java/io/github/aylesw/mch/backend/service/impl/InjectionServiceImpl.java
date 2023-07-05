@@ -3,6 +3,7 @@ package io.github.aylesw.mch.backend.service.impl;
 import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
+import io.github.aylesw.mch.backend.dto.VaccineStatisticsItem;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Child;
@@ -19,7 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -318,5 +322,44 @@ public class InjectionServiceImpl implements InjectionService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Injection does not belong to child");
 
         reactionRepository.deleteByInjectionIdAndDetails(injectionId, reaction);
+    }
+
+    @Override
+    public List<VaccineStatisticsItem> getVaccineStatistics(Integer month, Integer year) {
+
+        List<VaccineStatisticsItem> vaccineStatistics = new ArrayList<>();
+        List<Vaccine> vaccines = vaccineRepository.findAll();
+
+        Date fromDate, toDate;
+
+        if (month == null || year == null) {
+            fromDate = Date.valueOf(LocalDate.of(1900, 1, 1));
+            toDate = Date.valueOf(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()));
+        } else {
+            fromDate = Date.valueOf(LocalDate.of(year, month, 1));
+            toDate = Date.valueOf(fromDate.toLocalDate().with(TemporalAdjusters.lastDayOfMonth()));
+        }
+
+        vaccines.forEach(vaccine -> {
+            VaccineStatisticsItem vaccineStatisticsItem = VaccineStatisticsItem.builder()
+                    .vaccine(vaccine.getName())
+                    .doseNo(vaccine.getDoseNo())
+                    .quantity(injectionRepository.countByVaccine(vaccine.getName(), vaccine.getDoseNo(), fromDate, toDate))
+                    .build();
+            vaccineStatistics.add(vaccineStatisticsItem);
+        });
+
+        vaccines.stream()
+                .map(vaccine -> vaccine.getName()).collect(Collectors.toSet())
+                .forEach(name -> {
+                    VaccineStatisticsItem vaccineStatisticsItem = VaccineStatisticsItem.builder()
+                            .vaccine(name)
+                            .doseNo(0)
+                            .quantity(injectionRepository.countByVaccine(name, fromDate, toDate))
+                            .build();
+                    vaccineStatistics.add(vaccineStatisticsItem);
+                });
+
+        return vaccineStatistics;
     }
 }

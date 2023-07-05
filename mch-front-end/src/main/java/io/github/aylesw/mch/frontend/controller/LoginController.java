@@ -73,7 +73,7 @@ public class LoginController {
             ScreenManager.setNavBar();
             ScreenManager.setHeaderBar();
         } catch (Exception e) {
-            if (e.getMessage().contains("No value present") || e.getMessage().contains("Bad credentials")) {
+            if (e.getMessage().contains("No value present") || e.getMessage().contains("Bad credentials") || e instanceof IllegalStateException) {
                 lblError.setText("Email hoặc mật khẩu không đúng!");
             } else {
                 e.printStackTrace();

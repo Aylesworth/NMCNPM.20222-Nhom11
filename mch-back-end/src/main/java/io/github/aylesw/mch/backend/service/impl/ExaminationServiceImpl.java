@@ -61,7 +61,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
 
     @Override
-    public void delete(Long childId, Long examinationId) {
+    public void deleteExamination(Long childId, Long examinationId) {
         Child child = childRepository.findById(childId)
                 .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
 

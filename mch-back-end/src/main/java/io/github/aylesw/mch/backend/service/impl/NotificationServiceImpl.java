@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 
-    private final GoogleCalendarService googleCalendarService;
     private final SystemNotificationRepository systemNotificationRepository;
     private final EmailNotificationRepository emailNotificationRepository;
     private final UserRepository userRepository;
