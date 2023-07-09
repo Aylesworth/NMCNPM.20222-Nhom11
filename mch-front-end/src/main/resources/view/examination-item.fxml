@@ -2,24 +2,31 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="177.0" prefWidth="990.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="181.0" layoutY="57.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Lý do:" />
-      <Label layoutX="181.0" layoutY="93.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
-      <Label layoutX="181.0" layoutY="20.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
-      <Label layoutX="465.0" layoutY="19.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Nơi khám:" />
-      <Label fx:id="lblDate" layoutX="271.0" layoutY="19.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="21/06/2023" />
-      <Label fx:id="lblReason" layoutX="271.0" layoutY="56.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Bụng to" />
-      <Label fx:id="lblNote" layoutX="271.0" layoutY="92.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="(không có)" />
-      <Label fx:id="lblFacility" layoutX="578.0" layoutY="19.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Bệnh viện Miyazaki" />
-      <JFXButton fx:id="btnDelete" layoutX="848.0" layoutY="102.0" onAction="#delete" prefHeight="25.0" prefWidth="85.0" text="Xóa" />
-      <Label layoutX="465.0" layoutY="56.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Chẩn đoán:" />
-      <Label fx:id="lblResult" layoutX="578.0" layoutY="56.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Mang thai (song thai)" />
-      <JFXButton fx:id="btnEdit" layoutX="848.0" layoutY="54.0" onAction="#edit" prefHeight="25.0" prefWidth="85.0" text="Sửa" />
-      <JFXListView fx:id="listMedicines" layoutX="578.0" layoutY="92.0" prefHeight="65.0" prefWidth="161.0" />
-      <Label layoutX="465.0" layoutY="92.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Đơn thuốc:" />
+      <Label layoutX="133.0" layoutY="57.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Lý do:" />
+      <Label layoutX="133.0" layoutY="93.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
+      <Label layoutX="133.0" layoutY="20.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
+      <Label layoutX="443.0" layoutY="19.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Nơi khám:" />
+      <Label fx:id="lblDate" layoutX="223.0" layoutY="19.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="21/06/2023" />
+      <Label fx:id="lblReason" layoutX="223.0" layoutY="56.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Bụng to" />
+      <Label fx:id="lblNote" alignment="TOP_LEFT" layoutX="223.0" layoutY="92.0" prefHeight="57.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="(không có)" wrapText="true" />
+      <Label fx:id="lblFacility" layoutX="556.0" layoutY="19.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Bệnh viện Miyazaki" />
+      <JFXButton fx:id="btnDelete" layoutX="840.0" layoutY="97.0" onAction="#delete" prefHeight="30.0" prefWidth="71.0" text="Xóa">
+         <graphic>
+            <MaterialIconView fill="WHITE" glyphName="DELETE" size="20" />
+         </graphic></JFXButton>
+      <Label layoutX="443.0" layoutY="56.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Chẩn đoán:" />
+      <Label fx:id="lblResult" layoutX="556.0" layoutY="56.0" prefHeight="17.0" style="-fx-font-size: 14px;" text="Mang thai (song thai)" />
+      <JFXButton fx:id="btnEdit" layoutX="840.0" layoutY="49.0" onAction="#edit" prefHeight="30.0" prefWidth="71.0" text="Sửa">
+         <graphic>
+            <MaterialIconView fill="WHITE" glyphName="EDIT" size="20" />
+         </graphic></JFXButton>
+      <JFXListView fx:id="listMedicines" layoutX="556.0" layoutY="93.0" prefHeight="64.0" prefWidth="161.0" />
+      <Label layoutX="443.0" layoutY="92.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Đơn thuốc:" />
    </children>
 </AnchorPane>

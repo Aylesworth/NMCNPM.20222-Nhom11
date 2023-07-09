@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -16,6 +17,9 @@
                      <VBox.margin>
                         <Insets bottom="20.0" top="10.0" />
                      </VBox.margin>
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
+                     </graphic>
                   </JFXButton>
                   <FlowPane fx:id="flowPane" alignment="TOP_CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1020.0" vgap="20.0">
                      <padding>

@@ -1,14 +1,9 @@
 package io.github.aylesw.mch.frontend;
 
-import io.github.aylesw.mch.frontend.common.ApiRequest;
-import io.github.aylesw.mch.frontend.common.AppConstants;
 import io.github.aylesw.mch.frontend.common.UserIdentity;
-import io.github.aylesw.mch.frontend.common.Utils;
 import io.github.aylesw.mch.frontend.controller.ScreenManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.util.Map;
 
 public class App extends Application {
 
@@ -21,7 +16,6 @@ public class App extends Application {
         try {
             UserIdentity.updateUserIdentity();
         } catch (Exception e) {
-            ScreenManager.getLoginStage().show();
             return;
         }
 

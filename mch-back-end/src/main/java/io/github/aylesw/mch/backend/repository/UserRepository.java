@@ -10,14 +10,14 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	public Optional<User> findByEmail(String email);
+	Optional<User> findByEmail(String email);
 
 	@Query("SELECT u FROM User u WHERE u.fullName LIKE %?1% OR u.email LIKE %?1%")
-	public List<User> findByKeyword(String keyword);
+	List<User> findByKeyword(String keyword);
 
-	public boolean existsByEmail(String email);
+	boolean existsByEmail(String email);
 
 	@Query("SELECT u FROM User u JOIN FETCH u.roles r WHERE r.name LIKE 'ADMIN'")
-	public List<User> findAdmins();
+	List<User> findAdmins();
 
 }

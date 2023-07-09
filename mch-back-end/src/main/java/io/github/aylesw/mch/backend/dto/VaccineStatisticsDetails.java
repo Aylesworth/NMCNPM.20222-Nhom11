@@ -5,19 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VaccineStatisticsItem implements Comparable<VaccineStatisticsItem> {
+public class VaccineStatisticsDetails implements Comparable<VaccineStatisticsDetails> {
     private String vaccine;
     private Integer doseNo;
     private Long quantity;
 
     @Override
-    public int compareTo(VaccineStatisticsItem other) {
+    public int compareTo(VaccineStatisticsDetails other) {
         if (!this.vaccine.equals(other.vaccine))
             return this.vaccine.compareTo(other.vaccine);
 

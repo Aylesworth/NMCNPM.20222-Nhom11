@@ -5,44 +5,75 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox alignment="CENTER" prefHeight="707.0" prefWidth="1008.0" style="-fx-background-color: AQUA;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label style="-fx-font-size: 18; -fx-font-weight: bold;" stylesheets="@../style/material-ui.css" text="ĐĂNG NHẬP">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="30.0" />
-         </VBox.margin></Label>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Email" stylesheets="@../style/material-ui.css">
-         <VBox.margin>
-            <Insets bottom="30.0" />
-         </VBox.margin>
-      </JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" labelFloat="true" maxWidth="-Infinity" onAction="#login" prefWidth="200.0" promptText="Mật khẩu" stylesheets="@../style/material-ui.css">
-         <VBox.margin>
-            <Insets bottom="30.0" />
-         </VBox.margin>
-      </JFXPasswordField>
-      <JFXButton fx:id="btnLogin" alignment="CENTER" onAction="#login" prefHeight="28.0" prefWidth="94.0" stylesheets="@../style/material-ui.css" text="Đăng nhập" textAlignment="CENTER" textFill="WHITE">
-         <VBox.margin>
-            <Insets bottom="15.0" />
-         </VBox.margin>
-         <font>
-            <Font size="13.0" />
-         </font></JFXButton>
-      <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;">
-         <VBox.margin>
-            <Insets bottom="15.0" />
-         </VBox.margin>
-      </Label>
-      <JFXButton fx:id="btnForgotPassword" onAction="#resetPassword" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff">
-         <VBox.margin>
-            <Insets bottom="15.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="btnSignUp" onAction="#signUp" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff" />
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="408.0" style="-fx-background-color: white;">
+         <children>
+            <Label alignment="CENTER" graphicTextGap="10.0" prefHeight="54.0" prefWidth="348.0" style="-fx-text-fill: PURPLE; -fx-font-weight: bold;" text="QUẢN LÝ SỨC KHỎE MẸ VÀ BÉ" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Felix Titling" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="68.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/logo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" stylesheets="@../style/material-ui.css" text="ĐĂNG NHẬP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Label>
+            <JFXTextField fx:id="txtEmail" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Email" stylesheets="@../style/material-ui.css">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" maxWidth="-Infinity" onAction="#login" prefWidth="200.0" promptText="Mật khẩu" stylesheets="@../style/material-ui.css">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <JFXButton fx:id="btnLogin" alignment="CENTER" onAction="#login" prefHeight="28.0" prefWidth="94.0" stylesheets="@../style/material-ui.css" text="Đăng nhập" textAlignment="CENTER" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Label>
+            <JFXButton fx:id="btnForgotPassword" onAction="#resetPassword" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Quên mật khẩu?" textFill="#2f00ff">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnSignUp" onAction="#signUp" style="-fx-text-fill: blue; -fx-font-weight: none; -fx-font-size: 14px; -fx-font-family: &quot;Roboto&quot;, sans-serif;" text="Đăng ký tài khoản" textFill="#2f00ff">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+         <effect>
+            <DropShadow height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </VBox>
    </children>
 </VBox>

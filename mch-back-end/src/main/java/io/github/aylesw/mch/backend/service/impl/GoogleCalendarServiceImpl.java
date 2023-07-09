@@ -82,6 +82,7 @@ public class GoogleCalendarServiceImpl implements GoogleCalendarService {
         return credential;
     }
 
+    @Override
     public void sendEventInvitation(String recipientEmail, String eventTitle, String eventDescription, LocalDateTime eventDateTime) {
         try {
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();

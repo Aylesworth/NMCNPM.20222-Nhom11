@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -45,11 +46,26 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
                            <children>
-                              <JFXButton onAction="#exportSchedule" prefHeight="30.0" prefWidth="118.0" text="Xuất lịch tiêm" />
-                              <JFXButton onAction="#addInjection" prefHeight="30.0" prefWidth="118.0" text="Thêm" />
-                              <JFXButton fx:id="btnChangeDate" onAction="#changeDate" prefHeight="30.0" prefWidth="118.0" text="Thay đổi ngày" />
-                              <JFXButton fx:id="btnDeleteInjection" onAction="#deleteInjection" prefHeight="30.0" prefWidth="118.0" text="Xóa" />
-                              <JFXButton fx:id="btnViewProfile" onAction="#viewProfile" prefHeight="30.0" prefWidth="118.0" text="Hồ sơ trẻ" />
+                              <JFXButton onAction="#exportSchedule" prefHeight="30.0" prefWidth="138.0" text="Xuất lịch tiêm">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="PUBLISH" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton onAction="#addInjection" prefHeight="30.0" prefWidth="118.0" text="Thêm">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="btnChangeDate" onAction="#changeDate" prefHeight="30.0" prefWidth="118.0" text="Đổi ngày">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="DATE_RANGE" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="btnDeleteInjection" onAction="#deleteInjection" prefHeight="30.0" prefWidth="118.0" text="Xóa">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="DELETE" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="btnViewProfile" onAction="#viewProfile" prefHeight="30.0" prefWidth="118.0" text="Hồ sơ trẻ">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="ACCOUNT_BOX" size="20" />
+                                 </graphic></JFXButton>
                            </children>
                         </VBox>
                      </children>
@@ -91,9 +107,18 @@
                               <JFXTextField fx:id="txtDoseNo" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Mũi số" />
                               <JFXTextField fx:id="txtDate" editable="false" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ngày tiêm" />
                               <JFXTextField fx:id="txtNote" labelFloat="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="Ghi chú" />
-                              <JFXButton fx:id="btnConfirm" onAction="#confirm" prefHeight="30.0" prefWidth="118.0" text="Xác nhận" />
-                              <JFXButton fx:id="btnCancel" onAction="#cancel" prefHeight="30.0" prefWidth="118.0" text="Hủy mũi tiêm" />
-                              <JFXButton fx:id="btnViewProfile2" onAction="#viewProfile2" prefHeight="30.0" prefWidth="118.0" text="Hồ sơ trẻ" />
+                              <JFXButton fx:id="btnConfirm" onAction="#confirm" prefHeight="30.0" prefWidth="118.0" text="Xác nhận">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="CHECK" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="btnCancel" onAction="#cancel" prefHeight="30.0" prefWidth="118.0" text="Hủy">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="CLEAR" size="20" />
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="btnViewProfile2" onAction="#viewProfile2" prefHeight="30.0" prefWidth="118.0" text="Hồ sơ trẻ">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="ACCOUNT_BOX" size="20" />
+                                 </graphic></JFXButton>
                            </children>
                         </VBox>
                      </children>

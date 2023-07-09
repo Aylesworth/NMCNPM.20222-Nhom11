@@ -239,15 +239,15 @@ public class ChildServiceImpl implements ChildService {
         childRepository.save(child);
     }
 
+    @Override
+    public void deleteChild(Long id) {
+        childRepository.deleteById(id);
+    }
+
     private ChildDto mapToDto(Child child) {
         ChildDto childDto = mapper.map(child, ChildDto.class);
         childDto.setParentId(child.getParent().getId());
         childDto.setParentName(child.getParent().getFullName());
         return childDto;
-    }
-
-    @Override
-    public void deleteChild(Long id) {
-        childRepository.deleteById(id);
     }
 }

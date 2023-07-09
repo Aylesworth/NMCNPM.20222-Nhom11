@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -26,9 +27,18 @@
                   <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="59.0" layoutY="56.0" onKeyReleased="#search" prefHeight="25.0" prefWidth="213.0" promptText="Tìm kiếm" />
                   <HBox alignment="CENTER" layoutX="345.0" layoutY="275.0" prefHeight="30.0" prefWidth="545.0" spacing="30.0">
                      <children>
-                        <JFXButton fx:id="btnSendNotification" onAction="#sendNotification" text="Gửi thông báo" />
-                        <JFXButton fx:id="btnUpdate" onAction="#updateEvent" prefHeight="30.0" prefWidth="102.0" text="Cập nhật" />
-                        <JFXButton fx:id="btnDelete" onAction="#deleteEvent" text="Xóa sự kiện" />
+                        <JFXButton fx:id="btnSendNotification" onAction="#sendNotification" text="Gửi thông báo">
+                           <graphic>
+                              <MaterialIconView fill="WHITE" glyphName="ADD_ALERT" size="20" />
+                           </graphic></JFXButton>
+                        <JFXButton fx:id="btnUpdate" onAction="#updateEvent" prefHeight="30.0" prefWidth="106.0" text="Cập nhật">
+                           <graphic>
+                              <MaterialIconView fill="WHITE" glyphName="SAVE" size="20" />
+                           </graphic></JFXButton>
+                        <JFXButton fx:id="btnDelete" onAction="#deleteEvent" prefHeight="30.0" prefWidth="125.0" text="Xóa sự kiện">
+                           <graphic>
+                              <MaterialIconView fill="WHITE" glyphName="DELETE" size="20" />
+                           </graphic></JFXButton>
                      </children>
                   </HBox>
                   <TableView fx:id="tblParticipants" layoutX="345.0" layoutY="384.0" prefHeight="347.0" prefWidth="545.0">
@@ -41,8 +51,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton fx:id="btnViewProfile" layoutX="906.0" layoutY="501.0" onAction="#viewProfile" text="Xem hồ sơ" />
-                  <JFXButton fx:id="btnRemoveUser" layoutX="906.0" layoutY="558.0" onAction="#removeUser" prefHeight="30.0" prefWidth="89.0" text="Xóa" />
+                  <JFXButton fx:id="btnViewProfile" layoutX="906.0" layoutY="551.0" onAction="#viewProfile" prefHeight="30.0" prefWidth="90.0" text="Hồ sơ">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="ACCOUNT_BOX" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnRemoveUser" layoutX="906.0" layoutY="497.0" onAction="#removeUser" prefHeight="30.0" prefWidth="89.0" text="Xóa">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="REMOVE" size="20" />
+                     </graphic></JFXButton>
                   <Label layoutX="531.0" layoutY="358.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Danh sách người tham gia">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -52,7 +68,10 @@
                   <JFXTextArea fx:id="txtDescription" labelFloat="true" layoutX="344.0" layoutY="100.0" prefHeight="147.0" prefWidth="197.0" promptText="Mô tả" />
                   <JFXTextField fx:id="txtMinAge" labelFloat="true" layoutX="608.0" layoutY="218.0" prefHeight="25.0" prefWidth="87.0" promptText="Tuổi tối thiểu" />
                   <JFXTextField fx:id="txtMaxAge" labelFloat="true" layoutX="720.0" layoutY="218.0" prefHeight="25.0" prefWidth="83.0" promptText="Tuổi tối đa" />
-                  <JFXButton fx:id="btnAddUser" layoutX="906.0" layoutY="443.0" onAction="#addUser" prefHeight="30.0" prefWidth="89.0" text="Thêm" />
+                  <JFXButton fx:id="btnAddUser" layoutX="906.0" layoutY="443.0" onAction="#addUser" prefHeight="30.0" prefWidth="89.0" text="Thêm">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
+                     </graphic></JFXButton>
                   <JFXRadioButton fx:id="rbtnAll" layoutX="59.0" layoutY="108.0" selected="true" text="Tất cả">
                      <toggleGroup>
                         <ToggleGroup fx:id="filter" />
@@ -63,8 +82,13 @@
                   <DatePicker fx:id="dpToDate" layoutX="695.0" layoutY="156.0" promptText="Đến ngày" />
                   <Label layoutX="608.0" layoutY="111.0" style="-fx-font-size: 14px;" text="Từ ngày:" />
                   <Label layoutX="608.0" layoutY="168.0" style="-fx-font-size: 14px;" text="Đến ngày:" />
-                  <JFXButton layoutX="160.0" layoutY="660.0" onAction="#addEvent" prefHeight="30.0" prefWidth="111.0" text="Thêm sự kiện" />
+                  <JFXButton layoutX="134.0" layoutY="660.0" onAction="#addEvent" prefHeight="30.0" prefWidth="137.0" text="Thêm sự kiện">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
+                     </graphic></JFXButton>
                   <Label fx:id="lblError" alignment="CENTER" layoutX="416.0" layoutY="325.0" prefHeight="19.0" prefWidth="403.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
+                  <MaterialIconView glyphName="EVENT" layoutX="315.0" layoutY="71.0" size="20" />
+                  <MaterialIconView glyphName="SEARCH" layoutX="27.0" layoutY="88.0" size="25" />
                </children>
             </AnchorPane>
          </content>

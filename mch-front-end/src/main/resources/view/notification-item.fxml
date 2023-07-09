@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,12 +9,15 @@
 
 <AnchorPane prefHeight="109.0" prefWidth="1008.0" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="container" alignment="CENTER" layoutX="132.0" prefHeight="109.0" prefWidth="769.0" spacing="10.0" style="-fx-background-radius: 10;">
+      <VBox fx:id="container" alignment="CENTER" layoutX="132.0" prefHeight="131.0" prefWidth="769.0" spacing="10.0" style="-fx-background-radius: 10;">
          <children>
             <Label fx:id="lblTitle" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Title">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <MaterialIconView fx:id="iconNoti" glyphName="NOTIFICATIONS" size="20" />
+               </graphic>
             </Label>
             <Label fx:id="lblMessage" alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 14px;" text="This is notification's content." wrapText="true">
                <font>

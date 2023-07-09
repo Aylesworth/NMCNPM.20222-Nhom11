@@ -1,5 +1,6 @@
 package io.github.aylesw.mch.frontend.controller;
 
+import com.jfoenix.controls.JFXButton;
 import io.github.aylesw.mch.frontend.common.ApiRequest;
 import io.github.aylesw.mch.frontend.common.AppConstants;
 import javafx.event.ActionEvent;
@@ -19,8 +20,11 @@ public class NavBarController implements Initializable {
         this.userId = userId;
     }
 
+//    @FXML
+//    private Label lblNewNotiCount;
+
     @FXML
-    private Label lblNewNotiCount;
+    private JFXButton btnNotifications;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,11 +41,13 @@ public class NavBarController implements Initializable {
             long count = ((Double) result.get("count")).longValue();
 
             if (count > 0) {
-                lblNewNotiCount.setVisible(true);
-                lblNewNotiCount.setText(" " + count + " ");
+//                lblNewNotiCount.setVisible(true);
+//                lblNewNotiCount.setText(" " + count + " ");
+                btnNotifications.setText("Thông báo ("+count+")");
             } else {
-                lblNewNotiCount.setVisible(false);
-                lblNewNotiCount.setManaged(false);
+//                lblNewNotiCount.setVisible(false);
+//                lblNewNotiCount.setManaged(false);
+                btnNotifications.setText("Thông báo");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -3,7 +3,7 @@ package io.github.aylesw.mch.backend.service.impl;
 import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
-import io.github.aylesw.mch.backend.dto.VaccineStatisticsItem;
+import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Child;
@@ -325,9 +325,9 @@ public class InjectionServiceImpl implements InjectionService {
     }
 
     @Override
-    public List<VaccineStatisticsItem> getVaccineStatistics(Integer month, Integer year) {
+    public List<VaccineStatisticsDetails> getVaccineStatistics(Integer month, Integer year) {
 
-        List<VaccineStatisticsItem> vaccineStatistics = new ArrayList<>();
+        List<VaccineStatisticsDetails> vaccineStatistics = new ArrayList<>();
         List<Vaccine> vaccines = vaccineRepository.findAll();
 
         Date fromDate, toDate;
@@ -341,23 +341,23 @@ public class InjectionServiceImpl implements InjectionService {
         }
 
         vaccines.forEach(vaccine -> {
-            VaccineStatisticsItem vaccineStatisticsItem = VaccineStatisticsItem.builder()
+            VaccineStatisticsDetails vaccineStatisticsDetails = VaccineStatisticsDetails.builder()
                     .vaccine(vaccine.getName())
                     .doseNo(vaccine.getDoseNo())
                     .quantity(injectionRepository.countByVaccine(vaccine.getName(), vaccine.getDoseNo(), fromDate, toDate))
                     .build();
-            vaccineStatistics.add(vaccineStatisticsItem);
+            vaccineStatistics.add(vaccineStatisticsDetails);
         });
 
         vaccines.stream()
                 .map(vaccine -> vaccine.getName()).collect(Collectors.toSet())
                 .forEach(name -> {
-                    VaccineStatisticsItem vaccineStatisticsItem = VaccineStatisticsItem.builder()
+                    VaccineStatisticsDetails vaccineStatisticsDetails = VaccineStatisticsDetails.builder()
                             .vaccine(name)
                             .doseNo(0)
                             .quantity(injectionRepository.countByVaccine(name, fromDate, toDate))
                             .build();
-                    vaccineStatistics.add(vaccineStatisticsItem);
+                    vaccineStatistics.add(vaccineStatisticsDetails);
                 });
 
         return vaccineStatistics;

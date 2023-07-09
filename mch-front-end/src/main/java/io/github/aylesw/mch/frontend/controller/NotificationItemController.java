@@ -1,5 +1,6 @@
 package io.github.aylesw.mch.frontend.controller;
 
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import io.github.aylesw.mch.frontend.common.Beans;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,12 +43,16 @@ public class NotificationItemController implements Initializable {
     @FXML
     private Label lblTime;
 
+    @FXML
+    private MaterialIconView iconNoti;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTitle.setText(title);
         lblMessage.setText(message);
         lblTime.setText(calculateTimeDifference());
         container.setStyle("-fx-background-color: " + (seen ? "#ffc559" : "#f5a105") + "; -fx-background-radius: 20");
+        iconNoti.setGlyphName(seen ? "NOTIFICATIONS" : "NOTIFICATIONS_ACTIVE");
     }
 
     private String calculateTimeDifference() {

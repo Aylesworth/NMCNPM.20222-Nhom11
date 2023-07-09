@@ -4,8 +4,11 @@ import io.github.aylesw.mch.frontend.common.UserIdentity;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 public class ScreenManager {
@@ -53,8 +56,8 @@ public class ScreenManager {
         return loadNode("nav-bar.fxml", new NavBarController(UserIdentity.getUserId()));
     }
 
-    public static Parent getHomePage(){
-        return loadNode("home.fxml",new HomeController());
+    public static Parent getHomePage() {
+        return loadNode("home.fxml", new HomeController());
     }
 
     public static Parent getManageUsersPanel() {
@@ -81,8 +84,8 @@ public class ScreenManager {
         return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parentController));
     }
 
-    public static Parent getChildRefItem(long id, String name, Parent parent) {
-        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name, parent));
+    public static Parent getChildRefItem(long id, String name, String sex, Parent parent) {
+        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name, sex, parent));
     }
 
     public static Parent getNotificationItem(Map<String, Object> properties) {
@@ -181,6 +184,13 @@ public class ScreenManager {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(loadScene(resourceName, controller));
+        try {
+            stage.getIcons().add(new Image(ScreenManager.class.getResource("/image/logo.png").toURI().toURL().toString()));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         return stage;
     }
 

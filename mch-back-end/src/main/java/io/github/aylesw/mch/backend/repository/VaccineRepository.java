@@ -12,5 +12,5 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     Optional<Vaccine> findByNameAndDoseNo(String name, Integer doseNo);
 
     @Query("SELECT MAX(v.doseNo) FROM Vaccine v WHERE v.name LIKE ?1")
-    long findMaxDoseNo(String name);
+    int findMaxDoseNo(String name);
 }

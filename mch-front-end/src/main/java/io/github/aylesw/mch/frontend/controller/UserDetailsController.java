@@ -3,6 +3,7 @@ package io.github.aylesw.mch.frontend.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import io.github.aylesw.mch.frontend.common.*;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Service;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -233,6 +235,7 @@ public class UserDetailsController implements Initializable {
                         m -> ScreenManager.getChildRefItem(
                                 ((Double) m.get("id")).longValue(),
                                 m.get("fullName").toString(),
+                                m.get("sex").toString(),
                                 lblName.getParent().getParent())
                 ).toList();
 
@@ -252,9 +255,16 @@ public class UserDetailsController implements Initializable {
                     .build().request();
             var items = result.stream().map(event -> {
                 Label label = new Label(event.get("name").toString());
-                label.setStyle("    -fx-text-fill: #212121;\n" +
-                        "    -fx-font-family: \"Roboto\", sans-serif;\n" +
-                        "    -fx-font-size: 14px;");
+                label.setStyle("""
+                            -fx-text-fill: #212121;
+                            -fx-font-family: "Roboto", sans-serif;
+                            -fx-font-size: 14px;
+                        """);
+                MaterialIconView icon = new MaterialIconView();
+                icon.setGlyphName("EVENT");
+                icon.setFill(Color.BLACK);
+                icon.setGlyphSize(20);
+                label.setGraphic(icon);
                 return label;
             }).toList();
             eventsPane.getChildren().setAll(items);

@@ -92,7 +92,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         ApiException ex = new ApiException(HttpStatus.UNAUTHORIZED, "Authentication code invalid or expired");
 
-        AuthCode authCode = authCodeRepository.findByValueUnexpiredAtTime(
+        AuthCode authCode = authCodeRepository.findByValueNonExpiredAtTime(
                 resetPasswordDto.getAuthCode(),
                 DateTimeUtils.currentTimestamp()
         ).orElseThrow(() -> ex);
@@ -136,7 +136,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         ApiException ex = new ApiException(HttpStatus.UNAUTHORIZED, "Authentication code invalid or expired");
 
-        AuthCode authCode = authCodeRepository.findByValueUnexpiredAtTime(
+        AuthCode authCode = authCodeRepository.findByValueNonExpiredAtTime(
                 verifyEmailDto.getAuthCode(),
                 DateTimeUtils.currentTimestamp()
         ).orElseThrow(() -> ex);
@@ -159,7 +159,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining());
 
-        if (authCodeRepository.findByValueUnexpiredAtTime(value, DateTimeUtils.currentTimestamp()).isPresent())
+        if (authCodeRepository.findByValueNonExpiredAtTime(value, DateTimeUtils.currentTimestamp()).isPresent())
             return generateAuthCode(userEmail, usedFor);
 
         AuthCode authCode = AuthCode.builder()

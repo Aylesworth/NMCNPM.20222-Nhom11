@@ -652,6 +652,26 @@ public class ManageUsersController implements Initializable {
         service.start();
     }
 
+    private void clearChangesBackground() {
+        txtOrgFullName.setStyle("");
+        txtOrgEmail.setStyle("");
+        txtOrgSex.setStyle("");
+        txtOrgDob.setStyle("");
+        txtOrgPhoneNumber.setStyle("");
+        txtOrgAddress.setStyle("");
+        txtOrgCitizenId.setStyle("");
+        txtOrgInsuranceId.setStyle("");
+
+        txtNewFullName.setStyle("");
+        txtNewEmail.setStyle("");
+        txtNewSex.setStyle("");
+        txtNewDob.setStyle("");
+        txtNewPhoneNumber.setStyle("");
+        txtNewAddress.setStyle("");
+        txtNewCitizenId.setStyle("");
+        txtNewInsuranceId.setStyle("");
+    }
+
     @FXML
     void approveChange(ActionEvent event) {
         Service<String> service = new Service<String>() {
@@ -678,6 +698,7 @@ public class ManageUsersController implements Initializable {
         service.setOnSucceeded(e -> {
             if (service.getValue() != null) {
                 Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt thay đổi thông tin người dùng thành công!");
+                clearChangesBackground();
                 loadUserChangesData();
                 loadUsersData();
             }

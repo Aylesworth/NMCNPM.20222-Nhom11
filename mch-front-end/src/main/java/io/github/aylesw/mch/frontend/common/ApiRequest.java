@@ -1,7 +1,5 @@
 package io.github.aylesw.mch.frontend.common;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import io.github.aylesw.mch.frontend.controller.ScreenManager;
@@ -10,7 +8,7 @@ import lombok.AllArgsConstructor;
 import okhttp3.*;
 
 import java.lang.reflect.Type;
-import java.time.LocalDate;
+import java.net.ConnectException;
 
 @AllArgsConstructor
 public class ApiRequest<T> {
@@ -71,14 +69,21 @@ public class ApiRequest<T> {
         OkHttpClient client = new OkHttpClient();
         Response response = null;
 
-        response = client.newCall(request).execute();
+        try {
+            response = client.newCall(request).execute();
+        } catch (ConnectException e) {
+            Utils.showAlert(Alert.AlertType.ERROR, "Lỗi: Không thể kết nối tới máy chủ. Vui lòng thử lại sau.");
+            throw e;
+        }
         String responseBody = response.body().string();
         if (responseBody.contains("Token has expired")) {
             Utils.showAlert(Alert.AlertType.WARNING, "Phiên đăng nhập của bạn đã hết hạn!");
             ScreenManager.getLoginStage().show();
-            return null;
+            throw new Exception(responseBody);
         }
         if (!response.isSuccessful()) {
+            if (response.code() == 403)
+                ScreenManager.getLoginStage().show();
             throw new ApiRequestException(responseBody);
         }
 

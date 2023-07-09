@@ -1,43 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="250.0" spacing="5.0" style="-fx-background-color: lightcyan;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="250.0" spacing="15.0" style="-fx-background-color: lightcyan;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton onAction="#home" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Trang chính">
+      <JFXButton onAction="#home" prefHeight="75.0" prefWidth="250.0" style="-fx-alignment: CENTER_LEFT;" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Trang chính">
          <font>
             <Font name="Segoe UI" size="18.0" />
          </font>
+         <graphic>
+            <MaterialIconView fill="WHITE" glyphName="HOME" size="30" />
+         </graphic>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="24.0" />
+         </padding>
       </JFXButton>
-      <JFXButton contentDisplay="RIGHT" onAction="#notifications" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Thông báo">
+      <HBox>
+         <children>
+            <JFXButton fx:id="btnNotifications" onAction="#notifications" prefHeight="75.0" prefWidth="250.0" style="-fx-alignment: CENTER_LEFT;" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Thông báo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <MaterialIconView fill="WHITE" glyphName="NOTIFICATIONS" size="30" />
+               </graphic>
+               <padding>
+                  <Insets left="24.0" />
+               </padding>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXButton onAction="#myProfile" prefHeight="75.0" prefWidth="250.0" style="-fx-alignment: CENTER_LEFT;" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ của tôi">
          <font>
             <Font size="18.0" />
          </font>
          <graphic>
-            <Label fx:id="lblNewNotiCount" style="-fx-background-color: RED; -fx-background-radius: 15; -fx-text-fill: WHITE;" text=" 2 " textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" size="25" wrappingWidth="22.0" />
          </graphic>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
       </JFXButton>
-      <JFXButton onAction="#myProfile" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ của tôi">
+      <JFXButton onAction="#children" prefHeight="75.0" prefWidth="250.0" style="-fx-alignment: CENTER_LEFT;" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ trẻ em">
          <font>
             <Font size="18.0" />
          </font>
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="CHILD" size="25" wrappingWidth="22.0" />
+         </graphic>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
       </JFXButton>
-      <JFXButton onAction="#children" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Hồ sơ trẻ em">
+      <JFXButton onAction="#events" prefHeight="75.0" prefWidth="250.0" style="-fx-alignment: CENTER_LEFT;" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Sự kiện">
          <font>
             <Font size="18.0" />
          </font>
-      </JFXButton>
-      <JFXButton onAction="#events" prefHeight="75.0" prefWidth="250.0" styleClass="nav-button" stylesheets="@../style/material-ui.css" text="Sự kiện">
-         <font>
-            <Font size="18.0" />
-         </font>
+         <graphic>
+            <MaterialIconView fill="WHITE" glyphName="EVENT" size="30" />
+         </graphic>
+         <padding>
+            <Insets left="25.0" />
+         </padding>
       </JFXButton>
    </children>
+   <padding>
+      <Insets left="20.0" top="20.0" />
+   </padding>
 </VBox>

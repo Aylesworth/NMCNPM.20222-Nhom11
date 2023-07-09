@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/my-identity")
-    public ResponseEntity<UserIdentity> retrieveUserId(
+    public ResponseEntity<UserIdentity> getUserIdentity(
             @RequestHeader("Authorization") String authorizationHeader) {
         return ResponseEntity.ok(userService.getUserIdentity(authorizationHeader.substring(7)));
     }

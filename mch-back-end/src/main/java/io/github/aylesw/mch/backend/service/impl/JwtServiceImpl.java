@@ -23,6 +23,7 @@ public class JwtServiceImpl implements JwtService {
     @Value("${secret-key}")
     private String secretKey;
 
+    @Override
     public String generateToken(User user, Collection<SimpleGrantedAuthority> authorities) {
         System.out.println(authorities.size());
         Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
@@ -33,6 +34,7 @@ public class JwtServiceImpl implements JwtService {
                 .withClaim("id", user.getId()).sign(algorithm);
     }
 
+    @Override
     public String generateRefreshToken(User user, Collection<SimpleGrantedAuthority> authorities) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
         return JWT.create().withSubject(user.getEmail())

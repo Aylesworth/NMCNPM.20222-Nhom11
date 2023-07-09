@@ -17,5 +17,5 @@ public interface EmailNotificationRepository extends JpaRepository<EmailNotifica
     @Modifying
     @Transactional
     @Query("DELETE FROM EmailNotification n WHERE n.message LIKE %?1%")
-    int deleteByMessage(String message);
+    void deleteByMessage(String message);
 }

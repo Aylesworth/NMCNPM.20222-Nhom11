@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -72,8 +73,14 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="900.0" spacing="20.0">
                <children>
-                  <JFXButton onAction="#addUser" text="Thêm" />
-                  <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="56.0" text="Hủy" />
+                  <JFXButton onAction="#addUser" text="Thêm">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="SAVE" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton onAction="#cancel" prefHeight="30.0" prefWidth="80.0" text="Hủy">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="CLOSE" size="20" />
+                     </graphic></JFXButton>
                </children>
             </HBox>
             <Label fx:id="lblError" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 13px;" />

@@ -1,7 +1,7 @@
 package io.github.aylesw.mch.backend.controller;
 
 import io.github.aylesw.mch.backend.dto.InjectionDto;
-import io.github.aylesw.mch.backend.dto.VaccineStatisticsItem;
+import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
 import io.github.aylesw.mch.backend.model.Vaccine;
 import io.github.aylesw.mch.backend.service.InjectionService;
 import jakarta.validation.Valid;
@@ -105,7 +105,7 @@ public class InjectionController {
     }
 
     @GetMapping("/injections/vaccine-stats")
-    public ResponseEntity<List<VaccineStatisticsItem>> getVaccineStatistics(
+    public ResponseEntity<List<VaccineStatisticsDetails>> getVaccineStatistics(
             @RequestParam(value = "month", required = false) Integer month,
             @RequestParam(value = "year", required = false) Integer year
     ) {

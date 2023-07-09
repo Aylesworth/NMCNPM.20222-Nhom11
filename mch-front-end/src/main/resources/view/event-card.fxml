@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="284.0" prefWidth="439.0" style="-fx-background-color: aquamarine; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vBox" alignment="TOP_CENTER" layoutY="57.0" prefHeight="174.0" prefWidth="449.0" spacing="15.0" stylesheets="@../style/material-ui.css">
          <children>
-            <Label fx:id="lblName" alignment="CENTER" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Tên sự kiện" />
+            <Label fx:id="lblName" alignment="CENTER" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Tên sự kiện">
+               <graphic>
+                  <MaterialIconView glyphName="EVENT" size="20" />
+               </graphic></Label>
             <Label fx:id="lblDescription" alignment="CENTER" style="-fx-font-size: 14px;" text="Mô tả:" wrapText="true" />
             <Label fx:id="lblDate" alignment="CENTER" style="-fx-font-size: 14px;" text="Ngày diễn ra: " />
             <Label fx:id="lblAge" alignment="CENTER" style="-fx-font-size: 14px;" text="Dành cho độ tuổi: " />
@@ -21,11 +25,21 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </VBox>
-      <StackPane layoutX="173.0" layoutY="223.0">
+      <StackPane layoutX="161.0" layoutY="224.0">
          <children>
-            <JFXButton fx:id="btnRegister" onAction="#register" text="Đăng ký" visible="false" />
-            <Label fx:id="lblRegistered" style="-fx-font-size: 14px; -fx-font-style: italic;" text="Đã đăng ký" />
-            <JFXButton fx:id="btnUnregister" onAction="#unregister" text="Hủy đăng ký" />
+            <JFXButton fx:id="btnRegister" onAction="#register" text="Đăng ký" visible="false">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" size="20" wrappingWidth="19.809541702270508" />
+               </graphic>
+            </JFXButton>
+            <Label fx:id="lblRegistered" style="-fx-font-size: 14px; -fx-font-style: italic;" text="Đã đăng ký" visible="false">
+               <graphic>
+                  <MaterialIconView glyphName="CHECK" size="20" />
+               </graphic></Label>
+            <JFXButton fx:id="btnUnregister" onAction="#unregister" text="Hủy đăng ký">
+               <graphic>
+                  <MaterialIconView fill="WHITE" glyphName="CANCEL" size="20" />
+               </graphic></JFXButton>
          </children>
       </StackPane>
    </children>

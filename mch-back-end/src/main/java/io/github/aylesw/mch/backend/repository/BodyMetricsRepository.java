@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface BodyMetricsRepository extends JpaRepository<BodyMetrics, Long> {
     @Query("SELECT b FROM BodyMetrics b JOIN FETCH b.child c WHERE c.id = ?1 ORDER BY b.date")
-    public List<BodyMetrics> findByChildId(Long childId);
+    List<BodyMetrics> findByChildId(Long childId);
 }

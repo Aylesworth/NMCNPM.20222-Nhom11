@@ -13,20 +13,23 @@ public class ChildRefItemController implements Initializable {
 
     private long id;
     private String name;
+    private String sex;
     private Parent parent;
 
     @FXML
     JFXButton btnChildRef;
 
-    public ChildRefItemController(long id, String name, Parent parent) {
+    public ChildRefItemController(long id, String name, String sex, Parent parent) {
         this.id = id;
         this.name = name;
+        this.sex = sex;
         this.parent = parent;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnChildRef.setText(name);
+        btnChildRef.setStyle("-fx-background-color: " + (sex.equals("Nam") ? "AQUA" : "GAINSBORO"));
     }
 
     @FXML

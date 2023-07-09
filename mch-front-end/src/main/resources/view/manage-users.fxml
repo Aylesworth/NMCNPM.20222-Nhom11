@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -42,12 +44,25 @@
                   <JFXTextField fx:id="txtCitizenId" labelFloat="true" layoutX="712.0" layoutY="313.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
                   <JFXTextField fx:id="txtInsuranceId" labelFloat="true" layoutX="712.0" layoutY="372.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
                   <JFXComboBox fx:id="cbxSex" labelFloat="true" layoutX="422.0" layoutY="313.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
-                  <JFXButton fx:id="btnDeleteUser" layoutX="684.0" layoutY="489.0" onAction="#deleteUser" prefHeight="30.0" prefWidth="131.0" text="Xóa người dùng" />
-                  <JFXButton fx:id="btnUpdateUser" layoutX="613.0" layoutY="436.0" onAction="#updateUser" prefHeight="25.0" prefWidth="102.0" text="Cập nhật" />
-                  <JFXButton fx:id="btnViewProfile" layoutX="512.0" layoutY="489.0" onAction="#viewProfile" prefHeight="30.0" prefWidth="135.0" text="Xem hồ sơ chính" />
-                  <JFXButton layoutX="209.0" layoutY="673.0" onAction="#addUser" prefHeight="30.0" prefWidth="145.0" text="Thêm người dùng" />
+                  <JFXButton fx:id="btnDeleteUser" layoutX="684.0" layoutY="489.0" onAction="#deleteUser" prefHeight="30.0" prefWidth="150.0" text="Xóa người dùng">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_TIMES" size="15" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnUpdateUser" layoutX="608.0" layoutY="436.0" onAction="#updateUser" prefHeight="30.0" prefWidth="111.0" text="Cập nhật">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="SAVE" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnViewProfile" layoutX="497.0" layoutY="489.0" onAction="#viewProfile" prefHeight="30.0" prefWidth="150.0" text="Xem hồ sơ">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="ACCOUNT_BOX" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="187.0" layoutY="673.0" onAction="#addUser" prefHeight="30.0" prefWidth="167.0" text="Thêm người dùng">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="PERSON_ADD" size="20" />
+                     </graphic></JFXButton>
                   <Label fx:id="lblError" alignment="CENTER" layoutX="448.0" layoutY="553.0" prefHeight="19.0" prefWidth="431.0" style="-fx-text-fill: red; -fx-font-size: 13px;" />
                   <DatePicker fx:id="dpDob" layoutX="418.0" layoutY="366.0" prefHeight="42.0" prefWidth="209.0" promptText="Ngày sinh *" />
+                  <FontAwesomeIconView glyphName="SEARCH" layoutX="60.0" layoutY="68.0" size="20" />
                </children>
             </AnchorPane>
          </content>
@@ -80,9 +95,16 @@
                   <JFXTextField fx:id="txtDob2" editable="false" labelFloat="true" layoutX="515.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
                   <JFXTextField fx:id="txtCitizenId2" editable="false" labelFloat="true" layoutX="761.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
                   <JFXTextField fx:id="txtInsuranceId2" editable="false" labelFloat="true" layoutX="761.0" layoutY="393.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXButton fx:id="btnRejectRegistration" layoutX="761.0" layoutY="483.0" onAction="#rejectRegistration" prefHeight="25.0" prefWidth="91.0" text="Từ chối" />
-                  <JFXButton fx:id="btnApproveRegistration" layoutX="616.0" layoutY="483.0" onAction="#approveRegistration" prefHeight="25.0" prefWidth="91.0" text="Phê duyệt" />
+                  <JFXButton fx:id="btnRejectRegistration" layoutX="747.0" layoutY="483.0" onAction="#rejectRegistration" prefHeight="30.0" prefWidth="115.0" text="Từ chối">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="CLEAR" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnApproveRegistration" layoutX="609.0" layoutY="483.0" onAction="#approveRegistration" prefHeight="30.0" prefWidth="115.0" text="Phê duyệt">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="CHECK" size="20" />
+                     </graphic></JFXButton>
                   <JFXTextField fx:id="txtSex2" editable="false" labelFloat="true" layoutX="515.0" layoutY="334.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <FontAwesomeIconView glyphName="SEARCH" layoutX="60.0" layoutY="68.0" size="20" />
                </children>
             </AnchorPane>
          </content>
@@ -107,26 +129,33 @@
                      </children>
                   </StackPane>
                   <JFXTextField fx:id="txtSearchUserChange" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchUserChange" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
-                  <JFXTextField fx:id="txtOrgFullName" labelFloat="true" layoutX="515.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
-                  <JFXTextField fx:id="txtOrgEmail" labelFloat="true" layoutX="515.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
-                  <JFXTextField fx:id="txtOrgPhoneNumber" labelFloat="true" layoutX="761.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
+                  <JFXTextField fx:id="txtOrgFullName" editable="false" labelFloat="true" layoutX="515.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtOrgEmail" editable="false" labelFloat="true" layoutX="515.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
+                  <JFXTextField fx:id="txtOrgPhoneNumber" editable="false" labelFloat="true" layoutX="761.0" layoutY="113.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
                   <Label layoutX="515.0" layoutY="59.0" prefHeight="17.0" prefWidth="111.0" text="Thông tin ban đầu:" />
-                  <JFXTextField fx:id="txtOrgAddress" labelFloat="true" layoutX="761.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
-                  <JFXTextField fx:id="txtOrgDob" labelFloat="true" layoutX="515.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtOrgCitizenId" labelFloat="true" layoutX="761.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
-                  <JFXTextField fx:id="txtOrgInsuranceId" labelFloat="true" layoutX="761.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
-                  <JFXButton fx:id="btnRejectChange" layoutX="761.0" layoutY="668.0" onAction="#rejectChange" prefHeight="25.0" prefWidth="91.0" text="Từ chối" />
-                  <JFXButton fx:id="btnApproveChange" layoutX="616.0" layoutY="668.0" onAction="#approveChange" prefHeight="25.0" prefWidth="91.0" text="Phê duyệt" />
-                  <JFXTextField fx:id="txtNewFullName" labelFloat="true" layoutX="515.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
-                  <JFXTextField fx:id="txtNewEmail" labelFloat="true" layoutX="515.0" layoutY="480.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
-                  <JFXTextField fx:id="txtNewPhoneNumber" labelFloat="true" layoutX="761.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
+                  <JFXTextField fx:id="txtOrgAddress" editable="false" labelFloat="true" layoutX="761.0" layoutY="170.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
+                  <JFXTextField fx:id="txtOrgDob" editable="false" labelFloat="true" layoutX="515.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtOrgCitizenId" editable="false" labelFloat="true" layoutX="761.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
+                  <JFXTextField fx:id="txtOrgInsuranceId" editable="false" labelFloat="true" layoutX="761.0" layoutY="285.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXButton fx:id="btnRejectChange" layoutX="751.0" layoutY="668.0" onAction="#rejectChange" prefHeight="30.0" prefWidth="115.0" text="Từ chối">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="CLEAR" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnApproveChange" layoutX="602.0" layoutY="668.0" onAction="#approveChange" prefHeight="30.0" prefWidth="115.0" text="Phê duyệt">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="CHECK" size="20" />
+                     </graphic></JFXButton>
+                  <JFXTextField fx:id="txtNewFullName" editable="false" labelFloat="true" layoutX="515.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" />
+                  <JFXTextField fx:id="txtNewEmail" editable="false" labelFloat="true" layoutX="515.0" layoutY="480.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
+                  <JFXTextField fx:id="txtNewPhoneNumber" editable="false" labelFloat="true" layoutX="761.0" layoutY="423.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
                   <Label layoutX="515.0" layoutY="369.0" prefHeight="17.0" prefWidth="168.0" text="Thông tin mới cập nhật:" />
-                  <JFXTextField fx:id="txtNewAddress" labelFloat="true" layoutX="761.0" layoutY="480.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
-                  <JFXTextField fx:id="txtNewDob" labelFloat="true" layoutX="515.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
-                  <JFXTextField fx:id="txtNewCitizenId" labelFloat="true" layoutX="761.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
-                  <JFXTextField fx:id="txtNewInsuranceId" labelFloat="true" layoutX="761.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
+                  <JFXTextField fx:id="txtNewAddress" editable="false" labelFloat="true" layoutX="761.0" layoutY="480.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />
+                  <JFXTextField fx:id="txtNewDob" editable="false" labelFloat="true" layoutX="515.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Ngày sinh *" />
+                  <JFXTextField fx:id="txtNewCitizenId" editable="false" labelFloat="true" layoutX="761.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Mã CCCD" />
+                  <JFXTextField fx:id="txtNewInsuranceId" editable="false" labelFloat="true" layoutX="761.0" layoutY="595.0" prefHeight="25.0" prefWidth="193.0" promptText="Số BHYT" />
                   <JFXTextField fx:id="txtOrgSex" editable="false" labelFloat="true" layoutX="515.0" layoutY="226.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
                   <JFXTextField fx:id="txtNewSex" editable="false" labelFloat="true" layoutX="515.0" layoutY="536.0" prefHeight="25.0" prefWidth="193.0" promptText="Giới tính *" />
+                  <FontAwesomeIconView glyphName="SEARCH" layoutX="60.0" layoutY="68.0" size="20" />
                </children>
             </AnchorPane>
          </content>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -17,10 +18,13 @@
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <graphic>
+                  <MaterialIconView glyphName="NOTIFICATIONS" size="40" />
+               </graphic>
             </Label>
             <ScrollPane prefHeight="669.0" prefWidth="1030.0">
                <content>
-                  <VBox fx:id="notificationList" alignment="TOP_CENTER" spacing="10.0" />
+                  <VBox fx:id="notificationList" alignment="TOP_CENTER" spacing="20.0" />
                </content>
             </ScrollPane>
          </children>

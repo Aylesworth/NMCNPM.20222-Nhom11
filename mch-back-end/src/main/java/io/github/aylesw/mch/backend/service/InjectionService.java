@@ -1,7 +1,7 @@
 package io.github.aylesw.mch.backend.service;
 
 import io.github.aylesw.mch.backend.dto.InjectionDto;
-import io.github.aylesw.mch.backend.dto.VaccineStatisticsItem;
+import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
 import io.github.aylesw.mch.backend.model.Vaccine;
 
 import java.util.List;
@@ -31,5 +31,5 @@ public interface InjectionService {
 
     void removeReaction(Long childId, Long injectionId, String reaction);
 
-    List<VaccineStatisticsItem> getVaccineStatistics(Integer month, Integer year);
+    List<VaccineStatisticsDetails> getVaccineStatistics(Integer month, Integer year);
 }
