@@ -1,17 +1,31 @@
 package io.github.aylesw.mch.backend.config;
 
-import io.github.aylesw.mch.backend.dto.RegisterDto;
-import io.github.aylesw.mch.backend.dto.UserDto;
-import io.github.aylesw.mch.backend.model.Role;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import io.github.aylesw.mch.backend.model.*;
 import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.sql.Date;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @RequiredArgsConstructor
@@ -102,5 +116,230 @@ public class Initializer implements CommandLineRunner {
 
 //        System.out.println(childRepository.findById(1L).get().getAgeInDays());
 
+//        insertRandomUsers();
+//        insertRandomChildren();
+//        insertRandomBodyMetrics();
+//        insertRandomInjections();
+//        insertRandomExaminations();
+//        insertRandomEvents();
     }
+
+    private final PasswordEncoder passwordEncoder;
+
+    private Random rd = new Random();
+
+    void insertRandomUsers() {
+        var userData = apiGet("https://random-data-api.com/api/v2/users?size=100");
+        userData.stream().forEach(data -> {
+            String email = data.get("email").toString();
+            User user = User.builder()
+                    .email(email)
+                    .password(passwordEncoder.encode(email.substring(0, email.indexOf('@'))))
+                    .fullName(data.get("first_name").toString() + " " + data.get("last_name"))
+                    .dob(Date.valueOf(generateRandomDate(LocalDate.now().minusYears(40), LocalDate.now().minusYears(16))))
+                    .sex(rd.nextBoolean() ? "Nam" : "Nữ")
+                    .phoneNumber("0" + generateNumberSeries(9))
+                    .address(((Map<String, Object>) data.get("address")).get("street_address").toString())
+                    .citizenId(generateNumberSeries(12))
+                    .insuranceId(generateLetterSeries(2) + generateNumberSeries(13))
+                    .verified(false)
+                    .created(Timestamp.valueOf(generateRandomTime(LocalDateTime.now().minusMonths(6), LocalDateTime.now())))
+                    .build();
+            user = userRepository.save(user);
+            System.out.println(user);
+        });
+    }
+
+    void insertRandomChildren() {
+        var childData = apiGet("https://random-data-api.com/api/v2/users?size=75");
+        childData.stream().forEach(data -> {
+            Child child = Child.builder()
+                    .fullName(data.get("first_name").toString() + " " + data.get("last_name"))
+                    .dob(Date.valueOf(generateRandomDate(LocalDate.now().minusYears(5), LocalDate.now())))
+                    .sex(rd.nextBoolean() ? "Nam" : "Nữ")
+                    .insuranceId(generateLetterSeries(2) + generateNumberSeries(13))
+                    .ethnicity(rd.nextBoolean() ? "Kinh" : null)
+                    .birthplace(((Map<String, Object>) data.get("address")).get("city").toString())
+                    .created(Timestamp.valueOf(generateRandomTime(LocalDateTime.now().minusMonths(6), LocalDateTime.now())))
+                    .parent(userRepository.findById(Long.valueOf(rd.nextInt(5, 108))).get())
+                    .build();
+            child = childRepository.save(child);
+            System.out.println(child);
+        });
+    }
+
+    private final BodyMetricsRepository bodyMetricsRepository;
+
+    private void insertRandomBodyMetrics() {
+        childRepository.findAll().forEach(child -> {
+            int n = rd.nextInt(5, 15);
+            LocalDate date = LocalDate.now().minusMonths(rd.nextInt(3, 6));
+            double height = rd.nextDouble(50, 120);
+            double weight = rd.nextDouble(5, 15);
+            for (int i = 0; i < n; i++) {
+                BodyMetrics bodyMetrics = BodyMetrics.builder()
+                        .child(child)
+                        .height(height = height + rd.nextDouble(0, 2))
+                        .weight(weight = weight + rd.nextDouble(0, 1))
+                        .date(Date.valueOf(date = date.plusDays(rd.nextInt(7, 14))))
+                        .build();
+                bodyMetricsRepository.save(bodyMetrics);
+            }
+        });
+    }
+
+    private final InjectionRepository injectionRepository;
+
+    private void insertRandomInjections() {
+        childRepository.findAll().forEach(child -> {
+            int n = rd.nextInt(5, 11);
+            for (int i = 0; i < n; i++) {
+                Injection injection = Injection.builder()
+                        .child(child)
+                        .vaccine(vaccineRepository.findById(rd.nextLong(1, 35)).get())
+                        .date(Date.valueOf(generateRandomDate(LocalDate.now().minusMonths(4), LocalDate.now().plusMonths(2))))
+                        .status("Đã xác nhận")
+                        .build();
+                injectionRepository.save(injection);
+            }
+        });
+    }
+
+    private final ExaminationRepository examinationRepository;
+
+    private void insertRandomExaminations() {
+        childRepository.findAll().forEach(child -> {
+            int n = rd.nextInt(5, 11);
+            for (int i = 0; i < n; i++) {
+                Examination examination = Examination.builder()
+                        .date(Date.valueOf(generateRandomDate(LocalDate.now().minusMonths(4), LocalDate.now())))
+                        .facility(generateRandomWords(rd.nextInt(1, 4)))
+                        .reason(generateRandomWords(rd.nextInt(2, 6)))
+                        .result(generateRandomWords(rd.nextInt(2, 6)))
+                        .child(child)
+                        .build();
+                examinationRepository.save(examination);
+            }
+        });
+    }
+
+    private final EventRepository eventRepository;
+
+    private void insertRandomEvents() {
+        for (int i = 0; i < 10; i++) {
+            int minAge = rd.nextInt(16, 40);
+            int maxAge = 0;
+            do {
+                maxAge = rd.nextInt(16, 40);
+            } while (maxAge <= minAge);
+            LocalDate startDate = generateRandomDate(LocalDate.now().minusMonths(3), LocalDate.now().plusMonths(1));
+            LocalDate endDate = null;
+            do {
+                endDate = generateRandomDate(LocalDate.now().minusMonths(3), LocalDate.now().plusMonths(2));
+            } while (!endDate.isAfter(startDate));
+
+            Event event = Event.builder()
+                    .name("Chăm sóc sức khỏe phụ nữ từ %d đến %d tuổi".formatted(minAge, maxAge))
+                    .minAge(minAge)
+                    .maxAge(maxAge)
+                    .fromDate(Date.valueOf(startDate))
+                    .toDate(Date.valueOf(endDate))
+                    .build();
+
+            List<User> participants = new ArrayList<>();
+            int n = rd.nextInt(1, 30);
+            for (int j = 0; j < n; j++) {
+                User user = null;
+                do {
+                    user = userRepository.findAll().get(rd.nextInt(0, (int) userRepository.count()));
+                } while (user.getAge() > maxAge || user.getAge() < minAge || participants.contains(user));
+                participants.add(user);
+            }
+
+            event.setParticipants(participants);
+            eventRepository.save(event);
+        }
+    }
+
+    private String generateNumberSeries(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append(rd.nextInt(0, 10));
+        }
+        return sb.toString();
+    }
+
+    private String generateLetterSeries(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append((char) rd.nextInt('A', 'Z'));
+        }
+        return sb.toString();
+    }
+
+    private List<Map<String, Object>> apiGet(String url) {
+        Request request = new Request.Builder()
+                .url(url)
+                .method("GET", null)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Response response = null;
+        String responseBody = null;
+        try {
+            response = client.newCall(request).execute();
+            responseBody = response.body().string();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Type type = new TypeToken<List<Map<String, Object>>>() {
+        }.getType();
+
+        return new Gson().fromJson(responseBody, type);
+    }
+
+    private <T> T apiGet(String url, Class<T> clazz) {
+        Request request = new Request.Builder()
+                .url(url)
+                .method("GET", null)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        Response response = null;
+        String responseBody = null;
+        try {
+            response = client.newCall(request).execute();
+            responseBody = response.body().string();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Type type = new TypeToken<T>() {
+        }.getType();
+
+        return new Gson().fromJson(responseBody, type);
+    }
+
+    private LocalDate generateRandomDate(LocalDate startDate, LocalDate endDate) {
+        long startEpochDay = startDate.toEpochDay();
+        long endEpochDay = endDate.toEpochDay();
+        long randomEpochDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
+
+        return LocalDate.ofEpochDay(randomEpochDay);
+    }
+
+    private LocalDateTime generateRandomTime(LocalDateTime startTime, LocalDateTime endTime) {
+        long startEpochSecond = startTime.toEpochSecond(ZoneOffset.UTC);
+        long endEpochSecond = endTime.toEpochSecond(ZoneOffset.UTC);
+        long randomEpochSecond = ThreadLocalRandom.current().nextLong(startEpochSecond, endEpochSecond);
+
+        return LocalDateTime.ofEpochSecond(randomEpochSecond, 0, ZoneOffset.UTC);
+    }
+
+    private String generateRandomWords(int numOfWords) {
+        var words = apiGet("https://random-word-api.herokuapp.com/word?lang=en&number=" + numOfWords, new ArrayList<String>().getClass());
+        return String.join(" ", words);
+    }
+
 }

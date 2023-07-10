@@ -196,9 +196,10 @@ public class AddChildController implements Initializable {
 
         service.setOnSucceeded(e -> {
             if (service.getValue() != null) {
-//                Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm hồ sơ trẻ thành công!");
                 if (parentController instanceof ChildrenListController) {
                     Utils.showAlert(Alert.AlertType.INFORMATION, "Hồ sơ trẻ đang chờ được phê duyệt.");
+                } else {
+                    Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Thêm hồ sơ trẻ thành công!");
                 }
                 ((Stage) txtFullName.getScene().getWindow()).close();
 

@@ -80,9 +80,12 @@ public class InjectionItemController implements Initializable {
         btnRemoveReaction.setVisible(false);
         lblDate.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(properties.get("date").toString()));
         lblVaccineName.setText(properties.get("vaccineName").toString());
+        lblVaccineName.setTooltip(new Tooltip(lblVaccineName.getText()));
         lblDoseNo.setText(((Double) properties.get("vaccineDoseNo")).longValue() + "");
         lblNote.setText(Optional.ofNullable(properties.get("note")).orElse("").toString());
+        lblNote.setTooltip(new Tooltip(lblNote.getText()));
         lblStatus.setText(Optional.ofNullable(properties.get("status")).orElse("").toString());
+        lblStatus.setTooltip(new Tooltip(lblStatus.getText()));
         var reactions = (List<String>) properties.get("reactions");
         listReactions.setItems(FXCollections.observableArrayList(reactions));
         listReactions.getSelectionModel().selectedItemProperty().addListener((observale, oldValue, newValue) -> {

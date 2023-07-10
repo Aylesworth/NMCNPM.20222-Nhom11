@@ -99,7 +99,7 @@ public class AddExaminationController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm thông tin khám chữa bệnh thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm thông tin khám chữa bệnh thành công!");
             parentController.loadExaminations();
             ((Stage) dpDate.getScene().getWindow()).close();
         } catch (Exception e) {

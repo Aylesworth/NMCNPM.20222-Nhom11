@@ -2,15 +2,13 @@ package io.github.aylesw.mch.frontend.controller;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import io.github.aylesw.mch.frontend.common.ApiRequest;
-import io.github.aylesw.mch.frontend.common.AppConstants;
-import io.github.aylesw.mch.frontend.common.Beans;
-import io.github.aylesw.mch.frontend.common.RequestBodyMap;
+import io.github.aylesw.mch.frontend.common.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -109,7 +107,7 @@ public class EditExaminationController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-//            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật thông tin khám chữa bệnh thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật thông tin khám chữa bệnh thành công!");
             parentController.loadExaminations();
             ((Stage) dpDate.getScene().getWindow()).close();
         } catch (Exception e) {

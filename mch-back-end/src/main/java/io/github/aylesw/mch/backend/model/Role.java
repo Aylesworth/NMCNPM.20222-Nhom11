@@ -22,9 +22,10 @@ public class Role {
 	@Column(nullable = false)
 	private String name;
 	
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SELECT)
 	@JsonIgnore
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Set<User> users;
 }

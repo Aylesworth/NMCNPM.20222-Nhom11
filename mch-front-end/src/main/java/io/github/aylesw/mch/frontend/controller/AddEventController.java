@@ -2,13 +2,11 @@ package io.github.aylesw.mch.frontend.controller;
 
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import io.github.aylesw.mch.frontend.common.ApiRequest;
-import io.github.aylesw.mch.frontend.common.AppConstants;
-import io.github.aylesw.mch.frontend.common.Beans;
-import io.github.aylesw.mch.frontend.common.RequestBodyMap;
+import io.github.aylesw.mch.frontend.common.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -77,6 +75,7 @@ public class AddEventController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm sự kiện thành công!");
             parentController.setUpEventList();
             ((Stage) txtName.getScene().getWindow()).close();
         } catch (Exception e) {

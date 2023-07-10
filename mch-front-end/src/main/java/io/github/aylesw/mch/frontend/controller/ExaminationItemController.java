@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 import java.net.URL;
 import java.util.List;
@@ -62,9 +63,13 @@ public class ExaminationItemController implements Initializable {
         }
         lblDate.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(properties.get("date").toString()));
         lblFacility.setText(properties.get("facility").toString());
+        lblFacility.setTooltip(new Tooltip(lblFacility.getText()));
         lblReason.setText(properties.get("reason").toString());
+        lblReason.setTooltip(new Tooltip(lblReason.getText()));
         lblResult.setText(properties.get("result").toString());
+        lblResult.setTooltip(new Tooltip(lblResult.getText()));
         lblNote.setText(Optional.ofNullable(properties.get("note")).orElse("").toString());
+        lblNote.setTooltip(new Tooltip(lblNote.getText()));
 
         var medicines = FXCollections.observableArrayList((List<String>) properties.get("medicines"));
         listMedicines.setItems(medicines);

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -122,7 +123,7 @@ public class EditInjectionController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-//            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật thông tin mũi tiêm thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Cập nhật thông tin mũi tiêm thành công!");
             ((Stage) dpDate.getScene().getWindow()).close();
             parentController.loadInjections();
         } catch (Exception e) {

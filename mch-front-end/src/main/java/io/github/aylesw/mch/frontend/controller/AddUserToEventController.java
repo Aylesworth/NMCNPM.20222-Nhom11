@@ -90,6 +90,8 @@ public class AddUserToEventController implements Initializable {
                     .method("POST")
                     .build().request();
 
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm người dùng vào sự kiện thành công!");
+
             ((Stage) txtSearch.getScene().getWindow()).close();
             parentController.loadParticipants(eventId);
         } catch (Exception e) {

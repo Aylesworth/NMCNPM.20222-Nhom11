@@ -40,7 +40,7 @@ public class UserDetailsController implements Initializable {
     }
 
     @FXML
-    private VBox vBox;
+    private ScrollPane root;
 
     @FXML
     private Label lblName;
@@ -110,7 +110,7 @@ public class UserDetailsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (previous==null) {
+        if (previous == null) {
             btnBack.setManaged(false);
         }
         if (!UserIdentity.getRoles().contains("ADMIN")) {
@@ -236,7 +236,8 @@ public class UserDetailsController implements Initializable {
                                 ((Double) m.get("id")).longValue(),
                                 m.get("fullName").toString(),
                                 m.get("sex").toString(),
-                                lblName.getParent().getParent())
+                                root,
+                                this)
                 ).toList();
 
                 childrenPane.getChildren().setAll(childRefItems);
@@ -275,6 +276,11 @@ public class UserDetailsController implements Initializable {
 
     @FXML
     void back(ActionEvent event) {
+        if (deleted) {
+            ScreenManager.setMainPanel(ScreenManager.getManageUsersPanel());
+            return;
+        }
+
         switch (previousController) {
             case ManageUsersController manageUsersController -> {
                 manageUsersController.loadUsersData();
@@ -294,9 +300,11 @@ public class UserDetailsController implements Initializable {
         loadData();
     }
 
+    private boolean deleted = false;
+
     @FXML
     void deleteProfile(ActionEvent event) {
-        ButtonType buttonType = Utils.showAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", null, "Bạn có chắc muốn xóa người dùng này không?");
+        ButtonType buttonType = Utils.showAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", null, "Bạn có chắc muốn xóa người dùng này và tất cả hồ sơ trẻ của họ hay không?");
         if (!buttonType.equals(ButtonType.OK))
             return;
 
@@ -308,6 +316,7 @@ public class UserDetailsController implements Initializable {
             new ApiRequest.Builder<String>().url(url).token(token).method(method).build().request();
             Utils.showAlert(Alert.AlertType.INFORMATION, "Thông báo", null, "Xóa người dùng thành công!");
 
+            deleted = true;
             back(event);
         } catch (Exception e) {
             throw new RuntimeException(e);

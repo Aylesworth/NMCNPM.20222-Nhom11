@@ -15,15 +15,17 @@ public class ChildRefItemController implements Initializable {
     private String name;
     private String sex;
     private Parent parent;
+    private Object parentController;
 
     @FXML
     JFXButton btnChildRef;
 
-    public ChildRefItemController(long id, String name, String sex, Parent parent) {
+    public ChildRefItemController(long id, String name, String sex, Parent parent, Object parentController) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.parent = parent;
+        this.parentController = parentController;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class ChildRefItemController implements Initializable {
 
     @FXML
     void viewChildProfile(ActionEvent event) {
-        ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(id, parent, this));
+        ScreenManager.setMainPanel(ScreenManager.getChildDetailsPanel(id, parent, parentController));
     }
 
     void updateName(String name) {

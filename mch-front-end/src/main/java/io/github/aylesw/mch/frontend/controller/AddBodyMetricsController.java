@@ -5,6 +5,7 @@ import io.github.aylesw.mch.frontend.common.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -68,7 +69,7 @@ public class AddBodyMetricsController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm chiều cao cân nặng thành công!");
+            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm chiều cao cân nặng thành công!");
             parentController.loadBodyMetrics();
             ((Stage) txtHeight.getScene().getWindow()).close();
         } catch (Exception e) {

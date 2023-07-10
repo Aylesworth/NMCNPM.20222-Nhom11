@@ -412,6 +412,9 @@ public class ChildDetailsController implements Initializable {
             case ChildrenListController childrenListController -> {
                 childrenListController.loadChildren();
             }
+            case UserDetailsController userDetailsController -> {
+                userDetailsController.loadChildrenList();
+            }
             default -> throw new IllegalStateException("Unexpected value: " + previousController);
         }
         ScreenManager.setMainPanel(previous);

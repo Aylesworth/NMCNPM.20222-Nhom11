@@ -85,8 +85,8 @@ public class ScreenManager {
         return loadStage("Thêm hồ sơ trẻ", "add-child.fxml", new AddChildController(parentId, parentController));
     }
 
-    public static Parent getChildRefItem(long id, String name, String sex, Parent parent) {
-        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name, sex, parent));
+    public static Parent getChildRefItem(long id, String name, String sex, Parent parent, Object parentController) {
+        return loadNode("child-ref-item.fxml", new ChildRefItemController(id, name, sex, parent, parentController));
     }
 
     public static Parent getNotificationItem(Map<String, Object> properties) {
