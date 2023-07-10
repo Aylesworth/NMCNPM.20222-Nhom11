@@ -11,6 +11,7 @@ import io.github.aylesw.mch.backend.model.User;
 import io.github.aylesw.mch.backend.model.UserChange;
 import io.github.aylesw.mch.backend.model.UserRegistration;
 import io.github.aylesw.mch.backend.repository.*;
+import io.github.aylesw.mch.backend.service.ChildService;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -237,15 +238,16 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    private final ChildRepository childRepository;
+    private final ChildService childService;
 
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
+        childService.getByParentId(id).forEach(childDto -> childService.deleteChild(childDto.getId()));
         user.getRoles().clear();
-        childRepository.findByParentId(id).forEach(childRepository::delete);
+        user.getEvents().clear();
         userRepository.save(user);
         userRepository.deleteById(id);
     }

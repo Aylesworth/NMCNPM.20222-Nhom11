@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Entity
 @Table(name = "child")
@@ -48,6 +49,18 @@ public class Child {
     @JsonIgnore
     private User parent;
 
+    @OneToMany(mappedBy = "child")
+    @JsonIgnore
+    private List<BodyMetrics> bodyMetrics;
+
+    @OneToMany(mappedBy = "child")
+    @JsonIgnore
+    private List<Examination> examinations;
+
+    @OneToMany(mappedBy = "child")
+    @JsonIgnore
+    private List<Injection> injections;
+
     @JsonIgnore
     public long getAgeInDays() {
         return getAgeInDaysAsOf(LocalDate.now());
@@ -58,6 +71,10 @@ public class Child {
         YearMonth end = YearMonth.now();
 
         return start.until(end, ChronoUnit.MONTHS);
+    }
+
+    public long getAge() {
+        return ChronoUnit.YEARS.between(dob.toLocalDate(), LocalDate.now());
     }
 
     public long getAgeInDaysAsOf(LocalDate date) {

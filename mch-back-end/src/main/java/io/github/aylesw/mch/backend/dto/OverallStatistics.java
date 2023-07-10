@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,5 @@ public class OverallStatistics {
     private long injectionIncreaseByLastMonth;
     private List<VaccineStatisticsDetails> vaccineStatistics;
     private List<InjectionStatisticsDetails> injectionStatistics;
+    private Map<Long,Long> ageStatistics;
 }

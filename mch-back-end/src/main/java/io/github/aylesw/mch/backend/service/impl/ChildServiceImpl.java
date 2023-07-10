@@ -9,10 +9,7 @@ import io.github.aylesw.mch.backend.model.Child;
 import io.github.aylesw.mch.backend.model.ChildChange;
 import io.github.aylesw.mch.backend.model.ChildRegistration;
 import io.github.aylesw.mch.backend.model.User;
-import io.github.aylesw.mch.backend.repository.ChildChangeRepository;
-import io.github.aylesw.mch.backend.repository.ChildRegistrationRepository;
-import io.github.aylesw.mch.backend.repository.ChildRepository;
-import io.github.aylesw.mch.backend.repository.UserRepository;
+import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.ChildService;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -177,6 +174,9 @@ public class ChildServiceImpl implements ChildService {
         notificationService.createSystemNotification(notificationDetails);
     }
 
+    private final BodyMetricsRepository bodyMetricsRepository;
+    private final ExaminationRepository examinationRepository;
+    private final InjectionRepository injectionRepository;
     @Override
     public void rejectChildChange(Long childChangeId, String reason) {
         ChildChange childChange = childChangeRepository.findById(childChangeId)
@@ -244,7 +244,13 @@ public class ChildServiceImpl implements ChildService {
 
     @Override
     public void deleteChild(Long id) {
-        childRepository.deleteById(id);
+        Child child = childRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Child", "id", id));
+
+        bodyMetricsRepository.findByChildId(id).forEach(bodyMetricsRepository::delete);
+        injectionRepository.findByChildId(id).forEach(injectionRepository::delete);
+        examinationRepository.findByChildId(id).forEach(examinationRepository::delete);
+        childRepository.delete(child);
     }
 
     private ChildDto mapToDto(Child child) {

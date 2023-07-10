@@ -28,7 +28,7 @@
                   <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
                </graphic>
             </JFXButton>
-            <ScrollPane prefHeight="719.0" prefWidth="609.0">
+            <ScrollPane prefHeight="659.0" prefWidth="616.0">
                <content>
                   <VBox fx:id="schedulePanel" prefHeight="312.0" prefWidth="605.0" spacing="20.0">
                      <children>

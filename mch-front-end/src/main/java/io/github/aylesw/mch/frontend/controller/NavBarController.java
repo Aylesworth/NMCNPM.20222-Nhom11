@@ -68,7 +68,7 @@ public class NavBarController implements Initializable {
 
     @FXML
     void home(ActionEvent event) {
-        ScreenManager.setMainPanel(ScreenManager.getDashboardAdminPanel());
+        ScreenManager.setMainPanel(ScreenManager.getHomePage());
         updateNotiCount();
     }
 

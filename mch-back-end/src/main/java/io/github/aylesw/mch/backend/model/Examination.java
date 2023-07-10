@@ -31,7 +31,7 @@ public class Examination {
 
     private String note;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "prescription",
             joinColumns = @JoinColumn(name = "examination_id"),

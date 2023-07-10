@@ -62,6 +62,7 @@ public class GrowthChartsController implements Initializable {
             heightDataSeries.getData().add(new XYChart.Data<>(date, height * 100));
             weightDataSeries.getData().add(new XYChart.Data<>(date, weight));
             bmiDataSeries.getData().add(new XYChart.Data<>(date, bmi));
+            heightYAxis.setLowerBound(50);
             heightXAxis.setLabel("Ngày");
             heightYAxis.setLabel("Chiều cao (cm)");
             weightXAxis.setLabel("Ngày");

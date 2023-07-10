@@ -27,9 +27,15 @@
                <children>
                   <FlowPane prefHeight="967.0" prefWidth="1030.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
+                        <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0" spacing="10.0">
                            <children>
-                              <TableView fx:id="tblSchedule" prefHeight="695.0" prefWidth="716.0">
+                              <AnchorPane prefHeight="55.0" prefWidth="786.0">
+                                 <children>
+                                    <MaterialIconView glyphName="SEARCH" layoutX="249.0" layoutY="38.0" selectionFill="BLACK" size="25" />
+                                    <JFXTextField fx:id="txtSearchSchedule" labelFloat="true" layoutX="281.0" layoutY="10.0" onKeyReleased="#searchSchedule" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                                 </children>
+                              </AnchorPane>
+                              <TableView fx:id="tblSchedule" prefHeight="695.0" prefWidth="766.0">
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="Tên trẻ" />
                                     <TableColumn prefWidth="75.0" text="Vaccine" />
@@ -44,13 +50,15 @@
                                  </VBox.margin>
                               </TableView>
                            </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
                            <children>
-                              <JFXButton onAction="#exportSchedule" prefHeight="30.0" prefWidth="138.0" text="Xuất lịch tiêm">
-                                 <graphic>
-                                    <MaterialIconView fill="WHITE" glyphName="PUBLISH" size="20" />
-                                 </graphic></JFXButton>
                               <JFXButton onAction="#addInjection" prefHeight="30.0" prefWidth="118.0" text="Thêm">
                                  <graphic>
                                     <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
@@ -81,8 +89,14 @@
                <children>
                   <FlowPane prefHeight="967.0" prefWidth="1030.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0">
+                        <VBox alignment="CENTER" prefHeight="767.0" prefWidth="786.0" spacing="10.0">
                            <children>
+                              <AnchorPane prefHeight="55.0" prefWidth="786.0">
+                                 <children>
+                                    <MaterialIconView glyphName="SEARCH" layoutX="249.0" layoutY="38.0" selectionFill="BLACK" size="25" />
+                                    <JFXTextField fx:id="txtSearchRegistration" labelFloat="true" layoutX="281.0" layoutY="10.0" onKeyReleased="#searchRegistration" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
+                                 </children>
+                              </AnchorPane>
                               <TableView fx:id="tblRegistrations" prefHeight="695.0" prefWidth="716.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="Tên trẻ" />
@@ -98,6 +112,12 @@
                                  </VBox.margin>
                               </TableView>
                            </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="767.0" prefWidth="243.0" spacing="30.0">
                            <children>
@@ -149,7 +169,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <BarChart fx:id="chartStats" maxWidth="-Infinity" prefHeight="400.0" prefWidth="694.0">
+                        <BarChart fx:id="chartStats" maxWidth="-Infinity" prefHeight="641.0" prefWidth="694.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                           </xAxis>

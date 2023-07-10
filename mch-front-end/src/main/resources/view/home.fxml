@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1030.0" pickOnBounds="true" preserveRatio="true" scaleY="1.4">
+         <image>
+            <Image url="@../image/background-2.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="800.0" prefWidth="1030.0" style="-fx-background-color: none;" stylesheets="@../style/material-ui.css">
+         <children>
+            <ImageView fitHeight="327.0" fitWidth="399.0" layoutX="56.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/home-image.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="337.0" layoutY="46.0" prefHeight="100.0" prefWidth="355.0" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #800080;" text="Chào mừng đến với ứng dụng Quản Lý Sức Khỏe Mẹ Và Bé!" textAlignment="CENTER" wrapText="true" />
+            <Text fx:id="text1" layoutX="500.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16px; -fx-fill: #800080; -fx-font-style: italic;" text="Ứng dụng Quản Lý Sức Khỏe Mẹ Và Bé là người bạn đồng hành đáng tin cậy cho tất cả các bà mẹ và bé yêu. Với sứ mệnh đem lại trải nghiệm tốt nhất cho gia đình của bạn, chúng tôi đã phát triển một ứng dụng đa chức năng và độc đáo." textAlignment="JUSTIFY" wrappingWidth="463.731689453125" />
+            <Text fx:id="text2" layoutX="500.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16px; -fx-fill: #800080; -fx-font-style: italic;" text="Với ứng dụng Quản Lý Sức Khỏe Mẹ Và Bé, bạn không còn lo lắng về việc quản lý thông tin và theo dõi sức khỏe của bé. Hãy để chúng tôi đồng hành cùng bạn trong hành trình chăm sóc và nuôi dưỡng bé yêu, mang đến sự yên tâm và tiện ích hàng ngày cho gia đình của bạn." textAlignment="JUSTIFY" wrappingWidth="463.731689453125" />
+            <Label alignment="CENTER" layoutX="350.0" layoutY="514.0" prefHeight="55.0" prefWidth="329.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #800080;" text="Chức năng dành cho bạn" />
+            <JFXButton alignment="CENTER" contentDisplay="TOP" layoutX="165.0" layoutY="598.0" onAction="#children" prefHeight="111.0" prefWidth="159.0" style="-fx-font-size: 16px; -fx-background-radius: 20;" text="HỒ SƠ CỦA BÉ">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CHILD" size="30" />
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="435.0" layoutY="598.0" onAction="#injections" prefHeight="111.0" prefWidth="159.0" style="-fx-font-size: 16px; -fx-background-radius: 20;" text="DỊCH VỤ TIÊM CHỦNG" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/needle-white.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="705.0" layoutY="598.0" onAction="#events" prefHeight="111.0" prefWidth="159.0" style="-fx-font-size: 16px; -fx-background-radius: 20;" text="SỰ KIỆN CHĂM SÓC SỨC KHỎE" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <MaterialIconView fill="WHITE" glyphName="EVENT" size="30" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

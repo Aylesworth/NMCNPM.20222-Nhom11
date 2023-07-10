@@ -36,7 +36,7 @@ public class HeaderController implements Initializable {
 
     @FXML
     void viewProfile(ActionEvent event) {
-
+        ScreenManager.setMainPanel(ScreenManager.getUserDetailsPanel(UserIdentity.getUserId(), null, null));
     }
 
 }

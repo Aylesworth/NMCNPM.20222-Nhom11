@@ -16,6 +16,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -83,6 +84,12 @@ public class ManageInjectionsController implements Initializable {
 
     @FXML
     private TableView<Map<String, Object>> tblStats;
+
+    @FXML
+    private JFXTextField txtSearchSchedule;
+
+    @FXML
+    private JFXTextField txtSearchRegistration;
 
     private ObservableList<Map<String, Object>> schedule;
     private ObservableList<Map<String, Object>> registrations;
@@ -254,8 +261,9 @@ public class ManageInjectionsController implements Initializable {
         stats.stream()
                 .filter(data -> ((Double) data.get("quantity")).longValue() > 0)
                 .forEach(data -> {
+                    String vaccineName = data.get("vaccine").toString();
                     dataSeries.getData().add(new XYChart.Data<>(
-                            data.get("vaccine").toString(),
+                            vaccineName.length() > 30 ? vaccineName.substring(0, 30) + "..." : vaccineName,
                             ((Double) data.get("quantity")).intValue()
                     ));
                 });
@@ -264,6 +272,7 @@ public class ManageInjectionsController implements Initializable {
         chartStats.getData().setAll(dataSeries);
         chartStats.setAnimated(false);
         chartStats.setLegendVisible(false);
+        chartStats.setTitle("Số mũi tiêm các loại");
 
         var vaccineCol = new TableColumn<Map<String, Object>, String>("Vaccine");
         vaccineCol.setCellValueFactory(data ->
@@ -452,8 +461,19 @@ public class ManageInjectionsController implements Initializable {
     }
 
     @FXML
-    void exportSchedule(ActionEvent actionEvent) {
-//TODO:
+    void searchSchedule(KeyEvent event) {
+        tblSchedule.setItems(schedule.filtered(item ->
+                item.get("childName").toString().toLowerCase().contains(txtSearchSchedule.getText().toLowerCase())
+                        || item.get("vaccineName").toString().toLowerCase().contains(txtSearchSchedule.getText().toLowerCase()))
+        );
+    }
+
+    @FXML
+    void searchRegistration(KeyEvent event) {
+        tblRegistrations.setItems(registrations.filtered(item ->
+                item.get("childName").toString().toLowerCase().contains(txtSearchRegistration.getText().toLowerCase())
+                        || item.get("vaccineName").toString().toLowerCase().contains(txtSearchRegistration.getText().toLowerCase()))
+        );
     }
 
 }

@@ -189,18 +189,35 @@ public class Initializer implements CommandLineRunner {
     }
 
     private final InjectionRepository injectionRepository;
+    private final ReactionRepository reactionRepository;
 
     private void insertRandomInjections() {
         childRepository.findAll().forEach(child -> {
             int n = rd.nextInt(5, 11);
             for (int i = 0; i < n; i++) {
+                Vaccine vaccine;
+                do {
+                    vaccine = vaccineRepository.findById(rd.nextLong(1, 35)).get();
+                } while (injectionRepository.findByChildIdAndVaccineNameAndDoseNo(child.getId(), vaccine.getName(), vaccine.getDoseNo()).isPresent());
+
+                var date = generateRandomDate(LocalDate.now().minusMonths(4), LocalDate.now().plusMonths(2));
                 Injection injection = Injection.builder()
                         .child(child)
-                        .vaccine(vaccineRepository.findById(rd.nextLong(1, 35)).get())
-                        .date(Date.valueOf(generateRandomDate(LocalDate.now().minusMonths(4), LocalDate.now().plusMonths(2))))
-                        .status("Đã xác nhận")
+                        .vaccine(vaccine)
+                        .date(Date.valueOf(date))
+                        .status(!date.isAfter(LocalDate.now()) ? "Đã xác nhận" : rd.nextBoolean() ? "Đã xác nhận" : "Chờ xác nhận")
                         .build();
                 injectionRepository.save(injection);
+            }
+        });
+
+        injectionRepository.findAll().forEach(injection -> {
+            int n = rd.nextInt(0, 5);
+            for (int i = 0; i < n; i++) {
+                reactionRepository.save(Reaction.builder()
+                        .injection(injection)
+                        .details(generateRandomWords(rd.nextInt(2, 5)))
+                        .build());
             }
         });
     }
@@ -247,12 +264,10 @@ public class Initializer implements CommandLineRunner {
                     .build();
 
             List<User> participants = new ArrayList<>();
-            int n = rd.nextInt(1, 30);
+            int n = 50;
             for (int j = 0; j < n; j++) {
-                User user = null;
-                do {
-                    user = userRepository.findAll().get(rd.nextInt(0, (int) userRepository.count()));
-                } while (user.getAge() > maxAge || user.getAge() < minAge || participants.contains(user));
+                User user = userRepository.findAll().get(rd.nextInt(0, (int) userRepository.count()));
+                if (user.getAge() > maxAge || user.getAge() < minAge || participants.contains(user)) continue;
                 participants.add(user);
             }
 

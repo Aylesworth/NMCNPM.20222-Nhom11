@@ -36,8 +36,11 @@ public class DashboardAdminController implements Initializable {
     @FXML
     private Label lblInjectionIncrease;
 
+//    @FXML
+//    private BarChart<String, Long> barChart;
+
     @FXML
-    private BarChart<String, Long> barChart;
+    private PieChart pieChart;
 
     @FXML
     private LineChart<String, Long> lineChart;
@@ -56,8 +59,9 @@ public class DashboardAdminController implements Initializable {
             return;
         }
         loadFigures();
-        loadBarChartData();
+//        loadBarChartData();
         loadLineChartData();
+        loadPieChartData();
     }
 
     private void loadFigures() {
@@ -71,29 +75,42 @@ public class DashboardAdminController implements Initializable {
         lblInjectionIncrease.setText("%+d".formatted(Utils.toLongValue(data.get("injectionIncreaseByLastMonth"))));
     }
 
-    @FXML
-    private CategoryAxis barXAxis;
+//    @FXML
+//    private CategoryAxis barXAxis;
+//
+//    @FXML
+//    private NumberAxis barYAxis;
 
-    @FXML
-    private NumberAxis barYAxis;
+//    private void loadBarChartData() {
+//        var vaccineData = (List<Map<String, Object>>) data.get("vaccineStatistics");
+//
+//        XYChart.Series<String, Long> dataSeries = new XYChart.Series<>();
+//
+//        vaccineData.forEach(data -> {
+//            String label = data.get("vaccine").toString();
+//            dataSeries.getData().add(new XYChart.Data<>(
+//                    label.length() > 30 ? label.substring(0, 30) + "..." : label,
+//                    Utils.toLongValue(data.get("quantity"))
+//            ));
+//        });
+//
+//        barChart.setTitle("Số liều vaccine được sử dụng");
+//        barChart.getData().add(dataSeries);
+//        barChart.setLegendVisible(false);
+//        barXAxis.setTickLabelRotation(55);
+//    }
 
-    private void loadBarChartData() {
-        var vaccineData = (List<Map<String, Object>>) data.get("vaccineStatistics");
+    private void loadPieChartData() {
+        var ageStatsData = (Map<String,Double>) data.get("ageStatistics");
 
-        XYChart.Series<String, Long> dataSeries = new XYChart.Series<>();
-
-        vaccineData.forEach(data -> {
-            String label = data.get("vaccine").toString();
-            dataSeries.getData().add(new XYChart.Data<>(
-                    label.length() > 30 ? label.substring(0, 30) + "..." : label,
-                    Utils.toLongValue(data.get("quantity"))
-            ));
+        ageStatsData.entrySet().forEach(entry -> {
+            pieChart.getData().add(new PieChart.Data(entry.getKey()+" tuổi", entry.getValue()));
         });
 
-        barChart.setTitle("Số liều vaccine được sử dụng");
-        barChart.getData().add(dataSeries);
-        barChart.setLegendVisible(false);
-        barXAxis.setTickLabelRotation(55);
+        pieChart.setTitle("Số trẻ theo độ tuổi");
+        pieChart.setLabelsVisible(true);
+        pieChart.setClockwise(true);
+        pieChart.setStartAngle(90);
     }
 
     @FXML
@@ -114,7 +131,7 @@ public class DashboardAdminController implements Initializable {
             ));
         });
 
-        lineChart.setTitle("Số mũi tiêm 7 ngày gần đây");
+        lineChart.setTitle("Số mũi tiêm 2 tuần gần đây");
         lineChart.getData().add(dataSeries);
         lineChart.setLegendVisible(false);
     }

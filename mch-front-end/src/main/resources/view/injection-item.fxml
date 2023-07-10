@@ -9,13 +9,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="990.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="91.0" layoutY="78.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
-      <Label layoutX="91.0" layoutY="114.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
-      <Label layoutX="91.0" layoutY="41.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
+      <Label layoutX="91.0" layoutY="75.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
+      <Label layoutX="91.0" layoutY="111.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
+      <Label layoutX="91.0" layoutY="38.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
       <Label layoutX="366.0" layoutY="38.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
-      <Label fx:id="lblDate" layoutX="181.0" layoutY="40.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023" />
-      <Label fx:id="lblVaccineName" layoutX="181.0" layoutY="77.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Viêm gan B" />
-      <Label fx:id="lblDoseNo" layoutX="181.0" layoutY="113.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="2" />
+      <Label fx:id="lblDate" layoutX="181.0" layoutY="37.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023" />
+      <Label fx:id="lblVaccineName" layoutX="181.0" layoutY="74.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Viêm gan B" />
+      <Label fx:id="lblDoseNo" layoutX="181.0" layoutY="110.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="2" />
       <Label fx:id="lblNote" layoutX="464.0" layoutY="38.0" prefHeight="20.0" prefWidth="101.0" style="-fx-font-size: 14px;" text="không có" />
       <JFXButton fx:id="btnDelete" layoutX="869.0" layoutY="96.0" onAction="#delete" prefHeight="30.0" prefWidth="79.0" text="Xóa">
          <graphic>

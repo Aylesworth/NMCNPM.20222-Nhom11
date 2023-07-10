@@ -66,6 +66,14 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Child> children;
+
+    @ManyToMany(mappedBy = "participants")
+    @JsonIgnore
+    private List<Event> events;
+
     public long getAge() {
         return ChronoUnit.YEARS.between(dob.toLocalDate(), LocalDate.now());
     }
