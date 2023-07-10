@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="136.0" prefWidth="583.0" style="-fx-background-color: BISQUE; -fx-background-radius: 10;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lblDate" alignment="CENTER" layoutX="47.0" layoutY="64.0" prefHeight="30.0" prefWidth="121.0" style="-fx-font-size: 16px;" text="15/07/2023">
+         <graphic>
+            <MaterialIconView glyphName="EVENT" size="20" />
+         </graphic>
+      </Label>
+      <Label layoutX="237.0" layoutY="14.0" prefHeight="25.0" prefWidth="60.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Bé:" />
+      <Label layoutX="237.0" layoutY="54.0" prefHeight="25.0" prefWidth="95.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
+      <Label layoutX="237.0" layoutY="96.0" prefHeight="25.0" prefWidth="95.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
+      <Line endX="23.0" endY="95.66667175292969" layoutX="175.0" layoutY="39.0" startX="23.0" startY="-38.99999237060547" stroke="#e37f7f" />
+      <Label fx:id="lblDayOfWeek" alignment="CENTER" layoutX="47.0" layoutY="39.0" prefHeight="30.0" prefWidth="121.0" style="-fx-font-size: 16px;" text="Thứ 7" />
+      <Label fx:id="lblChild" layoutX="302.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Nguyễn Văn A" />
+      <Label fx:id="lblVaccine" layoutX="302.0" layoutY="54.0" prefHeight="25.0" prefWidth="265.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Viêm gan B" />
+      <Label fx:id="lblDoseNo" layoutX="302.0" layoutY="96.0" prefHeight="25.0" prefWidth="265.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="1" />
+   </children>
+</AnchorPane>

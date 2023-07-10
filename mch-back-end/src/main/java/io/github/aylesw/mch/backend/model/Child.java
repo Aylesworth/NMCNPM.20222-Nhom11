@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
@@ -37,6 +38,10 @@ public class Child {
     private String birthplace;
 
     private String insuranceId;
+
+    @JsonIgnore
+    @Column(columnDefinition = "timestamp")
+    private Timestamp created;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")

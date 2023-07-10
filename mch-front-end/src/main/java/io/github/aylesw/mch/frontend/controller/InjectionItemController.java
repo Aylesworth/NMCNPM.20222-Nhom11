@@ -69,9 +69,12 @@ public class InjectionItemController implements Initializable {
             btnRemoveReaction.setManaged(false);
         }
         if (!UserIdentity.isAdmin()) {
-            btnEdit.setManaged(false);
-            btnDelete.setManaged(false);
-            btnHandleReaction.setManaged(false);
+            btnEdit.setVisible(false);
+//            btnEdit.setManaged(false);
+            btnDelete.setVisible(false);
+//            btnDelete.setManaged(false);
+            btnHandleReaction.setVisible(false);
+//            btnHandleReaction.setManaged(false);
         }
         btnHandleReaction.setVisible(false);
         btnRemoveReaction.setVisible(false);

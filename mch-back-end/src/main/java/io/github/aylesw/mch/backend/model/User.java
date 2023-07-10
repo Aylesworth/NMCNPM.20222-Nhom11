@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
@@ -53,6 +54,10 @@ public class User implements UserDetails {
     private String address;
 
     private String insuranceId;
+
+    @JsonIgnore
+    @Column(columnDefinition = "timestamp")
+    private Timestamp created;
 
     @JsonIgnore
     private Boolean verified;

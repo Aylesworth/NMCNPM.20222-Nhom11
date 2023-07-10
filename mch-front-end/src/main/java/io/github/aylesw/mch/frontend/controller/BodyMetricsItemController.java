@@ -50,6 +50,7 @@ public class BodyMetricsItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!UserIdentity.isAdmin()) {
+            btnDelete.setVisible(false);
             btnDelete.setManaged(false);
         }
         double height = (Double) properties.get("height");

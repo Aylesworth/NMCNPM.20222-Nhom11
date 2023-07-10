@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<VBox alignment="TOP_CENTER" prefHeight="185.0" prefWidth="342.0" spacing="5.0" style="-fx-background-color: LAVENDER; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lblChild" alignment="CENTER" prefHeight="25.0" prefWidth="317.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Bé NGUYỄN VĂN A">
+         <graphic>
+            <FontAwesomeIconView glyphName="CHILD" size="20" />
+         </graphic>
+      </Label>
+      <Line endX="100.0" startX="-233.4257354736328" startY="-2.6924214363098145" />
+      <Label fx:id="lblVaccine" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
+      <Label fx:id="lblDoseNo" alignment="CENTER" prefHeight="25.0" prefWidth="135.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
+      <Label fx:id="lblAgeGroup" alignment="CENTER" prefHeight="25.0" prefWidth="269.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Độ tuổi:" />
+      <JFXButton onAction="#register" text="Đăng ký">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" size="20" />
+         </graphic>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="10.0" top="10.0" />
+   </padding>
+</VBox>

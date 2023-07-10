@@ -348,18 +348,30 @@ public class ManageChildrenController implements Initializable {
 
     private void clearChangeInfo() {
         txtOrgFullName.setText("");
+        txtOrgFullName.setStyle("");
         txtOrgSex.setText("");
+        txtOrgSex.setStyle("");
         txtOrgDob.setText("");
+        txtOrgDob.setStyle("");
         txtOrgEthnicity.setText("");
+        txtOrgEthnicity.setStyle("");
         txtOrgBirthplace.setText("");
+        txtOrgBirthplace.setStyle("");
         txtOrgInsuranceId.setText("");
+        txtOrgInsuranceId.setStyle("");
 
         txtNewFullName.setText("");
+        txtNewFullName.setStyle("");
         txtNewSex.setText("");
+        txtNewSex.setStyle("");
         txtNewDob.setText("");
+        txtNewDob.setStyle("");
         txtNewEthnicity.setText("");
+        txtNewEthnicity.setStyle("");
         txtNewBirthplace.setText("");
+        txtNewBirthplace.setStyle("");
         txtNewInsuranceId.setText("");
+        txtNewInsuranceId.setStyle("");
 
         btnApproveChange.setVisible(false);
         btnRejectChange.setVisible(false);
@@ -389,14 +401,7 @@ public class ManageChildrenController implements Initializable {
             if (newValue == null) {
                 clearChangeInfo();
             } else {
-                lblError.setText("");
-                txtFullName.setStyle("");
-                cbxSex.setStyle("");
-                dpDob.setStyle("");
-                txtEthnicity.setStyle("");
-                txtBirthplace.setStyle("");
-                txtInsuranceId.setText("");
-
+                clearChangeInfo();
                 selectedChangeId = ((Double) newValue.get("id")).longValue();
 
                 txtNewFullName.setText(newValue.get("fullName").toString());
@@ -418,6 +423,32 @@ public class ManageChildrenController implements Initializable {
                 btnApproveChange.setVisible(true);
                 btnRejectChange.setVisible(true);
                 btnViewProfile2.setVisible(true);
+
+                String changeBackground = "-fx-background-color: #ffffe6";
+                if (!txtOrgFullName.getText().equals(txtNewFullName.getText())) {
+                    txtOrgFullName.setStyle(changeBackground);
+                    txtNewFullName.setStyle(changeBackground);
+                }
+                if (!txtOrgSex.getText().equals(txtNewSex.getText())) {
+                    txtOrgSex.setStyle(changeBackground);
+                    txtNewSex.setStyle(changeBackground);
+                }
+                if (!txtOrgDob.getText().equals(txtNewDob.getText())) {
+                    txtOrgDob.setStyle(changeBackground);
+                    txtNewDob.setStyle(changeBackground);
+                }
+                if (!txtOrgEthnicity.getText().equals(txtNewEthnicity.getText())) {
+                    txtOrgEthnicity.setStyle(changeBackground);
+                    txtNewEthnicity.setStyle(changeBackground);
+                }
+                if (!txtOrgBirthplace.getText().equals(txtNewBirthplace.getText())) {
+                    txtOrgBirthplace.setStyle(changeBackground);
+                    txtNewBirthplace.setStyle(changeBackground);
+                }
+                if (!txtOrgInsuranceId.getText().equals(txtNewInsuranceId.getText())) {
+                    txtOrgInsuranceId.setStyle(changeBackground);
+                    txtNewInsuranceId.setStyle(changeBackground);
+                }
             }
         });
 

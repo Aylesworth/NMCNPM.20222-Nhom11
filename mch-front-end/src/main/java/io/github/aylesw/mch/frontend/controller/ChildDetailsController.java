@@ -200,15 +200,17 @@ public class ChildDetailsController implements Initializable {
         service.start();
     }
 
+    private List<Map<String, Object>> bodyMetricsData;
+
     void loadBodyMetrics() {
         try {
-            List<Map<String, Object>> result = new ApiRequest.Builder<List<Map<String, Object>>>()
+            bodyMetricsData = new ApiRequest.Builder<List<Map<String, Object>>>()
                     .url(AppConstants.BASE_URL + "/children/" + id + "/body-metrics")
                     .token(Utils.getToken())
                     .method("GET")
                     .build().request();
 
-            var items = result.stream().map(map -> ScreenManager.getBodyMetricsItem(map, this)).toList();
+            var items = bodyMetricsData.stream().map(map -> ScreenManager.getBodyMetricsItem(map, this)).toList();
 
             metricsContainer.getChildren().setAll(items);
         } catch (Exception e) {
@@ -255,7 +257,7 @@ public class ChildDetailsController implements Initializable {
 
     @FXML
     void addInjection(ActionEvent event) {
-        ScreenManager.getAddInjectionStage(id, this).show();
+        ScreenManager.getAddInjectionStage(1, id, this).show();
     }
 
     @FXML
@@ -312,6 +314,10 @@ public class ChildDetailsController implements Initializable {
         }
     }
 
+    @FXML
+    void showGrowthCharts(ActionEvent event) {
+        ScreenManager.getGrowthChartsStage(bodyMetricsData).show();
+    }
 
     @FXML
     void updateProfile(ActionEvent event) {

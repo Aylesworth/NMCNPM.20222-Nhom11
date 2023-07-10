@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<ScrollPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="883.0" spacing="20.0">
+         <children>
+            <LineChart fx:id="heightChart" prefHeight="400.0" prefWidth="829.0">
+              <xAxis>
+                <CategoryAxis fx:id="heightXAxis" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="heightYAxis" side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <LineChart fx:id="weightChart" prefHeight="400.0" prefWidth="829.0">
+               <xAxis>
+                  <CategoryAxis fx:id="weightXAxis" side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis fx:id="weightYAxis" side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <LineChart fx:id="bmiChart" prefHeight="400.0" prefWidth="829.0">
+               <xAxis>
+                  <CategoryAxis fx:id="bmiXAxis" side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis fx:id="bmiYAxis" side="LEFT" />
+               </yAxis>
+            </LineChart>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

@@ -412,6 +412,7 @@ public class ManageUsersController implements Initializable {
     void loadUserChangesData() {
         spinner3.setVisible(true);
         clearUserChangeInfo();
+        clearChangesBackground();
 
         userChanges = FXCollections.observableArrayList();
 

@@ -7,38 +7,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="186.0" prefWidth="990.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="990.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="91.0" layoutY="84.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
-      <Label layoutX="91.0" layoutY="120.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
-      <Label layoutX="91.0" layoutY="47.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
-      <Label layoutX="366.0" layoutY="44.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
-      <Label fx:id="lblDate" layoutX="181.0" layoutY="46.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023" />
-      <Label fx:id="lblVaccineName" layoutX="181.0" layoutY="83.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Viêm gan B" />
-      <Label fx:id="lblDoseNo" layoutX="181.0" layoutY="119.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="2" />
-      <Label fx:id="lblNote" layoutX="464.0" layoutY="44.0" prefHeight="20.0" prefWidth="101.0" style="-fx-font-size: 14px;" text="không có" />
-      <JFXButton fx:id="btnDelete" layoutX="869.0" layoutY="102.0" onAction="#delete" prefHeight="30.0" prefWidth="79.0" text="Xóa">
+      <Label layoutX="91.0" layoutY="78.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Vaccine:" />
+      <Label layoutX="91.0" layoutY="114.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mũi số:" />
+      <Label layoutX="91.0" layoutY="41.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ngày:" />
+      <Label layoutX="366.0" layoutY="38.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
+      <Label fx:id="lblDate" layoutX="181.0" layoutY="40.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="21/06/2023" />
+      <Label fx:id="lblVaccineName" layoutX="181.0" layoutY="77.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Viêm gan B" />
+      <Label fx:id="lblDoseNo" layoutX="181.0" layoutY="113.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="2" />
+      <Label fx:id="lblNote" layoutX="464.0" layoutY="38.0" prefHeight="20.0" prefWidth="101.0" style="-fx-font-size: 14px;" text="không có" />
+      <JFXButton fx:id="btnDelete" layoutX="869.0" layoutY="96.0" onAction="#delete" prefHeight="30.0" prefWidth="79.0" text="Xóa">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="DELETE" size="20" />
          </graphic></JFXButton>
-      <Label layoutX="366.0" layoutY="81.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Trạng thái:" />
-      <Label fx:id="lblStatus" layoutX="464.0" layoutY="81.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Đã tiêm" />
-      <JFXButton fx:id="btnEdit" layoutX="869.0" layoutY="55.0" onAction="#edit" prefHeight="30.0" prefWidth="79.0" text="Sửa">
+      <Label layoutX="366.0" layoutY="75.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Trạng thái:" />
+      <Label fx:id="lblStatus" layoutX="464.0" layoutY="75.0" prefHeight="17.0" prefWidth="161.0" style="-fx-font-size: 14px;" text="Đã tiêm" />
+      <JFXButton fx:id="btnEdit" layoutX="869.0" layoutY="49.0" onAction="#edit" prefHeight="30.0" prefWidth="79.0" text="Sửa">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="EDIT" size="20" />
          </graphic></JFXButton>
-      <Label layoutX="636.0" layoutY="20.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Triệu chứng:" />
-      <JFXListView fx:id="listReactions" layoutX="581.0" layoutY="52.0" prefHeight="75.0" prefWidth="200.0" />
-      <JFXButton fx:id="btnHandleReaction" layoutX="600.0" layoutY="139.0" onAction="#handleReaction" prefHeight="30.0" prefWidth="161.0" text="Xử lý triệu chứng">
+      <Label layoutX="636.0" layoutY="14.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Triệu chứng:" />
+      <JFXListView fx:id="listReactions" layoutX="581.0" layoutY="46.0" prefHeight="75.0" prefWidth="200.0" />
+      <JFXButton fx:id="btnHandleReaction" layoutX="600.0" layoutY="133.0" onAction="#handleReaction" prefHeight="30.0" prefWidth="161.0" text="Xử lý triệu chứng">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="LOCAL_HOSPITAL" size="20" />
          </graphic></JFXButton>
-      <Button fx:id="btnAddReaction" layoutX="791.0" layoutY="55.0" mnemonicParsing="false" onAction="#addReaction" prefHeight="30.0" prefWidth="30.0" style="-fx-padding: 0;">
+      <Button fx:id="btnAddReaction" layoutX="791.0" layoutY="49.0" mnemonicParsing="false" onAction="#addReaction" prefHeight="30.0" prefWidth="30.0" style="-fx-padding: 0;">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="ADD" size="20" />
          </graphic>
       </Button>
-      <Button fx:id="btnRemoveReaction" layoutX="791.0" layoutY="102.0" mnemonicParsing="false" onAction="#removeReaction" prefHeight="30.0" prefWidth="30.0" style="-fx-padding: 0;">
+      <Button fx:id="btnRemoveReaction" layoutX="791.0" layoutY="96.0" mnemonicParsing="false" onAction="#removeReaction" prefHeight="30.0" prefWidth="30.0" style="-fx-padding: 0;">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="REMOVE" size="20" />
          </graphic>

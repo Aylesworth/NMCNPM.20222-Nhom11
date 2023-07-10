@@ -13,11 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class HomeController implements Initializable {
+public class AboutController implements Initializable {
     @FXML
     private AnchorPane homeView;
 
-    public HomeController(){
+    public AboutController(){
     }
 
     private String readFile(){

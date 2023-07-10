@@ -1,7 +1,6 @@
 package io.github.aylesw.mch.frontend.controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import io.github.aylesw.mch.frontend.common.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +16,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -81,10 +79,7 @@ public class ManageInjectionsController implements Initializable {
     private NumberAxis yAxis;
 
     @FXML
-    private JFXComboBox<String> cbxMonth;
-
-    @FXML
-    private JFXComboBox<String> cbxYear;
+    private Label lblYearMonth;
 
     @FXML
     private TableView<Map<String, Object>> tblStats;
@@ -97,54 +92,16 @@ public class ManageInjectionsController implements Initializable {
         loadScheduleData();
         loadRegistrations();
 
-        chartStats.setManaged(false);
-
         List<String> months = new ArrayList<>(IntStream.rangeClosed(1, 12).mapToObj(String::valueOf).toList());
         months.add(0, "Tất cả");
         List<String> years = new ArrayList<>(IntStream.rangeClosed(2020, 2023).mapToObj(String::valueOf).toList());
         Collections.reverse(years);
         years.add(0, "Tất cả");
 
-        cbxMonth.setItems(FXCollections.observableArrayList(months));
-        cbxMonth.getSelectionModel().selectFirst();
-        cbxYear.setItems(FXCollections.observableArrayList(years));
-        cbxYear.getSelectionModel().selectFirst();
-
-        cbxMonth.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (cbxYear.getSelectionModel().getSelectedItem().equals("Tất cả"))
-                cbxMonth.getSelectionModel().selectFirst();
-            loadStats();
-        });
-        cbxYear.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("Tất cả"))
-                cbxMonth.getSelectionModel().selectFirst();
-            loadStats();
-        });
+        LocalDate today = LocalDate.now();
+        month = today.getMonthValue();
+        year = today.getYear();
         loadStats();
-
-
-        // Set the tick unit to 1 to display integer values
-        yAxis.setTickUnit(1);
-        yAxis.setTickLength(1);
-
-        // Set the tick label formatter to display integer values
-        yAxis.setTickLabelFormatter(new StringConverter<Number>() {
-            @Override
-            public String toString(Number object) {
-                return String.valueOf(object.intValue());
-            }
-
-            @Override
-            public Number fromString(String string) {
-                // Not needed for displaying integer values
-                return null;
-            }
-        });
-
-        xAxis.setPrefWidth(10);
-
-        // Add the data series to the bar chart
-        chartStats.getData().add(dataSeries);
     }
 
     private void hideButtons() {
@@ -272,17 +229,14 @@ public class ManageInjectionsController implements Initializable {
         }
     }
 
-
-    // Create a data series
-    private XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+    private int month;
+    private int year;
 
     void loadStats() {
+        lblYearMonth.setText("Tháng %d / %d".formatted(month, year));
         List<Map<String, Object>> stats;
         try {
-            String month = cbxMonth.getSelectionModel().getSelectedItem();
-            String year = cbxYear.getSelectionModel().getSelectedItem();
-
-            String requestParams = (month.equals("Tất cả") || year.equals("Tất cả")) ? "" : "?month=" + month + "&year=" + year;
+            String requestParams = "?month=" + month + "&year=" + year;
 
             stats = new ApiRequest.Builder<List<Map<String, Object>>>()
                     .url(AppConstants.BASE_URL + "/injections/vaccine-stats" + requestParams)
@@ -292,48 +246,72 @@ public class ManageInjectionsController implements Initializable {
             e.printStackTrace();
             return;
         }
-//
-//        dataSeries.getData().clear();
-//        stats.stream()
-//                .filter(data -> ((Double) data.get("doseNo")).longValue() == 0
-//                        && ((Double) data.get("quantity")).longValue() > 0)
-//                .forEach(data -> {
-//                    dataSeries.getData().add(new XYChart.Data<>(
-//                            data.get("vaccine").toString(),
-//                            ((Double) data.get("quantity")).intValue()
-//                    ));
-//                });
-//        chartStats.getData().clear();
-//        chartStats.getData().add(dataSeries);
+
+        stats = stats.stream()
+                .filter(data -> ((Double) data.get("doseNo")).longValue() == 0)
+                .toList();
+        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+        stats.stream()
+                .filter(data -> ((Double) data.get("quantity")).longValue() > 0)
+                .forEach(data -> {
+                    dataSeries.getData().add(new XYChart.Data<>(
+                            data.get("vaccine").toString(),
+                            ((Double) data.get("quantity")).intValue()
+                    ));
+                });
+        xAxis.setPrefWidth(20);
+        chartStats.getData().clear();
+        chartStats.getData().setAll(dataSeries);
+        chartStats.setAnimated(false);
+        chartStats.setLegendVisible(false);
 
         var vaccineCol = new TableColumn<Map<String, Object>, String>("Vaccine");
         vaccineCol.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().get("vaccine").toString()));
 
-        var doseNoCol = new TableColumn<Map<String, Object>, String>("Mũi");
-        doseNoCol.setCellValueFactory(data ->
-                new SimpleStringProperty(((Double)data.getValue().get("doseNo")).intValue()==0 ? "Tất cả" : ((Double) data.getValue().get("doseNo")).longValue() + ""));
-        doseNoCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//        var doseNoCol = new TableColumn<Map<String, Object>, String>("Mũi");
+//        doseNoCol.setCellValueFactory(data ->
+//                new SimpleStringProperty(((Double) data.getValue().get("doseNo")).intValue() == 0 ? "Tất cả" : ((Double) data.getValue().get("doseNo")).longValue() + ""));
+//        doseNoCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
         var quantityCol = new TableColumn<Map<String, Object>, String>("Số lượng");
         quantityCol.setCellValueFactory(data ->
                 new SimpleStringProperty(((Double) data.getValue().get("quantity")).longValue() + ""));
         quantityCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        tblStats.getColumns().setAll(vaccineCol, doseNoCol, quantityCol);
-//        tblStats.getItems().addAll(stats);
+        tblStats.getColumns().setAll(vaccineCol, quantityCol);
 
-        var sortedData = new SortedList<Map<String, Object>>(FXCollections.observableArrayList(stats));
-        sortedData.setComparator(new Comparator<Map<String, Object>>() {
+        var sortedData = new SortedList<>(FXCollections.observableArrayList(stats));
+        sortedData.setComparator(new Comparator<>() {
             @Override
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-                if (!o1.get("vaccine").equals(o2.get("vaccine")))
-                    return o1.get("vaccine").toString().compareTo(o2.get("vaccine").toString());
-                return ((Double) o1.get("doseNo")).intValue() - ((Double) o2.get("doseNo")).intValue();
+                if (!o1.get("quantity").equals(o2.get("quantity")))
+                    return ((Double) o2.get("quantity")).intValue() - ((Double) o1.get("quantity")).intValue();
+                return o1.get("vaccine").toString().compareTo(o2.get("vaccine").toString());
             }
         });
 
         tblStats.getItems().setAll(sortedData);
+    }
+
+    @FXML
+    void previousMonth(ActionEvent event) {
+        month--;
+        if (month < 1) {
+            year--;
+            month = 12;
+        }
+        loadStats();
+    }
+
+    @FXML
+    void nextMonth(ActionEvent event) {
+        month++;
+        if (month > 12) {
+            year++;
+            month = 1;
+        }
+        loadStats();
     }
 
     @FXML
@@ -375,7 +353,7 @@ public class ManageInjectionsController implements Initializable {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Thay đổi ngày");
         dialog.setHeaderText("Vui lòng nhập ngày mới (DD/MM/YYYY):");
-        dialog.setContentText("");
+        dialog.setContentText(null);
         var input = dialog.showAndWait();
 
         while (true) {

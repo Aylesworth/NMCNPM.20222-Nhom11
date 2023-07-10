@@ -2,6 +2,7 @@ package io.github.aylesw.mch.backend.controller;
 
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
+import io.github.aylesw.mch.backend.dto.VaccineSuggestion;
 import io.github.aylesw.mch.backend.model.Vaccine;
 import io.github.aylesw.mch.backend.service.InjectionService;
 import jakarta.validation.Valid;
@@ -110,5 +111,10 @@ public class InjectionController {
             @RequestParam(value = "year", required = false) Integer year
     ) {
         return ResponseEntity.ok(injectionService.getVaccineStatistics(month, year));
+    }
+
+    @GetMapping("/children/{child-id}/injections/suggestions")
+    public ResponseEntity<List<VaccineSuggestion>> getVaccineSuggestions(@PathVariable("child-id") Long childId) {
+        return ResponseEntity.ok(injectionService.getVaccineSuggestions(childId));
     }
 }

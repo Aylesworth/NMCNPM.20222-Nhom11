@@ -20,6 +20,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -222,6 +224,7 @@ public class ChildServiceImpl implements ChildService {
 
         Child child = mapper.map(childDto, Child.class);
         child.setId(null);
+        child.setCreated(DateTimeUtils.currentTimestamp());
         child.setParent(parent);
         childRepository.save(child);
     }

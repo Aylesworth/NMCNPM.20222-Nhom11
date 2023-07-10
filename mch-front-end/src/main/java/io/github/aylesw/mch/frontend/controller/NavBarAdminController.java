@@ -7,17 +7,16 @@ import io.github.aylesw.mch.frontend.common.AppConstants;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class AdminNavBarController implements Initializable {
+public class NavBarAdminController implements Initializable {
 
     private long adminId;
 
-    public AdminNavBarController(long adminId) {
+    public NavBarAdminController(long adminId) {
         this.adminId = adminId;
     }
 
@@ -69,7 +68,7 @@ public class AdminNavBarController implements Initializable {
 
     @FXML
     void home(ActionEvent event) {
-        ScreenManager.setMainPanel(ScreenManager.getHomePage());
+        ScreenManager.setMainPanel(ScreenManager.getDashboardAdminPanel());
         updateNotiCount();
     }
 

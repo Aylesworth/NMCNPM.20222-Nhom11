@@ -26,17 +26,23 @@ import java.util.stream.IntStream;
 
 public class AddInjectionController implements Initializable {
 
-    private long childId;
+    private long childId = -1;
 
     private Object parentController;
 
-    public AddInjectionController(long childId, Object parentController) {
-        this.childId = childId;
+    private long parentId = -1;
+
+    public AddInjectionController(int mode, long id, Object parentController) {
+        if (mode == 1) {
+            this.childId = id;
+        } else if (mode == 2) {
+            this.parentId = id;
+        }
         this.parentController = parentController;
     }
 
     public AddInjectionController(Object parentController) {
-        this(-1, parentController);
+        this(0, -1, parentController);
     }
 
     @FXML
@@ -63,8 +69,10 @@ public class AddInjectionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!UserIdentity.isAdmin()) {
-            cbxChild.setVisible(false);
-            cbxChild.setManaged(false);
+            if (childId != -1) {
+                cbxChild.setVisible(false);
+                cbxChild.setManaged(false);
+            }
             txtStatus.setText("Chờ xác nhận");
             txtStatus.setManaged(false);
         }
@@ -112,8 +120,10 @@ public class AddInjectionController implements Initializable {
 
     private void setUpChildComboBox() {
         try {
+            String entryPoint = "/children" + (parentId == -1 ? "" : "/find-by-parent?id=" + parentId);
+
             var result = new ApiRequest.Builder<List<Map<String, Object>>>()
-                    .url(AppConstants.BASE_URL + "/children")
+                    .url(AppConstants.BASE_URL + entryPoint)
                     .method("GET")
                     .build().request();
 
@@ -175,10 +185,11 @@ public class AddInjectionController implements Initializable {
                     .requestBody(requestBody)
                     .build().request();
 
-//            Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
 
             if (!UserIdentity.isAdmin()) {
                 Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tiêm chủng sẽ được quản trị viên xem xét và xác nhận");
+            } else {
+                Utils.showAlert(Alert.AlertType.INFORMATION, "Thêm mũi tiêm thành công!");
             }
 
             ((Stage) dpDate.getScene().getWindow()).close();

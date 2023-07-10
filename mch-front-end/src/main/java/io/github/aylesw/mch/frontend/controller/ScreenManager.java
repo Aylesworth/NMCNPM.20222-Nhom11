@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Map;
 
 public class ScreenManager {
@@ -52,12 +53,12 @@ public class ScreenManager {
 
     public static Parent getNavBar() {
         if (UserIdentity.getRoles().contains("ADMIN"))
-            return loadNode("nav-bar-admin.fxml", new AdminNavBarController(UserIdentity.getUserId()));
+            return loadNode("nav-bar-admin.fxml", new NavBarAdminController(UserIdentity.getUserId()));
         return loadNode("nav-bar.fxml", new NavBarController(UserIdentity.getUserId()));
     }
 
-    public static Parent getHomePage() {
-        return loadNode("home.fxml", new HomeController());
+    public static Parent getAboutPage() {
+        return loadNode("about.fxml", new AboutController());
     }
 
     public static Parent getManageUsersPanel() {
@@ -116,8 +117,8 @@ public class ScreenManager {
         return loadNode("injection-item.fxml", new InjectionItemController(properties, parentController));
     }
 
-    public static Stage getAddInjectionStage(long childId, ChildDetailsController parentController) {
-        return loadStage("Thêm mũi tiêm", "add-injection.fxml", new AddInjectionController(childId, parentController));
+    public static Stage getAddInjectionStage(int mode, long id, ChildDetailsController parentController) {
+        return loadStage("Thêm mũi tiêm", "add-injection.fxml", new AddInjectionController(mode, id, parentController));
     }
 
     public static Stage getAddInjectionStage(ManageInjectionsController parentController) {
@@ -178,6 +179,26 @@ public class ScreenManager {
 
     public static Stage getResetPasswordStage() {
         return loadStage("Quên mật khẩu", "reset-password.fxml", new ResetPasswordController());
+    }
+
+    public static Parent getDashboardAdminPanel() {
+        return loadNode("dashboard-admin.fxml", new DashboardAdminController());
+    }
+
+    public static Stage getGrowthChartsStage(List<Map<String, Object>> bodyMetricsData) {
+        return loadStage("Biểu đồ phát triển", "growth-charts.fxml", new GrowthChartsController(bodyMetricsData));
+    }
+
+    public static Parent getInjectionsPanel(long parentId) {
+        return loadNode("injections.fxml", new InjectionsController(parentId));
+    }
+
+    public static Parent getScheduleItem(Map<String, Object> properties) {
+        return loadNode("schedule-item.fxml", new ScheduleItemController(properties));
+    }
+
+    public static Parent getInjectionSuggestionItem(Map<String,Object> properties) {
+        return loadNode("injection-suggestion-item.fxml", new InjectionSuggestionItemController(properties));
     }
 
     public static Stage loadStage(String title, String resourceName, Object controller) {

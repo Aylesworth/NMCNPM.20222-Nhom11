@@ -44,4 +44,8 @@ public class Utils {
         return alert.getResult();
     }
 
+    public static long toLongValue(Object object) {
+        return ((Double) object).longValue();
+    }
+
 }

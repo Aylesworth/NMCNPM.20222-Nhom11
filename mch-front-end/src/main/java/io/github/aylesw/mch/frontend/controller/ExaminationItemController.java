@@ -55,7 +55,9 @@ public class ExaminationItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!UserIdentity.isAdmin()) {
+            btnEdit.setVisible(false);
             btnEdit.setManaged(false);
+            btnDelete.setVisible(false);
             btnDelete.setManaged(false);
         }
         lblDate.setText(Beans.DATE_FORMAT_CONVERTER.toCustom(properties.get("date").toString()));

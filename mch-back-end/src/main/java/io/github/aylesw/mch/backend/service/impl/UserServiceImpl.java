@@ -218,6 +218,7 @@ public class UserServiceImpl implements UserService {
         User user = mapper.map(registerDto, User.class);
         user.setId(null);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreated(DateTimeUtils.currentTimestamp());
         user.setVerified(false);
 
         userRepository.save(user);

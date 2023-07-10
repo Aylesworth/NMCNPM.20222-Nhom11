@@ -4,6 +4,7 @@ import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
+import io.github.aylesw.mch.backend.dto.VaccineSuggestion;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
 import io.github.aylesw.mch.backend.model.Child;
@@ -361,5 +362,29 @@ public class InjectionServiceImpl implements InjectionService {
                 });
 
         return vaccineStatistics;
+    }
+
+    @Override
+    public List<VaccineSuggestion> getVaccineSuggestions(Long childId) {
+        Child child = childRepository.findById(childId)
+                .orElseThrow(() -> new ResourceNotFoundException("Child", "id", childId));
+
+        return vaccineRepository.findAll().stream()
+                .filter(vaccine ->
+                        vaccine.getAgeGroup().getMinAgeInDays() <= child.getAgeInDays()
+                                && vaccine.getAgeGroup().getMaxAgeInDays() >= child.getAgeInDays())
+                .filter(vaccine -> injectionRepository.findByChildIdAndVaccineNameAndDoseNo(
+                        childId,
+                        vaccine.getName(),
+                        vaccine.getDoseNo()
+                ).isEmpty())
+                .map(vaccine -> VaccineSuggestion.builder()
+                        .childId(childId)
+                        .childName(child.getFullName())
+                        .vaccineName(vaccine.getName())
+                        .doseNo(vaccine.getDoseNo())
+                        .ageGroupName(vaccine.getAgeGroup().getName())
+                        .build()
+                ).toList();
     }
 }

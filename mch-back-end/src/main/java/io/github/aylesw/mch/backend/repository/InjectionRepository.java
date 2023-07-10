@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +33,6 @@ public interface InjectionRepository extends JpaRepository<Injection, Long> {
             "WHERE v.name LIKE ?1 AND v.doseNo = ?2 AND i.date >= ?3 AND i.date <= ?4")
     long countByVaccine(String vaccine, Integer doseNo, Date fromDate, Date toDate);
 
+    @Query("SELECT COUNT(i) FROM Injection i WHERE i.date = ?1")
+    long countByDate(Date date);
 }
