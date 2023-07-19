@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="177.0" prefWidth="990.0" style="-fx-background-color: aqua; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="177.0" prefWidth="990.0" style="-fx-background-color: bisque; -fx-background-radius: 20;" stylesheets="@../style/material-ui.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="133.0" layoutY="57.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Lý do:" />
       <Label layoutX="133.0" layoutY="93.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Ghi chú:" />
@@ -14,7 +14,7 @@
       <Label layoutX="443.0" layoutY="19.0" prefHeight="17.0" prefWidth="89.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Nơi khám:" />
       <Label fx:id="lblDate" layoutX="223.0" layoutY="19.0" prefHeight="20.0" prefWidth="188.0" style="-fx-font-size: 14px;" text="21/06/2023" />
       <Label fx:id="lblReason" layoutX="223.0" layoutY="56.0" prefHeight="20.0" prefWidth="188.0" style="-fx-font-size: 14px;" text="Bụng to" />
-      <Label fx:id="lblNote" alignment="TOP_LEFT" layoutX="223.0" layoutY="92.0" prefHeight="57.0" prefWidth="188.0" style="-fx-font-size: 14px;" text="(không có)" wrapText="true" />
+      <Label fx:id="lblNote" alignment="TOP_LEFT" layoutX="223.0" layoutY="96.0" prefHeight="57.0" prefWidth="188.0" style="-fx-font-size: 14px;" text="(không có)" wrapText="true" />
       <Label fx:id="lblFacility" layoutX="556.0" layoutY="19.0" prefHeight="20.0" prefWidth="209.0" style="-fx-font-size: 14px;" text="Bệnh viện Miyazaki" />
       <JFXButton fx:id="btnDelete" layoutX="840.0" layoutY="97.0" onAction="#delete" prefHeight="30.0" prefWidth="71.0" text="Xóa">
          <graphic>

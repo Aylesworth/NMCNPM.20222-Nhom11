@@ -1,4 +1,4 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,21 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "age_group")
+@Table(name = "medicine")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AgeGroup {
+public class Medicine {
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
-    private Integer minAgeInDays;
-
-    @Column(nullable = false)
-    private Integer maxAgeInDays;
 }

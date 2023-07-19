@@ -197,8 +197,8 @@ public class ScreenManager {
         return loadNode("schedule-item.fxml", new ScheduleItemController(properties));
     }
 
-    public static Parent getInjectionSuggestionItem(Map<String, Object> properties) {
-        return loadNode("injection-suggestion-item.fxml", new InjectionSuggestionItemController(properties));
+    public static Parent getInjectionSuggestionItem(Map<String, Object> properties, InjectionsController parentController) {
+        return loadNode("injection-suggestion-item.fxml", new InjectionSuggestionItemController(properties, parentController));
     }
 
     public static Parent getHomePage() {

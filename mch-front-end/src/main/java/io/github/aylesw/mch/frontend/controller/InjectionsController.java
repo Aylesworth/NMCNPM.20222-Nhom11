@@ -51,7 +51,7 @@ public class InjectionsController implements Initializable {
         loadSuggestions();
     }
 
-    private void loadScheduleData() {
+    void loadScheduleData() {
         injections = new ArrayList<>();
 
         childIds.forEach(id -> {
@@ -76,7 +76,7 @@ public class InjectionsController implements Initializable {
         schedulePanel.getChildren().setAll(items);
     }
 
-    private void loadSuggestions() {
+    void loadSuggestions() {
         suggestions = new ArrayList<>();
 
         childIds.forEach(id -> {
@@ -91,7 +91,7 @@ public class InjectionsController implements Initializable {
             }
         });
 
-        var items = suggestions.stream().map(ScreenManager::getInjectionSuggestionItem).toList();
+        var items = suggestions.stream().map(data -> ScreenManager.getInjectionSuggestionItem(data, this)).toList();
         suggestionPanel.getChildren().setAll(items);
     }
 

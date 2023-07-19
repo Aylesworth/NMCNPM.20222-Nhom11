@@ -1,6 +1,5 @@
 package io.github.aylesw.mch.backend.dto;
 
-import io.github.aylesw.mch.backend.model.Medicine;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

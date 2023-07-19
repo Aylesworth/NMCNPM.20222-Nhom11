@@ -1,7 +1,7 @@
 package io.github.aylesw.mch.backend.dto;
 
 import io.github.aylesw.mch.backend.config.DateTimeUtils;
-import io.github.aylesw.mch.backend.model.User;
+import io.github.aylesw.mch.backend.entity.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;

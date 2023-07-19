@@ -1,4 +1,4 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,19 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "reaction")
+@Table(name = "vaccine")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Reaction {
+public class Vaccine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String details;
+    private String name;
 
-    @ManyToOne @JoinColumn(name = "injection_id")
-    private Injection injection;
+    @Column(nullable = false)
+    private Integer doseNo;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "age_group")
+    private AgeGroup ageGroup;
 }

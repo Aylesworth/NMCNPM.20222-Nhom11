@@ -5,10 +5,10 @@ import io.github.aylesw.mch.backend.dto.ChildDto;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
 import io.github.aylesw.mch.backend.exception.ResourceNotFoundException;
-import io.github.aylesw.mch.backend.model.Child;
-import io.github.aylesw.mch.backend.model.ChildChange;
-import io.github.aylesw.mch.backend.model.ChildRegistration;
-import io.github.aylesw.mch.backend.model.User;
+import io.github.aylesw.mch.backend.entity.Child;
+import io.github.aylesw.mch.backend.entity.ChildChange;
+import io.github.aylesw.mch.backend.entity.ChildRegistration;
+import io.github.aylesw.mch.backend.entity.User;
 import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.ChildService;
 import io.github.aylesw.mch.backend.service.NotificationService;
@@ -17,8 +17,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

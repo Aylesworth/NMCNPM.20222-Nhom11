@@ -1,8 +1,8 @@
 package io.github.aylesw.mch.backend.service;
 
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
-import io.github.aylesw.mch.backend.model.Injection;
-import io.github.aylesw.mch.backend.model.SystemNotification;
+import io.github.aylesw.mch.backend.entity.Injection;
+import io.github.aylesw.mch.backend.entity.SystemNotification;
 
 import java.util.List;
 

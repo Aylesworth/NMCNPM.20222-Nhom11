@@ -1,6 +1,5 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -13,11 +13,11 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 public class OverallStatistics {
-    private long numberOfUsers;
+    private long userCount;
     private long userIncreaseByLastMonth;
-    private long numberOfChildren;
+    private long childCount;
     private long childIncreaseByLastMonth;
-    private long numberOfInjections;
+    private long injectionCount;
     private long injectionIncreaseByLastMonth;
     private List<VaccineStatisticsDetails> vaccineStatistics;
     private List<InjectionStatisticsDetails> injectionStatistics;

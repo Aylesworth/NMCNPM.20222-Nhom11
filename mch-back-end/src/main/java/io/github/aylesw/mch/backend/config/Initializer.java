@@ -2,7 +2,7 @@ package io.github.aylesw.mch.backend.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.github.aylesw.mch.backend.model.*;
+import io.github.aylesw.mch.backend.entity.*;
 import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
@@ -20,7 +20,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

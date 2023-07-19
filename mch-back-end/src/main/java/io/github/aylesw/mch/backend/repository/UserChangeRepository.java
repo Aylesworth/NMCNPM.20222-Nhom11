@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.repository;
 
-import io.github.aylesw.mch.backend.model.UserChange;
+import io.github.aylesw.mch.backend.entity.UserChange;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

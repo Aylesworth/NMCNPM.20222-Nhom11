@@ -2,7 +2,7 @@ package io.github.aylesw.mch.backend.service.impl;
 
 import com.google.api.services.calendar.model.Events;
 import io.github.aylesw.mch.backend.exception.ApiException;
-import io.github.aylesw.mch.backend.model.Injection;
+import io.github.aylesw.mch.backend.entity.Injection;
 import io.github.aylesw.mch.backend.service.GoogleCalendarService;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;

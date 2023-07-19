@@ -69,11 +69,11 @@ public class StatisticsServiceImpl implements StatisticsService {
         });
 
         return OverallStatistics.builder()
-                .numberOfUsers(numberOfUsers)
+                .userCount(numberOfUsers)
                 .userIncreaseByLastMonth(userIncreaseByLastMonth)
-                .numberOfChildren(numberOfChildren)
+                .childCount(numberOfChildren)
                 .childIncreaseByLastMonth(childIncreaseByLastMonth)
-                .numberOfInjections(numberOfInjections)
+                .injectionCount(numberOfInjections)
                 .injectionIncreaseByLastMonth(injectionIncreaseByLastMonth)
                 .vaccineStatistics(vaccineStatistics)
                 .injectionStatistics(injectionStatistics)

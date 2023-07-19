@@ -3,7 +3,7 @@ package io.github.aylesw.mch.backend.service;
 import io.github.aylesw.mch.backend.dto.InjectionDto;
 import io.github.aylesw.mch.backend.dto.VaccineStatisticsDetails;
 import io.github.aylesw.mch.backend.dto.VaccineSuggestion;
-import io.github.aylesw.mch.backend.model.Vaccine;
+import io.github.aylesw.mch.backend.entity.Vaccine;
 
 import java.util.List;
 

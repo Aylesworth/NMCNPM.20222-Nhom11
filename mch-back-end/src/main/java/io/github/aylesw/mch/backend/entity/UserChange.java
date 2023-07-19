@@ -1,4 +1,4 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -9,19 +9,20 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.YearMonth;
-import java.time.temporal.ChronoUnit;
 
 @Entity
-@Table(name = "child_registration")
+@Table(name = "user_change")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChildRegistration {
+public class UserChange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private String fullName;
@@ -32,26 +33,22 @@ public class ChildRegistration {
     @Column(nullable = false)
     private String sex;
 
-    private String ethnicity;
+    private String phoneNumber;
 
-    private String birthplace;
+    private String address;
+
+    private String citizenId;
 
     private String insuranceId;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private User parent;
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     @Column(columnDefinition = "timestamp")
     private Timestamp requested;
 
     @Column(columnDefinition = "timestamp")
     private Timestamp approved;
-
-    public long getAgeInMonths() {
-        YearMonth start = YearMonth.from(dob.toLocalDate());
-        YearMonth end = YearMonth.now();
-
-        return start.until(end, ChronoUnit.MONTHS);
-    }
 }

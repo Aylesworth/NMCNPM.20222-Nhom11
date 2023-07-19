@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.service;
 
-import io.github.aylesw.mch.backend.model.User;
+import io.github.aylesw.mch.backend.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;

@@ -65,13 +65,13 @@ public class DashboardAdminController implements Initializable {
     }
 
     private void loadFigures() {
-        lblNumUsers.setText("%,d".formatted(Utils.toLongValue(data.get("numberOfUsers"))));
+        lblNumUsers.setText("%,d".formatted(Utils.toLongValue(data.get("userCount"))));
         lblUserIncrease.setText("%+d".formatted(Utils.toLongValue(data.get("userIncreaseByLastMonth"))));
 
-        lblNumChildren.setText("%,d".formatted(Utils.toLongValue(data.get("numberOfChildren"))));
+        lblNumChildren.setText("%,d".formatted(Utils.toLongValue(data.get("childCount"))));
         lblChildIncrease.setText("%+d".formatted(Utils.toLongValue(data.get("childIncreaseByLastMonth"))));
 
-        lblNumInjections.setText("%,d".formatted(Utils.toLongValue(data.get("numberOfInjections"))));
+        lblNumInjections.setText("%,d".formatted(Utils.toLongValue(data.get("injectionCount"))));
         lblInjectionIncrease.setText("%+d".formatted(Utils.toLongValue(data.get("injectionIncreaseByLastMonth"))));
     }
 

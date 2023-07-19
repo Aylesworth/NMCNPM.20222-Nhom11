@@ -16,9 +16,11 @@ import java.util.ResourceBundle;
 public class InjectionSuggestionItemController implements Initializable {
 
     private Map<String, Object> properties;
+    private InjectionsController parentController;
 
-    public InjectionSuggestionItemController(Map<String, Object> properties) {
+    public InjectionSuggestionItemController(Map<String, Object> properties, InjectionsController parentController) {
         this.properties = properties;
+        this.parentController = parentController;
     }
 
     @FXML
@@ -82,6 +84,7 @@ public class InjectionSuggestionItemController implements Initializable {
                     .build().request();
 
             Utils.showAlert(Alert.AlertType.INFORMATION, "Đăng ký tiêm chủng sẽ được quản trị viên xem xét và xác nhận");
+            parentController.loadSuggestions();
         } catch (Exception e) {
             if (e.getMessage().contains("already injected")) {
                 Utils.showAlert(Alert.AlertType.ERROR, "Trẻ đã tiêm hoặc đã đăng ký tiêm mũi tiêm này!");

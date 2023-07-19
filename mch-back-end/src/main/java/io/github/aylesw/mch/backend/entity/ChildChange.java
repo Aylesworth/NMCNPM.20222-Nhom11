@@ -1,6 +1,5 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,18 +10,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user_change")
+@Table(name = "child_change")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserChange {
+public class ChildChange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String email;
 
     @Column(nullable = false)
     private String fullName;
@@ -33,18 +29,15 @@ public class UserChange {
     @Column(nullable = false)
     private String sex;
 
-    private String phoneNumber;
+    private String ethnicity;
 
-    private String address;
-
-    private String citizenId;
+    private String birthplace;
 
     private String insuranceId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
+    @JoinColumn(name = "child_id")
+    private Child child;
 
     @Column(columnDefinition = "timestamp")
     private Timestamp requested;

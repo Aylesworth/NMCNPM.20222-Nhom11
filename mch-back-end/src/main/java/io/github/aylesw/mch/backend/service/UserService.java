@@ -5,8 +5,8 @@ import io.github.aylesw.mch.backend.dto.ChangePasswordDto;
 import io.github.aylesw.mch.backend.dto.RegisterDto;
 import io.github.aylesw.mch.backend.dto.UserDto;
 import io.github.aylesw.mch.backend.dto.UserIdentity;
-import io.github.aylesw.mch.backend.model.UserChange;
-import io.github.aylesw.mch.backend.model.UserRegistration;
+import io.github.aylesw.mch.backend.entity.UserChange;
+import io.github.aylesw.mch.backend.entity.UserRegistration;
 
 import java.util.List;
 

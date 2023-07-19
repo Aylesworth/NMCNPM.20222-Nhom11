@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.repository;
 
-import io.github.aylesw.mch.backend.model.EmailNotification;
+import io.github.aylesw.mch.backend.entity.EmailNotification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

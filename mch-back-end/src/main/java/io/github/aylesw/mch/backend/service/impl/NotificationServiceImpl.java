@@ -3,15 +3,15 @@ package io.github.aylesw.mch.backend.service.impl;
 import io.github.aylesw.mch.backend.config.DateTimeUtils;
 import io.github.aylesw.mch.backend.dto.NotificationDetails;
 import io.github.aylesw.mch.backend.exception.ApiException;
-import io.github.aylesw.mch.backend.model.EmailNotification;
-import io.github.aylesw.mch.backend.model.Injection;
-import io.github.aylesw.mch.backend.model.SystemNotification;
-import io.github.aylesw.mch.backend.model.User;
+import io.github.aylesw.mch.backend.entity.EmailNotification;
+import io.github.aylesw.mch.backend.entity.Injection;
+import io.github.aylesw.mch.backend.entity.SystemNotification;
+import io.github.aylesw.mch.backend.entity.User;
 import io.github.aylesw.mch.backend.repository.EmailNotificationRepository;
 import io.github.aylesw.mch.backend.repository.SystemNotificationRepository;
 import io.github.aylesw.mch.backend.repository.UserRepository;
-import io.github.aylesw.mch.backend.service.GoogleCalendarService;
 import io.github.aylesw.mch.backend.service.NotificationService;
+import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +72,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    @PostConstruct
     public void scheduleEmailsOnStart() {
         emailNotificationRepository.findAllUnsent()
                 .forEach(this::scheduleEmail);

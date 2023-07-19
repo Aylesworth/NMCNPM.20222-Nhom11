@@ -1,8 +1,8 @@
 package io.github.aylesw.mch.backend.service;
 
 import io.github.aylesw.mch.backend.dto.ChildDto;
-import io.github.aylesw.mch.backend.model.ChildChange;
-import io.github.aylesw.mch.backend.model.ChildRegistration;
+import io.github.aylesw.mch.backend.entity.ChildChange;
+import io.github.aylesw.mch.backend.entity.ChildRegistration;
 
 import java.util.List;
 

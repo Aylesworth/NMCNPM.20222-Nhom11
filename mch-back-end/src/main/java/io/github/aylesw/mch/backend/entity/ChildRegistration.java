@@ -1,6 +1,5 @@
-package io.github.aylesw.mch.backend.model;
+package io.github.aylesw.mch.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +8,16 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 
 @Entity
-@Table(name = "child_change")
+@Table(name = "child_registration")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChildChange {
+public class ChildRegistration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,12 +38,19 @@ public class ChildChange {
     private String insuranceId;
 
     @ManyToOne
-    @JoinColumn(name = "child_id")
-    private Child child;
+    @JoinColumn(name = "parent_id")
+    private User parent;
 
     @Column(columnDefinition = "timestamp")
     private Timestamp requested;
 
     @Column(columnDefinition = "timestamp")
     private Timestamp approved;
+
+    public long getAgeInMonths() {
+        YearMonth start = YearMonth.from(dob.toLocalDate());
+        YearMonth end = YearMonth.now();
+
+        return start.until(end, ChronoUnit.MONTHS);
+    }
 }

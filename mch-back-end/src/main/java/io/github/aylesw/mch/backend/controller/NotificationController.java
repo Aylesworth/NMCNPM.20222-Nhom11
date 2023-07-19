@@ -1,6 +1,6 @@
 package io.github.aylesw.mch.backend.controller;
 
-import io.github.aylesw.mch.backend.model.SystemNotification;
+import io.github.aylesw.mch.backend.entity.SystemNotification;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
