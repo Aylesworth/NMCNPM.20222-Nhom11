@@ -31,8 +31,8 @@
                   <Insets />
                </VBox.margin>
             </JFXTextField>
-            <JFXPasswordField fx:id="txtPassword" maxWidth="250.0" prefWidth="250.0" promptText="Mật khẩu *" />
-            <JFXPasswordField fx:id="txtConfirmPassword" maxWidth="250.0" prefWidth="250.0" promptText="Xác nhận mật khẩu *" />
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" maxWidth="250.0" prefWidth="250.0" promptText="Mật khẩu *" />
+            <JFXPasswordField fx:id="txtConfirmPassword" labelFloat="true" maxWidth="250.0" prefWidth="250.0" promptText="Xác nhận mật khẩu *" />
             <JFXTextField fx:id="txtFullName" labelFloat="true" maxWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Họ tên *">
                <VBox.margin>
                   <Insets />

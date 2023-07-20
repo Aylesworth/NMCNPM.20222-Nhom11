@@ -14,6 +14,7 @@ import io.github.aylesw.mch.backend.repository.*;
 import io.github.aylesw.mch.backend.service.ChildService;
 import io.github.aylesw.mch.backend.service.NotificationService;
 import io.github.aylesw.mch.backend.service.UserService;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -239,13 +240,16 @@ public class UserServiceImpl implements UserService {
     }
 
     private final ChildService childService;
-
+    private final SystemNotificationRepository systemNotificationRepository;
+    private final EmailNotificationRepository emailNotificationRepository;
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
         childService.getByParentId(id).forEach(childDto -> childService.deleteChild(childDto.getId()));
+        systemNotificationRepository.deleteByUserId(id);
+        emailNotificationRepository.deleteByEmail(user.getEmail());
         user.getRoles().clear();
         user.getEvents().clear();
         userRepository.save(user);

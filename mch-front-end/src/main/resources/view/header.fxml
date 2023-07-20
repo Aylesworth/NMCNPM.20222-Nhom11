@@ -13,7 +13,7 @@
 
 <AnchorPane minHeight="70.0" prefHeight="60.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuButton fx:id="userMenu" alignment="CENTER" layoutX="1050.0" layoutY="15.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" stylesheets="@../style/material-ui.css" text="Tên người dùng">
+      <MenuButton fx:id="userMenu" alignment="CENTER" layoutX="1050.0" layoutY="15.0" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" style="-fx-background-color: none;" stylesheets="@../style/material-ui.css" text="Tên người dùng">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#viewProfile" text="Xem hồ sơ" />
             <MenuItem mnemonicParsing="false" onAction="#changePassword" text="Đổi mật khẩu" />

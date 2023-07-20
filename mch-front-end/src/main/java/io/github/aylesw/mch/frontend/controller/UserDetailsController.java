@@ -114,7 +114,9 @@ public class UserDetailsController implements Initializable {
             btnBack.setManaged(false);
         }
         if (!UserIdentity.getRoles().contains("ADMIN")) {
+            btnDelete.setVisible(false);
             btnDelete.setManaged(false);
+            btnAddChild.setVisible(false);
             btnAddChild.setManaged(false);
             btnEdit.setText("Cập nhật hồ sơ");
         }

@@ -26,4 +26,9 @@ public interface SystemNotificationRepository extends JpaRepository<SystemNotifi
     @Transactional
     @Query("DELETE FROM SystemNotification n WHERE n.title LIKE %?1% AND n.message LIKE %?2%")
     void deleteByTitleAndMessage(String title, String message);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM SystemNotification n WHERE n.user.id = ?1")
+    void deleteByUserId(Long userId);
 }
