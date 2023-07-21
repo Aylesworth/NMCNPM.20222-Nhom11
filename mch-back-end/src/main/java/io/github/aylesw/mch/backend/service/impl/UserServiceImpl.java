@@ -24,6 +24,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -206,7 +208,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(Long id) {
-        return mapper.map(userRepository.findById(id).orElseThrow(), UserDto.class);
+        return mapper.map(
+                userRepository.findById(id).orElseThrow(
+                        () -> new ApiException(HttpStatus.NOT_FOUND, "User does not exist or has been deleted")
+                ),
+                UserDto.class
+        );
     }
 
     @Override
@@ -230,11 +237,13 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         String password = user.getPassword();
         Boolean verified = user.getVerified();
+        Timestamp created = user.getCreated();
 
         user = mapper.map(userDto, User.class);
         user.setId(id);
         user.setPassword(password);
         user.setVerified(verified);
+        user.setCreated(created);
 
         userRepository.save(user);
     }
@@ -242,6 +251,7 @@ public class UserServiceImpl implements UserService {
     private final ChildService childService;
     private final SystemNotificationRepository systemNotificationRepository;
     private final EmailNotificationRepository emailNotificationRepository;
+
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
