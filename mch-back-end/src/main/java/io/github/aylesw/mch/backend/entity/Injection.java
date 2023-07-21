@@ -31,7 +31,7 @@ public class Injection {
 
     private String note;
 
-    @OneToMany(mappedBy = "injection", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "injection", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Reaction> reactions;
 
     private String status;

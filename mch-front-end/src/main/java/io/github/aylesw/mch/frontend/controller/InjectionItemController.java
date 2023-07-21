@@ -90,9 +90,9 @@ public class InjectionItemController implements Initializable {
         listReactions.setItems(FXCollections.observableArrayList(reactions));
         listReactions.getSelectionModel().selectedItemProperty().addListener((observale, oldValue, newValue) -> {
             if (newValue != null) {
-                if (btnHandleReaction.isManaged())
+                if (UserIdentity.isAdmin())
                     btnHandleReaction.setVisible(true);
-                if (btnRemoveReaction.isManaged())
+                else
                     btnRemoveReaction.setVisible(true);
             }
         });

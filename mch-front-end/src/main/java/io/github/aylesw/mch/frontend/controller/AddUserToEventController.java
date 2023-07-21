@@ -97,7 +97,9 @@ public class AddUserToEventController implements Initializable {
         } catch (Exception e) {
             if (e.getMessage().contains("age condition")) {
                 lblError.setText("Người dùng không thuộc độ tuổi của sự kiện này!");
-            } else {
+            } else if (e.getMessage().contains("already registered")) {
+                lblError.setText("Người dùng đã tham gia sự kiện từ trước!");
+            }else {
                 e.printStackTrace();
             }
         }

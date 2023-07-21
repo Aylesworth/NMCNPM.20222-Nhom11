@@ -109,9 +109,11 @@ public class InjectionServiceImpl implements InjectionService {
         }
 
         Date originalDate = injection.getDate();
+        var originalReactions = injection.getReactions();
         injection = mapToEntity(injectionDto);
         injection.setId(injectionId);
         injection.setChild(child);
+        injection.setReactions(originalReactions);
 
         saveInjection(injection);
 
