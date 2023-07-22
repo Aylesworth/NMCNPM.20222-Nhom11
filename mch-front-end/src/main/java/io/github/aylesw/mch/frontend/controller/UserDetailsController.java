@@ -146,7 +146,7 @@ public class UserDetailsController implements Initializable {
     }
 
     private void unlockFields() {
-        txtEmail.setEditable(true);
+//        txtEmail.setEditable(true);
         txtFullName.setEditable(true);
         txtPhoneNumber.setEditable(true);
         txtAddress.setEditable(true);

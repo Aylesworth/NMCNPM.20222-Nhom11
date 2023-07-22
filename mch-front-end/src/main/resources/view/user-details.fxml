@@ -53,7 +53,7 @@
                         <AnchorPane prefHeight="327.0" prefWidth="1028.0">
                            <children>
                               <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="203.0" layoutY="32.0" prefHeight="25.0" prefWidth="230.0" promptText="Họ tên *" />
-                              <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="203.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Email *" />
+                              <JFXTextField fx:id="txtEmail" editable="false" labelFloat="true" layoutX="203.0" layoutY="87.0" prefHeight="25.0" prefWidth="230.0" promptText="Email *" />
                               <StackPane layoutX="170.0" layoutY="194.0" prefHeight="42.0" prefWidth="295.0">
                                  <children>
                                     <DatePicker fx:id="dpDob" prefHeight="42.0" prefWidth="230.0" promptText="Ngày sinh *" visible="false" />

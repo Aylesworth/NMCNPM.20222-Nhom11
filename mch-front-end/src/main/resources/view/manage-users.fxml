@@ -37,7 +37,7 @@
                   </StackPane>
                   <JFXTextField fx:id="txtSearchUser" labelFloat="true" layoutX="86.0" layoutY="46.0" onKeyReleased="#searchUser" prefHeight="25.0" prefWidth="223.0" promptText="Tìm kiếm" />
                   <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="422.0" layoutY="200.0" prefHeight="25.0" prefWidth="193.0" promptText="Họ tên *" styleClass="text-field" />
-                  <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="422.0" layoutY="257.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
+                  <JFXTextField fx:id="txtEmail" editable="false" labelFloat="true" layoutX="422.0" layoutY="257.0" prefHeight="25.0" prefWidth="193.0" promptText="Email *" />
                   <JFXTextField fx:id="txtPhoneNumber" labelFloat="true" layoutX="712.0" layoutY="200.0" prefHeight="25.0" prefWidth="193.0" promptText="Số điện thoại *" />
                   <Label fx:id="lblId" layoutX="422.0" layoutY="147.0" prefHeight="17.0" prefWidth="111.0" text="ID:" />
                   <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="712.0" layoutY="257.0" prefHeight="25.0" prefWidth="193.0" promptText="Địa chỉ *" />

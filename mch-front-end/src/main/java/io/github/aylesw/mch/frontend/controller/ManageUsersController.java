@@ -574,34 +574,22 @@ public class ManageUsersController implements Initializable {
         String method = "POST";
         String requestBody = "";
 
-        Service<String> service = new Service<String>() {
-            @Override
-            protected Task<String> createTask() {
-                return new Task<String>() {
-                    @Override
-                    protected String call() throws Exception {
-                        try {
-                            return new ApiRequest.Builder<String>()
-                                    .url(url).token(token).method(method).requestBody(requestBody)
-                                    .build().request();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return null;
-                        }
-                    }
-                };
+        try {
+            new ApiRequest.Builder<String>()
+                    .url(url).token(token).method(method).requestBody(requestBody)
+                    .build().request();
+        } catch (Exception e) {
+            if (e.getMessage().contains("already used")) {
+                Utils.showAlert(Alert.AlertType.ERROR, "Email người dùng đã tồn tại trong hệ thống!");
             }
-        };
+            e.printStackTrace();
+            return;
+        }
 
-        service.setOnSucceeded(e -> {
-            if (service.getValue() != null) {
-                Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt người dùng thành công!");
-                loadUserRegistrationsData();
-                loadUsersData();
-            }
-        });
+        Utils.showAlert(Alert.AlertType.INFORMATION, "Phê duyệt người dùng thành công!");
+        loadUserRegistrationsData();
+        loadUsersData();
 
-        service.start();
     }
 
     @FXML
