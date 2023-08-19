@@ -1,16 +1,16 @@
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/Aylesworth/maternal-child-health">
-    <img src="logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="80">
   </a>
 
   <h3 align="center">Maternal & Child Health Management System</h3>
@@ -27,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Screen Shot](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.png?raw=true)](https://github.com/Aylesworth/maternal-child-health/)
+[![Product Screen Shot](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.jpg?raw=true)]][https://github.com/Aylesworth/maternal-child-health/]
 
 A desktop application that helps medical center store and manage maternal and child health information and medical records, as well as manage vaccination services.
 
