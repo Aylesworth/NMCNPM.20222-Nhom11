@@ -57,6 +57,8 @@ A desktop application that helps medical center store and manage maternal and ch
 	* Receive notifications about vaccination schedule
 	* Register for healthcare events
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Screenshots
 
 * Login:
@@ -118,6 +120,8 @@ A desktop application that helps medical center store and manage maternal and ch
 * Events:
 
 ![Events](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/events.jpg?raw=true)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
