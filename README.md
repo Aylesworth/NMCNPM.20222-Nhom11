@@ -27,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Screen Shot](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.jpg?raw=true)]][https://github.com/Aylesworth/maternal-child-health/]
+[![Product Screen Shot](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.jpg?raw=true)][https://github.com/Aylesworth/maternal-child-health/]
 
 A desktop application that helps medical center store and manage maternal and child health information and medical records, as well as manage vaccination services.
 
