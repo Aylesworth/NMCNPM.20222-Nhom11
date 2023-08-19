@@ -106,6 +106,7 @@ public class ChildServiceImpl implements ChildService {
 
         Child child = mapper.map(childRegistration, Child.class);
         child.setId(null);
+        child.setCreated(DateTimeUtils.currentTimestamp());
 
         childRepository.save(child);
 

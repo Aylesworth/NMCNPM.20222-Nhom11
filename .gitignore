@@ -1,1 +1,4 @@
 /.metadata/
+
+/mch-back-end/src/main/resources/application*
+/mch-back-end/src/main/resources/credentials.json
