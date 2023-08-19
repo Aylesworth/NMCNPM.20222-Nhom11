@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -25,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Screen Shot][https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.png?raw=true]](https://github.com/Aylesworth/maternal-child-health/)
+[![Product Screen Shot](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.png?raw=true)](https://github.com/Aylesworth/maternal-child-health/)
 
 A desktop application that helps medical center store and manage maternal and child health information and medical records, as well as manage vaccination services.
 
@@ -58,48 +60,63 @@ A desktop application that helps medical center store and manage maternal and ch
 ### Screenshots
 
 * Login:
+
 ![Login](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/login.jpg?raw=true)
 
 * Sign up:
+
 ![Sign up](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/sign-up.jpg?raw=true)
 
 * Dashboard:
+
 ![Dashboard](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/dashboard.jpg?raw=true)
 
 * Notifications:
+
 ![Notifications](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/notifications.jpg?raw=true)
 
 * Manage users:
+
 ![Manage users](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/manage-users.jpg?raw=true)
 
 * Manage child profiles:
+
 ![Manage child profiles](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/manage-children.jpg?raw=true)
 
 * User profile:
+
 ![User profile](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/user-profile.jpg?raw=true)
 
 * Child profile:
+
 ![Child profile](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/child-profile.jpg?raw=true)
 
 * Body metrics records:
+
 ![Body metrics records](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/body-metrics.jpg?raw=true)
 
 * Vaccination records:
+
 ![Vaccination records](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/injection-records.jpg?raw=true)
 
 * Medical records:
+
 ![Medical records](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/examination-records.jpg?raw=true)
 
 * Vaccination schedule:
+
 ![Vaccination schedule](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/vaccination-schedule.jpg?raw=true)
 
 * Manage events:
+
 ![Manage events](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/manage-events.jpg?raw=true)
 
 * Child vaccination schedule:
+
 ![Child vaccination schedule](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/child-vaccination-schedule.jpg?raw=true)
 
 * Events:
+
 ![Events](https://github.com/Aylesworth/maternal-child-health/blob/master/screenshots/events.jpg?raw=true)
 
 <!-- CONTACT -->
